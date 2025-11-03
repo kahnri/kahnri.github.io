@@ -1,0 +1,5 @@
+title: "Kagan Bağdemir"
+url: "https://kaganbagdemir.de"
+baseurl: ""          # custom domain kullandığın için boş kalsın
+permalink: /blog/:title/
+markdown: kramdown   # varsayılan
