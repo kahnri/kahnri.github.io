@@ -1,0 +1,43 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog — Kagan Bağdemir</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="color-scheme" content="light dark">
+</head>
+<body class="bg-zinc-950 text-zinc-100">
+  <main class="max-w-3xl mx-auto px-6 py-10">
+    <header class="flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</a>
+      <a href="/" class="px-3 py-1 rounded-full border border-zinc-700">← Anasayfa</a>
+    </header>
+
+    <h1 class="text-3xl font-semibold mt-6">Blog</h1>
+    <p class="text-zinc-400 mt-1">Yazılarım ve notlarım</p>
+
+    <div class="mt-6 space-y-6">
+      {% for post in site.posts %}
+      <article class="border border-zinc-800 rounded-2xl p-5 bg-zinc-900/60">
+        <h2 class="text-xl font-semibold">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <p class="text-zinc-400 text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
+        {% if post.excerpt %}
+          <p class="text-zinc-300 mt-2">{{ post.excerpt | strip_html | truncate: 180 }}</p>
+        {% endif %}
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700"
+           href="{{ post.url | relative_url }}">Oku</a>
+      </article>
+      {% endfor %}
+      {% unless site.posts.size > 0 %}
+        <p class="text-zinc-400">Henüz yazı yok. <code>_posts/</code> klasörüne bir Markdown dosyası ekle.</p>
+      {% endunless %}
+    </div>
+  </main>
+</body>
+</html>
