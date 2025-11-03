@@ -2,42 +2,86 @@
 layout: null
 ---
 <!doctype html>
-<html lang="de">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Blog — Kagan Bağdemir</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="color-scheme" content="light dark">
+  <!-- Plausible -->
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body class="bg-zinc-950 text-zinc-100">
   <main class="max-w-3xl mx-auto px-6 py-10">
     <header class="flex items-center justify-between">
       <a href="/" class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</a>
-      <a href="/" class="px-3 py-1 rounded-full border border-zinc-700">← Anasayfa</a>
+      <div class="flex items-center gap-3">
+        <input id="q" class="hidden md:block px-3 py-1 rounded-lg border border-zinc-700 bg-zinc-900/60 text-sm"
+               type="search" data-i18n-ph="blog.search" placeholder="Ara...">
+        <div class="space-x-2">
+          <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border border-zinc-700">TR</button>
+          <button onclick="setLang('de')" class="px-3 py-1 rounded-full border border-zinc-700">DE</button>
+          <button onclick="setLang('en')" class="px-3 py-1 rounded-full border border-zinc-700">EN</button>
+        </div>
+      </div>
     </header>
 
-    <h1 class="text-3xl font-semibold mt-6">Blog</h1>
-    <p class="text-zinc-400 mt-1">Yazılarım ve notlarım</p>
+    <h1 class="text-3xl font-semibold mt-6" data-i18n="blog.title"></h1>
+    <p class="text-zinc-400 mt-1" data-i18n="blog.subtitle"></p>
 
-    <div class="mt-6 space-y-6">
+    <div class="mt-6 space-y-6" id="list">
       {% for post in site.posts %}
-      <article class="border border-zinc-800 rounded-2xl p-5 bg-zinc-900/60">
+      <article class="border border-zinc-800 rounded-2xl p-5 bg-zinc-900/60 transition
+                      hover:-translate-y-0.5 hover:border-zinc-600"
+               data-title="{{ post.title | downcase }}"
+               data-text="{{ post.excerpt | strip_html | downcase }}">
         <h2 class="text-xl font-semibold">
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <a class="hover:underline" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         </h2>
         <p class="text-zinc-400 text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
         {% if post.excerpt %}
           <p class="text-zinc-300 mt-2">{{ post.excerpt | strip_html | truncate: 180 }}</p>
         {% endif %}
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700"
-           href="{{ post.url | relative_url }}">Oku</a>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700 hover:border-zinc-500 transition"
+           href="{{ post.url | relative_url }}" data-i18n="blog.read"></a>
       </article>
       {% endfor %}
       {% unless site.posts.size > 0 %}
-        <p class="text-zinc-400">Henüz yazı yok. <code>_posts/</code> klasörüne bir Markdown dosyası ekle.</p>
+        <p class="text-zinc-400" data-i18n="blog.empty"></p>
       {% endunless %}
     </div>
   </main>
+
+<script>
+const STRINGS={tr:{'blog.title':'Blog','blog.subtitle':'Yazılarım ve notlarım',
+'blog.read':'Oku','blog.empty':'Henüz yazı yok. _posts/ klasörüne bir Markdown dosyası ekle.',
+'blog.search':'Ara…'},
+de:{'blog.title':'Blog','blog.subtitle':'Meine Beiträge und Notizen',
+'blog.read':'Lesen','blog.empty':'Noch keine Beiträge. Lege eine Markdown-Datei in _posts/ ab.',
+'blog.search':'Suchen…'},
+en:{'blog.title':'Blog','blog.subtitle':'My posts and notes',
+'blog.read':'Read','blog.empty':'No posts yet. Add a Markdown file under _posts/.',
+'blog.search':'Search…'}};
+function apply(lang){
+  document.documentElement.lang=lang; localStorage.setItem('lang',lang);
+  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
+  const ph=document.querySelectorAll('[data-i18n-ph]');
+  ph.forEach(e=>e.placeholder=STRINGS[lang][e.dataset.i18nPh]||e.placeholder);
+}
+function setLang(l){apply(l);}
+apply(localStorage.getItem('lang')||'tr');
+
+// simple search/filter
+const q=document.getElementById('q'); if(q){
+  q.addEventListener('input',()=>{
+    const needle=q.value.trim().toLowerCase();
+    document.querySelectorAll('#list article').forEach(card=>{
+      const t=card.dataset.title, x=card.dataset.text;
+      card.style.display=(t.includes(needle)||x.includes(needle))?'':'none';
+    });
+  });
+}
+</script>
 </body>
 </html>
