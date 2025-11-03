@@ -5,109 +5,99 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kagan Bağdemir — Data & Logistics</title>
 <meta name="description" content="Maschinenbau (ITPL) · Data & Logistics · Werkstudent / Praktikum / Junior">
-<meta property="og:title" content="Kagan Bağdemir — Portfolio">
-<meta property="og:description" content="Projekte · FEM · Logistics IT · CAD">
+<script src="https://cdn.tailwindcss.com"></script>
 <meta name="color-scheme" content="light dark">
-<style>
-:root{--bg:#0b0c0e;--fg:#e8e8ea;--muted:#a6a7ab;--card:#16171b;--acc:#6ee7b7;--r:14px;--max:980px;--bd:#2a2b31}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
-a{color:var(--fg);text-decoration:none}
-a.btn{display:inline-block;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:linear-gradient(180deg,#1b1c21 0,#13141a 100%);transition:.2s transform}
-a.btn:hover{transform:translateY(-1px)}
-.wrap{max-width:var(--max);margin:auto;padding:28px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.brand{font-weight:700;letter-spacing:.5px}
-.pill{padding:6px 10px;border:1px solid var(--bd);border-radius:999px;cursor:pointer;background:#14151a}
-.hero{padding:28px;border-radius:var(--r);background:
-  radial-gradient(1200px 600px at 10% -20%, rgba(110,231,183,.25), transparent 55%),
-  var(--card)}
-h1{font-size:28px;margin:0 0 6px}
-h2{margin:20px 0 8px;font-size:20px}
-p.m{color:var(--muted);margin:0 0 16px}
-.grid{display:grid;gap:14px}
-@media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:var(--card);padding:18px;border-radius:var(--r);border:1px solid var(--bd)}
-footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--bd);color:var(--muted);font-size:14px}
-small.k{font-size:12px;color:var(--muted)}
-.badge{display:inline-block;padding:4px 8px;border:1px solid var(--bd);border-radius:999px;font-size:12px;margin-right:6px}
-</style>
 </head>
-<body>
-<div class="wrap">
-  <header>
-    <strong class="brand">KAGAN BAGDEMIR</strong>
-    <div>
-      <button class="pill" onclick="setLang('de')">DE</button>
-      <button class="pill" onclick="setLang('en')">EN</button>
-    </div>
-  </header>
+<body class="bg-zinc-950 text-zinc-100">
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <header class="flex items-center justify-between">
+      <h1 class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</h1>
+      <div class="space-x-2">
+        <button onclick="setLang('de')" class="px-3 py-1 rounded-full border border-zinc-700">DE</button>
+        <button onclick="setLang('en')" class="px-3 py-1 rounded-full border border-zinc-700">EN</button>
+      </div>
+    </header>
 
-  <section class="hero">
-    <h1 data-de="Maschinenbau (ITPL) · Data & Logistics"
-        data-en="Mechanical Eng. (ITPL) · Data & Logistics"></h1>
-    <p class="m" data-de="Werkstudent / Praktikum / Junior · Data/Analytics, Logistik-IT, Manufacturing"
-       data-en="Werkstudent / Internship / Junior · Data/Analytics, Logistics IT, Manufacturing"></p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a class="btn" href="mailto:bagdemirkagande@gmail.com">bagdemirkagande@gmail.com</a>
-      <a class="btn" href="cv.pdf" target="_blank" rel="noopener">CV / Resume (PDF)</a>
-      <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/kahnri" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <div style="margin-top:10px">
-      <span class="badge">Python / NumPy</span>
-      <span class="badge">FEM</span>
-      <span class="badge">Logistics IT</span>
-      <span class="badge">CAD / Tech Drawing</span>
-    </div>
-  </section>
+    <section class="mt-6 rounded-2xl p-6 border border-zinc-800 bg-zinc-900/60">
+      <h2 class="text-2xl font-semibold"
+          data-de="Maschinenbau (ITPL) · Data & Logistics"
+          data-en="Mechanical Eng. (ITPL) · Data & Logistics"></h2>
+      <p class="text-zinc-400 mt-1"
+         data-de="Werkstudent / Praktikum / Junior · Data/Analytics, Logistik-IT, Manufacturing"
+         data-en="Werkstudent / Internship / Junior · Data/Analytics, Logistics IT, Manufacturing"></p>
 
-  <section style="margin-top:18px" class="grid">
-    <article class="card">
-      <h2>FEM Mini-Solver (Python/NumPy)</h2>
-      <p class="m" data-de="2D elemanlarla demolar; DOF, küresel rijitlik, yer değiştirme & gerilme çıktıları."
-         data-en="2D elements demos; DOFs, global stiffness, displacement & stress outputs."></p>
-      <a class="btn" href="#" target="_blank">Repo / Demo</a>
-    </article>
+      <div class="flex flex-wrap gap-3 mt-4">
+        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="mailto:hi@kaganbagdemir.de">hi@kaganbagdemir.de</a>
+        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="cv.pdf" target="_blank">CV / Resume (PDF)</a>
+        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="https://github.com/kahnri" target="_blank">GitHub</a>
+      </div>
 
-    <article class="card">
-      <h2>Warehouse KPI Dashboard</h2>
-      <p class="m" data-de="Order lead time, picking accuracy, OEE; Python→pandas→viz; aksiyon alınabilir metrikler."
-         data-en="Lead time, picking accuracy, OEE; Python→pandas→viz; actionable metrics."></p>
-      <a class="btn" href="#" target="_blank">Repo / Demo</a>
-    </article>
+      <div class="flex flex-wrap gap-2 mt-4 text-sm text-zinc-300">
+        <span class="px-3 py-1 rounded-full border border-zinc-700">Python / NumPy</span>
+        <span class="px-3 py-1 rounded-full border border-zinc-700">FEM</span>
+        <span class="px-3 py-1 rounded-full border border-zinc-700">Logistics IT</span>
+        <span class="px-3 py-1 rounded-full border border-zinc-700">CAD</span>
+      </div>
+    </section>
 
-    <article class="card">
-      <h2>CAD / Technische Zeichnung</h2>
-      <p class="m" data-en="Automotive parts; dimensioning, tolerances, norms; portfolio."
-         data-de="Otomotiv parçaları; ölçülendirme, toleranslar, normlar; portföy."></p>
-      <a class="btn" href="#" target="_blank">Portföy</a>
-    </article>
+    <section class="grid md:grid-cols-2 gap-4 mt-6">
+      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60">
+        <h3 class="text-lg font-semibold">FEM Mini-Solver (Python/NumPy)</h3>
+        <p class="text-zinc-400 mt-1"
+           data-de="2D elemanlarla demolar; DOF, küresel rijitlik, yer değiştirme & gerilme."
+           data-en="2D elements demos; DOFs, global stiffness, displacement & stress."></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700" href="#" target="_blank">Repo / Demo</a>
+      </article>
 
-    <article class="card">
-      <h2>Blog / Notlar</h2>
-      <p class="m" data-de="IT in Produktion & Logistik’ten kısa yazılar."
-         data-en="Short posts from IT in Production & Logistics."></p>
-      <a class="btn" href="#" target="_blank">Blog</a>
-    </article>
-  </section>
+      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60">
+        <h3 class="text-lg font-semibold">Warehouse KPI Dashboard</h3>
+        <p class="text-zinc-400 mt-1"
+           data-de="Lead time, picking accuracy, OEE; Python→pandas→viz; aksiyon alınabilir."
+           data-en="Lead time, picking accuracy, OEE; Python→pandas→viz; actionable."></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700" href="#" target="_blank">Repo / Demo</a>
+      </article>
 
-  <footer>
-    <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutzerklärung</a>
-    <div id="impressum" style="margin-top:10px">
-      <h2>Impressum</h2>
-      <p class="m">Kagan Bağdemir · Hannover · E-Mail: hi@kaganbagdemir.de (adres metnini sonra düzenle)</p>
-    </div>
-    <div id="datenschutz" style="margin-top:10px">
-      <h2>Datenschutzerklärung</h2>
-      <p class="m">Bu sitede çerez kullanılmıyor. Analytics ekleyince metni güncelle ve gerekiyorsa çerez banner’ı ekle.</p>
-    </div>
-    <p style="margin-top:10px">© <span id="y"></span> Kagan Bağdemir · <small class="k">Hosted on GitHub Pages</small></p>
-  </footer>
-</div>
+      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60">
+        <h3 class="text-lg font-semibold">CAD / Technische Zeichnung</h3>
+        <p class="text-zinc-400 mt-1"
+           data-de="Otomotiv parçaları; ölçülendirme, toleranslar, normlar; portföy."
+           data-en="Automotive parts; dimensioning, tolerances, norms; portfolio."></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700" href="#" target="_blank">Portföy</a>
+      </article>
+
+      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60">
+        <h3 class="text-lg font-semibold">Blog / Notlar</h3>
+        <p class="text-zinc-400 mt-1"
+           data-de="IT in Produktion & Logistik’ten kısa yazılar."
+           data-en="Short posts from IT in Production & Logistics."></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700" href="#" target="_blank">Blog</a>
+      </article>
+    </section>
+
+    <footer class="mt-8 border-t border-zinc-800 pt-5 text-zinc-400 text-sm">
+      <nav class="space-x-3">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutzerklärung</a>
+      </nav>
+      <div id="impressum" class="mt-3">
+        <h4 class="font-semibold text-zinc-200">Impressum</h4>
+        <p>Kagan Bağdemir · Dortmund · E-Mail: hi@kaganbagdemir.de (metni sonra güncelle)</p>
+      </div>
+      <div id="datenschutz" class="mt-3">
+        <h4 class="font-semibold text-zinc-200">Datenschutzerklärung</h4>
+        <p>Bu sitede çerez kullanılmıyor. Analytics ekleyince metni güncelle ve gerekiyorsa çerez banner’ı ekle.</p>
+      </div>
+      <p class="mt-3">© <span id="y"></span> Kagan Bağdemir</p>
+    </footer>
+  </main>
+
 <script>
 const els=[...document.querySelectorAll('[data-de]')];
-function setLang(lang){els.forEach(el=>el.textContent=el.getAttribute(lang==='en'?'data-en':'data-de'));
-document.documentElement.lang=(lang==='en'?'en':'de');localStorage.setItem('lang',lang)}
+function setLang(lang){
+  els.forEach(el=>el.textContent=el.getAttribute(lang==='en'?'data-en':'data-de'));
+  document.documentElement.lang=(lang==='en'?'en':'de'); localStorage.setItem('lang',lang);
+}
 setLang(localStorage.getItem('lang')||'de');
 document.getElementById('y').textContent=new Date().getFullYear();
 </script>
