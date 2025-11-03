@@ -1,5 +1,21 @@
 title: "Kagan Bağdemir"
+description: "Maschinenbau (ITPL) · Data & Logistics · Werkstudent / Praktikum / Junior"
 url: "https://kaganbagdemir.de"
-baseurl: ""          # custom domain kullandığın için boş kalsın
+baseurl: ""
 permalink: /blog/:title/
-markdown: kramdown   # varsayılan
+markdown: kramdown
+
+# SEO için
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Sosyal/künye
+author:
+  name: "Kagan Bağdemir"
+social:
+  links:
+    - "https://github.com/kahnri"
+    - "https://www.linkedin.com/in/..."   # gerçek URL’ni ekle
+    - "mailto:hi@kaganbagdemir.de"
