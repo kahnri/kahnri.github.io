@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kagan Bağdemir — Data & Logistics</title>
+<script>
+(function(){
+  try{
+    const stored=localStorage.getItem('theme-preference');
+    const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme=stored|| (systemDark?'dark':'light');
+    document.documentElement.dataset.theme=theme;
+  }catch(e){
+    document.documentElement.dataset.theme='dark';
+  }
+})();
+</script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,6 +38,125 @@
 <meta name="description" content="Maschinenbau (ITPL) · Data & Logistics · Werkstudent / Praktikum / Junior">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+  :root {
+    color-scheme: dark;
+    --bg: #09090b;
+    --text-primary: #f4f4f5;
+    --text-strong: #fafafa;
+    --text-muted: #a1a1aa;
+    --text-soft: #d4d4d8;
+    --border: rgba(82, 82, 91, 0.65);
+    --border-strong: rgba(161, 161, 170, 0.95);
+    --surface: rgba(24, 24, 27, 0.78);
+    --surface-muted: rgba(39, 39, 42, 0.55);
+    --chip-bg: rgba(39, 39, 42, 0.55);
+    --accent-bg: rgba(16, 185, 129, 0.16);
+    --accent-border: rgba(16, 185, 129, 0.5);
+    --accent-text: #34d399;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f8fafc;
+    --text-primary: #0f172a;
+    --text-strong: #111827;
+    --text-muted: #475569;
+    --text-soft: #1e293b;
+    --border: rgba(203, 213, 225, 0.9);
+    --border-strong: rgba(148, 163, 184, 1);
+    --surface: rgba(255, 255, 255, 0.88);
+    --surface-muted: rgba(241, 245, 249, 0.9);
+    --chip-bg: rgba(241, 245, 249, 0.95);
+    --accent-bg: rgba(16, 185, 129, 0.12);
+    --accent-border: rgba(16, 185, 129, 0.55);
+    --accent-text: #0f766e;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .theme-text-muted {
+    color: var(--text-muted);
+  }
+
+  .theme-text-soft {
+    color: var(--text-soft);
+  }
+
+  .theme-text-strong {
+    color: var(--text-strong);
+  }
+
+  .theme-border {
+    border-color: var(--border);
+  }
+
+  .theme-card,
+  .theme-button,
+  .theme-button-icon,
+  .theme-button-accent,
+  .theme-chip {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  .theme-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+
+  .theme-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .theme-button {
+    background-color: var(--surface-muted);
+    border-color: var(--border);
+    color: inherit;
+  }
+
+  .theme-button:hover {
+    border-color: var(--border-strong);
+  }
+
+  .theme-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-muted);
+    border-color: var(--border);
+    color: inherit;
+  }
+
+  .theme-button-icon:hover {
+    border-color: var(--border-strong);
+  }
+
+  .theme-button-accent {
+    background-color: var(--accent-bg);
+    border-color: var(--accent-border);
+    color: var(--accent-text);
+  }
+
+  .theme-chip {
+    background-color: var(--chip-bg);
+    border-color: var(--border);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   @keyframes fadeUp {
     from {
       opacity: 0;
@@ -87,78 +218,82 @@
 <!-- Plausible -->
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
-<body class="bg-zinc-950 text-zinc-100">
+<body>
   <main class="relative isolate max-w-5xl mx-auto px-6 py-10">
     <header class="flex items-center justify-between" data-animate style="--stagger:0">
       <h1 class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</h1>
       <div class="flex items-center gap-3">
-        <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border border-zinc-700 hover:border-zinc-500 transition" data-i18n="nav.blog"></a>
-        <div class="space-x-2">
-          <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border border-zinc-700">TR</button>
-          <button onclick="setLang('de')" class="px-3 py-1 rounded-full border border-zinc-700">DE</button>
-          <button onclick="setLang('en')" class="px-3 py-1 rounded-full border border-zinc-700">EN</button>
+        <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
+        <div class="flex items-center gap-2">
+          <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
+          <button onclick="setLang('de')" class="px-3 py-1 rounded-full border theme-button">DE</button>
+          <button onclick="setLang('en')" class="px-3 py-1 rounded-full border theme-button">EN</button>
+          <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+            <span id="theme-icon" aria-hidden="true">🌙</span>
+            <span class="sr-only" data-i18n="btn.theme"></span>
+          </button>
         </div>
       </div>
     </header>
 
-    <section class="mt-6 rounded-2xl p-6 border border-zinc-800 bg-zinc-900/60" data-animate style="--stagger:1">
+    <section class="mt-6 rounded-2xl p-6 border theme-card" data-animate style="--stagger:1">
       <h2 class="text-2xl font-semibold" data-i18n="hero.title"></h2>
-      <p class="text-zinc-400 mt-1" data-i18n="hero.subtitle"></p>
+      <p class="mt-1 theme-text-muted" data-i18n="hero.subtitle"></p>
 
       <div class="flex flex-wrap gap-3 mt-4">
-        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="mailto:hi@kaganbagdemir.de" data-i18n="btn.email"></a>
-        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="/dev/" data-i18n="btn.cv"></a>
-        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="/dev/" target="_blank" data-i18n="btn.linkedin"></a>
-        <a class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800" href="/dev/" target="_blank" data-i18n="btn.github"></a>
-        <a class="px-4 py-2 rounded-xl border border-emerald-600/50 bg-emerald-900/20" href="/blog/" data-i18n="btn.blog"></a>
+        <a class="px-4 py-2 rounded-xl border theme-button" href="mailto:hi@kaganbagdemir.de" data-i18n="btn.email"></a>
+        <a class="px-4 py-2 rounded-xl border theme-button" href="/dev/" data-i18n="btn.cv"></a>
+        <a class="px-4 py-2 rounded-xl border theme-button" href="/dev/" target="_blank" data-i18n="btn.linkedin"></a>
+        <a class="px-4 py-2 rounded-xl border theme-button" href="/dev/" target="_blank" data-i18n="btn.github"></a>
+        <a class="px-4 py-2 rounded-xl border theme-button-accent" href="/blog/" data-i18n="btn.blog"></a>
       </div>
 
-      <div class="flex flex-wrap gap-2 mt-4 text-sm text-zinc-300">
-        <span class="px-3 py-1 rounded-full border border-zinc-700">Python / NumPy</span>
-        <span class="px-3 py-1 rounded-full border border-zinc-700">FEM</span>
-        <span class="px-3 py-1 rounded-full border border-zinc-700">Logistics IT</span>
-        <span class="px-3 py-1 rounded-full border border-zinc-700">CAD</span>
+      <div class="flex flex-wrap gap-2 mt-4 text-sm theme-text-soft">
+        <span class="px-3 py-1 rounded-full border theme-chip">Python / NumPy</span>
+        <span class="px-3 py-1 rounded-full border theme-chip">FEM</span>
+        <span class="px-3 py-1 rounded-full border theme-chip">Logistics IT</span>
+        <span class="px-3 py-1 rounded-full border theme-chip">CAD</span>
       </div>
     </section>
 
     <!-- Kartlar (hepsi şimdilik /dev'e gider) -->
     <section class="grid md:grid-cols-2 gap-4 mt-6" data-animate style="--stagger:2">
-      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 transition hover:-translate-y-0.5 hover:border-zinc-600" data-animate style="--stagger:2.4">
+      <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.4">
         <h3 class="text-lg font-semibold">FEM Mini-Solver (Python/NumPy)</h3>
-        <p class="text-zinc-400 mt-1" data-i18n="cards.fem"></p>
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700 hover:border-zinc-500 transition" href="/dev/" data-i18n="cards.repo"></a>
+        <p class="mt-1 theme-text-muted" data-i18n="cards.fem"></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.repo"></a>
       </article>
 
-      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 transition hover:-translate-y-0.5 hover:border-zinc-600" data-animate style="--stagger:2.6">
+      <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.6">
         <h3 class="text-lg font-semibold">Warehouse KPI Dashboard</h3>
-        <p class="text-zinc-400 mt-1" data-i18n="cards.kpi"></p>
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700 hover:border-zinc-500 transition" href="/dev/" data-i18n="cards.repo"></a>
+        <p class="mt-1 theme-text-muted" data-i18n="cards.kpi"></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.repo"></a>
       </article>
 
-      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 transition hover:-translate-y-0.5 hover:border-zinc-600" data-animate style="--stagger:2.8">
+      <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.8">
         <h3 class="text-lg font-semibold">CAD / Technische Zeichnung</h3>
-        <p class="text-zinc-400 mt-1" data-i18n="cards.cad"></p>
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700 hover:border-zinc-500 transition" href="/dev/" data-i18n="cards.portfolio"></a>
+        <p class="mt-1 theme-text-muted" data-i18n="cards.cad"></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.portfolio"></a>
       </article>
 
-      <article class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 transition hover:-translate-y-0.5 hover:border-zinc-600" data-animate style="--stagger:3">
+      <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:3">
         <h3 class="text-lg font-semibold" data-i18n="cards.blogTitle"></h3>
-        <p class="text-zinc-400 mt-1" data-i18n="cards.blogTxt"></p>
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border border-zinc-700 hover:border-zinc-500 transition" href="/blog/" data-i18n="btn.blog"></a>
+        <p class="mt-1 theme-text-muted" data-i18n="cards.blogTxt"></p>
+        <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/blog/" data-i18n="btn.blog"></a>
       </article>
     </section>
 
-    <footer class="mt-8 border-t border-zinc-800 pt-5 text-zinc-400 text-sm" data-animate style="--stagger:3.4">
+    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:3.4">
       <nav class="space-x-3">
         <a href="#impressum">Impressum</a>
         <a href="#datenschutz">Datenschutzerklärung</a>
       </nav>
       <div id="impressum" class="mt-3">
-        <h4 class="font-semibold text-zinc-200">Impressum</h4>
+        <h4 class="font-semibold theme-text-strong">Impressum</h4>
         <p>Kagan Bağdemir · Dortmund · E-Mail: hi@kaganbagdemir.de</p>
       </div>
       <div id="datenschutz" class="mt-3">
-        <h4 class="font-semibold text-zinc-200">Datenschutzerklärung</h4>
+        <h4 class="font-semibold theme-text-strong">Datenschutzerklärung</h4>
         <p>Bu sitede çerez kullanılmıyor. Analytics ekleyince metni güncelle.</p>
       </div>
       <p class="mt-3">© <span id="y"></span> Kagan Bağdemir</p>
@@ -169,7 +304,7 @@
 const STRINGS={
  tr:{'nav.blog':'Blog','hero.title':'Makine Mühendisliği (ITPL) · Veri & Lojistik',
      'hero.subtitle':'Werkstudent / Staj / Junior · Veri/Analitik, Lojistik-IT, Üretim',
-     'btn.email':'E-posta','btn.cv':'CV / Özgeçmiş (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog',
+     'btn.email':'E-posta','btn.cv':'CV / Özgeçmiş (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Tema değiştir',
      'cards.fem':'2D elemanlarla demolar; DOF, küresel rijitlik, yer değiştirme & gerilme.',
      'cards.kpi':'Lead time, picking accuracy, OEE; Python→pandas→viz; aksiyon alınabilir metrikler.',
      'cards.cad':'Otomotiv parçaları; ölçülendirme, toleranslar, normlar; portföy.',
@@ -177,7 +312,7 @@ const STRINGS={
      'cards.blogTxt':'IT in Produktion & Logistik üzerine kısa yazılar.'},
  de:{'nav.blog':'Blog','hero.title':'Maschinenbau (ITPL) · Data & Logistics',
      'hero.subtitle':'Werkstudent / Praktikum / Junior · Data/Analytics, Logistik-IT, Manufacturing',
-     'btn.email':'E-Mail','btn.cv':'CV / Lebenslauf (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog',
+     'btn.email':'E-Mail','btn.cv':'CV / Lebenslauf (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Thema wechseln',
      'cards.fem':'Demos mit 2D-Elementen; DOF, globale Steifigkeit, Verschiebung & Spannung.',
      'cards.kpi':'Lead Time, Picking Accuracy, OEE; Python→pandas→Viz; umsetzbare Metriken.',
      'cards.cad':'Automotive-Teile; Bemaßung, Toleranzen, Normen; Portfolio.',
@@ -185,7 +320,7 @@ const STRINGS={
      'cards.blogTxt':'Kurztexte aus IT in Produktion & Logistik.'},
  en:{'nav.blog':'Blog','hero.title':'Mechanical Eng. (ITPL) · Data & Logistics',
      'hero.subtitle':'Werkstudent / Internship / Junior · Data/Analytics, Logistics IT, Manufacturing',
-     'btn.email':'E-mail','btn.cv':'CV / Resume (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog',
+     'btn.email':'E-mail','btn.cv':'CV / Resume (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Toggle theme',
      'cards.fem':'Demos with 2D elements; DOFs, global stiffness, displacement & stress.',
      'cards.kpi':'Lead time, picking accuracy, OEE; Python→pandas→viz; actionable metrics.',
      'cards.cad':'Automotive parts; dimensioning, tolerances, norms; portfolio.',
@@ -195,10 +330,64 @@ const STRINGS={
 function apply(lang){
   document.documentElement.lang=lang; localStorage.setItem('lang',lang);
   document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
+  const toggle=document.getElementById('theme-toggle');
+  if(toggle){
+    const label=STRINGS[lang]['btn.theme'];
+    toggle.setAttribute('aria-label',label);
+    toggle.setAttribute('title',label);
+  }
 }
 function setLang(l){apply(l);}
 apply(localStorage.getItem('lang')||'tr');
 document.getElementById('y').textContent=new Date().getFullYear();
+
+const themeKey='theme-preference';
+const icon=document.getElementById('theme-icon');
+const htmlEl=document.documentElement;
+let storedTheme=null;
+
+try{storedTheme=localStorage.getItem(themeKey);}catch(e){storedTheme=null;}
+
+function currentTheme(){
+  return htmlEl.dataset.theme||'dark';
+}
+
+function updateIcon(theme){
+  if(icon){
+    icon.textContent=theme==='dark'?'🌙':'☀️';
+  }
+}
+
+function setTheme(theme,persist=true){
+  htmlEl.dataset.theme=theme;
+  if(persist){
+    try{localStorage.setItem(themeKey,theme);}catch(e){}
+    storedTheme=theme;
+  }
+  updateIcon(theme);
+}
+
+if(storedTheme){
+  setTheme(storedTheme);
+}else{
+  updateIcon(currentTheme());
+}
+
+const themeToggle=document.getElementById('theme-toggle');
+if(themeToggle){
+  themeToggle.addEventListener('click',()=>{
+    const next=currentTheme()==='dark'?'light':'dark';
+    setTheme(next);
+  });
+}
+
+try{
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',event=>{
+    if(!storedTheme){
+      setTheme(event.matches?'dark':'light',false);
+    }
+  });
+}catch(e){}
 
 const firstVisitKey='landingAnimationPlayed';
 let shouldAnimate=false;
