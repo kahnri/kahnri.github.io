@@ -156,16 +156,6 @@ const STRINGS={
      'cards.portfolio':'Portfolio','cards.repo':'Repo / Demo','cards.blogTitle':'Blog / Notes',
      'cards.blogTxt':'Short posts from IT in Production & Logistics.'}
 };
-const RECENT_STRINGS={
-  tr:{'recent.title':'Son yazılar','recent.all':'Tüm yazılar','recent.read':'Oku','recent.empty':'Henüz yazı yok. _posts/ klasörüne bir Markdown dosyası ekle.'},
-  de:{'recent.title':'Neueste Beiträge','recent.all':'Alle Beiträge','recent.read':'Lesen','recent.empty':'Noch keine Beiträge. Lege eine Markdown-Datei in _posts/ ab.'},
-  en:{'recent.title':'Latest posts','recent.all':'All posts','recent.read':'Read','recent.empty':'No posts yet. Add a Markdown file under _posts/.'},
-};
-Object.keys(RECENT_STRINGS).forEach(function(lang){
-  if(STRINGS[lang]){
-    STRINGS[lang]=Object.assign({},STRINGS[lang],RECENT_STRINGS[lang]);
-  }
-});
 function apply(lang){
   document.documentElement.lang=lang; localStorage.setItem('lang',lang);
   document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
