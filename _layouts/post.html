@@ -25,14 +25,14 @@
 <body>
   <main class="max-w-3xl mx-auto px-6 py-10">
     <header class="flex items-center justify-between">
-      <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="post.back">Blog</span></a>
+      <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="post.back"></span></a>
       <div class="flex items-center gap-2">
         <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
         <button onclick="setLang('de')" class="px-3 py-1 rounded-full border theme-button">DE</button>
         <button onclick="setLang('en')" class="px-3 py-1 rounded-full border theme-button">EN</button>
         <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
           <span data-theme-icon aria-hidden="true">🌙</span>
-          <span class="sr-only" data-i18n="btn.theme">Tema değiştir</span>
+          <span class="sr-only" data-i18n="btn.theme"></span>
         </button>
       </div>
     </header>
@@ -65,22 +65,28 @@
     </footer>
   </main>
 
+<script src="/assets/i18n.js"></script>
 <script>
-const STRINGS={
-  tr:{'post.back':'Blog','btn.theme':'Tema değiştir'},
-  de:{'post.back':'Blog','btn.theme':'Thema wechseln'},
-  en:{'post.back':'Blog','btn.theme':'Toggle theme'}
-};
+const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.post)||{};
 function apply(lang){
-  document.documentElement.lang=lang; localStorage.setItem('lang',lang);
-  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
+  document.documentElement.lang=lang;
+  localStorage.setItem('lang',lang);
+  const table=STRINGS[lang]||{};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(table[key]){
+      el.textContent=table[key];
+    }
+  });
   // İçerik görünürlüğü:
   const blocks={tr:document.getElementById('post-tr'),de:document.getElementById('post-de'),en:document.getElementById('post-en')};
   const toggle=document.getElementById('theme-toggle');
   if(toggle){
-    const label=STRINGS[lang]['btn.theme'];
-    toggle.setAttribute('aria-label',label);
-    toggle.setAttribute('title',label);
+    const label=table['btn.theme'];
+    if(label){
+      toggle.setAttribute('aria-label',label);
+      toggle.setAttribute('title',label);
+    }
   }
   const any=Object.values(blocks).some(b=>b && b.innerHTML.trim().length>0);
   if(any){ Object.values(blocks).forEach(b=>b&&(b.style.display='none')); if(blocks[lang] && blocks[lang].innerHTML.trim()){blocks[lang].style.display='';} else { // fallback sırayla
