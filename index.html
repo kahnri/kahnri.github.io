@@ -124,41 +124,26 @@
     </footer>
   </main>
 
+<script src="/assets/i18n.js"></script>
 <script>
-const STRINGS={
- tr:{'nav.blog':'Blog','hero.title':'Makine Mühendisliği (ITPL) · Veri & Lojistik',
-     'hero.subtitle':'Werkstudent / Staj / Junior · Veri/Analitik, Lojistik-IT, Üretim',
-     'btn.email':'E-posta','btn.cv':'CV / Özgeçmiş (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Tema değiştir',
-     'cards.fem':'2D elemanlarla demolar; DOF, küresel rijitlik, yer değiştirme & gerilme.',
-     'cards.kpi':'Lead time, picking accuracy, OEE; Python→pandas→viz; aksiyon alınabilir metrikler.',
-     'cards.cad':'Otomotiv parçaları; ölçülendirme, toleranslar, normlar; portföy.',
-     'cards.portfolio':'Portföy','cards.repo':'Repo / Demo','cards.blogTitle':'Blog / Notlar',
-     'cards.blogTxt':'IT in Produktion & Logistik üzerine kısa yazılar.'},
- de:{'nav.blog':'Blog','hero.title':'Maschinenbau (ITPL) · Data & Logistics',
-     'hero.subtitle':'Werkstudent / Praktikum / Junior · Data/Analytics, Logistik-IT, Manufacturing',
-     'btn.email':'E-Mail','btn.cv':'CV / Lebenslauf (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Thema wechseln',
-     'cards.fem':'Demos mit 2D-Elementen; DOF, globale Steifigkeit, Verschiebung & Spannung.',
-     'cards.kpi':'Lead Time, Picking Accuracy, OEE; Python→pandas→Viz; umsetzbare Metriken.',
-     'cards.cad':'Automotive-Teile; Bemaßung, Toleranzen, Normen; Portfolio.',
-     'cards.portfolio':'Portfolio','cards.repo':'Repo / Demo','cards.blogTitle':'Blog / Notizen',
-     'cards.blogTxt':'Kurztexte aus IT in Produktion & Logistik.'},
- en:{'nav.blog':'Blog','hero.title':'Mechanical Eng. (ITPL) · Data & Logistics',
-     'hero.subtitle':'Werkstudent / Internship / Junior · Data/Analytics, Logistics IT, Manufacturing',
-     'btn.email':'E-mail','btn.cv':'CV / Resume (PDF)','btn.linkedin':'LinkedIn','btn.github':'GitHub','btn.blog':'Blog','btn.theme':'Toggle theme',
-     'cards.fem':'Demos with 2D elements; DOFs, global stiffness, displacement & stress.',
-     'cards.kpi':'Lead time, picking accuracy, OEE; Python→pandas→viz; actionable metrics.',
-     'cards.cad':'Automotive parts; dimensioning, tolerances, norms; portfolio.',
-     'cards.portfolio':'Portfolio','cards.repo':'Repo / Demo','cards.blogTitle':'Blog / Notes',
-     'cards.blogTxt':'Short posts from IT in Production & Logistics.'}
-};
+const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.landing)||{};
 function apply(lang){
-  document.documentElement.lang=lang; localStorage.setItem('lang',lang);
-  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
+  document.documentElement.lang=lang;
+  localStorage.setItem('lang',lang);
+  const table=STRINGS[lang]||{};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(table[key]){
+      el.textContent=table[key];
+    }
+  });
   const toggle=document.getElementById('theme-toggle');
   if(toggle){
-    const label=STRINGS[lang]['btn.theme'];
-    toggle.setAttribute('aria-label',label);
-    toggle.setAttribute('title',label);
+    const label=table['btn.theme'];
+    if(label){
+      toggle.setAttribute('aria-label',label);
+      toggle.setAttribute('title',label);
+    }
   }
 }
 function setLang(l){apply(l);}

@@ -43,22 +43,27 @@
     </div>
   </main>
 
+<script src="/assets/i18n.js"></script>
 <script>
-const STRINGS={tr:{'back.home':'Anasayfa','wip.title':'Bu bölüm geliştirme aşamasında',
-'wip.subtitle':'Yakında burada proje detayları ve demolar olacak.','btn.theme':'Tema değiştir'},
-de:{'back.home':'Startseite','wip.title':'Dieser Bereich befindet sich im Aufbau',
-'wip.subtitle':'Bald findest du hier Projektdetails und Demos.','btn.theme':'Thema wechseln'},
-en:{'back.home':'Home','wip.title':'This section is under construction',
-'wip.subtitle':'Project details and demos will appear here soon.','btn.theme':'Toggle theme'}};
+const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.dev)||{};
 const els=[...document.querySelectorAll('[data-i18n]')];
 function apply(lang){
-  els.forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
-  document.documentElement.lang=lang; localStorage.setItem('lang',lang);
+  const table=STRINGS[lang]||{};
+  els.forEach(el=>{
+    const key=el.dataset.i18n;
+    if(table[key]){
+      el.textContent=table[key];
+    }
+  });
+  document.documentElement.lang=lang;
+  localStorage.setItem('lang',lang);
   const toggle=document.getElementById('theme-toggle');
   if(toggle){
-    const label=STRINGS[lang]['btn.theme'];
-    toggle.setAttribute('aria-label',label);
-    toggle.setAttribute('title',label);
+    const label=table['btn.theme'];
+    if(label){
+      toggle.setAttribute('aria-label',label);
+      toggle.setAttribute('title',label);
+    }
   }
 }
 function setLang(l){apply(l);}

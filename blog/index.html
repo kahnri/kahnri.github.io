@@ -69,26 +69,33 @@ layout: null
     </div>
   </main>
 
+<script src="/assets/i18n.js"></script>
 <script>
-const STRINGS={tr:{'blog.title':'Blog','blog.subtitle':'Yazılarım ve notlarım',
-'blog.read':'Oku','blog.empty':'Henüz yazı yok. _posts/ klasörüne bir Markdown dosyası ekle.',
-'blog.search':'Ara…','btn.theme':'Tema değiştir'},
-de:{'blog.title':'Blog','blog.subtitle':'Meine Beiträge und Notizen',
-'blog.read':'Lesen','blog.empty':'Noch keine Beiträge. Lege eine Markdown-Datei in _posts/ ab.',
-'blog.search':'Suchen…','btn.theme':'Thema wechseln'},
-en:{'blog.title':'Blog','blog.subtitle':'My posts and notes',
-'blog.read':'Read','blog.empty':'No posts yet. Add a Markdown file under _posts/.',
-'blog.search':'Search…','btn.theme':'Toggle theme'}};
+const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.blog)||{};
 function apply(lang){
-  document.documentElement.lang=lang; localStorage.setItem('lang',lang);
-  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=STRINGS[lang][e.dataset.i18n]||e.textContent);
+  document.documentElement.lang=lang;
+  localStorage.setItem('lang',lang);
+  const table=STRINGS[lang]||{};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(table[key]){
+      el.textContent=table[key];
+    }
+  });
   const ph=document.querySelectorAll('[data-i18n-ph]');
-  ph.forEach(e=>e.placeholder=STRINGS[lang][e.dataset.i18nPh]||e.placeholder);
+  ph.forEach(el=>{
+    const key=el.dataset.i18nPh;
+    if(table[key]){
+      el.placeholder=table[key];
+    }
+  });
   const toggle=document.getElementById('theme-toggle');
   if(toggle){
-    const label=STRINGS[lang]['btn.theme'];
-    toggle.setAttribute('aria-label',label);
-    toggle.setAttribute('title',label);
+    const label=table['btn.theme'];
+    if(label){
+      toggle.setAttribute('aria-label',label);
+      toggle.setAttribute('title',label);
+    }
   }
 }
 function setLang(l){apply(l);}
