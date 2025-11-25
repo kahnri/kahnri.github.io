@@ -56,6 +56,24 @@
         'cards.repo': 'Repo / Demo',
         'cards.blogTitle': 'Blog / Notes',
         'cards.blogTxt': 'Short posts from IT in Production & Logistics.'
+      },
+      nl: {
+        'nav.blog': 'Blog',
+        'hero.title': 'Werktuigbouwkunde (ITPL) · Data & Logistiek',
+        'hero.subtitle': 'Werkstudent / Stage / Junior · Data/Analytics, Logistieke IT, Productie',
+        'btn.email': 'E-mail',
+        'btn.cv': 'CV / Resume (PDF)',
+        'btn.linkedin': 'LinkedIn',
+        'btn.github': 'GitHub',
+        'btn.blog': 'Blog',
+        'btn.theme': 'Thema wisselen',
+        'cards.fem': 'Demo\'s met 2D-elementen; DOF\'s, globale stijfheid, verplaatsing & spanning.',
+        'cards.kpi': 'Doorlooptijd, picknauwkeurigheid, OEE; Python→pandas→viz; bruikbare statistieken.',
+        'cards.cad': 'Automotive-onderdelen; dimensionering, toleranties, normen; portfolio.',
+        'cards.portfolio': 'Portfolio',
+        'cards.repo': 'Repo / Demo',
+        'cards.blogTitle': 'Blog / Notities',
+        'cards.blogTxt': 'Korte berichten uit IT in Productie & Logistiek.'
       }
     },
     blog: {
@@ -82,6 +100,14 @@
         'blog.empty': 'No posts yet. Add a Markdown file under _posts/.',
         'blog.search': 'Search…',
         'btn.theme': 'Toggle theme'
+      },
+      nl: {
+        'blog.title': 'Blog',
+        'blog.subtitle': 'Mijn posts en notities',
+        'blog.read': 'Lees',
+        'blog.empty': 'Nog geen posts. Voeg een Markdown-bestand toe onder _posts/.',
+        'blog.search': 'Zoeken…',
+        'btn.theme': 'Thema wisselen'
       }
     },
     dev: {
@@ -102,6 +128,12 @@
         'wip.title': 'This section is under construction',
         'wip.subtitle': 'Project details and demos will appear here soon.',
         'btn.theme': 'Toggle theme'
+      },
+      nl: {
+        'back.home': 'Home',
+        'wip.title': 'Deze sectie is in aanbouw',
+        'wip.subtitle': 'Projectdetails en demo\'s zullen hier binnenkort verschijnen.',
+        'btn.theme': 'Thema wisselen'
       }
     },
     post: {
@@ -116,6 +148,10 @@
       en: {
         'post.back': 'Blog',
         'btn.theme': 'Toggle theme'
+      },
+      nl: {
+        'post.back': 'Blog',
+        'btn.theme': 'Thema wisselen'
       }
     }
   };
