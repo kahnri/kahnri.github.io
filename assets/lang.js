@@ -46,6 +46,19 @@
         }
     }
 
+    // Update language buttons visual state
+    document.querySelectorAll('button[data-lang]').forEach(btn => {
+        if (btn.dataset.lang === lang) {
+            btn.setAttribute('aria-pressed', 'true');
+            btn.classList.remove('theme-button');
+            btn.classList.add('theme-button-accent');
+        } else {
+            btn.setAttribute('aria-pressed', 'false');
+            btn.classList.remove('theme-button-accent');
+            btn.classList.add('theme-button');
+        }
+    });
+
     // Update content visibility for [data-lang-content]
     // Example: <div data-lang-content="tr">...</div>
     const contentBlocks = document.querySelectorAll('[data-lang-content]');
