@@ -46,8 +46,27 @@
         }
     }
 
+    // Update Language Buttons Visual State
+    // Select buttons that call setLang(...)
+    const langBtns = document.querySelectorAll('button[onclick^="setLang"]');
+    langBtns.forEach(btn => {
+        // Extract lang from onclick="setLang('tr')"
+        const match = btn.getAttribute('onclick').match(/setLang\(['"](\w+)['"]\)/);
+        if (match && match[1]) {
+            const btnLang = match[1];
+            if (btnLang === lang) {
+                btn.classList.add('theme-button-accent');
+                btn.classList.remove('theme-button');
+                btn.setAttribute('aria-pressed', 'true');
+            } else {
+                btn.classList.add('theme-button');
+                btn.classList.remove('theme-button-accent');
+                btn.setAttribute('aria-pressed', 'false');
+            }
+        }
+    });
+
     // Update content visibility for [data-lang-content]
-    // Example: <div data-lang-content="tr">...</div>
     const contentBlocks = document.querySelectorAll('[data-lang-content]');
     if (contentBlocks.length > 0) {
         // Hide all first
@@ -59,16 +78,9 @@
         if (currentLangBlocks.length > 0 && currentLangBlocks.some(el => el.innerHTML.trim())) {
              currentLangBlocks.forEach(el => el.style.display = '');
         } else {
-             // Fallback logic for posts: try tr, then de, then en, then default
-             // This logic matches the previous specific implementation in post.html
-             // But generalized: check if we have specific fallback element
+             // Fallback logic
              const fallback = document.getElementById('post-default');
              if (fallback) {
-                 // Check if we found any valid content in preferred lang, if not, try fallbacks
-                 // But wait, the previous logic was: if ANY block has content, hide all and show specific.
-                 // If specific is empty, show fallback chain.
-
-                 // Let's replicate the chain if we are on a post page (heuristic: has post-default)
                  const blocks = {
                      tr: document.querySelector('[data-lang-content="tr"]'),
                      de: document.querySelector('[data-lang-content="de"]'),
@@ -76,14 +88,12 @@
                      nl: document.querySelector('[data-lang-content="nl"]')
                  };
 
-                 // Check if any block exists and has content
                  const hasAnyContent = Object.values(blocks).some(b => b && b.innerHTML.trim().length > 0);
 
                  if (hasAnyContent) {
                      if (blocks[lang] && blocks[lang].innerHTML.trim()) {
                          blocks[lang].style.display = '';
                      } else {
-                         // Fallback chain
                          if (blocks.tr && blocks.tr.innerHTML.trim()) blocks.tr.style.display = '';
                          else if (blocks.de && blocks.de.innerHTML.trim()) blocks.de.style.display = '';
                          else if (blocks.en && blocks.en.innerHTML.trim()) blocks.en.style.display = '';
