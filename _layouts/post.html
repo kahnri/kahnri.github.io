@@ -30,6 +30,7 @@
         <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
         <button onclick="setLang('de')" class="px-3 py-1 rounded-full border theme-button">DE</button>
         <button onclick="setLang('en')" class="px-3 py-1 rounded-full border theme-button">EN</button>
+        <button onclick="setLang('nl')" class="px-3 py-1 rounded-full border theme-button">NL</button>
         <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
           <span data-theme-icon aria-hidden="true">🌙</span>
           <span class="sr-only" data-i18n="btn.theme"></span>
@@ -44,14 +45,17 @@
       </p>
 
       <!-- Çok dilli içerik -->
-      <div id="post-tr" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-tr" data-lang-content="tr" class="prose theme-prose mt-6 max-w-none" style="display:none;">
         {% if page.tr %}{{ page.tr | markdownify }}{% endif %}
       </div>
-      <div id="post-de" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-de" data-lang-content="de" class="prose theme-prose mt-6 max-w-none" style="display:none;">
         {% if page.de %}{{ page.de | markdownify }}{% endif %}
       </div>
-      <div id="post-en" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-en" data-lang-content="en" class="prose theme-prose mt-6 max-w-none" style="display:none;">
         {% if page.en %}{{ page.en | markdownify }}{% endif %}
+      </div>
+      <div id="post-nl" data-lang-content="nl" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+        {% if page.nl %}{{ page.nl | markdownify }}{% endif %}
       </div>
 
       <!-- Fallback: tek dilli içerik -->
@@ -61,41 +65,12 @@
     </article>
 
     <footer class="mt-10 border-t theme-border pt-5 theme-text-muted text-sm">
-      © {{ "now" | date: "%Y" }} Kagan Bağdemir · <a href="/#impressum">Impressum</a>
+      © {{ "now" | date: "%Y" }} Kagan Bağdemir · <a href="/#impressum" data-i18n="footer.impressum"></a>
     </footer>
   </main>
 
 <script src="/assets/i18n.js"></script>
-<script>
-const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.post)||{};
-function apply(lang){
-  document.documentElement.lang=lang;
-  localStorage.setItem('lang',lang);
-  const table=STRINGS[lang]||{};
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key=el.dataset.i18n;
-    if(table[key]){
-      el.textContent=table[key];
-    }
-  });
-  // İçerik görünürlüğü:
-  const blocks={tr:document.getElementById('post-tr'),de:document.getElementById('post-de'),en:document.getElementById('post-en')};
-  const toggle=document.getElementById('theme-toggle');
-  if(toggle){
-    const label=table['btn.theme'];
-    if(label){
-      toggle.setAttribute('aria-label',label);
-      toggle.setAttribute('title',label);
-    }
-  }
-  const any=Object.values(blocks).some(b=>b && b.innerHTML.trim().length>0);
-  if(any){ Object.values(blocks).forEach(b=>b&&(b.style.display='none')); if(blocks[lang] && blocks[lang].innerHTML.trim()){blocks[lang].style.display='';} else { // fallback sırayla
-      (blocks.tr&&blocks.tr.innerHTML.trim()?blocks.tr:blocks.de&&blocks.de.innerHTML.trim()?blocks.de:blocks.en&&blocks.en.innerHTML.trim()?blocks.en:document.getElementById('post-default')).style.display='';
-    }} else { document.getElementById('post-default').style.display=''; }
-}
-function setLang(l){apply(l);}
-apply(localStorage.getItem('lang')||'tr');
-</script>
+<script src="/assets/lang.js"></script>
 <script src="/assets/theme.js"></script>
 </body>
 </html>

@@ -36,6 +36,7 @@ layout: null
           <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
           <button onclick="setLang('de')" class="px-3 py-1 rounded-full border theme-button">DE</button>
           <button onclick="setLang('en')" class="px-3 py-1 rounded-full border theme-button">EN</button>
+          <button onclick="setLang('nl')" class="px-3 py-1 rounded-full border theme-button">NL</button>
           <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
             <span data-theme-icon aria-hidden="true">🌙</span>
             <span class="sr-only" data-i18n="btn.theme"></span>
@@ -70,37 +71,9 @@ layout: null
   </main>
 
 <script src="/assets/i18n.js"></script>
+<script src="/assets/lang.js"></script>
+<script src="/assets/theme.js"></script>
 <script>
-const STRINGS=(window.I18N_STRINGS&&window.I18N_STRINGS.blog)||{};
-function apply(lang){
-  document.documentElement.lang=lang;
-  localStorage.setItem('lang',lang);
-  const table=STRINGS[lang]||{};
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key=el.dataset.i18n;
-    if(table[key]){
-      el.textContent=table[key];
-    }
-  });
-  const ph=document.querySelectorAll('[data-i18n-ph]');
-  ph.forEach(el=>{
-    const key=el.dataset.i18nPh;
-    if(table[key]){
-      el.placeholder=table[key];
-    }
-  });
-  const toggle=document.getElementById('theme-toggle');
-  if(toggle){
-    const label=table['btn.theme'];
-    if(label){
-      toggle.setAttribute('aria-label',label);
-      toggle.setAttribute('title',label);
-    }
-  }
-}
-function setLang(l){apply(l);}
-apply(localStorage.getItem('lang')||'tr');
-
 // simple search/filter
 const q=document.getElementById('q'); if(q){
   q.addEventListener('input',()=>{
@@ -112,6 +85,5 @@ const q=document.getElementById('q'); if(q){
   });
 }
 </script>
-<script src="/assets/theme.js"></script>
 </body>
 </html>
