@@ -21,6 +21,7 @@
   const outputEl = document.getElementById("admin-output");
   const buildBtn = document.getElementById("admin-build");
   const copyBtn = document.getElementById("admin-copy");
+  const downloadBtn = document.getElementById("admin-download");
   const fileEl = document.getElementById("admin-file");
 
   function setUnlocked(value){
@@ -129,6 +130,22 @@
       }).catch(function(){
         window.alert("Copy failed. Please copy manually.");
       });
+    });
+  }
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", function(){
+      if (!outputEl || !outputEl.value) return;
+      const filename = (fileEl && fileEl.textContent) ? fileEl.textContent.trim() : "post.md";
+      const blob = new Blob([outputEl.value], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename.replace(/^_posts\\//, "");
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
     });
   }
 
