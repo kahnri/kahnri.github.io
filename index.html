@@ -41,7 +41,7 @@ layout: null
 </script>
 <meta name="description" content="Maschinenbau (ITPL) · Data & Logistics · Werkstudent / Praktikum / Junior">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="assets/theme.css">
 <meta name="color-scheme" content="light dark">
 <!-- Plausible -->
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
@@ -119,7 +119,7 @@ layout: null
       <p class="mt-1 theme-text-muted text-sm">Client-side lock only. This is not secure on a public site.</p>
 
       <div id="admin-locked" class="mt-4">
-        <button id="admin-unlock" class="px-4 py-2 rounded-xl border theme-button">Unlock</button>
+        <button id="admin-unlock" class="px-4 py-2 rounded-xl border theme-button" type="button">Unlock</button>
       </div>
 
       <div id="admin-unlocked" class="mt-4" style="display:none;">
@@ -158,10 +158,10 @@ layout: null
         </div>
 
         <div class="mt-4 flex flex-wrap gap-3 items-center">
-          <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button">Build front matter</button>
-          <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button">Copy</button>
-          <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button">Download</button>
-          <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button">Lock</button>
+          <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button">Build front matter</button>
+          <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button">Copy</button>
+          <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button">Download</button>
+          <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button">Lock</button>
           <span class="text-sm theme-text-muted">Suggested file: <span id="admin-file">_posts/</span></span>
         </div>
 
@@ -189,10 +189,10 @@ layout: null
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=2"></script>
-<script src="/assets/lang.js?v=2"></script>
-<script src="/assets/theme.js?v=2"></script>
-<script src="/assets/admin.js?v=1"></script>
+<script src="assets/i18n.js?v=2"></script>
+<script src="assets/lang.js?v=2"></script>
+<script src="assets/theme.js?v=2"></script>
+<script src="assets/admin.js?v=1"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 const firstVisitKey='landingAnimationPlayed';
