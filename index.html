@@ -53,6 +53,7 @@ layout: null
       <div class="flex items-center gap-3">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2">
+          <button id="admin-login" class="px-3 py-1 rounded-full border theme-button" type="button">Admin</button>
           <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
           <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
           <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
@@ -112,64 +113,6 @@ layout: null
         <p class="mt-1 theme-text-muted" data-i18n="cards.blogTxt"></p>
         <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/blog/" data-i18n="btn.blog"></a>
       </article>
-    </section>
-
-    <section id="admin-tools" class="mt-6 rounded-2xl p-6 border theme-card" data-animate style="--stagger:3.2">
-      <h2 class="text-2xl font-semibold">Admin tools</h2>
-      <p class="mt-1 theme-text-muted text-sm">Client-side lock only. This is not secure on a public site.</p>
-
-      <div id="admin-locked" class="mt-4">
-        <button id="admin-unlock" class="px-4 py-2 rounded-xl border theme-button" type="button">Unlock</button>
-      </div>
-
-      <div id="admin-unlocked" class="mt-4" style="display:none;">
-        <div class="grid md:grid-cols-3 gap-3">
-          <label class="block">
-            <span class="text-sm theme-text-muted">Title</span>
-            <input id="admin-title" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="Post title">
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">Date</span>
-            <input id="admin-date" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="date">
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">Slug (optional)</span>
-            <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="auto-from-title">
-          </label>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-3 mt-4">
-          <label class="block">
-            <span class="text-sm theme-text-muted">TR content</span>
-            <textarea id="admin-tr" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="Turkish content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">DE content</span>
-            <textarea id="admin-de" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="German content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">EN content</span>
-            <textarea id="admin-en" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="English content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">NL content</span>
-            <textarea id="admin-nl" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="Dutch content"></textarea>
-          </label>
-        </div>
-
-        <div class="mt-4 flex flex-wrap gap-3 items-center">
-          <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button">Build front matter</button>
-          <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button">Copy</button>
-          <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button">Download</button>
-          <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button">Lock</button>
-          <span class="text-sm theme-text-muted">Suggested file: <span id="admin-file">_posts/</span></span>
-        </div>
-
-        <label class="block mt-3">
-          <span class="text-sm theme-text-muted">Output</span>
-          <textarea id="admin-output" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-40 font-mono text-xs" readonly></textarea>
-        </label>
-      </div>
     </section>
 
     <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:3.4">

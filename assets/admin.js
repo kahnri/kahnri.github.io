@@ -2,11 +2,9 @@
   const password = "Kaan99kb";
   const storageKey = "admin-unlocked";
 
+  const loginBtn = document.getElementById("admin-login");
   const locked = document.getElementById("admin-locked");
   const unlocked = document.getElementById("admin-unlocked");
-  if (!locked || !unlocked) {
-    return;
-  }
 
   const unlockBtn = document.getElementById("admin-unlock");
   const lockBtn = document.getElementById("admin-lock");
@@ -25,6 +23,7 @@
   const fileEl = document.getElementById("admin-file");
 
   function setUnlocked(value){
+    if (!locked || !unlocked) return;
     if (value) {
       locked.style.display = "none";
       unlocked.style.display = "block";
@@ -46,6 +45,32 @@
     } catch (e) {
       return false;
     }
+  }
+
+  function promptUnlock(){
+    const entered = window.prompt("Admin password:");
+    if (entered === password) {
+      try {
+        localStorage.setItem(storageKey, "1");
+      } catch (e) {}
+      return true;
+    }
+    if (entered !== null) {
+      window.alert("Wrong password.");
+    }
+    return false;
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", function(){
+      if (promptUnlock()) {
+        window.location.href = "admin.html";
+      }
+    });
+  }
+
+  if (!locked || !unlocked) {
+    return;
   }
 
   function slugify(text){
@@ -100,12 +125,9 @@
 
   if (unlockBtn) {
     unlockBtn.addEventListener("click", function(){
-      const entered = window.prompt("Admin password:");
-      if (entered === password) {
+      if (promptUnlock()) {
         setUnlocked(true);
         build();
-      } else if (entered !== null) {
-        window.alert("Wrong password.");
       }
     });
   }
