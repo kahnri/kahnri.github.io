@@ -53,7 +53,7 @@ layout: null
       <div class="flex items-center gap-3">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2">
-          <a id="admin-login" href="admin.html" class="px-3 py-1 rounded-full border theme-button">Admin</a>
+          <a id="admin-login" href="/admin.html" class="px-3 py-1 rounded-full border theme-button">Admin</a>
           <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
           <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
           <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
@@ -137,23 +137,25 @@ layout: null
 <script src="assets/theme.js?v=2"></script>
 <script>
 window.adminNavLogin=function(event){
+  if(event){
+    event.preventDefault();
+  }
   try{
     if(localStorage.getItem('admin-unlocked')==='1'){
+      window.location.href='/admin.html';
       return true;
     }
   }catch(e){}
 
   const entered=window.prompt('Admin password:');
-  if(entered==='Kaan99kb'){
+  if((entered||'').trim()==='Kaan99kb'){
     try{
       localStorage.setItem('admin-unlocked','1');
     }catch(e){}
+    window.location.href='/admin.html';
     return true;
   }
 
-  if(event){
-    event.preventDefault();
-  }
   if(entered!==null){
     window.alert('Wrong password.');
   }

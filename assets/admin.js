@@ -22,7 +22,7 @@
 
   function promptUnlock(){
     var entered = window.prompt("Admin password:");
-    if (entered === password) {
+    if ((entered || "").trim() === password) {
       setUnlocked(true);
       return true;
     }
@@ -62,7 +62,7 @@
       }
       event.preventDefault();
       if (promptUnlock()) {
-        window.location.href = "admin.html";
+        window.location.href = "/admin.html";
       }
     });
   }
@@ -81,7 +81,7 @@
 
   if (!isUnlocked()) {
     if (!promptUnlock()) {
-      window.location.href = "index.html";
+      window.location.href = "/";
       return;
     }
   }
@@ -204,7 +204,7 @@
 
   function lockAndExit(){
     setUnlocked(false);
-    window.location.href = "index.html";
+    window.location.href = "/";
   }
 
   dateEl.value = today();
