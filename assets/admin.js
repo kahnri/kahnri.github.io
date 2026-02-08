@@ -1,42 +1,15 @@
 (function(){
-  const password = "Kaan99kb";
-  const storageKey = "admin-unlocked";
-
-  const loginBtn = document.getElementById("admin-login");
-  const locked = document.getElementById("admin-locked");
-  const unlocked = document.getElementById("admin-unlocked");
-
-  const unlockBtn = document.getElementById("admin-unlock");
-  const lockBtn = document.getElementById("admin-lock");
-
-  const titleEl = document.getElementById("admin-title");
-  const dateEl = document.getElementById("admin-date");
-  const slugEl = document.getElementById("admin-slug");
-  const trEl = document.getElementById("admin-tr");
-  const deEl = document.getElementById("admin-de");
-  const enEl = document.getElementById("admin-en");
-  const nlEl = document.getElementById("admin-nl");
-  const outputEl = document.getElementById("admin-output");
-  const buildBtn = document.getElementById("admin-build");
-  const copyBtn = document.getElementById("admin-copy");
-  const downloadBtn = document.getElementById("admin-download");
-  const fileEl = document.getElementById("admin-file");
+  var password = "Kaan99kb";
+  var storageKey = "admin-unlocked";
 
   function setUnlocked(value){
-    if (!locked || !unlocked) return;
-    if (value) {
-      locked.style.display = "none";
-      unlocked.style.display = "block";
-      try {
+    try {
+      if (value) {
         localStorage.setItem(storageKey, "1");
-      } catch (e) {}
-    } else {
-      locked.style.display = "block";
-      unlocked.style.display = "none";
-      try {
+      } else {
         localStorage.removeItem(storageKey);
-      } catch (e) {}
-    }
+      }
+    } catch (e) {}
   }
 
   function isUnlocked(){
@@ -48,29 +21,15 @@
   }
 
   function promptUnlock(){
-    const entered = window.prompt("Admin password:");
+    var entered = window.prompt("Admin password:");
     if (entered === password) {
-      try {
-        localStorage.setItem(storageKey, "1");
-      } catch (e) {}
+      setUnlocked(true);
       return true;
     }
     if (entered !== null) {
       window.alert("Wrong password.");
     }
     return false;
-  }
-
-  if (loginBtn) {
-    loginBtn.addEventListener("click", function(){
-      if (promptUnlock()) {
-        window.location.href = "admin.html";
-      }
-    });
-  }
-
-  if (!locked || !unlocked) {
-    return;
   }
 
   function slugify(text){
@@ -84,98 +43,205 @@
       .replace(/-+/g, "-");
   }
 
+  function yamlEscape(text){
+    return text.replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
+  }
+
   function today(){
     return new Date().toISOString().slice(0, 10);
   }
 
-  function build(){
-    const title = (titleEl && titleEl.value.trim()) || "Untitled";
-    const date = (dateEl && dateEl.value) || today();
-    const slug = (slugEl && slugEl.value.trim()) || slugify(title) || "post";
-
-    const lines = ["---", "layout: post", "title: \"" + title.replace(/\"/g, "\\\"") + "\"", "date: " + date];
-
-    function addLang(el, key){
-      if (!el) return;
-      const value = el.value.trim();
-      if (!value) return;
-      const indented = value.split("\n").map(function(line){ return "  " + line; }).join("\n");
-      lines.push(key + ": |");
-      lines.push(indented);
-    }
-
-    addLang(trEl, "tr");
-    addLang(deEl, "de");
-    addLang(enEl, "en");
-    addLang(nlEl, "nl");
-
-    lines.push("---", "");
-
-    if (outputEl) {
-      outputEl.value = lines.join("\n");
-    }
-    if (fileEl) {
-      fileEl.textContent = "_posts/" + date + "-" + slug + ".md";
-    }
-  }
-
-  if (dateEl && !dateEl.value) {
-    dateEl.value = today();
-  }
-
-  if (unlockBtn) {
-    unlockBtn.addEventListener("click", function(){
+  var loginBtn = document.getElementById("admin-login");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", function(event){
+      if (event.defaultPrevented) {
+        return;
+      }
+      if (isUnlocked()) {
+        return;
+      }
+      event.preventDefault();
       if (promptUnlock()) {
-        setUnlocked(true);
-        build();
+        window.location.href = "admin.html";
       }
     });
   }
 
-  if (lockBtn) {
-    lockBtn.addEventListener("click", function(){
-      setUnlocked(false);
+  var titleEl = document.getElementById("admin-title");
+  var dateEl = document.getElementById("admin-date");
+  var slugEl = document.getElementById("admin-slug");
+  var editorEl = document.getElementById("admin-content-editor");
+  var outputEl = document.getElementById("admin-output");
+  var fileEl = document.getElementById("admin-file");
+  var activeLangEl = document.getElementById("admin-active-language");
+
+  if (!titleEl || !dateEl || !slugEl || !editorEl || !outputEl || !fileEl || !activeLangEl) {
+    return;
+  }
+
+  if (!isUnlocked()) {
+    if (!promptUnlock()) {
+      window.location.href = "index.html";
+      return;
+    }
+  }
+
+  var tabButtons = Array.prototype.slice.call(document.querySelectorAll("[data-lang-tab]"));
+  var activeLang = "tr";
+  var contentByLang = { tr: "", de: "", en: "", nl: "" };
+  var manualSlug = false;
+
+  function setTabState(){
+    tabButtons.forEach(function(btn){
+      var lang = btn.getAttribute("data-lang-tab");
+      if (lang === activeLang) {
+        btn.classList.remove("theme-button");
+        btn.classList.add("theme-button-accent");
+      } else {
+        btn.classList.remove("theme-button-accent");
+        btn.classList.add("theme-button");
+      }
     });
+    activeLangEl.textContent = "Editing: " + activeLang.toUpperCase();
   }
 
-  if (buildBtn) {
-    buildBtn.addEventListener("click", build);
+  function switchLang(nextLang){
+    contentByLang[activeLang] = editorEl.value;
+    activeLang = nextLang;
+    editorEl.value = contentByLang[activeLang] || "";
+    setTabState();
+    build();
   }
 
-  if (copyBtn) {
-    copyBtn.addEventListener("click", function(){
-      if (!outputEl || !outputEl.value) return;
-      navigator.clipboard.writeText(outputEl.value).then(function(){
-        const prev = copyBtn.textContent;
-        copyBtn.textContent = "Copied";
-        setTimeout(function(){ copyBtn.textContent = prev; }, 1200);
-      }).catch(function(){
-        window.alert("Copy failed. Please copy manually.");
+  function syncAutoSlug(){
+    if (manualSlug) {
+      return;
+    }
+    var value = slugify(titleEl.value || "");
+    slugEl.value = value;
+  }
+
+  function build(){
+    contentByLang[activeLang] = editorEl.value;
+
+    var title = (titleEl.value || "").trim() || "Untitled";
+    var date = dateEl.value || today();
+    var slug = (slugEl.value || "").trim() || slugify(title) || "post";
+
+    var lines = [
+      "---",
+      "layout: post",
+      "title: \"" + yamlEscape(title) + "\"",
+      "date: " + date
+    ];
+
+    ["tr", "de", "en", "nl"].forEach(function(lang){
+      var value = (contentByLang[lang] || "").trim();
+      if (!value) {
+        return;
+      }
+      lines.push(lang + ": |");
+      value.split("\n").forEach(function(line){
+        lines.push("  " + line);
       });
     });
+
+    lines.push("---", "");
+
+    outputEl.value = lines.join("\n");
+    fileEl.textContent = "_posts/" + date + "-" + slug + ".md";
   }
 
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", function(){
-      if (!outputEl || !outputEl.value) return;
-      const filename = (fileEl && fileEl.textContent) ? fileEl.textContent.trim() : "post.md";
-      const blob = new Blob([outputEl.value], { type: "text/markdown;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename.replace(/^_posts\\//, "");
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
+  function copyOutput(){
+    if (!outputEl.value) {
+      return;
+    }
+    navigator.clipboard.writeText(outputEl.value).then(function(){
+      var btn = document.getElementById("admin-copy");
+      if (!btn) {
+        return;
+      }
+      var prev = btn.textContent;
+      btn.textContent = "Copied";
+      setTimeout(function(){
+        btn.textContent = prev;
+      }, 1200);
+    }).catch(function(){
+      window.alert("Copy failed. Please copy manually.");
     });
   }
 
-  [titleEl, dateEl, slugEl, trEl, deEl, enEl, nlEl].forEach(function(el){
-    if (!el) return;
-    el.addEventListener("input", build);
+  function downloadOutput(){
+    if (!outputEl.value) {
+      return;
+    }
+    var filename = fileEl.textContent ? fileEl.textContent.trim().replace(/^_posts\//, "") : "post.md";
+    var blob = new Blob([outputEl.value], { type: "text/markdown;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
+  }
+
+  function resetForm(){
+    if (!window.confirm("Clear all fields?")) {
+      return;
+    }
+    titleEl.value = "";
+    dateEl.value = today();
+    slugEl.value = "";
+    manualSlug = false;
+    contentByLang = { tr: "", de: "", en: "", nl: "" };
+    activeLang = "tr";
+    editorEl.value = "";
+    setTabState();
+    build();
+  }
+
+  function lockAndExit(){
+    setUnlocked(false);
+    window.location.href = "index.html";
+  }
+
+  dateEl.value = today();
+  setTabState();
+  build();
+
+  titleEl.addEventListener("input", function(){
+    syncAutoSlug();
+    build();
   });
 
-  setUnlocked(isUnlocked());
-  build();
+  dateEl.addEventListener("input", build);
+
+  slugEl.addEventListener("input", function(){
+    manualSlug = slugEl.value.trim().length > 0;
+    build();
+  });
+
+  editorEl.addEventListener("input", build);
+
+  tabButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      switchLang(btn.getAttribute("data-lang-tab"));
+    });
+  });
+
+  var buildBtn = document.getElementById("admin-build");
+  var copyBtn = document.getElementById("admin-copy");
+  var downloadBtn = document.getElementById("admin-download");
+  var resetBtn = document.getElementById("admin-reset");
+  var lockBtn = document.getElementById("admin-lock");
+  var topLockBtn = document.getElementById("admin-logout-top");
+
+  if (buildBtn) buildBtn.addEventListener("click", build);
+  if (copyBtn) copyBtn.addEventListener("click", copyOutput);
+  if (downloadBtn) downloadBtn.addEventListener("click", downloadOutput);
+  if (resetBtn) resetBtn.addEventListener("click", resetForm);
+  if (lockBtn) lockBtn.addEventListener("click", lockAndExit);
+  if (topLockBtn) topLockBtn.addEventListener("click", lockAndExit);
 })();

@@ -53,7 +53,7 @@ layout: null
       <div class="flex items-center gap-3">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2">
-          <button id="admin-login" class="px-3 py-1 rounded-full border theme-button" type="button">Admin</button>
+          <a id="admin-login" href="admin.html" class="px-3 py-1 rounded-full border theme-button">Admin</a>
           <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
           <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
           <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
@@ -135,8 +135,32 @@ layout: null
 <script src="assets/i18n.js?v=2"></script>
 <script src="assets/lang.js?v=2"></script>
 <script src="assets/theme.js?v=2"></script>
-<script src="assets/admin.js?v=1"></script>
 <script>
+window.adminNavLogin=function(event){
+  try{
+    if(localStorage.getItem('admin-unlocked')==='1'){
+      return true;
+    }
+  }catch(e){}
+
+  const entered=window.prompt('Admin password:');
+  if(entered==='Kaan99kb'){
+    try{
+      localStorage.setItem('admin-unlocked','1');
+    }catch(e){}
+    return true;
+  }
+
+  if(event){
+    event.preventDefault();
+  }
+  if(entered!==null){
+    window.alert('Wrong password.');
+  }
+  return false;
+};
+
+document.getElementById('admin-login').addEventListener('click',window.adminNavLogin);
 document.getElementById('y').textContent=new Date().getFullYear();
 const firstVisitKey='landingAnimationPlayed';
 let shouldAnimate=false;

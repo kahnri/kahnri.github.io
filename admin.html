@@ -6,131 +6,104 @@ layout: null
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin — Kagan Bağdemir</title>
+<title>Admin - Kagan Bagdemir</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <script>
 (function(){
   try{
     const stored=localStorage.getItem('theme-preference');
     const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme=stored|| (systemDark?'dark':'light');
+    const theme=stored||(systemDark?'dark':'light');
     document.documentElement.dataset.theme=theme;
   }catch(e){
     document.documentElement.dataset.theme='dark';
   }
 })();
 </script>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Kagan Bağdemir",
-  "givenName": "Kagan",
-  "familyName": "Bağdemir",
-  "jobTitle": "Mechanical Engineering (ITPL) · Data & Logistics",
-  "email": "mailto:hi@kaganbagdemir.de",
-  "url": "https://kaganbagdemir.de",
-  "image": "https://kaganbagdemir.de/avatar.jpg",
-  "address": { "@type": "PostalAddress", "addressLocality": "Dortmund", "addressCountry": "DE" },
-  "sameAs": [
-    "https://github.com/kahnri",
-    "https://www.linkedin.com/in/kagan-b-7b2b28206/",
-    "mailto:hi@kaganbagdemir.de"
-  ]
-}
-</script>
-<meta name="description" content="Admin tools">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="assets/theme.css">
 <meta name="color-scheme" content="light dark">
-<!-- Plausible -->
-<script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
-  <main class="relative isolate max-w-4xl mx-auto px-6 py-10">
-    <header class="flex items-center justify-between" data-animate style="--stagger:0">
+  <main class="relative isolate max-w-4xl mx-auto px-6 py-8">
+    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
       <div class="flex items-center gap-3">
-        <a href="/" class="px-3 py-1 rounded-full border theme-button">Home</a>
+        <a href="index.html" class="px-3 py-1 rounded-full border theme-button">Home</a>
         <h1 class="text-xl font-bold tracking-wide">ADMIN</h1>
       </div>
       <div class="flex items-center gap-2">
+        <button id="admin-logout-top" class="px-3 py-1 rounded-full border theme-button" type="button">Lock</button>
         <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
         <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
         <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
         <button onclick="setLang('nl')" data-lang="nl" aria-label="Switch to Dutch" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">NL</button>
         <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span data-theme-icon aria-hidden="true">moon</span>
           <span class="sr-only" data-i18n="btn.theme"></span>
         </button>
       </div>
     </header>
 
-    <section id="admin-tools" class="mt-6 rounded-2xl p-6 border theme-card" data-animate style="--stagger:1">
-      <h2 class="text-2xl font-semibold">Post Builder</h2>
-      <p class="mt-1 theme-text-muted text-sm">Client-side lock only. This is not secure on a public site.</p>
-
-      <div id="admin-locked" class="mt-4">
-        <button id="admin-unlock" class="px-4 py-2 rounded-xl border theme-button" type="button">Unlock</button>
+    <section class="mt-5 rounded-2xl p-5 border theme-card" data-animate style="--stagger:1">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-xl font-semibold">New Blog Post</h2>
+        <p class="text-sm theme-text-muted">Client-side gate only</p>
       </div>
 
-      <div id="admin-unlocked" class="mt-4" style="display:none;">
-        <div class="grid md:grid-cols-3 gap-3">
-          <label class="block">
-            <span class="text-sm theme-text-muted">Title</span>
-            <input id="admin-title" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="Post title">
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">Date</span>
-            <input id="admin-date" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="date">
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">Slug (optional)</span>
-            <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="auto-from-title">
-          </label>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-3 mt-4">
-          <label class="block">
-            <span class="text-sm theme-text-muted">TR content</span>
-            <textarea id="admin-tr" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="Turkish content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">DE content</span>
-            <textarea id="admin-de" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="German content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">EN content</span>
-            <textarea id="admin-en" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="English content"></textarea>
-          </label>
-          <label class="block">
-            <span class="text-sm theme-text-muted">NL content</span>
-            <textarea id="admin-nl" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-32" placeholder="Dutch content"></textarea>
-          </label>
-        </div>
-
-        <div class="mt-4 flex flex-wrap gap-3 items-center">
-          <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button">Build front matter</button>
-          <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button">Copy</button>
-          <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button">Download</button>
-          <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button">Lock</button>
-          <span class="text-sm theme-text-muted">Suggested file: <span id="admin-file">_posts/</span></span>
-        </div>
-
-        <label class="block mt-3">
-          <span class="text-sm theme-text-muted">Output</span>
-          <textarea id="admin-output" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-40 font-mono text-xs" readonly></textarea>
+      <div class="grid md:grid-cols-3 gap-3 mt-4">
+        <label class="block">
+          <span class="text-sm theme-text-muted">Title</span>
+          <input id="admin-title" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="Post title">
+        </label>
+        <label class="block">
+          <span class="text-sm theme-text-muted">Date</span>
+          <input id="admin-date" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="date">
+        </label>
+        <label class="block">
+          <span class="text-sm theme-text-muted">Slug</span>
+          <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="auto-from-title">
         </label>
       </div>
+
+      <div class="mt-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <button data-lang-tab="tr" class="px-3 py-1 rounded-full border theme-button" type="button">TR</button>
+          <button data-lang-tab="de" class="px-3 py-1 rounded-full border theme-button" type="button">DE</button>
+          <button data-lang-tab="en" class="px-3 py-1 rounded-full border theme-button" type="button">EN</button>
+          <button data-lang-tab="nl" class="px-3 py-1 rounded-full border theme-button" type="button">NL</button>
+          <span id="admin-active-language" class="text-sm theme-text-muted">Editing: TR</span>
+        </div>
+        <label class="block mt-2">
+          <span class="text-sm theme-text-muted">Content</span>
+          <textarea id="admin-content-editor" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-64" placeholder="Write in selected language"></textarea>
+        </label>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2 items-center">
+        <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button">Build</button>
+        <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button">Copy</button>
+        <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button">Download</button>
+        <button id="admin-reset" class="px-4 py-2 rounded-xl border theme-button" type="button">Reset</button>
+        <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button">Lock</button>
+        <span class="text-sm theme-text-muted">File: <span id="admin-file">_posts/</span></span>
+      </div>
+
+      <label class="block mt-3">
+        <span class="text-sm theme-text-muted">Front matter output</span>
+        <textarea id="admin-output" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-40 font-mono text-xs" readonly></textarea>
+      </label>
     </section>
 
-    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:1.4">
-      © <span id="y"></span> Kagan Bağdemir
+    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm" data-animate style="--stagger:1.2">
+      <p>Use Download, then move file into <code>_posts/</code> in your repo and commit.</p>
+      <p class="mt-2">&copy; <span id="y"></span> Kagan Bagdemir</p>
     </footer>
   </main>
 
 <script src="assets/i18n.js?v=2"></script>
 <script src="assets/lang.js?v=2"></script>
 <script src="assets/theme.js?v=2"></script>
-<script src="assets/admin.js?v=1"></script>
+<script src="assets/admin.js?v=3"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 </script>
