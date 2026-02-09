@@ -3,7 +3,7 @@
 
   var postsKey = "local-posts-v1";
   var homeUrl = "/";
-  var localPostUrl = "/blog/post/";
+  var localPostUrl = "/local-post.html";
 
   function slugify(text){
     return text

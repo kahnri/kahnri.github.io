@@ -2,17 +2,64 @@
 layout: null
 ---
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Redirecting</title>
+  <title>Post - Kagan Bagdemir</title>
   <script>
   (function(){
-    var target='/blog/post/' + window.location.search + window.location.hash;
-    window.location.replace(target);
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
   })();
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/theme.css">
+  <meta name="color-scheme" content="light dark">
 </head>
-<body></body>
+<body>
+  <main class="max-w-3xl mx-auto px-6 py-10">
+    <header class="flex items-center justify-between">
+      <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span>Blog</span></a>
+      <div class="flex items-center gap-2">
+        <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
+        <button onclick="setLang('de')" class="px-3 py-1 rounded-full border theme-button">DE</button>
+        <button onclick="setLang('en')" class="px-3 py-1 rounded-full border theme-button">EN</button>
+        <button onclick="setLang('nl')" class="px-3 py-1 rounded-full border theme-button">NL</button>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">moon</span>
+          <span class="sr-only" data-i18n="btn.theme"></span>
+        </button>
+      </div>
+    </header>
+
+    <article class="mt-6">
+      <h1 id="local-post-title" class="text-3xl font-semibold"></h1>
+      <p id="local-post-date" class="theme-text-muted text-sm mt-1"></p>
+      <div id="local-post-content" class="prose theme-prose mt-6 max-w-none"></div>
+      <p id="local-post-missing" class="theme-text-muted mt-6" style="display:none;">Post not found.</p>
+    </article>
+
+    <footer class="mt-10 border-t theme-border pt-5 theme-text-muted text-sm">
+      &copy; <span id="y"></span> Kagan Bagdemir
+    </footer>
+  </main>
+
+<script src="/assets/i18n.js?v=2"></script>
+<script src="/assets/lang.js?v=2"></script>
+<script src="/assets/theme.js?v=2"></script>
+<script src="/assets/local-posts.js?v=3"></script>
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+if(window.LocalPosts){
+  window.LocalPosts.renderPostPage();
+}
+</script>
+</body>
 </html>

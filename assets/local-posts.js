@@ -2,7 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'local-posts-v1';
-  var POST_URL = '/blog/post/';
+  var POST_URL = '/local-post.html';
 
   function readPosts(){
     try {

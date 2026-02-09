@@ -62,6 +62,21 @@ body::before {
   animation: themeAurora 18s ease-in-out infinite;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.7), transparent 78%);
+  animation: gridDrift 24s linear infinite;
+}
+
 @keyframes themeAurora {
   0% {
     transform: scale(1.05) translate3d(-1%, -1%, 0);
@@ -103,19 +118,45 @@ a:hover {
 .theme-button-icon,
 .theme-button-accent,
 .theme-chip {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .theme-card {
+  position: relative;
+  overflow: hidden;
   background-color: var(--surface);
   border-color: var(--border);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.theme-card::after {
+  content: "";
+  position: absolute;
+  top: -160%;
+  left: -60%;
+  width: 70%;
+  height: 320%;
+  transform: rotate(22deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .theme-card:hover {
   border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.theme-card:hover::after {
+  opacity: 1;
+  animation: cardSheen 0.9s ease forwards;
 }
 
 .theme-button {
+  position: relative;
+  overflow: hidden;
   background-color: var(--surface-muted);
   border-color: var(--border);
   color: inherit;
@@ -123,9 +164,13 @@ a:hover {
 
 .theme-button:hover {
   border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .theme-button-icon {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -136,6 +181,29 @@ a:hover {
 
 .theme-button-icon:hover {
   border-color: var(--border-strong);
+  transform: translateY(-1px) scale(1.03);
+}
+
+.theme-button::after,
+.theme-button-icon::after,
+.theme-button-accent::after {
+  content: "";
+  position: absolute;
+  top: -220%;
+  left: -80%;
+  width: 46%;
+  height: 520%;
+  transform: rotate(24deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-button:hover::after,
+.theme-button-icon:hover::after,
+.theme-button-accent:hover::after {
+  opacity: 1;
+  animation: buttonSheen 0.9s ease forwards;
 }
 
 .theme-button-accent {
@@ -147,6 +215,36 @@ a:hover {
 .theme-chip {
   background-color: var(--chip-bg);
   border-color: var(--border);
+  animation: chipFloat 6.5s ease-in-out infinite;
+}
+
+.theme-chip:nth-child(2n) {
+  animation-delay: -1.8s;
+}
+
+.theme-chip:nth-child(3n) {
+  animation-delay: -3.1s;
+}
+
+.fx-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.fx-hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(59, 130, 246, 0.35), transparent 35%, rgba(16, 185, 129, 0.35), transparent 72%, rgba(244, 114, 182, 0.3));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  padding: 1px;
+  opacity: 0.85;
+  animation: heroBorder 6.5s linear infinite;
 }
 
 .theme-toggle-fixed {
@@ -245,6 +343,52 @@ a:hover {
   100% {
     opacity: 0;
     transform: translate(-50%, -60%) scale(1.3);
+  }
+}
+
+@keyframes gridDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-28px, 18px, 0);
+  }
+}
+
+@keyframes cardSheen {
+  0% {
+    transform: translateX(0) rotate(22deg);
+  }
+  100% {
+    transform: translateX(280%) rotate(22deg);
+  }
+}
+
+@keyframes buttonSheen {
+  0% {
+    transform: translateX(0) rotate(24deg);
+  }
+  100% {
+    transform: translateX(300%) rotate(24deg);
+  }
+}
+
+@keyframes chipFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes heroBorder {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
 
