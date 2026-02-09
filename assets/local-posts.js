@@ -2,6 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'local-posts-v1';
+  var POST_URL = '/blog/post/';
 
   function readPosts(){
     try {
@@ -103,11 +104,11 @@
       return (
         '<article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5">' +
         '<h3 class="text-lg font-semibold">' +
-        '<a class="hover:underline" href="/local-post.html?slug=' + encodeURIComponent(post.slug) + '">' + escapeHtml(post.title) + '</a>' +
+        '<a class="hover:underline" href="' + POST_URL + '?slug=' + encodeURIComponent(post.slug) + '">' + escapeHtml(post.title) + '</a>' +
         '</h3>' +
         '<p class="theme-text-muted text-sm">' + escapeHtml(formatDate(post.date)) + '</p>' +
         (content ? '<p class="theme-text-soft mt-2">' + escapeHtml(excerpt(content, 140)) + '</p>' : '') +
-        '<a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/local-post.html?slug=' + encodeURIComponent(post.slug) + '">Read</a>' +
+        '<a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="' + POST_URL + '?slug=' + encodeURIComponent(post.slug) + '">Read</a>' +
         '</article>'
       );
     }).join('');
@@ -136,11 +137,11 @@
         ' data-title="' + escapeHtml(post.title.toLowerCase()) + '"' +
         ' data-text="' + escapeHtml(excerptText.toLowerCase()) + '">' +
         '<h2 class="text-xl font-semibold">' +
-        '<a class="hover:underline" href="/local-post.html?slug=' + encodeURIComponent(post.slug) + '">' + escapeHtml(post.title) + '</a>' +
+        '<a class="hover:underline" href="' + POST_URL + '?slug=' + encodeURIComponent(post.slug) + '">' + escapeHtml(post.title) + '</a>' +
         '</h2>' +
         '<p class="theme-text-muted text-sm">' + escapeHtml(formatDate(post.date)) + '</p>' +
         (excerptText ? '<p class="theme-text-soft mt-2">' + escapeHtml(excerptText) + '</p>' : '') +
-        '<a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/local-post.html?slug=' + encodeURIComponent(post.slug) + '">Read</a>' +
+        '<a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="' + POST_URL + '?slug=' + encodeURIComponent(post.slug) + '">Read</a>' +
         '</article>'
       );
     }).join('');

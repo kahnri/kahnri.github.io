@@ -14,8 +14,8 @@ layout: null
       window.location.replace('/admin/');
       return;
     }
-    if (path === '/local-post') {
-      window.location.replace('/blog/');
+    if (path === '/local-post' || path === '/local-post.html') {
+      window.location.replace('/blog/post/' + window.location.search + window.location.hash);
       return;
     }
   })();

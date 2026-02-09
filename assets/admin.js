@@ -1,42 +1,9 @@
 (function(){
   'use strict';
 
-  var password = "Kaan99kb";
-  var unlockKey = "admin-unlocked";
   var postsKey = "local-posts-v1";
-  var adminEntryUrl = "/admin/";
   var homeUrl = "/";
-  var localPostUrl = "/local-post.html";
-
-  function setUnlocked(value){
-    try {
-      if (value) {
-        localStorage.setItem(unlockKey, "1");
-      } else {
-        localStorage.removeItem(unlockKey);
-      }
-    } catch (e) {}
-  }
-
-  function isUnlocked(){
-    try {
-      return localStorage.getItem(unlockKey) === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function promptUnlock(){
-    var entered = window.prompt("Admin password:");
-    if ((entered || "").trim() === password) {
-      setUnlocked(true);
-      return true;
-    }
-    if (entered !== null) {
-      window.alert("Wrong password.");
-    }
-    return false;
-  }
+  var localPostUrl = "/blog/post/";
 
   function slugify(text){
     return text
@@ -103,22 +70,6 @@
     });
   }
 
-  var loginBtn = document.getElementById("admin-login");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", function(event){
-      if (event.defaultPrevented) {
-        return;
-      }
-      if (isUnlocked()) {
-        return;
-      }
-      event.preventDefault();
-      if (promptUnlock()) {
-        window.location.href = adminEntryUrl;
-      }
-    });
-  }
-
   var titleEl = document.getElementById("admin-title");
   var dateEl = document.getElementById("admin-date");
   var slugEl = document.getElementById("admin-slug");
@@ -130,13 +81,6 @@
 
   if (!titleEl || !dateEl || !slugEl || !editorEl || !outputEl || !fileEl || !activeLangEl) {
     return;
-  }
-
-  if (!isUnlocked()) {
-    if (!promptUnlock()) {
-      window.location.href = homeUrl;
-      return;
-    }
   }
 
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll("[data-lang-tab]"));
@@ -259,7 +203,6 @@
   }
 
   function lockAndExit(){
-    setUnlocked(false);
     window.location.href = homeUrl;
   }
 
