@@ -4,6 +4,9 @@
   var password = "Kaan99kb";
   var unlockKey = "admin-unlocked";
   var postsKey = "local-posts-v1";
+  var adminEntryUrl = "admin/";
+  var homeUrl = "index.html";
+  var localPostUrl = "local-post.html";
 
   function setUnlocked(value){
     try {
@@ -111,7 +114,7 @@
       }
       event.preventDefault();
       if (promptUnlock()) {
-        window.location.href = "/admin.html";
+        window.location.href = adminEntryUrl;
       }
     });
   }
@@ -131,7 +134,7 @@
 
   if (!isUnlocked()) {
     if (!promptUnlock()) {
-      window.location.href = "/";
+      window.location.href = homeUrl;
       return;
     }
   }
@@ -257,7 +260,7 @@
 
   function lockAndExit(){
     setUnlocked(false);
-    window.location.href = "/";
+    window.location.href = homeUrl;
   }
 
   function validateForSave(){
@@ -421,7 +424,7 @@
     if (target.dataset.action === 'edit') {
       loadPost(post);
     } else if (target.dataset.action === 'view') {
-      window.location.href = '/local-post.html?slug=' + encodeURIComponent((post && post.slug) || id || '');
+      window.location.href = localPostUrl + '?slug=' + encodeURIComponent((post && post.slug) || id || '');
     } else if (target.dataset.action === 'delete') {
       editingId = id;
       deleteCurrent();

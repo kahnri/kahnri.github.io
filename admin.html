@@ -20,6 +20,25 @@ layout: null
   }
 })();
 </script>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('admin-unlocked')==='1'){
+      return;
+    }
+  }catch(e){}
+
+  var entered=window.prompt('Admin password:');
+  if((entered||'').trim()==='Kaan99kb'){
+    try{
+      localStorage.setItem('admin-unlocked','1');
+    }catch(e){}
+    return;
+  }
+
+  window.location.replace('index.html');
+})();
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="assets/theme.css">
 <meta name="color-scheme" content="light dark">
@@ -115,7 +134,7 @@ layout: null
 <script src="assets/i18n.js?v=2"></script>
 <script src="assets/lang.js?v=2"></script>
 <script src="assets/theme.js?v=2"></script>
-<script src="assets/admin.js?v=5"></script>
+<script src="assets/admin.js?v=6"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 </script>
