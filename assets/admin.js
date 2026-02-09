@@ -4,9 +4,9 @@
   var password = "Kaan99kb";
   var unlockKey = "admin-unlocked";
   var postsKey = "local-posts-v1";
-  var adminEntryUrl = "admin/";
-  var homeUrl = "index.html";
-  var localPostUrl = "local-post.html";
+  var adminEntryUrl = "/admin/";
+  var homeUrl = "/";
+  var localPostUrl = "/local-post.html";
 
   function setUnlocked(value){
     try {

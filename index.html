@@ -53,7 +53,7 @@ layout: null
       <div class="flex items-center gap-3">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2">
-          <a id="admin-login" href="admin/" class="px-3 py-1 rounded-full border theme-button">Admin</a>
+          <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button">Admin</a>
           <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
           <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
           <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
@@ -141,7 +141,7 @@ window.adminNavLogin=function(event){
   if(event){
     event.preventDefault();
   }
-  const adminUrl='admin/';
+  const adminUrl='/admin/';
   try{
     if(localStorage.getItem('admin-unlocked')==='1'){
       window.location.href=adminUrl;

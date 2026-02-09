@@ -2,17 +2,142 @@
 layout: null
 ---
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Admin</title>
-  <script>
-  (function(){
-    var target='../admin.html';
-    window.location.replace(target+window.location.search+window.location.hash);
-  })();
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<base href="/">
+<title>Admin - Kagan Bagdemir</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script>
+(function(){
+  try{
+    const stored=localStorage.getItem('theme-preference');
+    const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme=stored||(systemDark?'dark':'light');
+    document.documentElement.dataset.theme=theme;
+  }catch(e){
+    document.documentElement.dataset.theme='dark';
+  }
+})();
+</script>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('admin-unlocked')==='1'){
+      return;
+    }
+  }catch(e){}
+
+  var entered=window.prompt('Admin password:');
+  if((entered||'').trim()==='Kaan99kb'){
+    try{
+      localStorage.setItem('admin-unlocked','1');
+    }catch(e){}
+    return;
+  }
+
+  window.location.replace('/');
+})();
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="assets/theme.css">
+<meta name="color-scheme" content="light dark">
 </head>
-<body></body>
+<body>
+  <main class="relative isolate max-w-4xl mx-auto px-6 py-8">
+    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
+      <div class="flex items-center gap-3">
+        <a href="/" class="px-3 py-1 rounded-full border theme-button">Home</a>
+        <h1 class="text-xl font-bold tracking-wide">ADMIN</h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="admin-logout-top" class="px-3 py-1 rounded-full border theme-button" type="button">Lock</button>
+        <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
+        <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
+        <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
+        <button onclick="setLang('nl')" data-lang="nl" aria-label="Switch to Dutch" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">NL</button>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">moon</span>
+          <span class="sr-only" data-i18n="btn.theme"></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="mt-5 rounded-2xl p-5 border theme-card" data-animate style="--stagger:1">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-xl font-semibold">New Blog Post</h2>
+        <p class="text-sm theme-text-muted">Client-side gate only</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-3 mt-4">
+        <label class="block">
+          <span class="text-sm theme-text-muted">Title</span>
+          <input id="admin-title" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="Post title">
+        </label>
+        <label class="block">
+          <span class="text-sm theme-text-muted">Date</span>
+          <input id="admin-date" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="date">
+        </label>
+        <label class="block">
+          <span class="text-sm theme-text-muted">Slug</span>
+          <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="auto-from-title">
+        </label>
+      </div>
+
+      <div class="mt-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <button data-lang-tab="tr" class="px-3 py-1 rounded-full border theme-button" type="button">TR</button>
+          <button data-lang-tab="de" class="px-3 py-1 rounded-full border theme-button" type="button">DE</button>
+          <button data-lang-tab="en" class="px-3 py-1 rounded-full border theme-button" type="button">EN</button>
+          <button data-lang-tab="nl" class="px-3 py-1 rounded-full border theme-button" type="button">NL</button>
+          <span id="admin-active-language" class="text-sm theme-text-muted">Editing: TR</span>
+        </div>
+        <label class="block mt-2">
+          <span class="text-sm theme-text-muted">Content</span>
+          <textarea id="admin-content-editor" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-64" placeholder="Write in selected language"></textarea>
+        </label>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2 items-center">
+        <button id="admin-save" class="px-4 py-2 rounded-xl border theme-button-accent" type="button">Save to Blog</button>
+        <button id="admin-delete" class="px-4 py-2 rounded-xl border theme-button" type="button">Delete</button>
+        <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button">Build</button>
+        <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button">Copy</button>
+        <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button">Download</button>
+        <button id="admin-reset" class="px-4 py-2 rounded-xl border theme-button" type="button">Reset</button>
+        <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button">Lock</button>
+        <span class="text-sm theme-text-muted">File: <span id="admin-file">_posts/</span></span>
+        <span id="admin-editing" class="text-sm theme-text-muted">New post</span>
+      </div>
+
+      <label class="block mt-3">
+        <span class="text-sm theme-text-muted">Front matter output</span>
+        <textarea id="admin-output" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-40 font-mono text-xs" readonly></textarea>
+      </label>
+    </section>
+
+    <section class="mt-5 rounded-2xl p-5 border theme-card" data-animate style="--stagger:1.1">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-lg font-semibold">My Posts</h3>
+        <button id="admin-refresh" class="px-3 py-1 rounded-full border theme-button" type="button">Refresh</button>
+      </div>
+      <div id="admin-posts" class="mt-3 space-y-3"></div>
+      <p id="admin-posts-empty" class="theme-text-muted mt-3">No local posts yet.</p>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm" data-animate style="--stagger:1.2">
+      <p>Use Download, then move file into <code>_posts/</code> in your repo and commit.</p>
+      <p class="mt-2">&copy; <span id="y"></span> Kagan Bagdemir</p>
+    </footer>
+  </main>
+
+<script src="assets/i18n.js?v=2"></script>
+<script src="assets/lang.js?v=2"></script>
+<script src="assets/theme.js?v=2"></script>
+<script src="assets/admin.js?v=7"></script>
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
 </html>
