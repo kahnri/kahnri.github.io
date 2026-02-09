@@ -4,8 +4,10 @@
     <a class="px-3 py-1 rounded-full border theme-button transition" href="/blog/" data-i18n="recent.all"></a>
   </div>
 
+  <div id="local-recent-posts" class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
+
   {% if site.posts.size > 0 %}
-  <div class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <div id="static-recent-posts" class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
     {% for post in site.posts limit:3 %}
     <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5">
       <h3 class="text-lg font-semibold">
@@ -20,6 +22,6 @@
     {% endfor %}
   </div>
   {% else %}
-  <p class="mt-4 theme-text-muted" data-i18n="recent.empty"></p>
+  <p id="recent-empty" class="mt-4 theme-text-muted" data-i18n="recent.empty"></p>
   {% endif %}
 </section>

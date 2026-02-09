@@ -49,6 +49,7 @@ layout: null
     <p class="theme-text-muted mt-1" data-i18n="blog.subtitle"></p>
 
     <div class="mt-6 space-y-6" id="list">
+      <div id="local-posts"></div>
       {% for post in site.posts %}
       <article class="border rounded-2xl p-5 theme-card transition hover:-translate-y-0.5"
                data-title="{{ post.title | downcase }}"
@@ -65,7 +66,7 @@ layout: null
       </article>
       {% endfor %}
       {% unless site.posts.size > 0 %}
-        <p class="theme-text-muted" data-i18n="blog.empty"></p>
+        <p id="blog-empty" class="theme-text-muted" data-i18n="blog.empty"></p>
       {% endunless %}
     </div>
   </main>
@@ -73,7 +74,11 @@ layout: null
 <script src="/assets/i18n.js?v=2"></script>
 <script src="/assets/lang.js?v=2"></script>
 <script src="/assets/theme.js?v=2"></script>
+<script src="/assets/local-posts.js?v=1"></script>
 <script>
+if(window.LocalPosts){
+  window.LocalPosts.renderBlogList('local-posts','blog-empty');
+}
 // simple search/filter
 const q=document.getElementById('q'); if(q){
   q.addEventListener('input',()=>{
