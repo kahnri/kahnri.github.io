@@ -10,12 +10,12 @@ layout: null
   <script>
   (function(){
     var path = window.location.pathname.replace(/\/+$/, '');
-    if (path === '/admin' || path === '/admin.html') {
+    if (path === '/admin' || path === '/admin.html' || path === '/admin/index' || path === '/admin/index.html') {
       window.location.replace('/admin/');
       return;
     }
-    if (path === '/local-post' || path === '/local-post.html' || path === '/blog/post') {
-      window.location.replace('/local-post.html' + window.location.search + window.location.hash);
+    if (path === '/local-post' || path === '/local-post.html' || path === '/blog/post' || path === '/blog/post/index' || path === '/blog/post/index.html') {
+      window.location.replace('/blog/');
       return;
     }
   })();

@@ -4,24 +4,22 @@
     <a class="px-3 py-1 rounded-full border theme-button transition" href="/blog/" data-i18n="recent.all"></a>
   </div>
 
-  <div id="local-recent-posts" class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
-
   {% if site.posts.size > 0 %}
-  <div id="static-recent-posts" class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <div class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
     {% for post in site.posts limit:3 %}
     <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5">
       <h3 class="text-lg font-semibold">
-        <a class="hover:underline" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <a class="hover:underline" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       </h3>
       <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
       {% if post.excerpt %}
-      <p class="theme-text-soft mt-2">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+      <p class="theme-text-soft mt-2">{{ post.excerpt | strip_html | truncate: 140 | escape }}</p>
       {% endif %}
       <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="{{ post.url | relative_url }}" data-i18n="recent.read"></a>
     </article>
     {% endfor %}
   </div>
   {% else %}
-  <p id="recent-empty" class="mt-4 theme-text-muted" data-i18n="recent.empty"></p>
+  <p class="mt-4 theme-text-muted" data-i18n="recent.empty"></p>
   {% endif %}
 </section>

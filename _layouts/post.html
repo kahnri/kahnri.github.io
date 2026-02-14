@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page.title }} — Kagan Bağdemir</title>
+  <title>{{ page.title | escape }} — Kagan Bağdemir</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script>
   (function(){
@@ -18,14 +18,14 @@
   })();
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/theme.css">
+  <link rel="stylesheet" href="/assets/theme.css?v=3">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
   <main class="max-w-3xl mx-auto px-6 py-10">
-    <header class="flex items-center justify-between">
+    <header class="flex items-center justify-between" data-animate style="--stagger:0">
       <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="post.back"></span></a>
       <div class="flex items-center gap-2">
         <button onclick="setLang('tr')" class="px-3 py-1 rounded-full border theme-button">TR</button>
@@ -39,8 +39,8 @@
       </div>
     </header>
 
-    <article class="mt-6">
-      <h1 class="text-3xl font-semibold">{{ page.title }}</h1>
+    <article class="mt-6" data-animate style="--stagger:0.6">
+      <h1 class="text-3xl font-semibold">{{ page.title | escape }}</h1>
       <p class="theme-text-muted text-sm mt-1">
         {{ page.date | date: "%d.%m.%Y" }}
       </p>
@@ -72,6 +72,12 @@
 
 <script src="/assets/i18n.js?v=2"></script>
 <script src="/assets/lang.js?v=2"></script>
-<script src="/assets/theme.js?v=2"></script>
+<script src="/assets/theme.js?v=3"></script>
+<script>
+document.body.classList.add('initial-anim');
+requestAnimationFrame(function(){
+  document.body.classList.add('initial-anim-run');
+});
+</script>
 </body>
 </html>
