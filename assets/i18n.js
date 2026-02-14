@@ -3,6 +3,12 @@
 
   const DICT = {
     tr: {
+      'lang.label': 'Dil',
+      'lang.tr': 'Türkçe',
+      'lang.de': 'Deutsch',
+      'lang.en': 'English',
+      'lang.nl': 'Nederlands',
+      'lang.ja': '日本語',
       'nav.blog': 'Blog',
       'hero.title': 'Makine Mühendisliği (ITPL) · Veri & Lojistik',
       'hero.subtitle': 'Werkstudent / Staj / Junior · Veri/Analitik, Lojistik-IT, Üretim',
@@ -38,6 +44,12 @@
       'footer.privacy_text': 'Bu sitede çerez kullanılmıyor. Analytics ekleyince metni güncelle.'
     },
     de: {
+      'lang.label': 'Sprache',
+      'lang.tr': 'Türkisch',
+      'lang.de': 'Deutsch',
+      'lang.en': 'Englisch',
+      'lang.nl': 'Niederländisch',
+      'lang.ja': 'Japanisch',
       'nav.blog': 'Blog',
       'hero.title': 'Maschinenbau (ITPL) · Data & Logistics',
       'hero.subtitle': 'Werkstudent / Praktikum / Junior · Data/Analytics, Logistik-IT, Manufacturing',
@@ -73,6 +85,12 @@
       'footer.privacy_text': 'Diese Seite verwendet keine Cookies. Text bei Analytics-Integration aktualisieren.'
     },
     en: {
+      'lang.label': 'Language',
+      'lang.tr': 'Turkish',
+      'lang.de': 'German',
+      'lang.en': 'English',
+      'lang.nl': 'Dutch',
+      'lang.ja': 'Japanese',
       'nav.blog': 'Blog',
       'hero.title': 'Mechanical Eng. (ITPL) · Data & Logistics',
       'hero.subtitle': 'Werkstudent / Internship / Junior · Data/Analytics, Logistics IT, Manufacturing',
@@ -108,6 +126,12 @@
       'footer.privacy_text': 'No cookies used on this site. Update text when adding analytics.'
     },
     nl: {
+      'lang.label': 'Taal',
+      'lang.tr': 'Turks',
+      'lang.de': 'Duits',
+      'lang.en': 'Engels',
+      'lang.nl': 'Nederlands',
+      'lang.ja': 'Japans',
       'nav.blog': 'Blog',
       'hero.title': 'Werktuigbouwkunde (ITPL) · Data & Logistiek',
       'hero.subtitle': 'Werkstudent / Stage / Junior · Data/Analytics, Logistieke IT, Productie',
@@ -141,6 +165,47 @@
       'footer.privacy': 'Privacyverklaring',
       'footer.impressum_text': 'Kagan Bağdemir · Dortmund · E-mail: hi@kaganbagdemir.de',
       'footer.privacy_text': 'Deze site gebruikt geen cookies. Update tekst bij toevoegen analytics.'
+    },
+    ja: {
+      'lang.label': '言語',
+      'lang.tr': 'トルコ語',
+      'lang.de': 'ドイツ語',
+      'lang.en': '英語',
+      'lang.nl': 'オランダ語',
+      'lang.ja': '日本語',
+      'nav.blog': 'ブログ',
+      'hero.title': '機械工学 (ITPL) · データ & ロジスティクス',
+      'hero.subtitle': 'Werkstudent / インターン / ジュニア · データ分析、物流IT、製造',
+      'btn.email': 'メール',
+      'btn.cv': '履歴書 (PDF)',
+      'btn.linkedin': 'LinkedIn',
+      'btn.github': 'GitHub',
+      'btn.blog': 'ブログ',
+      'btn.theme': 'テーマ切替',
+      'cards.fem': '2D要素デモ；自由度、全体剛性、変位と応力。',
+      'cards.kpi': 'Lead time、picking accuracy、OEE；Python→pandas→可視化。',
+      'cards.cad': '自動車部品；寸法、公差、規格；ポートフォリオ。',
+      'cards.portfolio': 'ポートフォリオ',
+      'cards.repo': 'リポジトリ / デモ',
+      'cards.blogTitle': 'ブログ / ノート',
+      'cards.blogTxt': '生産と物流ITに関する短い記事。',
+      'blog.title': 'ブログ',
+      'blog.subtitle': '投稿とメモ',
+      'blog.read': '読む',
+      'blog.empty': '投稿がありません。_posts/ にMarkdownファイルを追加してください。',
+      'blog.search': '検索…',
+      'back.home': 'ホーム',
+      'wip.title': 'このセクションは準備中です',
+      'wip.subtitle': '近日中にプロジェクト詳細とデモを公開します。',
+      'post.back': 'ブログ',
+      'recent.title': '最新投稿',
+      'recent.all': 'すべての投稿',
+      'recent.read': '読む',
+      'recent.empty': '投稿がありません。_posts/ にMarkdownファイルを追加してください。',
+      'footer.impressum': 'Impressum',
+      'footer.privacy': 'プライバシーポリシー',
+      'footer.impressum_text': 'Kagan Bağdemir · Dortmund · E-Mail: hi@kaganbagdemir.de',
+      'footer.privacy_text': 'このサイトはCookieを使用していません。分析を追加する場合は本文を更新してください。'
     }
   };
 

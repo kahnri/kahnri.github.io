@@ -31,7 +31,7 @@
 
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll('[data-lang-tab]'));
   var activeLang = 'tr';
-  var contentByLang = { tr: '', de: '', en: '', nl: '' };
+  var contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
   var manualSlug = false;
   var editingPath = null;
   var allPosts = [];
@@ -323,7 +323,7 @@
       'permalink: /blog/' + slug + '/'
     ];
 
-    ['tr', 'de', 'en', 'nl'].forEach(function(lang){
+    ['tr', 'de', 'en', 'nl', 'ja'].forEach(function(lang){
       var value = (contentByLang[lang] || '').trim();
       if (!value) return;
       lines.push(lang + ': |');
@@ -349,7 +349,7 @@
       throw new Error('Gelecek tarihli post varsayilan olarak blogda gorunmez. Tarihi bugun veya gecmis yapin.');
     }
 
-    var hasContent = ['tr', 'de', 'en', 'nl'].some(function(lang){
+    var hasContent = ['tr', 'de', 'en', 'nl', 'ja'].some(function(lang){
       return (contentByLang[lang] || '').trim().length > 0;
     });
 
@@ -394,7 +394,7 @@
     dateEl.value = today();
     slugEl.value = '';
     manualSlug = false;
-    contentByLang = { tr: '', de: '', en: '', nl: '' };
+    contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
     activeLang = 'tr';
     editorEl.value = '';
     editingPath = null;
@@ -475,6 +475,7 @@
     if (content.de) return 'de';
     if (content.en) return 'en';
     if (content.nl) return 'nl';
+    if (content.ja) return 'ja';
     return 'tr';
   }
 
@@ -499,7 +500,8 @@
       tr: parsed.tr || '',
       de: parsed.de || '',
       en: parsed.en || '',
-      nl: parsed.nl || ''
+      nl: parsed.nl || '',
+      ja: parsed.ja || ''
     };
 
     activeLang = firstLang(contentByLang);

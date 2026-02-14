@@ -62,10 +62,14 @@ layout: null
       </div>
       <div class="flex items-center gap-2">
         <button id="admin-logout-top" class="px-3 py-1 rounded-full border theme-button" type="button">Lock</button>
-        <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
-        <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
-        <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
-        <button onclick="setLang('nl')" data-lang="nl" aria-label="Switch to Dutch" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">NL</button>
+        <label for="lang-select-admin" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-admin" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
         <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
           <span data-theme-icon aria-hidden="true">moon</span>
           <span class="sr-only" data-i18n="btn.theme"></span>
@@ -132,6 +136,7 @@ layout: null
           <button data-lang-tab="de" class="px-3 py-1 rounded-full border theme-button" type="button">DE</button>
           <button data-lang-tab="en" class="px-3 py-1 rounded-full border theme-button" type="button">EN</button>
           <button data-lang-tab="nl" class="px-3 py-1 rounded-full border theme-button" type="button">NL</button>
+          <button data-lang-tab="ja" class="px-3 py-1 rounded-full border theme-button" type="button">JA</button>
           <span id="admin-active-language" class="text-sm theme-text-muted">Editing: TR</span>
         </div>
         <label class="block mt-2">
@@ -174,10 +179,10 @@ layout: null
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=2"></script>
-<script src="assets/lang.js?v=2"></script>
+<script src="assets/i18n.js?v=3"></script>
+<script src="assets/lang.js?v=3"></script>
 <script src="assets/theme.js?v=3"></script>
-<script src="assets/admin.js?v=11"></script>
+<script src="assets/admin.js?v=12"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 document.body.classList.add('initial-anim');

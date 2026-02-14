@@ -54,10 +54,14 @@ layout: null
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2">
           <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button">Admin</a>
-          <button onclick="setLang('tr')" data-lang="tr" aria-label="Switch to Turkish" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">TR</button>
-          <button onclick="setLang('de')" data-lang="de" aria-label="Switch to German" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">DE</button>
-          <button onclick="setLang('en')" data-lang="en" aria-label="Switch to English" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">EN</button>
-          <button onclick="setLang('nl')" data-lang="nl" aria-label="Switch to Dutch" aria-pressed="false" class="px-3 py-1 rounded-full border theme-button">NL</button>
+          <label for="lang-select-home" class="sr-only" data-i18n="lang.label"></label>
+          <select id="lang-select-home" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm">
+            <option value="tr" data-i18n="lang.tr">Turkce</option>
+            <option value="de" data-i18n="lang.de">Deutsch</option>
+            <option value="en" data-i18n="lang.en">English</option>
+            <option value="nl" data-i18n="lang.nl">Nederlands</option>
+            <option value="ja" data-i18n="lang.ja">日本語</option>
+          </select>
           <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
             <span data-theme-icon aria-hidden="true">🌙</span>
             <span class="sr-only" data-i18n="btn.theme"></span>
@@ -132,11 +136,50 @@ layout: null
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=2"></script>
-<script src="assets/lang.js?v=2"></script>
+<script src="assets/i18n.js?v=3"></script>
+<script src="assets/lang.js?v=3"></script>
 <script src="assets/theme.js?v=3"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
+
+const SITE_LANGS=['tr','de','en','nl','ja'];
+function pickLocalized(card,kind,lang){
+  const order=[lang].concat(SITE_LANGS.filter(code=>code!==lang));
+  for(const code of order){
+    const value=(card.getAttribute(`data-${kind}-${code}`)||'').trim();
+    if(value) return value;
+  }
+  return '';
+}
+function truncateText(text,maxLen){
+  if(!text) return '';
+  if(text.length<=maxLen) return text;
+  return text.slice(0,maxLen-1)+'…';
+}
+function applyRecentLanguage(lang){
+  document.querySelectorAll('[data-recent-card]').forEach(card=>{
+    const titleEl=card.querySelector('[data-recent-title]');
+    const excerptEl=card.querySelector('[data-recent-excerpt]');
+    const title=pickLocalized(card,'title',lang);
+    const excerpt=truncateText(pickLocalized(card,'excerpt',lang),140);
+    if(titleEl&&title){ titleEl.textContent=title; }
+    if(excerptEl){
+      if(excerpt){
+        excerptEl.textContent=excerpt;
+        excerptEl.style.display='';
+      }else{
+        excerptEl.textContent='';
+        excerptEl.style.display='none';
+      }
+    }
+  });
+}
+
+applyRecentLanguage(document.documentElement.lang||'tr');
+document.addEventListener('langchange',event=>{
+  applyRecentLanguage((event.detail&&event.detail.lang)||'tr');
+});
+
 const firstVisitKey='landingAnimationPlayed';
 let shouldAnimate=false;
 try{

@@ -7,14 +7,33 @@
   {% if site.posts.size > 0 %}
   <div class="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
     {% for post in site.posts limit:3 %}
-    <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5">
+    {% assign title_tr = post.title_tr | default: post.title %}
+    {% assign title_de = post.title_de | default: post.title %}
+    {% assign title_en = post.title_en | default: post.title %}
+    {% assign title_nl = post.title_nl | default: post.title %}
+    {% assign title_ja = post.title_ja | default: post.title %}
+    {% assign excerpt_tr = post.excerpt_tr | default: post.tr | default: post.excerpt %}
+    {% assign excerpt_de = post.excerpt_de | default: post.de | default: post.excerpt %}
+    {% assign excerpt_en = post.excerpt_en | default: post.en | default: post.excerpt %}
+    {% assign excerpt_nl = post.excerpt_nl | default: post.nl | default: post.excerpt %}
+    {% assign excerpt_ja = post.excerpt_ja | default: post.ja | default: post.excerpt %}
+    <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5"
+             data-recent-card
+             data-title-tr="{{ title_tr | strip_html | strip_newlines | escape }}"
+             data-title-de="{{ title_de | strip_html | strip_newlines | escape }}"
+             data-title-en="{{ title_en | strip_html | strip_newlines | escape }}"
+             data-title-nl="{{ title_nl | strip_html | strip_newlines | escape }}"
+             data-title-ja="{{ title_ja | strip_html | strip_newlines | escape }}"
+             data-excerpt-tr="{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | escape }}"
+             data-excerpt-de="{{ excerpt_de | markdownify | strip_html | strip_newlines | strip | escape }}"
+             data-excerpt-en="{{ excerpt_en | markdownify | strip_html | strip_newlines | strip | escape }}"
+             data-excerpt-nl="{{ excerpt_nl | markdownify | strip_html | strip_newlines | strip | escape }}"
+             data-excerpt-ja="{{ excerpt_ja | markdownify | strip_html | strip_newlines | strip | escape }}">
       <h3 class="text-lg font-semibold">
-        <a class="hover:underline" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <a class="hover:underline" href="{{ post.url | relative_url }}" data-recent-title>{{ title_tr | strip_html | strip_newlines | escape }}</a>
       </h3>
       <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
-      {% if post.excerpt %}
-      <p class="theme-text-soft mt-2">{{ post.excerpt | strip_html | truncate: 140 | escape }}</p>
-      {% endif %}
+      <p class="theme-text-soft mt-2" data-recent-excerpt>{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | truncate: 140 | escape }}</p>
       <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="{{ post.url | relative_url }}" data-i18n="recent.read"></a>
     </article>
     {% endfor %}
