@@ -48,14 +48,14 @@ layout: null
 </head>
 <body>
   <main class="relative isolate max-w-5xl mx-auto px-6 py-10">
-    <header class="flex items-center justify-between" data-animate style="--stagger:0">
+    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
       <h1 class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</h1>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 flex-wrap justify-end">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-wrap justify-end">
           <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button">Admin</a>
           <label for="lang-select-home" class="sr-only" data-i18n="lang.label"></label>
-          <select id="lang-select-home" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm">
+          <select id="lang-select-home" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
             <option value="tr" data-i18n="lang.tr">Turkce</option>
             <option value="de" data-i18n="lang.de">Deutsch</option>
             <option value="en" data-i18n="lang.en">English</option>
@@ -136,8 +136,8 @@ layout: null
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=3"></script>
-<script src="assets/lang.js?v=3"></script>
+<script src="assets/i18n.js?v=4"></script>
+<script src="assets/lang.js?v=4"></script>
 <script src="assets/theme.js?v=3"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
