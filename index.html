@@ -6,7 +6,7 @@ layout: null
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kagan Bağdemir — Data & Logistics</title>
+<title data-i18n-title="meta.title.home">Kagan Bağdemir — Data & Logistics</title>
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <script>
 (function(){
@@ -53,7 +53,7 @@ layout: null
       <div class="flex items-center gap-3 flex-wrap justify-end">
         <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog"></a>
         <div class="flex items-center gap-2 flex-wrap justify-end">
-          <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button">Admin</a>
+          <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button" data-i18n="nav.admin"></a>
           <label for="lang-select-home" class="sr-only" data-i18n="lang.label"></label>
           <select id="lang-select-home" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
             <option value="tr" data-i18n="lang.tr">Turkce</option>
@@ -83,10 +83,10 @@ layout: null
       </div>
 
       <div class="flex flex-wrap gap-2 mt-4 text-sm theme-text-soft">
-        <span class="px-3 py-1 rounded-full border theme-chip">Python / NumPy</span>
-        <span class="px-3 py-1 rounded-full border theme-chip">FEM</span>
-        <span class="px-3 py-1 rounded-full border theme-chip">Logistics IT</span>
-        <span class="px-3 py-1 rounded-full border theme-chip">CAD</span>
+        <span class="px-3 py-1 rounded-full border theme-chip" data-i18n="chips.python"></span>
+        <span class="px-3 py-1 rounded-full border theme-chip" data-i18n="chips.fem"></span>
+        <span class="px-3 py-1 rounded-full border theme-chip" data-i18n="chips.logistics"></span>
+        <span class="px-3 py-1 rounded-full border theme-chip" data-i18n="chips.cad"></span>
       </div>
     </section>
 
@@ -95,19 +95,19 @@ layout: null
     <!-- Kartlar (hepsi şimdilik /dev'e gider) -->
     <section class="grid md:grid-cols-2 gap-4 mt-6" data-animate style="--stagger:2">
       <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.4">
-        <h3 class="text-lg font-semibold">FEM Mini-Solver (Python/NumPy)</h3>
+        <h3 class="text-lg font-semibold" data-i18n="cards.femTitle"></h3>
         <p class="mt-1 theme-text-muted" data-i18n="cards.fem"></p>
         <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.repo"></a>
       </article>
 
       <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.6">
-        <h3 class="text-lg font-semibold">Warehouse KPI Dashboard</h3>
+        <h3 class="text-lg font-semibold" data-i18n="cards.kpiTitle"></h3>
         <p class="mt-1 theme-text-muted" data-i18n="cards.kpi"></p>
         <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.repo"></a>
       </article>
 
       <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5" data-animate style="--stagger:2.8">
-        <h3 class="text-lg font-semibold">CAD / Technische Zeichnung</h3>
+        <h3 class="text-lg font-semibold" data-i18n="cards.cadTitle"></h3>
         <p class="mt-1 theme-text-muted" data-i18n="cards.cad"></p>
         <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/dev/" data-i18n="cards.portfolio"></a>
       </article>
@@ -136,8 +136,8 @@ layout: null
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=4"></script>
-<script src="assets/lang.js?v=4"></script>
+<script src="assets/i18n.js?v=5"></script>
+<script src="assets/lang.js?v=5"></script>
 <script src="assets/theme.js?v=3"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();

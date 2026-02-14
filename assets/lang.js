@@ -37,6 +37,13 @@
       }
     });
 
+    document.querySelectorAll('[data-i18n-title]').forEach(function(el){
+      var key = el.dataset.i18nTitle;
+      if (strings[key]) {
+        el.textContent = strings[key];
+      }
+    });
+
     document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
       var key = el.dataset.i18nPh;
       if (strings[key]) {

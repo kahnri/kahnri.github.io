@@ -48,6 +48,38 @@
     'admin-reset'
   ];
 
+  function currentSiteLang(){
+    try {
+      var stored = (localStorage.getItem('lang') || '').toLowerCase();
+      if (stored === 'tr' || stored === 'de' || stored === 'en' || stored === 'nl' || stored === 'ja') {
+        return stored;
+      }
+    } catch (e) {}
+
+    var htmlLang = String(document.documentElement.lang || '').slice(0, 2).toLowerCase();
+    if (htmlLang === 'tr' || htmlLang === 'de' || htmlLang === 'en' || htmlLang === 'nl' || htmlLang === 'ja') {
+      return htmlLang;
+    }
+    return 'tr';
+  }
+
+  function formatText(text, vars){
+    var result = String(text || '');
+    if (!vars) return result;
+    Object.keys(vars).forEach(function(key){
+      var token = '{' + key + '}';
+      result = result.split(token).join(String(vars[key]));
+    });
+    return result;
+  }
+
+  function t(key, fallback, vars){
+    var lang = currentSiteLang();
+    var strings = (window.I18N_STRINGS && window.I18N_STRINGS[lang]) || {};
+    var base = strings[key] || fallback || key;
+    return formatText(base, vars);
+  }
+
   function setStatus(message, isError){
     statusEl.textContent = message;
     statusEl.style.color = isError ? '#ef4444' : '';
@@ -181,10 +213,10 @@
     };
 
     if (!config.owner || !config.repo || !config.branch) {
-      throw new Error('Owner/repo/branch bos olamaz.');
+      throw new Error(t('admin.msg.owner_repo_branch_required', 'Owner/repo/branch bos olamaz.'));
     }
     if (requireToken && !config.token) {
-      throw new Error('GitHub token gerekli.');
+      throw new Error(t('admin.msg.token_required', 'GitHub token gerekli.'));
     }
 
     return config;
@@ -274,7 +306,7 @@
         btn.classList.add('theme-button');
       }
     });
-    activeLangEl.textContent = 'Editing: ' + activeLang.toUpperCase();
+    activeLangEl.textContent = t('admin.msg.editing_lang', 'Editing: {lang}', { lang: activeLang.toUpperCase() });
   }
 
   function switchLang(nextLang){
@@ -341,12 +373,12 @@
   function validateForSave(){
     var title = (titleEl.value || '').trim();
     if (!title) {
-      throw new Error('Title gerekli.');
+      throw new Error(t('admin.msg.title_required', 'Title gerekli.'));
     }
 
     var selectedDate = dateEl.value || today();
     if (selectedDate > today()) {
-      throw new Error('Gelecek tarihli post varsayilan olarak blogda gorunmez. Tarihi bugun veya gecmis yapin.');
+      throw new Error(t('admin.msg.future_date', 'Gelecek tarihli post varsayilan olarak blogda gorunmez. Tarihi bugun veya gecmis yapin.'));
     }
 
     var hasContent = ['tr', 'de', 'en', 'nl', 'ja'].some(function(lang){
@@ -354,7 +386,7 @@
     });
 
     if (!hasContent) {
-      throw new Error('En az bir dilde icerik girin.');
+      throw new Error(t('admin.msg.content_required', 'En az bir dilde icerik girin.'));
     }
   }
 
@@ -364,10 +396,10 @@
       var btn = document.getElementById('admin-copy');
       if (!btn) return;
       var prev = btn.textContent;
-      btn.textContent = 'Kopyalandi';
+      btn.textContent = t('admin.msg.copy_done', 'Kopyalandi');
       setTimeout(function(){ btn.textContent = prev; }, 1200);
     }).catch(function(){
-      setStatus('Kopyalama basarisiz.', true);
+      setStatus(t('admin.msg.copy_failed', 'Kopyalama basarisiz.'), true);
     });
   }
 
@@ -386,7 +418,7 @@
   }
 
   function resetForm(promptUser){
-    if (promptUser && !window.confirm('Form temizlensin mi?')) {
+    if (promptUser && !window.confirm(t('admin.msg.reset_confirm', 'Form temizlensin mi?'))) {
       return;
     }
 
@@ -398,10 +430,10 @@
     activeLang = 'tr';
     editorEl.value = '';
     editingPath = null;
-    if (editingEl) editingEl.textContent = 'Yeni post';
+    if (editingEl) editingEl.textContent = t('admin.newpost', 'Yeni post');
     setTabState();
     build();
-    setStatus('Editor temizlendi.', false);
+    setStatus(t('admin.msg.editor_cleared', 'Editor temizlendi.'), false);
   }
 
   function lockAndExit(){
@@ -507,7 +539,7 @@
     activeLang = firstLang(contentByLang);
     editorEl.value = contentByLang[activeLang] || '';
     editingPath = path;
-    if (editingEl) editingEl.textContent = 'Duzenleniyor: ' + path;
+    if (editingEl) editingEl.textContent = t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: path });
     setTabState();
     build();
   }
@@ -517,11 +549,11 @@
       var config = getConfig(true);
       saveConfig();
       var repo = await getRepo(config);
-      setConnectionStatus('Bagli: ' + repo.full_name + ' @ ' + config.branch, false);
-      setStatus('GitHub baglantisi basarili.', false);
+      setConnectionStatus(t('admin.connection.connected', 'Bagli: {repo} @ {branch}', { repo: repo.full_name, branch: config.branch }), false);
+      setStatus(t('admin.msg.connection_ok', 'GitHub baglantisi basarili.'), false);
     } catch (e) {
-      setConnectionStatus('Hata', true);
-      setStatus(e.message || 'Baglanti hatasi.', true);
+      setConnectionStatus(t('admin.connection.error', 'Hata'), true);
+      setStatus(e.message || t('admin.msg.connection_error', 'Baglanti hatasi.'), true);
     }
   }
 
@@ -567,9 +599,9 @@
               '<p class="text-sm theme-text-muted">' + (meta.date || '-') + ' · ' + (meta.slug || '-') + '</p>' +
             '</div>' +
             '<div class="flex flex-wrap gap-2">' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="edit">Edit</button>' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="view">View</button>' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="delete">Delete</button>' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="edit">' + escapeHtml(t('admin.action.edit', 'Edit')) + '</button>' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="view">' + escapeHtml(t('admin.action.view', 'View')) + '</button>' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="delete">' + escapeHtml(t('admin.action.delete', 'Delete')) + '</button>' +
             '</div>' +
           '</div>' +
         '</div>'
@@ -595,17 +627,23 @@
 
   async function refreshPosts(){
     try {
-      setStatus('Repo postlari aliniyor...', false);
+      setStatus(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
       var items = await fetchPosts();
       allPosts = items;
       applyPostFilter();
-      setStatus('Repo postlari guncellendi.', false);
-      setConnectionStatus('Bagli: ' + ownerEl.value.trim() + '/' + repoEl.value.trim() + ' @ ' + branchEl.value.trim(), false);
+      setStatus(t('admin.msg.posts_refreshed', 'Repo postlari guncellendi.'), false);
+      setConnectionStatus(
+        t('admin.connection.connected', 'Bagli: {repo} @ {branch}', {
+          repo: ownerEl.value.trim() + '/' + repoEl.value.trim(),
+          branch: branchEl.value.trim()
+        }),
+        false
+      );
     } catch (e) {
       allPosts = [];
       renderPostsList([]);
-      setConnectionStatus('Hata', true);
-      setStatus(e.message || 'Post listesi alinamadi.', true);
+      setConnectionStatus(t('admin.connection.error', 'Hata'), true);
+      setStatus(e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.'), true);
     }
   }
 
@@ -614,15 +652,15 @@
       var config = getConfig(true);
       var file = await getContents(config, path);
       if (!file || !file.content) {
-        throw new Error('Dosya icerigi okunamadi.');
+        throw new Error(t('admin.msg.content_read_failed', 'Dosya icerigi okunamadi.'));
       }
 
       var raw = fromBase64Unicode(file.content);
       var parsed = parseFrontMatter(raw);
       setEditorFromParsed(path, parsed);
-      setStatus('Post editora yuklendi.', false);
+      setStatus(t('admin.msg.post_loaded', 'Post editora yuklendi.'), false);
     } catch (e) {
-      setStatus(e.message || 'Post yuklenemedi.', true);
+      setStatus(e.message || t('admin.msg.post_load_failed', 'Post yuklenemedi.'), true);
     }
   }
 
@@ -633,7 +671,7 @@
     if (!sha) {
       var file = await getContents(config, path);
       if (!file || !file.sha) {
-        throw new Error('Silinecek dosya bulunamadi.');
+        throw new Error(t('admin.msg.delete_file_missing', 'Silinecek dosya bulunamadi.'));
       }
       sha = file.sha;
     }
@@ -666,11 +704,11 @@
       }
 
       editingPath = path;
-      if (editingEl) editingEl.textContent = 'Duzenleniyor: ' + path;
-      setStatus('Post GitHub\'a yazildi. Pages build sonrasi herkese acik olacak.', false);
+      if (editingEl) editingEl.textContent = t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: path });
+      setStatus(t('admin.msg.published', 'Post GitHub\\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
       await refreshPosts();
     } catch (e) {
-      setStatus(e.message || 'Yayinlama basarisiz.', true);
+      setStatus(e.message || t('admin.msg.publish_failed', 'Yayinlama basarisiz.'), true);
     }
   }
 
@@ -678,19 +716,19 @@
     try {
       var path = editingPath || currentPath();
       if (!path || path === '_posts/') {
-        throw new Error('Silinecek post secin.');
+        throw new Error(t('admin.msg.select_post_to_delete', 'Silinecek post secin.'));
       }
 
-      if (!window.confirm('Bu post GitHub\'dan silinsin mi?')) {
+      if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post GitHub\\'dan silinsin mi?'))) {
         return;
       }
 
       await deletePath(path, null);
       resetForm(false);
-      setStatus('Post GitHub\'dan silindi.', false);
+      setStatus(t('admin.msg.deleted', 'Post GitHub\\'dan silindi.'), false);
       await refreshPosts();
     } catch (e) {
-      setStatus(e.message || 'Silme basarisiz.', true);
+      setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
     }
   }
 
@@ -719,7 +757,7 @@
     }
 
     if (action === 'delete') {
-      if (!window.confirm('Secili post silinsin mi?')) {
+      if (!window.confirm(t('admin.msg.confirm_delete_selected', 'Secili post silinsin mi?'))) {
         return;
       }
       try {
@@ -728,11 +766,11 @@
           if (editingPath === path) {
             resetForm(false);
           }
-          setStatus('Post silindi: ' + path, false);
+          setStatus(t('admin.msg.deleted_path', 'Post silindi: {path}', { path: path }), false);
           await refreshPosts();
         });
       } catch (e) {
-        setStatus(e.message || 'Silme basarisiz.', true);
+        setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
       }
     }
   }
@@ -746,8 +784,9 @@
     dateEl.value = today();
     setTabState();
     build();
-    setStatus('Hazir', false);
-    setConnectionStatus('Hazir degil', false);
+    if (editingEl) editingEl.textContent = t('admin.newpost', 'Yeni post');
+    setStatus(t('admin.status.ready', 'Hazir'), false);
+    setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
   }
 
   titleEl.addEventListener('input', function(){
@@ -802,6 +841,15 @@
   if (postSearchEl) postSearchEl.addEventListener('input', applyPostFilter);
 
   postsListEl.addEventListener('click', handlePostsClick);
+  document.addEventListener('langchange', function(){
+    setTabState();
+    if (editingEl) {
+      editingEl.textContent = editingPath
+        ? t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: editingPath })
+        : t('admin.newpost', 'Yeni post');
+    }
+    applyPostFilter();
+  });
 
   initialize();
 })();
