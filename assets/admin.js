@@ -3,13 +3,20 @@
 
   var homeUrl = '/';
   var configKey = 'admin-github-config-v1';
+  var tokenSessionKey = 'admin-github-token-session-v1';
   var apiBase = 'https://api.github.com';
+  var fixedRepo = {
+    owner: 'kahnri',
+    repo: 'kahnri.github.io',
+    branch: 'main'
+  };
 
   var ownerEl = document.getElementById('github-owner');
   var repoEl = document.getElementById('github-repo');
   var branchEl = document.getElementById('github-branch');
   var tokenEl = document.getElementById('github-token');
   var connectionEl = document.getElementById('github-connection');
+  var repoLabelEl = document.getElementById('admin-repo-label');
 
   var titleEl = document.getElementById('admin-title');
   var dateEl = document.getElementById('admin-date');
@@ -46,6 +53,7 @@
   var realtimeActiveRequest = null;
   var realtimeKey = 'admin-realtime-enabled-v1';
   var realtimeIntervalMs = 12000;
+  var realtimePublicIntervalMs = 90000;
   var realtimeEnabled = readRealtimePreference();
 
   var busyButtonIds = [
@@ -150,11 +158,6 @@
       return;
     }
 
-    if (!tokenEl.value.trim()) {
-      setRealtimeStamp(t('admin.realtime.waiting_token', 'Canli senkronizasyon icin token girin.'), false);
-      return;
-    }
-
     if (lastRealtimeSyncAt) {
       setRealtimeStamp(
         t('admin.realtime.last_sync', 'Canli senkron: son kontrol {time}', {
@@ -165,7 +168,12 @@
       return;
     }
 
-    setRealtimeStamp(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
+    if (tokenEl.value.trim()) {
+      setRealtimeStamp(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
+      return;
+    }
+
+    setRealtimeStamp(t('admin.realtime.public_mode', 'Canli senkron acik (token yok: sadece okuma modu).'), false);
   }
 
   function setBusy(isBusy){
@@ -175,6 +183,27 @@
       btn.disabled = !!isBusy;
       btn.style.opacity = isBusy ? '0.7' : '';
       btn.style.cursor = isBusy ? 'wait' : '';
+    });
+  }
+
+  function applyWriteActionState(){
+    var hasToken = !!tokenEl.value.trim();
+    ['admin-save', 'admin-delete'].forEach(function(id){
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      if (busyCounter > 0) return;
+
+      if (hasToken) {
+        btn.disabled = false;
+        btn.style.opacity = '';
+        btn.style.cursor = '';
+        btn.removeAttribute('title');
+      } else {
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        btn.style.cursor = 'not-allowed';
+        btn.setAttribute('title', t('admin.msg.token_actions_locked', 'Yayinlama/silme icin token girin.'));
+      }
     });
   }
 
@@ -189,6 +218,7 @@
     busyCounter = Math.max(0, busyCounter - 1);
     if (busyCounter === 0) {
       setBusy(false);
+      applyWriteActionState();
     }
   }
 
@@ -251,7 +281,11 @@
   }
 
   function today(){
-    return new Date().toISOString().slice(0, 10);
+    var now = new Date();
+    var year = String(now.getFullYear());
+    var month = String(now.getMonth() + 1).padStart(2, '0');
+    var day = String(now.getDate()).padStart(2, '0');
+    return year + '-' + month + '-' + day;
   }
 
   function normalizeDateInput(value, fallback){
@@ -282,11 +316,38 @@
       .join('/');
   }
 
+  function loadTokenFromSession(){
+    try {
+      return String(sessionStorage.getItem(tokenSessionKey) || '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function saveTokenToSession(value){
+    try {
+      var token = String(value || '').trim();
+      if (!token) {
+        sessionStorage.removeItem(tokenSessionKey);
+        return;
+      }
+      sessionStorage.setItem(tokenSessionKey, token);
+    } catch (e) {}
+  }
+
+  function updateRepoLabel(){
+    if (!repoLabelEl) return;
+    var owner = ownerEl.value.trim() || fixedRepo.owner;
+    var repo = repoEl.value.trim() || fixedRepo.repo;
+    var branch = branchEl.value.trim() || fixedRepo.branch;
+    repoLabelEl.textContent = owner + '/' + repo + ' @ ' + branch;
+  }
+
   function loadConfig(){
     var defaults = {
-      owner: 'kahnri',
-      repo: 'kahnri.github.io',
-      branch: 'main'
+      owner: fixedRepo.owner,
+      repo: fixedRepo.repo,
+      branch: fixedRepo.branch
     };
 
     try {
@@ -317,15 +378,16 @@
 
   function getConfig(requireToken){
     var config = {
-      owner: ownerEl.value.trim(),
-      repo: repoEl.value.trim(),
-      branch: branchEl.value.trim(),
+      owner: ownerEl.value.trim() || fixedRepo.owner,
+      repo: repoEl.value.trim() || fixedRepo.repo,
+      branch: branchEl.value.trim() || fixedRepo.branch,
       token: tokenEl.value.trim()
     };
 
-    if (!config.owner || !config.repo || !config.branch) {
-      throw new Error(t('admin.msg.owner_repo_branch_required', 'Owner/repo/branch bos olamaz.'));
-    }
+    ownerEl.value = config.owner;
+    repoEl.value = config.repo;
+    branchEl.value = config.branch;
+
     if (requireToken && !config.token) {
       throw new Error(t('admin.msg.token_required', 'GitHub token gerekli.'));
     }
@@ -840,10 +902,6 @@
       updateRealtimeStamp();
       return;
     }
-    if (!tokenEl.value.trim()) {
-      updateRealtimeStamp();
-      return;
-    }
     if (busyCounter > 0 || realtimeActiveRequest) {
       return;
     }
@@ -868,14 +926,15 @@
     stopRealtimeSync();
     updateRealtimeStamp();
 
-    if (!realtimeEnabled || !tokenEl.value.trim()) {
+    if (!realtimeEnabled) {
       return;
     }
 
     runRealtimeSync();
+    var intervalMs = tokenEl.value.trim() ? realtimeIntervalMs : realtimePublicIntervalMs;
     realtimeTimer = setInterval(function(){
       runRealtimeSync();
-    }, realtimeIntervalMs);
+    }, intervalMs);
   }
 
   function applyRealtimePreference(nextEnabled){
@@ -1027,6 +1086,7 @@
     ownerEl.value = saved.owner;
     repoEl.value = saved.repo;
     branchEl.value = saved.branch;
+    tokenEl.value = loadTokenFromSession();
 
     dateEl.value = today();
     setTabState();
@@ -1037,6 +1097,11 @@
 
     if (realtimeToggleEl) {
       realtimeToggleEl.checked = realtimeEnabled;
+    }
+    updateRepoLabel();
+    applyWriteActionState();
+    if (!tokenEl.value.trim()) {
+      setStatus(t('admin.msg.readonly_mode', 'Listeleme ve duzenleme acik. Yayinlama ve silme icin token girin.'), false);
     }
     updateRealtimeStamp();
   }
@@ -1098,6 +1163,7 @@
   [ownerEl, repoEl, branchEl].forEach(function(el){
     el.addEventListener('change', function(){
       saveConfig();
+      updateRepoLabel();
       if (realtimeEnabled) {
         startRealtimeSync();
       } else {
@@ -1107,10 +1173,14 @@
   });
 
   tokenEl.addEventListener('input', function(){
+    saveTokenToSession(tokenEl.value);
+    applyWriteActionState();
     updateRealtimeStamp();
   });
 
   tokenEl.addEventListener('change', function(){
+    saveTokenToSession(tokenEl.value);
+    applyWriteActionState();
     if (realtimeEnabled) {
       startRealtimeSync();
     } else {
@@ -1126,6 +1196,8 @@
         ? t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: editingPath })
         : t('admin.newpost', 'Yeni post');
     }
+    applyWriteActionState();
+    updateRepoLabel();
     applyPostFilter();
     updateRealtimeStamp();
   });
