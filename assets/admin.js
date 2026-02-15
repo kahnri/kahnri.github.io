@@ -24,6 +24,8 @@
   var postsListEl = document.getElementById('admin-posts');
   var postsEmptyEl = document.getElementById('admin-posts-empty');
   var postSearchEl = document.getElementById('admin-post-search');
+  var realtimeToggleEl = document.getElementById('admin-realtime-toggle');
+  var realtimeStampEl = document.getElementById('admin-realtime-stamp');
 
   if (!ownerEl || !repoEl || !branchEl || !tokenEl || !titleEl || !dateEl || !slugEl || !editorEl || !outputEl || !fileEl || !activeLangEl || !statusEl || !postsListEl || !postsEmptyEl) {
     return;
@@ -35,7 +37,14 @@
   var manualSlug = false;
   var editingPath = null;
   var allPosts = [];
+  var lastPostsFingerprint = '';
+  var lastRealtimeSyncAt = null;
   var busyCounter = 0;
+  var realtimeTimer = null;
+  var realtimeActiveRequest = null;
+  var realtimeKey = 'admin-realtime-enabled-v1';
+  var realtimeIntervalMs = 12000;
+  var realtimeEnabled = readRealtimePreference();
 
   var busyButtonIds = [
     'github-test',
@@ -47,6 +56,22 @@
     'admin-download',
     'admin-reset'
   ];
+
+  function readRealtimePreference(){
+    try {
+      var raw = localStorage.getItem(realtimeKey);
+      if (raw === null) return true;
+      return raw === '1';
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function saveRealtimePreference(enabled){
+    try {
+      localStorage.setItem(realtimeKey, enabled ? '1' : '0');
+    } catch (e) {}
+  }
 
   function currentSiteLang(){
     try {
@@ -80,6 +105,19 @@
     return formatText(base, vars);
   }
 
+  function formatSyncTime(date){
+    if (!date) return '';
+    try {
+      return date.toLocaleTimeString(currentSiteLang(), {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    } catch (e) {
+      return date.toLocaleTimeString();
+    }
+  }
+
   function setStatus(message, isError){
     statusEl.textContent = message;
     statusEl.style.color = isError ? '#ef4444' : '';
@@ -88,6 +126,44 @@
   function setConnectionStatus(message, isError){
     connectionEl.textContent = message;
     connectionEl.style.color = isError ? '#ef4444' : '';
+  }
+
+  function setRealtimeStamp(message, isError){
+    if (!realtimeStampEl) return;
+    realtimeStampEl.textContent = message || '';
+    realtimeStampEl.style.color = isError ? '#ef4444' : '';
+  }
+
+  function postListFingerprint(items){
+    return (items || []).map(function(item){
+      return String(item.path || item.name || '') + '@' + String(item.sha || '');
+    }).join('|');
+  }
+
+  function updateRealtimeStamp(){
+    if (!realtimeStampEl) return;
+
+    if (!realtimeEnabled) {
+      setRealtimeStamp(t('admin.realtime.off', 'Canli senkronizasyon kapali.'), false);
+      return;
+    }
+
+    if (!tokenEl.value.trim()) {
+      setRealtimeStamp(t('admin.realtime.waiting_token', 'Canli senkronizasyon icin token girin.'), false);
+      return;
+    }
+
+    if (lastRealtimeSyncAt) {
+      setRealtimeStamp(
+        t('admin.realtime.last_sync', 'Canli senkron: son kontrol {time}', {
+          time: formatSyncTime(lastRealtimeSyncAt)
+        }),
+        false
+      );
+      return;
+    }
+
+    setRealtimeStamp(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
   }
 
   function setBusy(isBusy){
@@ -625,13 +701,31 @@
     renderPostsList(filtered);
   }
 
-  async function refreshPosts(){
+  async function refreshPosts(options){
+    options = options || {};
+    var silent = !!options.silent;
+    var source = options.source || 'manual';
+
     try {
-      setStatus(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
+      if (!silent) {
+        setStatus(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
+      }
       var items = await fetchPosts();
+      var fingerprint = postListFingerprint(items);
+      var changed = fingerprint !== lastPostsFingerprint;
+
       allPosts = items;
+      lastPostsFingerprint = fingerprint;
       applyPostFilter();
-      setStatus(t('admin.msg.posts_refreshed', 'Repo postlari guncellendi.'), false);
+      lastRealtimeSyncAt = new Date();
+      updateRealtimeStamp();
+
+      if (!silent) {
+        setStatus(t('admin.msg.posts_refreshed', 'Repo postlari guncellendi.'), false);
+      } else if (source === 'realtime' && changed) {
+        setStatus(t('admin.msg.live_updated', 'Canli senkron: repo postlari guncellendi.'), false);
+      }
+
       setConnectionStatus(
         t('admin.connection.connected', 'Bagli: {repo} @ {branch}', {
           repo: ownerEl.value.trim() + '/' + repoEl.value.trim(),
@@ -639,11 +733,83 @@
         }),
         false
       );
+
+      return { changed: changed, count: items.length };
     } catch (e) {
-      allPosts = [];
-      renderPostsList([]);
-      setConnectionStatus(t('admin.connection.error', 'Hata'), true);
-      setStatus(e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.'), true);
+      if (!silent) {
+        allPosts = [];
+        lastPostsFingerprint = '';
+        renderPostsList([]);
+        setConnectionStatus(t('admin.connection.error', 'Hata'), true);
+        setStatus(e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.'), true);
+      } else {
+        setRealtimeStamp(
+          t('admin.realtime.sync_error', 'Canli senkron hatasi: {message}', {
+            message: e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.')
+          }),
+          true
+        );
+      }
+      throw e;
+    }
+  }
+
+  async function runRealtimeSync(){
+    if (!realtimeEnabled) {
+      updateRealtimeStamp();
+      return;
+    }
+    if (!tokenEl.value.trim()) {
+      updateRealtimeStamp();
+      return;
+    }
+    if (busyCounter > 0 || realtimeActiveRequest) {
+      return;
+    }
+
+    realtimeActiveRequest = refreshPosts({ silent: true, source: 'realtime' })
+      .catch(function(){})
+      .finally(function(){
+        realtimeActiveRequest = null;
+      });
+
+    await realtimeActiveRequest;
+  }
+
+  function stopRealtimeSync(){
+    if (realtimeTimer) {
+      clearInterval(realtimeTimer);
+      realtimeTimer = null;
+    }
+  }
+
+  function startRealtimeSync(){
+    stopRealtimeSync();
+    updateRealtimeStamp();
+
+    if (!realtimeEnabled || !tokenEl.value.trim()) {
+      return;
+    }
+
+    runRealtimeSync();
+    realtimeTimer = setInterval(function(){
+      runRealtimeSync();
+    }, realtimeIntervalMs);
+  }
+
+  function applyRealtimePreference(nextEnabled){
+    realtimeEnabled = !!nextEnabled;
+    saveRealtimePreference(realtimeEnabled);
+
+    if (realtimeToggleEl) {
+      realtimeToggleEl.checked = realtimeEnabled;
+    }
+
+    if (realtimeEnabled) {
+      startRealtimeSync();
+    } else {
+      stopRealtimeSync();
+      updateRealtimeStamp();
     }
   }
 
@@ -787,6 +953,11 @@
     if (editingEl) editingEl.textContent = t('admin.newpost', 'Yeni post');
     setStatus(t('admin.status.ready', 'Hazir'), false);
     setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
+
+    if (realtimeToggleEl) {
+      realtimeToggleEl.checked = realtimeEnabled;
+    }
+    updateRealtimeStamp();
   }
 
   titleEl.addEventListener('input', function(){
@@ -839,6 +1010,32 @@
   if (lockBtn) lockBtn.addEventListener('click', lockAndExit);
   if (topLockBtn) topLockBtn.addEventListener('click', lockAndExit);
   if (postSearchEl) postSearchEl.addEventListener('input', applyPostFilter);
+  if (realtimeToggleEl) realtimeToggleEl.addEventListener('change', function(){
+    applyRealtimePreference(realtimeToggleEl.checked);
+  });
+
+  [ownerEl, repoEl, branchEl].forEach(function(el){
+    el.addEventListener('change', function(){
+      saveConfig();
+      if (realtimeEnabled) {
+        startRealtimeSync();
+      } else {
+        updateRealtimeStamp();
+      }
+    });
+  });
+
+  tokenEl.addEventListener('input', function(){
+    updateRealtimeStamp();
+  });
+
+  tokenEl.addEventListener('change', function(){
+    if (realtimeEnabled) {
+      startRealtimeSync();
+    } else {
+      updateRealtimeStamp();
+    }
+  });
 
   postsListEl.addEventListener('click', handlePostsClick);
   document.addEventListener('langchange', function(){
@@ -849,7 +1046,21 @@
         : t('admin.newpost', 'Yeni post');
     }
     applyPostFilter();
+    updateRealtimeStamp();
   });
 
   initialize();
+  startRealtimeSync();
+
+  window.addEventListener('focus', function(){
+    runRealtimeSync();
+  });
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible') {
+      runRealtimeSync();
+    }
+  });
+
+  window.addEventListener('beforeunload', stopRealtimeSync);
 })();
