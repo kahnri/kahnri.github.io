@@ -703,7 +703,7 @@
 
   async function testConnection(){
     try {
-      var config = getConfig(true);
+      var config = getConfig(false);
       saveConfig();
       var repo = await getRepo(config);
       setConnectionStatus(t('admin.connection.connected', 'Bagli: {repo} @ {branch}', { repo: repo.full_name, branch: config.branch }), false);
@@ -715,7 +715,7 @@
   }
 
   async function fetchPosts(){
-    var config = getConfig(true);
+    var config = getConfig(false);
     saveConfig();
 
     var list = await getContents(config, '_posts');
@@ -896,7 +896,7 @@
 
   async function loadPost(path){
     try {
-      var config = getConfig(true);
+      var config = getConfig(false);
       var file = await getContents(config, path);
       if (!file || !file.content) {
         throw new Error(t('admin.msg.content_read_failed', 'Dosya icerigi okunamadi.'));
@@ -1131,6 +1131,9 @@
   });
 
   initialize();
+  withBusy(function(){
+    return refreshPosts();
+  }).catch(function(){});
   startRealtimeSync();
 
   window.addEventListener('focus', function(){
