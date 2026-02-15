@@ -36,6 +36,8 @@
   var contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
   var manualSlug = false;
   var editingPath = null;
+  var extraFrontMatter = {};
+  var extraFrontMatterOrder = [];
   var allPosts = [];
   var lastPostsFingerprint = '';
   var lastRealtimeSyncAt = null;
@@ -220,6 +222,18 @@
     return String(text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   }
 
+  function yamlValue(value){
+    var text = String(value || '');
+    if (!text.trim()) return '""';
+    if (/^\[.*\]$/.test(text)) return text;
+    if (/^(true|false|null|~)$/i.test(text)) return text.toLowerCase();
+    if (/^-?\d+(\.\d+)?$/.test(text)) return text;
+    if (/[:#]/.test(text) || /^\s|\s$/.test(text)) {
+      return '"' + yamlEscape(text) + '"';
+    }
+    return text;
+  }
+
   function escapeHtml(text){
     return String(text || '')
       .replace(/&/g, '&amp;')
@@ -238,6 +252,27 @@
 
   function today(){
     return new Date().toISOString().slice(0, 10);
+  }
+
+  function normalizeDateInput(value, fallback){
+    var raw = String(value || '').trim();
+    if (!raw) return fallback || today();
+
+    var direct = raw.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (direct && direct[1]) {
+      return direct[1];
+    }
+
+    if (/^\d{4}\/\d{2}\/\d{2}$/.test(raw)) {
+      return raw.replace(/\//g, '-');
+    }
+
+    var parsed = new Date(raw);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed.toISOString().slice(0, 10);
+    }
+
+    return fallback || today();
   }
 
   function encodePath(path){
@@ -431,6 +466,28 @@
       'permalink: /blog/' + slug + '/'
     ];
 
+    extraFrontMatterOrder.forEach(function(key){
+      if (!key || key === 'layout' || key === 'title' || key === 'date' || key === 'slug' || key === 'permalink') {
+        return;
+      }
+
+      var value = extraFrontMatter[key];
+      if (value === undefined || value === null) return;
+
+      var text = String(value);
+      if (!text.trim()) return;
+
+      if (text.indexOf('\n') >= 0) {
+        lines.push(key + ': |');
+        text.split('\n').forEach(function(line){
+          lines.push('  ' + line);
+        });
+        return;
+      }
+
+      lines.push(key + ': ' + yamlValue(text));
+    });
+
     ['tr', 'de', 'en', 'nl', 'ja'].forEach(function(lang){
       var value = (contentByLang[lang] || '').trim();
       if (!value) return;
@@ -503,6 +560,8 @@
     slugEl.value = '';
     manualSlug = false;
     contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
+    extraFrontMatter = {};
+    extraFrontMatterOrder = [];
     activeLang = 'tr';
     editorEl.value = '';
     editingPath = null;
@@ -596,11 +655,25 @@
   }
 
   function setEditorFromParsed(path, parsed){
+    var reserved = {
+      layout: true,
+      title: true,
+      date: true,
+      slug: true,
+      permalink: true,
+      tr: true,
+      de: true,
+      en: true,
+      nl: true,
+      ja: true
+    };
+
     var meta = fileMeta(path);
     var slugCandidate = parsed.slug || slugFromPermalink(parsed.permalink) || meta.slug || '';
+    var normalizedDate = normalizeDateInput(parsed.date, meta.date || today());
 
     titleEl.value = parsed.title || '';
-    dateEl.value = parsed.date || meta.date || today();
+    dateEl.value = normalizedDate;
     slugEl.value = slugCandidate;
     manualSlug = true;
 
@@ -611,6 +684,14 @@
       nl: parsed.nl || '',
       ja: parsed.ja || ''
     };
+
+    extraFrontMatter = {};
+    extraFrontMatterOrder = [];
+    Object.keys(parsed).forEach(function(key){
+      if (reserved[key]) return;
+      extraFrontMatter[key] = parsed[key];
+      extraFrontMatterOrder.push(key);
+    });
 
     activeLang = firstLang(contentByLang);
     editorEl.value = contentByLang[activeLang] || '';
