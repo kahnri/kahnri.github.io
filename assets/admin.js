@@ -43,6 +43,7 @@
   var contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
   var manualSlug = false;
   var editingPath = null;
+  var editingSha = null;
   var extraFrontMatter = {};
   var extraFrontMatterOrder = [];
   var allPosts = [];
@@ -55,6 +56,9 @@
   var realtimeIntervalMs = 12000;
   var realtimePublicIntervalMs = 90000;
   var realtimeEnabled = readRealtimePreference();
+  var draftKey = 'admin-post-draft-v1';
+  var draftSaveTimer = null;
+  var lastSavedSignature = '';
 
   var busyButtonIds = [
     'github-test',
@@ -229,6 +233,132 @@
     } finally {
       endBusy();
     }
+  }
+
+  function snapshotContentByLang(){
+    return {
+      tr: activeLang === 'tr' ? editorEl.value : (contentByLang.tr || ''),
+      de: activeLang === 'de' ? editorEl.value : (contentByLang.de || ''),
+      en: activeLang === 'en' ? editorEl.value : (contentByLang.en || ''),
+      nl: activeLang === 'nl' ? editorEl.value : (contentByLang.nl || ''),
+      ja: activeLang === 'ja' ? editorEl.value : (contentByLang.ja || '')
+    };
+  }
+
+  function editorStateSnapshot(){
+    return {
+      title: String(titleEl.value || ''),
+      date: String(dateEl.value || ''),
+      slug: String(slugEl.value || ''),
+      manualSlug: !!manualSlug,
+      activeLang: activeLang,
+      editingPath: editingPath || '',
+      editingSha: editingSha || '',
+      contentByLang: snapshotContentByLang(),
+      extraFrontMatter: Object.assign({}, extraFrontMatter),
+      extraFrontMatterOrder: Array.isArray(extraFrontMatterOrder) ? extraFrontMatterOrder.slice() : []
+    };
+  }
+
+  function editorSignature(){
+    try {
+      return JSON.stringify(editorStateSnapshot());
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function currentEditingLabel(){
+    return editingPath
+      ? t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: editingPath })
+      : t('admin.newpost', 'Yeni post');
+  }
+
+  function hasUnsavedChanges(){
+    return editorSignature() !== lastSavedSignature;
+  }
+
+  function updateEditingLabel(){
+    if (!editingEl) return;
+    var label = currentEditingLabel();
+    if (hasUnsavedChanges()) {
+      label += ' *';
+    }
+    editingEl.textContent = label;
+  }
+
+  function markSavedBaseline(){
+    lastSavedSignature = editorSignature();
+    updateEditingLabel();
+  }
+
+  function hasMeaningfulDraft(snapshot){
+    if (!snapshot || typeof snapshot !== 'object') return false;
+    if (String(snapshot.title || '').trim()) return true;
+    if (String(snapshot.slug || '').trim()) return true;
+    if (String(snapshot.editingPath || '').trim()) return true;
+    if (Array.isArray(snapshot.extraFrontMatterOrder) && snapshot.extraFrontMatterOrder.length) return true;
+
+    var langs = snapshot.contentByLang || {};
+    return ['tr', 'de', 'en', 'nl', 'ja'].some(function(lang){
+      return String(langs[lang] || '').trim().length > 0;
+    });
+  }
+
+  function loadDraftFromStorage(){
+    try {
+      var raw = localStorage.getItem(draftKey);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearDraftSaveTimer(){
+    if (!draftSaveTimer) return;
+    clearTimeout(draftSaveTimer);
+    draftSaveTimer = null;
+  }
+
+  function clearDraftFromStorage(){
+    clearDraftSaveTimer();
+    try {
+      localStorage.removeItem(draftKey);
+    } catch (e) {}
+  }
+
+  function saveDraftNow(){
+    clearDraftSaveTimer();
+    var snapshot = editorStateSnapshot();
+
+    if (!hasMeaningfulDraft(snapshot)) {
+      clearDraftFromStorage();
+      return;
+    }
+
+    snapshot.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(draftKey, JSON.stringify(snapshot));
+    } catch (e) {}
+  }
+
+  function scheduleDraftSave(){
+    clearDraftSaveTimer();
+    draftSaveTimer = setTimeout(function(){
+      saveDraftNow();
+    }, 300);
+  }
+
+  function confirmDiscardChanges(){
+    if (!hasUnsavedChanges()) return true;
+    return window.confirm(
+      t(
+        'admin.msg.unsaved_confirm',
+        'Kaydedilmemis degisiklikler var. Devam ederseniz kaybolabilir. Devam edilsin mi?'
+      )
+    );
   }
 
   function slugify(text){
@@ -563,6 +693,8 @@
 
     outputEl.value = lines.join('\n');
     fileEl.textContent = currentPath();
+    updateEditingLabel();
+    scheduleDraftSave();
   }
 
   function validateForSave(){
@@ -613,8 +745,14 @@
   }
 
   function resetForm(promptUser){
-    if (promptUser && !window.confirm(t('admin.msg.reset_confirm', 'Form temizlensin mi?'))) {
-      return;
+    if (promptUser) {
+      var resetPromptKey = hasUnsavedChanges() ? 'admin.msg.reset_confirm_dirty' : 'admin.msg.reset_confirm';
+      var resetPromptText = hasUnsavedChanges()
+        ? 'Kaydedilmemis degisiklikler silinecek. Form temizlensin mi?'
+        : 'Form temizlensin mi?';
+      if (!window.confirm(t(resetPromptKey, resetPromptText))) {
+        return;
+      }
     }
 
     titleEl.value = '';
@@ -627,13 +765,16 @@
     activeLang = 'tr';
     editorEl.value = '';
     editingPath = null;
-    if (editingEl) editingEl.textContent = t('admin.newpost', 'Yeni post');
+    editingSha = null;
     setTabState();
     build();
+    clearDraftFromStorage();
+    markSavedBaseline();
     setStatus(t('admin.msg.editor_cleared', 'Editor temizlendi.'), false);
   }
 
   function lockAndExit(){
+    if (!confirmDiscardChanges()) return;
     window.location.href = homeUrl;
   }
 
@@ -716,7 +857,7 @@
     return parts.length ? parts[parts.length - 1] : '';
   }
 
-  function setEditorFromParsed(path, parsed){
+  function setEditorFromParsed(path, parsed, sha){
     var reserved = {
       layout: true,
       title: true,
@@ -758,9 +899,94 @@
     activeLang = firstLang(contentByLang);
     editorEl.value = contentByLang[activeLang] || '';
     editingPath = path;
-    if (editingEl) editingEl.textContent = t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: path });
+    editingSha = sha || null;
     setTabState();
     build();
+    clearDraftFromStorage();
+    markSavedBaseline();
+  }
+
+  function applyDraftSnapshot(snapshot){
+    if (!snapshot || typeof snapshot !== 'object') return false;
+
+    titleEl.value = String(snapshot.title || '');
+    dateEl.value = normalizeDateInput(snapshot.date, today());
+    slugEl.value = String(snapshot.slug || '');
+    manualSlug = !!snapshot.manualSlug && !!String(snapshot.slug || '').trim();
+
+    var draftContent = snapshot.contentByLang || {};
+    contentByLang = {
+      tr: String(draftContent.tr || ''),
+      de: String(draftContent.de || ''),
+      en: String(draftContent.en || ''),
+      nl: String(draftContent.nl || ''),
+      ja: String(draftContent.ja || '')
+    };
+
+    extraFrontMatter = {};
+    if (snapshot.extraFrontMatter && typeof snapshot.extraFrontMatter === 'object') {
+      Object.keys(snapshot.extraFrontMatter).forEach(function(key){
+        extraFrontMatter[key] = snapshot.extraFrontMatter[key];
+      });
+    }
+
+    extraFrontMatterOrder = Array.isArray(snapshot.extraFrontMatterOrder)
+      ? snapshot.extraFrontMatterOrder.filter(function(key){
+          return typeof key === 'string' && key.length > 0;
+        })
+      : Object.keys(extraFrontMatter);
+
+    activeLang = String(snapshot.activeLang || 'tr').toLowerCase();
+    if (['tr', 'de', 'en', 'nl', 'ja'].indexOf(activeLang) < 0) {
+      activeLang = firstLang(contentByLang);
+    }
+
+    editorEl.value = contentByLang[activeLang] || '';
+    editingPath = String(snapshot.editingPath || '').trim() || null;
+    editingSha = String(snapshot.editingSha || '').trim() || null;
+
+    setTabState();
+    build();
+    updateEditingLabel();
+    return true;
+  }
+
+  function maybeRestoreDraft(){
+    var draft = loadDraftFromStorage();
+    if (!hasMeaningfulDraft(draft)) {
+      clearDraftFromStorage();
+      return false;
+    }
+
+    var when = '';
+    if (draft.updatedAt) {
+      try {
+        when = new Date(draft.updatedAt).toLocaleString(currentSiteLang());
+      } catch (e) {
+        when = '';
+      }
+    }
+
+    var shouldRestore = window.confirm(
+      t(
+        'admin.msg.restore_draft',
+        'Kaydedilmis yerel taslak bulundu{time}. Geri yuklensin mi?',
+        { time: when ? (' (' + when + ')') : '' }
+      )
+    );
+
+    if (!shouldRestore) {
+      clearDraftFromStorage();
+      return false;
+    }
+
+    if (!applyDraftSnapshot(draft)) {
+      clearDraftFromStorage();
+      return false;
+    }
+
+    setStatus(t('admin.msg.draft_restored', 'Yerel taslak geri yuklendi.'), false);
+    return true;
   }
 
   async function testConnection(){
@@ -963,7 +1189,7 @@
 
       var raw = fromBase64Unicode(file.content);
       var parsed = parseFrontMatter(raw);
-      setEditorFromParsed(path, parsed);
+      setEditorFromParsed(path, parsed, file.sha || null);
       setStatus(t('admin.msg.post_loaded', 'Post editora yuklendi.'), false);
     } catch (e) {
       setStatus(e.message || t('admin.msg.post_load_failed', 'Post yuklenemedi.'), true);
@@ -995,22 +1221,60 @@
       saveConfig();
 
       var path = currentPath();
+      var renaming = !!editingPath && editingPath !== path;
       var existing = await getContents(config, path);
       var sha = existing && existing.sha ? existing.sha : null;
+      var oldPathSha = null;
 
-      await putContents(config, path, outputEl.value, (sha ? 'Update post: ' : 'Create post: ') + path, sha);
+      if (editingPath && !renaming && editingSha) {
+        if (!existing || !existing.sha) {
+          throw new Error(t('admin.msg.remote_deleted_reload', 'Dosya repo tarafinda silinmis. Once listeyi yenileyip postu tekrar acin.'));
+        }
+        if (existing.sha !== editingSha) {
+          throw new Error(t('admin.msg.remote_changed_reload', 'Dosya repo tarafinda degismis. Uzerine yazmamak icin once postu yeniden yukleyin.'));
+        }
+        sha = editingSha;
+      }
 
-      if (editingPath && editingPath !== path) {
+      if (editingPath && renaming && editingSha) {
+        var sourceFile = await getContents(config, editingPath);
+        if (!sourceFile || !sourceFile.sha) {
+          throw new Error(t('admin.msg.rename_source_missing', 'Eski dosya repo tarafinda bulunamadi. Once listeyi yenileyin.'));
+        }
+        if (sourceFile.sha !== editingSha) {
+          throw new Error(t('admin.msg.rename_source_changed', 'Eski dosya repo tarafinda degismis. Once postu yeniden yukleyin.'));
+        }
+        oldPathSha = sourceFile.sha;
+      }
+
+      if (existing && existing.sha && (!editingPath || renaming)) {
+        if (!window.confirm(t('admin.msg.confirm_overwrite_target', 'Ayni isimde bir post zaten var. Uzerine yazilsin mi?'))) {
+          setStatus(t('admin.msg.publish_cancelled', 'Yayinlama iptal edildi.'), false);
+          return;
+        }
+      }
+
+      var saveResponse = await putContents(config, path, outputEl.value, (sha ? 'Update post: ' : 'Create post: ') + path, sha);
+
+      if (editingPath && renaming) {
         try {
-          var oldFile = await getContents(config, editingPath);
-          if (oldFile && oldFile.sha) {
-            await deleteContents(config, editingPath, oldFile.sha, 'Delete old renamed post: ' + editingPath);
+          var deleteSha = oldPathSha;
+          if (!deleteSha) {
+            var oldFile = await getContents(config, editingPath);
+            if (oldFile && oldFile.sha) {
+              deleteSha = oldFile.sha;
+            }
+          }
+          if (deleteSha) {
+            await deleteContents(config, editingPath, deleteSha, 'Delete old renamed post: ' + editingPath);
           }
         } catch (e) {}
       }
 
       editingPath = path;
-      if (editingEl) editingEl.textContent = t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: path });
+      editingSha = saveResponse && saveResponse.content && saveResponse.content.sha ? saveResponse.content.sha : null;
+      clearDraftFromStorage();
+      markSavedBaseline();
       setStatus(t('admin.msg.published', 'Post GitHub\\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
       await refreshPosts();
     } catch (e) {
@@ -1029,7 +1293,7 @@
         return;
       }
 
-      await deletePath(path, null);
+      await deletePath(path, editingPath === path ? editingSha : null);
       resetForm(false);
       setStatus(t('admin.msg.deleted', 'Post GitHub\\'dan silindi.'), false);
       await refreshPosts();
@@ -1051,6 +1315,9 @@
     var slug = card.getAttribute('data-slug');
 
     if (action === 'edit') {
+      if (!confirmDiscardChanges()) {
+        return;
+      }
       await withBusy(function(){
         return loadPost(path);
       });
@@ -1091,7 +1358,7 @@
     dateEl.value = today();
     setTabState();
     build();
-    if (editingEl) editingEl.textContent = t('admin.newpost', 'Yeni post');
+    markSavedBaseline();
     setStatus(t('admin.status.ready', 'Hazir'), false);
     setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
 
@@ -1104,6 +1371,7 @@
       setStatus(t('admin.msg.readonly_mode', 'Listeleme ve duzenleme acik. Yayinlama ve silme icin token girin.'), false);
     }
     updateRealtimeStamp();
+    maybeRestoreDraft();
   }
 
   titleEl.addEventListener('input', function(){
@@ -1191,11 +1459,7 @@
   postsListEl.addEventListener('click', handlePostsClick);
   document.addEventListener('langchange', function(){
     setTabState();
-    if (editingEl) {
-      editingEl.textContent = editingPath
-        ? t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: editingPath })
-        : t('admin.newpost', 'Yeni post');
-    }
+    updateEditingLabel();
     applyWriteActionState();
     updateRepoLabel();
     applyPostFilter();
@@ -1218,5 +1482,14 @@
     }
   });
 
-  window.addEventListener('beforeunload', stopRealtimeSync);
+  window.addEventListener('beforeunload', function(event){
+    if (hasUnsavedChanges()) {
+      event.preventDefault();
+      event.returnValue = '';
+      saveDraftNow();
+    } else {
+      clearDraftSaveTimer();
+    }
+    stopRealtimeSync();
+  });
 })();
