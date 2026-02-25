@@ -4,6 +4,8 @@
   var homeUrl = '/';
   var configKey = 'admin-github-config-v1';
   var tokenSessionKey = 'admin-github-token-session-v1';
+  var tokenLocalKey = 'admin-github-token-local-v1';
+  var tokenPersistKey = 'admin-github-token-persist-v1';
   var apiBase = 'https://api.github.com';
   var fixedRepo = {
     owner: 'kahnri',
@@ -15,6 +17,8 @@
   var repoEl = document.getElementById('github-repo');
   var branchEl = document.getElementById('github-branch');
   var tokenEl = document.getElementById('github-token');
+  var tokenPersistEl = document.getElementById('admin-token-persist');
+  var tokenClearEl = document.getElementById('admin-token-clear');
   var connectionEl = document.getElementById('github-connection');
   var repoLabelEl = document.getElementById('admin-repo-label');
 
@@ -56,6 +60,7 @@
   var realtimeIntervalMs = 12000;
   var realtimePublicIntervalMs = 90000;
   var realtimeEnabled = readRealtimePreference();
+  var tokenPersistEnabled = readTokenPersistPreference();
   var draftKey = 'admin-post-draft-v1';
   var draftSaveTimer = null;
   var lastSavedSignature = '';
@@ -65,6 +70,9 @@
     'admin-refresh',
     'admin-save',
     'admin-delete',
+    'admin-github-web-new',
+    'admin-github-web-edit',
+    'admin-github-web-delete',
     'admin-build',
     'admin-copy',
     'admin-download',
@@ -84,6 +92,22 @@
   function saveRealtimePreference(enabled){
     try {
       localStorage.setItem(realtimeKey, enabled ? '1' : '0');
+    } catch (e) {}
+  }
+
+  function readTokenPersistPreference(){
+    try {
+      var raw = localStorage.getItem(tokenPersistKey);
+      if (raw === null) return true;
+      return raw === '1';
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function saveTokenPersistPreference(enabled){
+    try {
+      localStorage.setItem(tokenPersistKey, enabled ? '1' : '0');
     } catch (e) {}
   }
 
@@ -192,23 +216,34 @@
 
   function applyWriteActionState(){
     var hasToken = !!tokenEl.value.trim();
-    ['admin-save', 'admin-delete'].forEach(function(id){
-      var btn = document.getElementById(id);
-      if (!btn) return;
-      if (busyCounter > 0) return;
+    var saveBtn = document.getElementById('admin-save');
+    var deleteBtn = document.getElementById('admin-delete');
+    if (busyCounter > 0) return;
 
-      if (hasToken) {
-        btn.disabled = false;
-        btn.style.opacity = '';
-        btn.style.cursor = '';
-        btn.removeAttribute('title');
-      } else {
-        btn.disabled = true;
-        btn.style.opacity = '0.6';
-        btn.style.cursor = 'not-allowed';
-        btn.setAttribute('title', t('admin.msg.token_actions_locked', 'Yayinlama/silme icin token girin.'));
-      }
+    [saveBtn, deleteBtn].forEach(function(btn){
+      if (!btn) return;
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.cursor = '';
     });
+
+    if (saveBtn) {
+      saveBtn.setAttribute(
+        'title',
+        hasToken
+          ? t('admin.msg.save_api_mode', 'API modu: direkt GitHub repo\'ya yazar.')
+          : t('admin.msg.save_web_mode', 'Token yok: GitHub web editor acilir.')
+      );
+    }
+
+    if (deleteBtn) {
+      deleteBtn.setAttribute(
+        'title',
+        hasToken
+          ? t('admin.msg.delete_api_mode', 'API modu: direkt GitHub repo\'dan siler.')
+          : t('admin.msg.delete_web_mode', 'Token yok: GitHub web silme sayfasi acilir.')
+      );
+    }
   }
 
   function beginBusy(){
@@ -463,6 +498,70 @@
       }
       sessionStorage.setItem(tokenSessionKey, token);
     } catch (e) {}
+  }
+
+  function loadTokenFromLocal(){
+    try {
+      return String(localStorage.getItem(tokenLocalKey) || '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function saveTokenToLocal(value){
+    try {
+      var token = String(value || '').trim();
+      if (!token) {
+        localStorage.removeItem(tokenLocalKey);
+        return;
+      }
+      localStorage.setItem(tokenLocalKey, token);
+    } catch (e) {}
+  }
+
+  function loadSavedToken(){
+    var sessionToken = loadTokenFromSession();
+    var localToken = loadTokenFromLocal();
+    if (tokenPersistEnabled) {
+      return localToken || sessionToken || '';
+    }
+    return sessionToken || localToken || '';
+  }
+
+  function persistCurrentToken(){
+    var value = tokenEl.value || '';
+    saveTokenToSession(value);
+    if (tokenPersistEnabled) {
+      saveTokenToLocal(value);
+    } else {
+      saveTokenToLocal('');
+    }
+  }
+
+  function syncTokenPersistUi(){
+    if (tokenPersistEl) {
+      tokenPersistEl.checked = !!tokenPersistEnabled;
+    }
+  }
+
+  function setTokenPersistEnabled(nextEnabled){
+    tokenPersistEnabled = !!nextEnabled;
+    saveTokenPersistPreference(tokenPersistEnabled);
+    syncTokenPersistUi();
+    persistCurrentToken();
+  }
+
+  function clearStoredToken(){
+    tokenEl.value = '';
+    saveTokenToSession('');
+    saveTokenToLocal('');
+    applyWriteActionState();
+    updateRealtimeStamp();
+    setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
+    setStatus(t('admin.msg.token_cleared', 'Token temizlendi.'), false);
+    if (realtimeEnabled) {
+      startRealtimeSync();
+    }
   }
 
   function updateRepoLabel(){
@@ -734,9 +833,19 @@
     }
   }
 
-  function openGithubWebDelete(){
+  function isLikelyGithubAuthError(error){
+    var message = String(error && error.message ? error.message : error || '').toLowerCase();
+    return (
+      message.indexOf('401') >= 0 ||
+      message.indexOf('403') >= 0 ||
+      message.indexOf('bad credentials') >= 0 ||
+      message.indexOf('token') >= 0 ||
+      message.indexOf('resource not accessible') >= 0
+    );
+  }
+
+  function openGithubWebDeleteForPath(path){
     try {
-      var path = editingPath;
       if (!path) {
         throw new Error(t('admin.msg.github_web_delete_pick', 'GitHub uzerinden silmek icin once listeden bir post acin.'));
       }
@@ -753,6 +862,10 @@
     } catch (e) {
       setStatus(e.message || t('admin.msg.github_web_delete_failed', 'GitHub silme sayfasi acilamadi.'), true);
     }
+  }
+
+  function openGithubWebDelete(){
+    openGithubWebDeleteForPath(editingPath);
   }
 
   function setTabState(){
@@ -1348,8 +1461,10 @@
       var parsed = parseFrontMatter(raw);
       setEditorFromParsed(path, parsed, file.sha || null);
       setStatus(t('admin.msg.post_loaded', 'Post editora yuklendi.'), false);
+      return true;
     } catch (e) {
       setStatus(e.message || t('admin.msg.post_load_failed', 'Post yuklenemedi.'), true);
+      return false;
     }
   }
 
@@ -1435,6 +1550,13 @@
       setStatus(t('admin.msg.published', 'Post GitHub\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
       await refreshPosts();
     } catch (e) {
+      if (isLikelyGithubAuthError(e)) {
+        setStatus(
+          t('admin.msg.publish_auth_fallback', 'API publish basarisiz (token/yetki). "GitHub\'da Yeni/Duzenle" butonlariyla kaydedin.'),
+          true
+        );
+        return;
+      }
       setStatus(e.message || t('admin.msg.publish_failed', 'Yayinlama basarisiz.'), true);
     }
   }
@@ -1455,6 +1577,16 @@
       setStatus(t('admin.msg.deleted', 'Post GitHub\'dan silindi.'), false);
       await refreshPosts();
     } catch (e) {
+      if (isLikelyGithubAuthError(e)) {
+        setStatus(
+          t('admin.msg.delete_auth_fallback', 'API ile silme basarisiz. GitHub web silme sayfasini kullanabilirsiniz.'),
+          true
+        );
+        if (editingPath) {
+          openGithubWebDeleteForPath(editingPath);
+        }
+        return;
+      }
       setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
     }
   }
@@ -1475,18 +1607,42 @@
       if (!confirmDiscardChanges()) {
         return;
       }
-      await withBusy(function(){
+      var loaded = await withBusy(function(){
         return loadPost(path);
       });
+      if (loaded === false && window.confirm(t('admin.msg.open_github_edit_fallback', 'Post editora yuklenemedi. GitHub duzenleme sayfasi acilsin mi?'))) {
+        try {
+          var editConfig = getConfig(false);
+          saveConfig();
+          openExternalPage(githubRepoWebBase(editConfig) + '/edit/' + encodeURIComponent(editConfig.branch) + '/' + encodePath(path));
+        } catch (e) {
+          setStatus(e.message || t('admin.msg.github_web_edit_failed', 'GitHub duzenleme sayfasi acilamadi.'), true);
+        }
+      }
       return;
     }
 
     if (action === 'view') {
-      window.open('/blog/' + encodeURIComponent(slug) + '/', '_blank');
+      if (slug) {
+        openExternalPage('/blog/' + encodeURIComponent(slug) + '/');
+      } else {
+        try {
+          var viewConfig = getConfig(false);
+          saveConfig();
+          openExternalPage(githubRepoWebBase(viewConfig) + '/blob/' + encodeURIComponent(viewConfig.branch) + '/' + encodePath(path));
+        } catch (e) {
+          setStatus(e.message || t('admin.msg.view_failed', 'Post acilamadi.'), true);
+        }
+      }
       return;
     }
 
     if (action === 'delete') {
+      if (!tokenEl.value.trim()) {
+        openGithubWebDeleteForPath(path);
+        return;
+      }
+
       if (!window.confirm(t('admin.msg.confirm_delete_selected', 'Secili post silinsin mi?'))) {
         return;
       }
@@ -1500,6 +1656,14 @@
           await refreshPosts();
         });
       } catch (e) {
+        if (isLikelyGithubAuthError(e)) {
+          setStatus(
+            t('admin.msg.delete_auth_fallback', 'API ile silme basarisiz. GitHub web silme sayfasini kullanabilirsiniz.'),
+            true
+          );
+          openGithubWebDeleteForPath(path);
+          return;
+        }
         setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
       }
     }
@@ -1510,7 +1674,8 @@
     ownerEl.value = saved.owner;
     repoEl.value = saved.repo;
     branchEl.value = saved.branch;
-    tokenEl.value = loadTokenFromSession();
+    syncTokenPersistUi();
+    tokenEl.value = loadSavedToken();
 
     dateEl.value = today();
     setTabState();
@@ -1572,9 +1737,17 @@
     withBusy(refreshPosts).catch(function(){});
   });
   if (saveBtn) saveBtn.addEventListener('click', function(){
+    if (!tokenEl.value.trim()) {
+      openGithubWebEdit().catch(function(){});
+      return;
+    }
     withBusy(publishPost).catch(function(){});
   });
   if (deleteBtn) deleteBtn.addEventListener('click', function(){
+    if (!tokenEl.value.trim()) {
+      openGithubWebDelete();
+      return;
+    }
     withBusy(deleteCurrent).catch(function(){});
   });
   if (githubWebNewActionBtn) githubWebNewActionBtn.addEventListener('click', function(){
@@ -1608,13 +1781,13 @@
   });
 
   tokenEl.addEventListener('input', function(){
-    saveTokenToSession(tokenEl.value);
+    persistCurrentToken();
     applyWriteActionState();
     updateRealtimeStamp();
   });
 
   tokenEl.addEventListener('change', function(){
-    saveTokenToSession(tokenEl.value);
+    persistCurrentToken();
     applyWriteActionState();
     if (realtimeEnabled) {
       startRealtimeSync();
@@ -1622,6 +1795,18 @@
       updateRealtimeStamp();
     }
   });
+
+  if (tokenPersistEl) tokenPersistEl.addEventListener('change', function(){
+    setTokenPersistEnabled(tokenPersistEl.checked);
+    setStatus(
+      tokenPersistEnabled
+        ? t('admin.msg.token_persist_on', 'Token bu tarayicida hatirlanacak.')
+        : t('admin.msg.token_persist_off', 'Token sadece bu sekmede tutulacak.'),
+      false
+    );
+  });
+
+  if (tokenClearEl) tokenClearEl.addEventListener('click', clearStoredToken);
 
   postsListEl.addEventListener('click', handlePostsClick);
   document.addEventListener('langchange', function(){

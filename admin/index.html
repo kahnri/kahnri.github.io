@@ -103,6 +103,13 @@ layout: null
         <label class="block">
           <span class="text-sm theme-text-muted" data-i18n="admin.token"></span>
           <input id="github-token" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="password" placeholder="github_pat_..." autocomplete="off">
+          <div class="mt-2 flex flex-wrap items-center gap-3">
+            <label class="inline-flex items-center gap-2 text-sm theme-text-muted">
+              <input id="admin-token-persist" type="checkbox" class="h-4 w-4 accent-emerald-500" checked>
+              <span>Bu tarayicida tokeni hatirla</span>
+            </label>
+            <button id="admin-token-clear" type="button" class="px-2 py-1 rounded-lg border theme-button text-xs">Tokeni Temizle</button>
+          </div>
         </label>
         <div class="rounded-lg border theme-button px-3 py-2">
           <p class="text-sm theme-text-muted" data-i18n="admin.repo_fixed"></p>
@@ -228,7 +235,7 @@ layout: null
 <script src="assets/i18n.js?v=10"></script>
 <script src="assets/lang.js?v=7"></script>
 <script src="assets/theme.js?v=3"></script>
-<script src="assets/admin.js?v=21"></script>
+<script src="assets/admin.js?v=22"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 document.body.classList.add('initial-anim');
