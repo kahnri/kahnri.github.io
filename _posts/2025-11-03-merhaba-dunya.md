@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Bu site neden var"
+title: "Bu site neden mevcut, neye hizmet ediyor :D ? "
 title_tr: "Bu site neden var"
 title_de: "Warum es diese Website gibt"
 title_en: "Why this website exists"
