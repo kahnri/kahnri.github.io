@@ -526,38 +526,67 @@
   }
 
   async function githubRequest(path, method, token, body){
-    var headers = {
-      'Accept': 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    };
+    async function runRequest(authHeaderValue){
+      var headers = {
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      };
 
-    if (token) {
-      headers.Authorization = 'Bearer ' + token;
+      if (authHeaderValue) {
+        headers.Authorization = authHeaderValue;
+      }
+
+      if (body !== undefined) {
+        headers['Content-Type'] = 'application/json';
+      }
+
+      var response = await fetch(apiBase + path, {
+        method: method || 'GET',
+        headers: headers,
+        body: body === undefined ? undefined : JSON.stringify(body)
+      });
+
+      var payload = null;
+      try {
+        payload = await response.json();
+      } catch (e) {
+        payload = null;
+      }
+
+      return { response: response, payload: payload };
     }
 
-    if (body !== undefined) {
-      headers['Content-Type'] = 'application/json';
+    function withGithubHint(message, statusCode){
+      var text = String(message || ('GitHub API error ' + statusCode));
+      var lower = text.toLowerCase();
+
+      if (statusCode === 401) {
+        return text + ' ' + t('admin.msg.token_check_hint', 'Token gecersiz olabilir. Fine-grained PAT icin repo secimi ve Contents (Read/Write) iznini kontrol edin.');
+      }
+
+      if (statusCode === 403 || lower.indexOf('resource not accessible') >= 0) {
+        return text + ' ' + t('admin.msg.token_perm_hint', 'Fine-grained PAT: repo erisimi + Contents (Read/Write) izni gerekli.');
+      }
+
+      if (statusCode === 404 && token) {
+        return text + ' ' + t('admin.msg.token_repo_hint', 'Repo secimi/branch veya token repo erisimi yanlis olabilir.');
+      }
+
+      return text;
     }
 
-    var response = await fetch(apiBase + path, {
-      method: method || 'GET',
-      headers: headers,
-      body: body === undefined ? undefined : JSON.stringify(body)
-    });
+    var result = await runRequest(token ? ('Bearer ' + token) : '');
 
-    var payload = null;
-    try {
-      payload = await response.json();
-    } catch (e) {
-      payload = null;
+    if (token && result.response && result.response.status === 401) {
+      result = await runRequest('token ' + token);
     }
 
-    if (!response.ok) {
-      var message = payload && payload.message ? payload.message : ('GitHub API error ' + response.status);
-      throw new Error(message);
+    if (!result.response.ok) {
+      var message = result.payload && result.payload.message ? result.payload.message : ('GitHub API error ' + result.response.status);
+      throw new Error(withGithubHint(message, result.response.status));
     }
 
-    return payload;
+    return result.payload;
   }
 
   async function getRepo(config){
@@ -596,6 +625,134 @@
       sha: sha,
       branch: config.branch
     });
+  }
+
+  function githubRepoWebBase(config){
+    return 'https://github.com/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo);
+  }
+
+  function openExternalPage(url){
+    var popup = null;
+    try {
+      popup = window.open(url, '_blank', 'noopener');
+    } catch (e) {
+      popup = null;
+    }
+
+    if (!popup) {
+      window.location.href = url;
+      return false;
+    }
+    return true;
+  }
+
+  function tryCopyOutputSilently(){
+    if (!outputEl.value || !navigator.clipboard || !navigator.clipboard.writeText) {
+      return Promise.resolve(false);
+    }
+    return navigator.clipboard.writeText(outputEl.value).then(function(){
+      return true;
+    }).catch(function(){
+      return false;
+    });
+  }
+
+  function prepareOutputForWebAction(){
+    contentByLang[activeLang] = editorEl.value;
+    build();
+  }
+
+  async function openGithubWebNew(){
+    try {
+      prepareOutputForWebAction();
+      validateForSave();
+      var config = getConfig(false);
+      saveConfig();
+      var path = currentPath();
+
+      var params = new URLSearchParams();
+      params.set('filename', path);
+      params.set('value', outputEl.value);
+      params.set('message', 'Create post: ' + path);
+
+      var baseUrl = githubRepoWebBase(config) + '/new/' + encodeURIComponent(config.branch);
+      var url = baseUrl + '?' + params.toString();
+
+      if (url.length > 7000) {
+        params.delete('value');
+        url = baseUrl + '?' + params.toString();
+        var copiedLong = await tryCopyOutputSilently();
+        openExternalPage(url);
+        setStatus(
+          copiedLong
+            ? t('admin.msg.github_web_new_long_copied', 'Post uzun oldugu icin GitHub yeni dosya sayfasi iceriksiz acildi. Icerik panoya kopyalandi; GitHub editorune yapistirip commit edin.')
+            : t('admin.msg.github_web_new_long', 'Post uzun oldugu icin GitHub yeni dosya sayfasi iceriksiz acildi. Asagidaki ciktiyi kopyalayip GitHub editorune yapistirin.'),
+          false
+        );
+        return;
+      }
+
+      openExternalPage(url);
+      setStatus(t('admin.msg.github_web_new_opened', 'GitHub yeni dosya ekrani acildi. Commit ederek kaydedin.'), false);
+    } catch (e) {
+      setStatus(e.message || t('admin.msg.github_web_new_failed', 'GitHub yeni dosya sayfasi acilamadi.'), true);
+    }
+  }
+
+  async function openGithubWebEdit(){
+    try {
+      prepareOutputForWebAction();
+      var currentBuiltPath = currentPath();
+
+      if (!editingPath) {
+        await openGithubWebNew();
+        return;
+      }
+
+      if (editingPath !== currentBuiltPath) {
+        if (!window.confirm(t('admin.msg.github_web_edit_renamed', 'Slug/tarih degismis. Bu durumda yeni dosya olarak acilacak. Devam edilsin mi?'))) {
+          return;
+        }
+        await openGithubWebNew();
+        return;
+      }
+
+      var config = getConfig(false);
+      saveConfig();
+      var copied = await tryCopyOutputSilently();
+      var url = githubRepoWebBase(config) + '/edit/' + encodeURIComponent(config.branch) + '/' + encodePath(editingPath);
+      openExternalPage(url);
+
+      setStatus(
+        copied
+          ? t('admin.msg.github_web_edit_opened_copied', 'GitHub duzenleme sayfasi acildi. Guncel icerik panoya kopyalandi; GitHub editorune yapistirip commit edin.')
+          : t('admin.msg.github_web_edit_opened', 'GitHub duzenleme sayfasi acildi. Gerekirse asagidaki ciktiyi kopyalayip GitHub editorune yapistirin.'),
+        false
+      );
+    } catch (e) {
+      setStatus(e.message || t('admin.msg.github_web_edit_failed', 'GitHub duzenleme sayfasi acilamadi.'), true);
+    }
+  }
+
+  function openGithubWebDelete(){
+    try {
+      var path = editingPath;
+      if (!path) {
+        throw new Error(t('admin.msg.github_web_delete_pick', 'GitHub uzerinden silmek icin once listeden bir post acin.'));
+      }
+
+      if (!window.confirm(t('admin.msg.github_web_delete_confirm', 'GitHub silme sayfasi acilsin mi? Silme islemi GitHub ekraninda tamamlanir.'))) {
+        return;
+      }
+
+      var config = getConfig(false);
+      saveConfig();
+      var url = githubRepoWebBase(config) + '/delete/' + encodeURIComponent(config.branch) + '/' + encodePath(path);
+      openExternalPage(url);
+      setStatus(t('admin.msg.github_web_delete_opened', 'GitHub silme sayfasi acildi. GitHub ekraninda onaylayin.'), false);
+    } catch (e) {
+      setStatus(e.message || t('admin.msg.github_web_delete_failed', 'GitHub silme sayfasi acilamadi.'), true);
+    }
   }
 
   function setTabState(){
@@ -1275,7 +1432,7 @@
       editingSha = saveResponse && saveResponse.content && saveResponse.content.sha ? saveResponse.content.sha : null;
       clearDraftFromStorage();
       markSavedBaseline();
-      setStatus(t('admin.msg.published', 'Post GitHub\\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
+      setStatus(t('admin.msg.published', 'Post GitHub\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
       await refreshPosts();
     } catch (e) {
       setStatus(e.message || t('admin.msg.publish_failed', 'Yayinlama basarisiz.'), true);
@@ -1289,13 +1446,13 @@
         throw new Error(t('admin.msg.select_post_to_delete', 'Silinecek post secin.'));
       }
 
-      if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post GitHub\\'dan silinsin mi?'))) {
+      if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post GitHub\'dan silinsin mi?'))) {
         return;
       }
 
       await deletePath(path, editingPath === path ? editingSha : null);
       resetForm(false);
-      setStatus(t('admin.msg.deleted', 'Post GitHub\\'dan silindi.'), false);
+      setStatus(t('admin.msg.deleted', 'Post GitHub\'dan silindi.'), false);
       await refreshPosts();
     } catch (e) {
       setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
@@ -1368,7 +1525,7 @@
     updateRepoLabel();
     applyWriteActionState();
     if (!tokenEl.value.trim()) {
-      setStatus(t('admin.msg.readonly_mode', 'Listeleme ve duzenleme acik. Yayinlama ve silme icin token girin.'), false);
+      setStatus(t('admin.msg.readonly_mode', 'Listeleme ve duzenleme acik. Token yoksa "GitHub\'da..." butonlariyla devam edin; API publish/sil icin token gerekir.'), false);
     }
     updateRealtimeStamp();
     maybeRestoreDraft();
@@ -1398,6 +1555,9 @@
   var refreshBtn = document.getElementById('admin-refresh');
   var saveBtn = document.getElementById('admin-save');
   var deleteBtn = document.getElementById('admin-delete');
+  var githubWebNewActionBtn = document.getElementById('admin-github-web-new');
+  var githubWebEditActionBtn = document.getElementById('admin-github-web-edit');
+  var githubWebDeleteActionBtn = document.getElementById('admin-github-web-delete');
   var buildBtn = document.getElementById('admin-build');
   var copyBtn = document.getElementById('admin-copy');
   var downloadBtn = document.getElementById('admin-download');
@@ -1417,6 +1577,13 @@
   if (deleteBtn) deleteBtn.addEventListener('click', function(){
     withBusy(deleteCurrent).catch(function(){});
   });
+  if (githubWebNewActionBtn) githubWebNewActionBtn.addEventListener('click', function(){
+    openGithubWebNew().catch(function(){});
+  });
+  if (githubWebEditActionBtn) githubWebEditActionBtn.addEventListener('click', function(){
+    openGithubWebEdit().catch(function(){});
+  });
+  if (githubWebDeleteActionBtn) githubWebDeleteActionBtn.addEventListener('click', openGithubWebDelete);
   if (buildBtn) buildBtn.addEventListener('click', build);
   if (copyBtn) copyBtn.addEventListener('click', copyOutput);
   if (downloadBtn) downloadBtn.addEventListener('click', downloadOutput);
