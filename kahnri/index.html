@@ -1,0 +1,267 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KAHNRI — Eglence Alani</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/theme.css?v=3">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    body { font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif; }
+
+    .kahnri-stage {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(100% 90% at 0% 0%, rgba(14, 165, 233, 0.22), transparent 55%),
+        radial-gradient(90% 70% at 100% 0%, rgba(251, 191, 36, 0.18), transparent 55%),
+        radial-gradient(80% 90% at 50% 100%, rgba(16, 185, 129, 0.18), transparent 60%),
+        var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .kahnri-stage::before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -80px;
+      top: -80px;
+      border-radius: 9999px;
+      background: rgba(244, 114, 182, 0.22);
+      filter: blur(28px);
+      pointer-events: none;
+    }
+
+    .kahnri-burst {
+      animation: kahnriBurst 520ms ease;
+    }
+
+    @keyframes kahnriBurst {
+      0% { transform: scale(0.98); opacity: 0.72; }
+      70% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kahnri-burst { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
+      <div class="flex items-center gap-2 flex-wrap">
+        <a href="/" class="px-3 py-1 rounded-full border theme-button text-sm">Ana Sayfa</a>
+        <a href="/blog/" class="px-3 py-1 rounded-full border theme-button text-sm">Blog</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">moon</span>
+          <span class="sr-only">Tema Degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="kahnri-stage mt-6 rounded-3xl p-6" data-animate style="--stagger:0.5">
+      <p class="text-xs uppercase tracking-[0.2em] theme-text-muted">KAHNRI / FUN MODE</p>
+      <h1 class="text-4xl md:text-5xl font-black mt-2 leading-tight">Eglence Alanin Acik.</h1>
+      <p class="theme-text-muted mt-3 max-w-2xl">
+        Burasi tamamen serbest bolge. Rastgele vibe cek, mini gorev sec, muzik ac ve notlarini biriktir.
+      </p>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <button id="vibe-btn" class="px-4 py-2 rounded-xl border theme-button-accent" type="button">Vibe Cek</button>
+        <button id="quest-btn" class="px-4 py-2 rounded-xl border theme-button" type="button">Mini Gorev</button>
+        <button id="track-btn" class="px-4 py-2 rounded-xl border theme-button" type="button">Sarki Ac</button>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-3 mt-4">
+        <article class="rounded-2xl border theme-card p-4">
+          <p class="text-xs theme-text-muted uppercase tracking-widest">Vibe</p>
+          <p id="vibe-output" class="text-lg font-semibold mt-2">Hazir.</p>
+        </article>
+        <article class="rounded-2xl border theme-card p-4">
+          <p class="text-xs theme-text-muted uppercase tracking-widest">Gorev</p>
+          <p id="quest-output" class="text-lg font-semibold mt-2">Baslamaya hazir.</p>
+        </article>
+        <article class="rounded-2xl border theme-card p-4">
+          <p class="text-xs theme-text-muted uppercase tracking-widest">Track</p>
+          <p id="track-output" class="text-lg font-semibold mt-2">Bir track sec.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4 mt-6">
+      <article class="rounded-2xl border theme-card p-5" data-animate style="--stagger:1">
+        <h2 class="text-xl font-semibold">Kader Carki</h2>
+        <p class="theme-text-muted text-sm mt-1">Secenekleri virgul ile yaz: <code>kahve, yuruyus, kod</code></p>
+        <input id="roulette-input" class="mt-3 w-full rounded-lg border theme-button px-3 py-2" type="text" value="kahve, yuruyus, fotograf, oyun, chill">
+        <button id="roulette-spin" class="mt-3 px-4 py-2 rounded-xl border theme-button-accent" type="button">Cevir</button>
+        <p id="roulette-result" class="mt-3 text-lg font-semibold">?</p>
+      </article>
+
+      <article class="rounded-2xl border theme-card p-5" data-animate style="--stagger:1.2">
+        <div class="flex items-center justify-between gap-2">
+          <h2 class="text-xl font-semibold">Duvar Notlari</h2>
+          <button id="notes-clear" class="px-3 py-1 rounded-lg border theme-button text-sm" type="button">Temizle</button>
+        </div>
+        <textarea id="notes-box" class="mt-3 w-full rounded-lg border theme-button px-3 py-2 h-40" placeholder="Akliniza gelen her sey..."></textarea>
+        <p id="notes-status" class="text-xs theme-text-muted mt-2">Yerel kayit acik.</p>
+      </article>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm">
+      <p>KAHNRI Playground · sadece eglence, tamamen senin alanin.</p>
+      <p class="mt-1">© <span id="y"></span> Kagan Bagdemir</p>
+    </footer>
+  </main>
+
+  <script src="/assets/theme.js?v=3"></script>
+  <script>
+  (function(){
+    const vibes=[
+      'Yuksek enerji / hizli mod',
+      'Sakin ve fokuslu mod',
+      'Tam chill, acele yok',
+      'Kafa dagit, reset at',
+      'Yaratici mod: bir sey uret'
+    ];
+    const quests=[
+      '10 dakika yuruyus + 1 fotograf cek.',
+      'Bugun birine random iyi bir mesaj at.',
+      '5 dakika boyun/sirt esnetme yap.',
+      '3 satir mini gunluk yaz.',
+      'Masandan gereksiz 5 seyi temizle.'
+    ];
+    const tracks=[
+      {title:'Lofi focus set',url:'https://www.youtube.com/results?search_query=lofi+focus+mix'},
+      {title:'Synthwave ride',url:'https://www.youtube.com/results?search_query=synthwave+mix'},
+      {title:'Turkish indie mix',url:'https://www.youtube.com/results?search_query=turkish+indie+playlist'},
+      {title:'Ambient calm',url:'https://www.youtube.com/results?search_query=ambient+calm+music'}
+    ];
+
+    const vibeBtn=document.getElementById('vibe-btn');
+    const questBtn=document.getElementById('quest-btn');
+    const trackBtn=document.getElementById('track-btn');
+    const vibeOut=document.getElementById('vibe-output');
+    const questOut=document.getElementById('quest-output');
+    const trackOut=document.getElementById('track-output');
+    const rouletteInput=document.getElementById('roulette-input');
+    const rouletteSpin=document.getElementById('roulette-spin');
+    const rouletteResult=document.getElementById('roulette-result');
+    const notesBox=document.getElementById('notes-box');
+    const notesStatus=document.getElementById('notes-status');
+    const notesClear=document.getElementById('notes-clear');
+    const yearEl=document.getElementById('y');
+    const notesKey='kahnri-playground-notes-v1';
+
+    function pick(list){
+      return list[Math.floor(Math.random()*list.length)];
+    }
+
+    function burst(el){
+      if(!el) return;
+      el.classList.remove('kahnri-burst');
+      window.requestAnimationFrame(function(){
+        el.classList.add('kahnri-burst');
+      });
+    }
+
+    function setVibe(){
+      vibeOut.textContent=pick(vibes);
+      burst(vibeOut);
+    }
+
+    function setQuest(){
+      questOut.textContent=pick(quests);
+      burst(questOut);
+    }
+
+    function setTrack(openTab){
+      const selected=pick(tracks);
+      trackOut.textContent=selected.title;
+      burst(trackOut);
+      if(openTab){
+        window.open(selected.url,'_blank','noopener');
+      }
+    }
+
+    function spinRoulette(){
+      const options=String(rouletteInput.value||'')
+        .split(',')
+        .map(function(item){ return item.trim(); })
+        .filter(Boolean);
+      if(!options.length){
+        rouletteResult.textContent='Secenek gir.';
+        return;
+      }
+      rouletteResult.textContent=pick(options);
+      burst(rouletteResult);
+    }
+
+    let saveTimer=null;
+    function saveNotesSoon(){
+      if(saveTimer) clearTimeout(saveTimer);
+      saveTimer=setTimeout(function(){
+        try{
+          localStorage.setItem(notesKey,notesBox.value||'');
+          notesStatus.textContent='Kaydedildi.';
+        }catch(e){
+          notesStatus.textContent='Kayit hatasi.';
+        }
+      },220);
+    }
+
+    function clearNotes(){
+      notesBox.value='';
+      try{ localStorage.removeItem(notesKey); }catch(e){}
+      notesStatus.textContent='Temizlendi.';
+    }
+
+    function loadNotes(){
+      try{
+        const saved=localStorage.getItem(notesKey);
+        if(saved) notesBox.value=saved;
+      }catch(e){}
+    }
+
+    if(yearEl) yearEl.textContent=String(new Date().getFullYear());
+    if(vibeBtn) vibeBtn.addEventListener('click',setVibe);
+    if(questBtn) questBtn.addEventListener('click',setQuest);
+    if(trackBtn) trackBtn.addEventListener('click',function(){ setTrack(true); });
+    if(rouletteSpin) rouletteSpin.addEventListener('click',spinRoulette);
+    if(notesBox) notesBox.addEventListener('input',saveNotesSoon);
+    if(notesClear) notesClear.addEventListener('click',clearNotes);
+
+    loadNotes();
+    setVibe();
+    setQuest();
+    setTrack(false);
+
+    document.body.classList.add('initial-anim');
+    requestAnimationFrame(function(){
+      document.body.classList.add('initial-anim-run');
+    });
+  })();
+  </script>
+</body>
+</html>
