@@ -1,0 +1,335 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KAHNRI — Kader Carki</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/theme.css?v=3">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    body { font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif; }
+
+    .wheel-stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(110% 80% at 5% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(80% 90% at 95% 10%, rgba(251, 191, 36, 0.16), transparent 62%),
+        radial-gradient(80% 90% at 50% 100%, rgba(244, 114, 182, 0.16), transparent 60%),
+        var(--surface);
+      backdrop-filter: blur(8px);
+    }
+
+    .pulse {
+      animation: pulseResult 0.55s ease;
+    }
+
+    @keyframes pulseResult {
+      0% { transform: scale(0.96); opacity: 0.7; }
+      70% { transform: scale(1.04); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
+      <div class="flex items-center gap-2 flex-wrap">
+        <a href="/kahnri/" class="px-3 py-1 rounded-full border theme-button text-sm">KAHNRI</a>
+        <a href="/" class="px-3 py-1 rounded-full border theme-button text-sm">Ana Sayfa</a>
+        <a href="/blog/" class="px-3 py-1 rounded-full border theme-button text-sm">Blog</a>
+      </div>
+      <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+        <span data-theme-icon aria-hidden="true">moon</span>
+        <span class="sr-only">Tema Degistir</span>
+      </button>
+    </header>
+
+    <section class="wheel-stage mt-6 rounded-3xl p-6" data-animate style="--stagger:0.5">
+      <p class="text-xs uppercase tracking-[0.2em] theme-text-muted">KADER CARKI / YENI SITE</p>
+      <h1 class="text-4xl md:text-5xl font-black mt-2">Secim Zamanı.</h1>
+      <p class="theme-text-muted mt-3 max-w-2xl">
+        Buraya ne kadar cok olasilik eklersen o kadar guzel kaos olur. Varsayilan listede cok sayida secenek var.
+      </p>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button id="spin-normal" class="px-4 py-2 rounded-xl border theme-button-accent" type="button">Cevir</button>
+        <button id="spin-turbo" class="px-4 py-2 rounded-xl border theme-button" type="button">Turbo Cevir</button>
+        <button id="shuffle-list" class="px-4 py-2 rounded-xl border theme-button" type="button">Listeyi Karistir</button>
+        <button id="clear-list" class="px-4 py-2 rounded-xl border theme-button" type="button">Temizle</button>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mt-5">
+        <article class="rounded-2xl border theme-card p-4">
+          <p class="text-xs uppercase tracking-widest theme-text-muted">Secenekler</p>
+          <textarea id="wheel-options" class="mt-2 w-full rounded-lg border theme-button px-3 py-2 h-56" spellcheck="false"></textarea>
+          <p id="count-output" class="text-xs theme-text-muted mt-2">0 secenek</p>
+        </article>
+
+        <article class="rounded-2xl border theme-card p-4">
+          <p class="text-xs uppercase tracking-widest theme-text-muted">Sonuc</p>
+          <p id="wheel-live" class="mt-3 text-lg font-semibold">Hazir.</p>
+          <p id="wheel-result" class="mt-3 text-3xl font-black leading-tight">?</p>
+
+          <div class="mt-4">
+            <p class="text-xs uppercase tracking-widest theme-text-muted">Son Cikanlar</p>
+            <ul id="history-list" class="mt-2 space-y-1 text-sm theme-text-soft"></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-6 grid md:grid-cols-3 gap-3">
+      <article class="rounded-2xl border theme-card p-4">
+        <h2 class="text-lg font-semibold">Set: Sosyal</h2>
+        <button class="preset-btn mt-3 px-3 py-1 rounded-lg border theme-button text-sm" data-preset="social" type="button">Yukle</button>
+      </article>
+      <article class="rounded-2xl border theme-card p-4">
+        <h2 class="text-lg font-semibold">Set: Uretken</h2>
+        <button class="preset-btn mt-3 px-3 py-1 rounded-lg border theme-button text-sm" data-preset="productive" type="button">Yukle</button>
+      </article>
+      <article class="rounded-2xl border theme-card p-4">
+        <h2 class="text-lg font-semibold">Set: Chill</h2>
+        <button class="preset-btn mt-3 px-3 py-1 rounded-lg border theme-button text-sm" data-preset="chill" type="button">Yukle</button>
+      </article>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm">
+      <p>KAHNRI Kader Carki · daha cok olasilik, daha cok surpriz.</p>
+      <p class="mt-1">© <span id="y"></span> Kagan Bagdemir</p>
+    </footer>
+  </main>
+
+  <script src="/assets/theme.js?v=3"></script>
+  <script>
+  (function(){
+    const defaultOptions=[
+      'Kahve molasi',
+      '15 dk yuruyus',
+      'Yeni playlist ac',
+      'Mini oyun oyna',
+      'Cok kisa power nap',
+      'Arkadasina mesaj at',
+      'Masa toplama',
+      'Kod challenge',
+      'Fotograf cek',
+      'Disari cik',
+      'Kisa meditasyon',
+      'Su ic',
+      'Muzik kesfet',
+      'Film fragmani izle',
+      'Cizim dene',
+      'Yuzunu yika',
+      'Nefes egzersizi',
+      'Eski bir notu temizle',
+      'Yeni hedef belirle',
+      'Kendine odul ver',
+      'Kitaptan 5 sayfa',
+      'Podcast ac',
+      'Sohbet baslat',
+      'Beyin firtinasi',
+      'Hizli duzen',
+      'Plan yap',
+      'Yeni fikir ara',
+      'Eski isi bitir',
+      'Sarki degistir',
+      'Sadece dinlen'
+    ];
+
+    const presets={
+      social:[
+        'Birine ses kaydi at',
+        'Random meme paylas',
+        'Gruba selam at',
+        '5 dk sohbet',
+        'Aileden birini ara',
+        'LinkedIn check',
+        'Yeni tanidiga mesaj'
+      ],
+      productive:[
+        'Pomodoro 25 dk',
+        'Inbox temizligi',
+        'Masaustu temizle',
+        'To-do onceliklendir',
+        '1 bug kapat',
+        '1 mini refactor',
+        'Notlarini duzenle'
+      ],
+      chill:[
+        'Lofi ac',
+        'Pencere kenari mola',
+        'Yavas yuruyus',
+        'Chillhop set',
+        'Sessizlik 5 dk',
+        'Bitki sulama',
+        'Rahatlama esneme'
+      ]
+    };
+
+    const optionsEl=document.getElementById('wheel-options');
+    const countEl=document.getElementById('count-output');
+    const liveEl=document.getElementById('wheel-live');
+    const resultEl=document.getElementById('wheel-result');
+    const historyEl=document.getElementById('history-list');
+    const spinNormalBtn=document.getElementById('spin-normal');
+    const spinTurboBtn=document.getElementById('spin-turbo');
+    const shuffleBtn=document.getElementById('shuffle-list');
+    const clearBtn=document.getElementById('clear-list');
+    const presetBtns=Array.from(document.querySelectorAll('.preset-btn'));
+    const yearEl=document.getElementById('y');
+    const maxHistory=8;
+
+    let spinning=false;
+    const history=[];
+
+    function writeOptions(list){
+      optionsEl.value=list.join('\n');
+      refreshCount();
+    }
+
+    function parseOptions(){
+      return String(optionsEl.value||'')
+        .split(/\n|,/)
+        .map(function(item){ return item.trim(); })
+        .filter(Boolean);
+    }
+
+    function refreshCount(){
+      const count=parseOptions().length;
+      countEl.textContent=count+' secenek';
+    }
+
+    function pick(list){
+      return list[Math.floor(Math.random()*list.length)];
+    }
+
+    function shuffleArray(list){
+      const copy=list.slice();
+      for(let i=copy.length-1;i>0;i-=1){
+        const j=Math.floor(Math.random()*(i+1));
+        const tmp=copy[i];
+        copy[i]=copy[j];
+        copy[j]=tmp;
+      }
+      return copy;
+    }
+
+    function pulse(el){
+      el.classList.remove('pulse');
+      window.requestAnimationFrame(function(){
+        el.classList.add('pulse');
+      });
+    }
+
+    function renderHistory(){
+      historyEl.innerHTML=history.map(function(item){
+        return '<li>• '+item+'</li>';
+      }).join('');
+    }
+
+    function commitResult(text){
+      liveEl.textContent='Tamamlandi.';
+      resultEl.textContent=text;
+      pulse(resultEl);
+      history.unshift(text);
+      if(history.length>maxHistory){
+        history.length=maxHistory;
+      }
+      renderHistory();
+    }
+
+    function spin(mode){
+      const options=parseOptions();
+      if(options.length<2){
+        liveEl.textContent='En az 2 secenek gir.';
+        return;
+      }
+      if(spinning) return;
+      spinning=true;
+      spinNormalBtn.disabled=true;
+      spinTurboBtn.disabled=true;
+
+      const ticks=mode==='turbo' ? 22 : 16;
+      const delay=mode==='turbo' ? 55 : 95;
+      let step=0;
+
+      const timer=setInterval(function(){
+        step+=1;
+        const current=pick(options);
+        liveEl.textContent='Donuyor: '+current;
+        resultEl.textContent=current;
+
+        if(step>=ticks){
+          clearInterval(timer);
+          const winner=pick(options);
+          commitResult(winner);
+          spinNormalBtn.disabled=false;
+          spinTurboBtn.disabled=false;
+          spinning=false;
+        }
+      },delay);
+    }
+
+    function loadPreset(name){
+      const preset=presets[name];
+      if(!preset) return;
+      const merged=shuffleArray(defaultOptions.concat(preset));
+      writeOptions(merged);
+      liveEl.textContent='Preset yuklendi: '+name;
+    }
+
+    if(yearEl) yearEl.textContent=String(new Date().getFullYear());
+
+    writeOptions(defaultOptions);
+    liveEl.textContent='Hazir. Carki cevir.';
+    resultEl.textContent='?';
+
+    optionsEl.addEventListener('input',refreshCount);
+    spinNormalBtn.addEventListener('click',function(){ spin('normal'); });
+    spinTurboBtn.addEventListener('click',function(){ spin('turbo'); });
+    shuffleBtn.addEventListener('click',function(){
+      writeOptions(shuffleArray(parseOptions()));
+      liveEl.textContent='Liste karistirildi.';
+    });
+    clearBtn.addEventListener('click',function(){
+      optionsEl.value='';
+      refreshCount();
+      liveEl.textContent='Liste temizlendi.';
+      resultEl.textContent='?';
+    });
+    presetBtns.forEach(function(btn){
+      btn.addEventListener('click',function(){
+        loadPreset(btn.getAttribute('data-preset'));
+      });
+    });
+
+    document.body.classList.add('initial-anim');
+    requestAnimationFrame(function(){
+      document.body.classList.add('initial-anim-run');
+    });
+  })();
+  </script>
+</body>
+</html>
