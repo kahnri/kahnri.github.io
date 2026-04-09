@@ -26,12 +26,12 @@ layout: null
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
-  <main class="max-w-3xl mx-auto px-6 py-10">
-    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
-      <a href="/" class="text-xl font-bold tracking-wide">KAGAN BAGDEMIR</a>
-      <div class="flex items-center gap-3 flex-wrap justify-end">
+  <main class="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <a href="/" class="text-lg font-bold tracking-wide sm:text-xl">KAGAN BAGDEMIR</a>
+      <div class="flex w-full items-center justify-between gap-3 flex-wrap sm:w-auto sm:justify-end">
         <a href="/kahnri/" class="hidden md:inline px-3 py-1 rounded-full border theme-button text-sm">KAHNRI</a>
-        <input id="q" class="hidden md:block px-3 py-1 rounded-lg border theme-input text-sm"
+        <input id="q" class="order-last w-full px-3 py-2 rounded-lg border theme-input text-sm sm:order-none sm:w-auto md:block"
                type="search" data-i18n-ph="blog.search" placeholder="Ara...">
         <div class="flex items-center gap-2 flex-wrap justify-end">
           <label for="lang-select-blog" class="sr-only" data-i18n="lang.label"></label>
@@ -48,9 +48,12 @@ layout: null
           </button>
         </div>
       </div>
+      <div class="flex w-full gap-2 overflow-x-auto pb-1 md:hidden">
+        <a href="/kahnri/" class="whitespace-nowrap px-3 py-1 rounded-full border theme-button text-sm">KAHNRI</a>
+      </div>
     </header>
 
-    <h1 class="text-3xl font-semibold mt-6" data-i18n="blog.title" data-animate style="--stagger:0.4"></h1>
+    <h1 class="mt-6 text-2xl font-semibold sm:text-3xl safe-wrap" data-i18n="blog.title" data-animate style="--stagger:0.4"></h1>
     <p class="theme-text-muted mt-1" data-i18n="blog.subtitle" data-animate style="--stagger:0.7"></p>
 
     <div class="mt-6 space-y-6" id="list">
@@ -65,7 +68,7 @@ layout: null
       {% assign excerpt_en = post.excerpt_en | default: post.en | default: post.excerpt %}
       {% assign excerpt_nl = post.excerpt_nl | default: post.nl | default: post.excerpt %}
       {% assign excerpt_ja = post.excerpt_ja | default: post.ja | default: post.excerpt %}
-      <article class="border rounded-2xl p-5 theme-card transition hover:-translate-y-0.5"
+      <article class="border rounded-2xl p-4 sm:p-5 theme-card transition hover:-translate-y-0.5"
                data-title-tr="{{ title_tr | strip_html | strip_newlines | escape }}"
                data-title-de="{{ title_de | strip_html | strip_newlines | escape }}"
                data-title-en="{{ title_en | strip_html | strip_newlines | escape }}"
@@ -78,7 +81,7 @@ layout: null
                data-excerpt-ja="{{ excerpt_ja | markdownify | strip_html | strip_newlines | strip | escape }}"
                data-animate
                style="--stagger:{{ forloop.index | plus: 1 }}">
-        <h2 class="text-xl font-semibold">
+        <h2 class="text-xl font-semibold safe-wrap">
           <a class="hover:underline" href="{{ post.url | relative_url }}" data-blog-title>{{ title_tr | strip_html | strip_newlines | escape }}</a>
         </h2>
         <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>

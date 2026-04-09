@@ -1,6 +1,6 @@
-<section class="mt-6 rounded-2xl p-6 border theme-card" data-animate style="--stagger:1.5">
+<section class="mt-6 rounded-2xl border theme-card p-5 sm:p-6" data-animate style="--stagger:1.5">
   <div class="flex flex-wrap items-center justify-between gap-3">
-    <h2 class="text-2xl font-semibold" data-i18n="recent.title"></h2>
+    <h2 class="text-2xl font-semibold safe-wrap" data-i18n="recent.title"></h2>
     <a class="px-3 py-1 rounded-full border theme-button transition" href="/blog/" data-i18n="recent.all"></a>
   </div>
 
@@ -17,7 +17,7 @@
     {% assign excerpt_en = post.excerpt_en | default: post.en | default: post.excerpt %}
     {% assign excerpt_nl = post.excerpt_nl | default: post.nl | default: post.excerpt %}
     {% assign excerpt_ja = post.excerpt_ja | default: post.ja | default: post.excerpt %}
-    <article class="p-5 rounded-2xl border theme-card transition hover:-translate-y-0.5"
+    <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5"
              data-recent-card
              data-title-tr="{{ title_tr | strip_html | strip_newlines | escape }}"
              data-title-de="{{ title_de | strip_html | strip_newlines | escape }}"
@@ -29,7 +29,7 @@
              data-excerpt-en="{{ excerpt_en | markdownify | strip_html | strip_newlines | strip | escape }}"
              data-excerpt-nl="{{ excerpt_nl | markdownify | strip_html | strip_newlines | strip | escape }}"
              data-excerpt-ja="{{ excerpt_ja | markdownify | strip_html | strip_newlines | strip | escape }}">
-      <h3 class="text-lg font-semibold">
+      <h3 class="text-lg font-semibold safe-wrap">
         <a class="hover:underline" href="{{ post.url | relative_url }}" data-recent-title>{{ title_tr | strip_html | strip_newlines | escape }}</a>
       </h3>
       <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>

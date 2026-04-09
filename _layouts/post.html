@@ -24,10 +24,10 @@
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
-  <main class="max-w-3xl mx-auto px-6 py-10">
-    <header class="flex flex-wrap items-center justify-between gap-3" data-animate style="--stagger:0">
+  <main class="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
       <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="post.back"></span></a>
-      <div class="flex items-center gap-2 flex-wrap justify-end">
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
         <label for="lang-select-post" class="sr-only" data-i18n="lang.label"></label>
         <select id="lang-select-post" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
           <option value="tr" data-i18n="lang.tr">Turkce</option>
@@ -50,7 +50,7 @@
       {% assign page_title_nl = page.title_nl | default: page.title %}
       {% assign page_title_ja = page.title_ja | default: page.title %}
       <h1 id="post-main-title"
-          class="text-3xl font-semibold"
+          class="text-2xl font-semibold safe-wrap sm:text-3xl"
           data-lang-text
           data-lang-text-tr="{{ page_title_tr | strip_html | strip_newlines | escape }}"
           data-lang-text-de="{{ page_title_de | strip_html | strip_newlines | escape }}"
@@ -62,24 +62,24 @@
       </p>
 
       <!-- Çok dilli içerik -->
-      <div id="post-tr" data-lang-content="tr" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-tr" data-lang-content="tr" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.tr %}{{ page.tr | markdownify }}{% endif %}
       </div>
-      <div id="post-de" data-lang-content="de" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-de" data-lang-content="de" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.de %}{{ page.de | markdownify }}{% endif %}
       </div>
-      <div id="post-en" data-lang-content="en" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-en" data-lang-content="en" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.en %}{{ page.en | markdownify }}{% endif %}
       </div>
-      <div id="post-nl" data-lang-content="nl" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-nl" data-lang-content="nl" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.nl %}{{ page.nl | markdownify }}{% endif %}
       </div>
-      <div id="post-ja" data-lang-content="ja" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-ja" data-lang-content="ja" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.ja %}{{ page.ja | markdownify }}{% endif %}
       </div>
 
       <!-- Fallback: tek dilli içerik -->
-      <div id="post-default" class="prose theme-prose mt-6 max-w-none" style="display:none;">
+      <div id="post-default" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {{ content }}
       </div>
     </article>

@@ -23,11 +23,11 @@
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
-  <main class="min-h-screen flex items-center justify-center p-6">
-    <div id="box" class="max-w-xl text-center opacity-0 transition-opacity duration-700">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+  <main class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+    <div id="box" class="max-w-xl text-center opacity-0 transition-opacity duration-700 w-full">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-6 sm:items-center">
         <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home"></span></a>
-        <div class="flex items-center gap-2 flex-wrap justify-end">
+        <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
           <label for="lang-select-dev" class="sr-only" data-i18n="lang.label"></label>
           <select id="lang-select-dev" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
             <option value="tr" data-i18n="lang.tr">Turkce</option>
@@ -42,9 +42,9 @@
           </button>
         </div>
       </div>
-      <h1 class="text-3xl font-semibold" data-i18n="wip.title"></h1>
+      <h1 class="text-2xl font-semibold safe-wrap sm:text-3xl" data-i18n="wip.title"></h1>
       <p class="theme-text-muted mt-2" data-i18n="wip.subtitle"></p>
-      <a href="/" class="inline-block mt-5 px-4 py-2 rounded-xl border theme-button" data-i18n="back.home"></a>
+      <a href="/" class="inline-block mt-5 w-full sm:w-auto px-4 py-2 rounded-xl border theme-button" data-i18n="back.home"></a>
     </div>
   </main>
 

@@ -44,6 +44,8 @@ html[data-theme="light"] {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -135,6 +137,7 @@ a:hover {
   background-color: var(--surface);
   border-color: var(--border);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
@@ -300,6 +303,32 @@ a:hover {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  min-width: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.safe-wrap {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .theme-input::placeholder {
   color: var(--text-muted);
 }
@@ -335,6 +364,23 @@ a:hover {
 
 .theme-prose a {
   color: var(--accent-text);
+}
+
+.theme-prose img,
+.theme-prose iframe,
+.theme-prose video {
+  max-width: 100%;
+  height: auto;
+}
+
+.theme-prose pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.theme-prose code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .sr-only {
@@ -468,5 +514,27 @@ body.initial-anim-run main::before {
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body::after {
+    opacity: 0.12;
+  }
+
+  .theme-card {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  }
+
+  .theme-button,
+  .theme-button-accent,
+  .theme-button-icon {
+    min-height: 44px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
