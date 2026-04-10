@@ -19,7 +19,7 @@ layout: null
     }
   })();
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=3">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
@@ -44,7 +44,7 @@ layout: null
           </select>
           <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
             <span data-theme-icon aria-hidden="true">🌙</span>
-            <span class="sr-only" data-i18n="btn.theme"></span>
+            <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
           </button>
         </div>
       </div>
@@ -53,8 +53,8 @@ layout: null
       </div>
     </header>
 
-    <h1 class="mt-6 text-2xl font-semibold sm:text-3xl safe-wrap" data-i18n="blog.title" data-animate style="--stagger:0.4"></h1>
-    <p class="theme-text-muted mt-1" data-i18n="blog.subtitle" data-animate style="--stagger:0.7"></p>
+    <h1 class="mt-6 text-2xl font-semibold sm:text-3xl safe-wrap" data-i18n="blog.title" data-animate style="--stagger:0.4">Blog</h1>
+    <p class="theme-text-muted mt-1" data-i18n="blog.subtitle" data-animate style="--stagger:0.7">Yazilarim ve notlarim</p>
 
     <div class="mt-6 space-y-6" id="list">
       {% for post in site.posts %}
@@ -87,11 +87,11 @@ layout: null
         <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
         <p class="theme-text-soft mt-2" data-blog-excerpt>{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | truncate: 180 | escape }}</p>
         <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-           href="{{ post.url | relative_url }}" data-i18n="blog.read"></a>
+           href="{{ post.url | relative_url }}" data-i18n="blog.read">Oku</a>
       </article>
       {% endfor %}
       {% unless site.posts.size > 0 %}
-        <p class="theme-text-muted" data-i18n="blog.empty"></p>
+        <p class="theme-text-muted" data-i18n="blog.empty">Henuz yazi yok. _posts/ klasorune bir Markdown dosyasi ekle.</p>
       {% endunless %}
     </div>
   </main>

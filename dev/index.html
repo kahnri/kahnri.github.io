@@ -16,7 +16,7 @@
     }
   })();
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=3">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
@@ -24,9 +24,9 @@
 </head>
 <body>
   <main class="min-h-screen flex items-center justify-center p-4 sm:p-6">
-    <div id="box" class="max-w-xl text-center opacity-0 transition-opacity duration-700 w-full">
+    <div id="box" class="max-w-xl text-center transition-opacity duration-700 w-full">
       <div class="flex flex-wrap items-start justify-between gap-3 mb-6 sm:items-center">
-        <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home"></span></a>
+        <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
         <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
           <label for="lang-select-dev" class="sr-only" data-i18n="lang.label"></label>
           <select id="lang-select-dev" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
@@ -38,13 +38,13 @@
           </select>
           <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
             <span data-theme-icon aria-hidden="true">🌙</span>
-            <span class="sr-only" data-i18n="btn.theme"></span>
+            <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
           </button>
         </div>
       </div>
-      <h1 class="text-2xl font-semibold safe-wrap sm:text-3xl" data-i18n="wip.title"></h1>
-      <p class="theme-text-muted mt-2" data-i18n="wip.subtitle"></p>
-      <a href="/" class="inline-block mt-5 w-full sm:w-auto px-4 py-2 rounded-xl border theme-button" data-i18n="back.home"></a>
+      <h1 class="text-2xl font-semibold safe-wrap sm:text-3xl" data-i18n="wip.title">Bu bolum gelistirme asamasinda</h1>
+      <p class="theme-text-muted mt-2" data-i18n="wip.subtitle">Yakinda burada proje detaylari ve demolar olacak.</p>
+      <a href="/" class="inline-block mt-5 w-full sm:w-auto px-4 py-2 rounded-xl border theme-button" data-i18n="back.home">Anasayfa</a>
     </div>
   </main>
 
