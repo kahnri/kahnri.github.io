@@ -62,30 +62,39 @@
       </p>
 
       <!-- Çok dilli içerik -->
-      <div id="post-tr" data-lang-content="tr" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-tr" data-lang-content="tr" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.tr %}{{ page.tr | markdownify }}{% endif %}
       </div>
-      <div id="post-de" data-lang-content="de" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-de" data-lang-content="de" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.de %}{{ page.de | markdownify }}{% endif %}
       </div>
-      <div id="post-en" data-lang-content="en" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-en" data-lang-content="en" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.en %}{{ page.en | markdownify }}{% endif %}
       </div>
-      <div id="post-nl" data-lang-content="nl" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-nl" data-lang-content="nl" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.nl %}{{ page.nl | markdownify }}{% endif %}
       </div>
-      <div id="post-ja" data-lang-content="ja" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-ja" data-lang-content="ja" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {% if page.ja %}{{ page.ja | markdownify }}{% endif %}
       </div>
 
       <!-- Fallback: tek dilli içerik -->
-      <div id="post-default" class="prose theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
+      <div id="post-default" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
         {{ content }}
       </div>
     </article>
 
     <footer class="mt-10 border-t theme-border pt-5 theme-text-muted text-sm">
-      © {{ "now" | date: "%Y" }} Kagan Bağdemir · <a href="/#impressum" data-i18n="footer.impressum">Impressum</a>
+      <p>© {{ "now" | date: "%Y" }} Kagan Bağdemir · <a href="/#impressum" data-i18n="footer.impressum">Impressum</a></p>
+      <p class="mt-2 mini-footer-note">
+        <span data-lang-text
+              data-lang-text-tr="Kucuk bir not: eglenmek icin ayri bir alan da var"
+              data-lang-text-de="Kleine Randnotiz: Es gibt auch einen separaten Spielplatz"
+              data-lang-text-en="Small side note: there is also a separate playground"
+              data-lang-text-nl="Small side note: there is also a separate playground"
+              data-lang-text-ja="Small side note: there is also a separate playground">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
+        · <a href="/kahnri/" class="footer-side-link">KAHNRI</a>
+      </p>
     </footer>
   </main>
 
