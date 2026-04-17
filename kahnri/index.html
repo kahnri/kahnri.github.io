@@ -6,7 +6,7 @@ layout: null
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KAHNRI — Eglence Alani</title>
+  <title>KAHNRI - Personal Hub</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script>
   (function(){
@@ -26,33 +26,497 @@ layout: null
   <style>
     body { font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif; }
 
+    .kahnri-hub {
+      --hub-accent: #38bdf8;
+      --hub-accent-soft: rgba(56, 189, 248, 0.18);
+      --hub-accent-strong: #0ea5e9;
+      --hub-accent-glow: rgba(56, 189, 248, 0.24);
+    }
+
+    .kahnri-hub[data-hub-mode="chill"] {
+      --hub-accent: #a78bfa;
+      --hub-accent-soft: rgba(167, 139, 250, 0.18);
+      --hub-accent-strong: #8b5cf6;
+      --hub-accent-glow: rgba(167, 139, 250, 0.28);
+    }
+
+    .kahnri-hub[data-hub-mode="focus"] {
+      --hub-accent: #34d399;
+      --hub-accent-soft: rgba(52, 211, 153, 0.18);
+      --hub-accent-strong: #10b981;
+      --hub-accent-glow: rgba(52, 211, 153, 0.28);
+    }
+
+    .kahnri-hub[data-hub-mode="create"] {
+      --hub-accent: #f59e0b;
+      --hub-accent-soft: rgba(245, 158, 11, 0.18);
+      --hub-accent-strong: #d97706;
+      --hub-accent-glow: rgba(245, 158, 11, 0.28);
+    }
+
+    .kahnri-hub[data-hub-mode="outside"] {
+      --hub-accent: #22c55e;
+      --hub-accent-soft: rgba(34, 197, 94, 0.18);
+      --hub-accent-strong: #16a34a;
+      --hub-accent-glow: rgba(34, 197, 94, 0.28);
+    }
+
+    .kahnri-hub[data-hub-mode="social"] {
+      --hub-accent: #f472b6;
+      --hub-accent-soft: rgba(244, 114, 182, 0.18);
+      --hub-accent-strong: #ec4899;
+      --hub-accent-glow: rgba(244, 114, 182, 0.28);
+    }
+
     .kahnri-stage {
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(100% 90% at 0% 0%, rgba(14, 165, 233, 0.22), transparent 55%),
-        radial-gradient(90% 70% at 100% 0%, rgba(251, 191, 36, 0.18), transparent 55%),
-        radial-gradient(80% 90% at 50% 100%, rgba(16, 185, 129, 0.18), transparent 60%),
-        var(--surface);
       border: 1px solid var(--border);
+      background:
+        radial-gradient(80% 90% at 0% 0%, var(--hub-accent-soft), transparent 58%),
+        radial-gradient(70% 80% at 100% 0%, rgba(251, 191, 36, 0.16), transparent 60%),
+        radial-gradient(80% 95% at 50% 100%, rgba(16, 185, 129, 0.16), transparent 62%),
+        var(--surface);
       backdrop-filter: blur(8px);
     }
 
-    .kahnri-stage::before {
+    .kahnri-stage::before,
+    .kahnri-stage::after {
       content: "";
       position: absolute;
-      width: 240px;
-      height: 240px;
-      right: -80px;
-      top: -80px;
       border-radius: 9999px;
-      background: rgba(244, 114, 182, 0.22);
-      filter: blur(28px);
       pointer-events: none;
+    }
+
+    .kahnri-stage::before {
+      width: 280px;
+      height: 280px;
+      left: -120px;
+      top: -110px;
+      background: radial-gradient(circle, var(--hub-accent-glow), transparent 72%);
+      filter: blur(14px);
+      opacity: 0.95;
+    }
+
+    .kahnri-stage::after {
+      width: 210px;
+      height: 210px;
+      right: -90px;
+      bottom: -70px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      opacity: 0.5;
+    }
+
+    .hub-shell {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .hub-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.72rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--hub-accent-soft);
+      color: var(--text-strong);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hub-copy {
+      max-width: 42rem;
+    }
+
+    .stats-row {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .hub-kpi {
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .hub-kpi span {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hub-kpi strong {
+      display: block;
+      margin-top: 0.45rem;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      color: var(--text-strong);
+    }
+
+    .hub-orbit {
+      position: relative;
+      overflow: hidden;
+      padding: 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(80% 80% at 80% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .hub-orbit::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -60px;
+      top: -55px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      opacity: 0.7;
+    }
+
+    .meter-grid {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .meter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .meter-bar {
+      margin-top: 0.35rem;
+      width: 100%;
+      height: 0.6rem;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .meter-bar i {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--hub-accent), #fbbf24);
+      transition: width 0.35s ease;
+    }
+
+    .status-line {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.2);
+      color: var(--text-soft);
+    }
+
+    html[data-theme="light"] .status-line {
+      background: rgba(248, 250, 252, 0.7);
+    }
+
+    .hub-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .module-card {
+      min-height: 100%;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .split-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+
+    .output-card {
+      position: relative;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+      min-height: 126px;
+    }
+
+    .output-card-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .output-card-value {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--text-strong);
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .track-link {
+      display: inline-flex;
+      margin-top: 0.75rem;
+      color: var(--hub-accent);
+    }
+
+    .dock-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .dock-link {
+      display: block;
+      min-height: 130px;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dock-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+    }
+
+    .dock-tag {
+      display: inline-flex;
+      padding: 0.26rem 0.58rem;
+      border-radius: 9999px;
+      background: var(--hub-accent-soft);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-strong);
+    }
+
+    .dock-link strong {
+      display: block;
+      margin-top: 0.9rem;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .dock-link p {
+      margin-top: 0.4rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .hub-textarea {
+      width: 100%;
+      min-height: 11rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(9, 9, 11, 0.18);
+      color: inherit;
+      line-height: 1.55;
+      resize: vertical;
+    }
+
+    .hub-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    html[data-theme="light"] .hub-textarea {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .check-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .check-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .check-chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .check-chip[data-done="true"] {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: var(--hub-accent-soft);
+    }
+
+    .check-chip strong {
+      display: block;
+      font-size: 0.96rem;
+      text-align: left;
+    }
+
+    .check-chip span {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .check-chip[data-done="true"] span {
+      color: var(--text-soft);
+    }
+
+    .check-chip-mark {
+      flex: 0 0 auto;
+      width: 1.7rem;
+      height: 1.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 0.88rem;
+      color: var(--text-strong);
+    }
+
+    .mode-dock {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(80% 90% at 0% 0%, var(--hub-accent-soft), transparent 58%),
+        radial-gradient(90% 90% at 100% 100%, rgba(244, 114, 182, 0.14), transparent 62%),
+        var(--surface);
+      backdrop-filter: blur(8px);
+    }
+
+    .mode-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .mode-btn {
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .mode-btn[data-active="true"] {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: var(--hub-accent-soft);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .mode-btn strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text-strong);
+    }
+
+    .mode-btn span {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .mode-panel {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mode-tip-list {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 0.9rem;
+    }
+
+    .mode-tip {
+      padding: 0.85rem 0.95rem;
+      border-radius: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-soft);
+      font-size: 0.92rem;
     }
 
     .kahnri-burst {
       animation: kahnriBurst 520ms ease;
+    }
+
+    .pulse {
+      animation: pulseResult 560ms ease;
     }
 
     @keyframes kahnriBurst {
@@ -61,13 +525,46 @@ layout: null
       100% { transform: scale(1); opacity: 1; }
     }
 
+    @keyframes pulseResult {
+      0% { transform: scale(0.97); opacity: 0.76; }
+      70% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (min-width: 900px) {
+      .hub-shell {
+        grid-template-columns: minmax(0, 1.38fr) minmax(300px, 0.86fr);
+      }
+
+      .hub-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .kahnri-burst { animation: none; }
+      .dock-link,
+      .check-chip,
+      .mode-btn,
+      .kahnri-burst,
+      .pulse {
+        animation: none;
+        transition: none;
+      }
+
+      .meter-bar i {
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+  <main id="kahnri-hub" class="kahnri-hub max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10" data-hub-mode="create">
     <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
       <div class="flex items-center gap-2 flex-wrap">
         <a href="/" class="px-3 py-1 rounded-full border theme-button text-xs sm:text-sm">Ana Sayfa</a>
@@ -82,63 +579,266 @@ layout: null
       </div>
     </header>
 
-    <section class="kahnri-stage mt-6 rounded-3xl p-5 sm:p-6" data-animate style="--stagger:0.5">
-      <p class="text-xs uppercase tracking-[0.2em] theme-text-muted">KAHNRI / FUN MODE</p>
-      <h1 class="mt-2 text-3xl font-black leading-tight safe-wrap sm:text-4xl md:text-5xl">Eglence Alanin Acik.</h1>
-      <p class="theme-text-muted mt-3 max-w-2xl">
-        Burasi tamamen serbest bolge. Rastgele vibe cek, mini gorev sec, muzik ac. Kader Carki artik ayri sayfada.
-      </p>
+    <section class="kahnri-stage fx-hero mt-6 rounded-3xl p-5 sm:p-6" data-animate style="--stagger:0.4">
+      <div class="hub-shell">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-xs uppercase tracking-[0.2em] theme-text-muted">KAHNRI / PERSONAL HUB</p>
+            <span class="hub-pill">oyun + reset + launchpad</span>
+          </div>
+          <h1 class="mt-3 text-3xl font-black leading-tight safe-wrap sm:text-4xl md:text-5xl">KAHNRI HQ acik. Burasi senin kendi mini evrenin.</h1>
+          <p class="theme-text-muted mt-3 hub-copy">
+            Rastgele vibe cek, aktif modunu kilitle, kendine mini not birak, gunluk check-in yap ve tek tikla istedigin yone firla. Daha az "sayfa", daha cok "senin panelin".
+          </p>
 
-      <div class="mt-5 flex flex-wrap gap-2">
-        <button id="vibe-btn" class="w-full px-4 py-2 rounded-xl border theme-button-accent text-center sm:w-auto" type="button">Vibe Cek</button>
-        <button id="quest-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Mini Gorev</button>
-        <button id="track-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Sarki Ac</button>
-        <button id="combo-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Karma Mod</button>
-        <a href="/kahnri/cark/" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto">Kader Carkina Git</a>
-      </div>
+          <div class="stats-row mt-5">
+            <article class="hub-kpi">
+              <span>Aktif Mod</span>
+              <strong id="hero-mode">Create</strong>
+            </article>
+            <article class="hub-kpi">
+              <span>Bugun Action</span>
+              <strong id="action-count">0</strong>
+            </article>
+            <article class="hub-kpi">
+              <span>Check-In</span>
+              <strong id="check-count">0/4</strong>
+            </article>
+          </div>
 
-      <div class="grid md:grid-cols-3 gap-3 mt-4">
-        <article class="rounded-2xl border theme-card p-4">
-          <p class="text-xs theme-text-muted uppercase tracking-widest">Vibe</p>
-          <p id="vibe-output" class="text-lg font-semibold mt-2 safe-wrap">Hazir.</p>
-        </article>
-        <article class="rounded-2xl border theme-card p-4">
-          <p class="text-xs theme-text-muted uppercase tracking-widest">Gorev</p>
-          <p id="quest-output" class="text-lg font-semibold mt-2 safe-wrap">Baslamaya hazir.</p>
-        </article>
-        <article class="rounded-2xl border theme-card p-4">
-          <p class="text-xs theme-text-muted uppercase tracking-widest">Track</p>
-          <p id="track-output" class="text-lg font-semibold mt-2 safe-wrap">Bir track sec.</p>
-        </article>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <button id="combo-btn" class="w-full px-4 py-2 rounded-xl border theme-button-accent text-center sm:w-auto" type="button">Hub Refresh</button>
+            <a href="/kahnri/cark/" class="trackable-link w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto">Kader Carkina Git</a>
+            <button id="track-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Track Ac</button>
+            <a href="https://github.com/kahnri" target="_blank" rel="noopener" class="trackable-link w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="hub-orbit rounded-3xl">
+          <p class="text-xs uppercase tracking-[0.2em] theme-text-muted">BUGUN</p>
+          <h2 id="today-label" class="mt-2 text-2xl font-black leading-tight safe-wrap">Hub yukleniyor...</h2>
+          <p id="mode-output" class="mt-2 theme-text-soft safe-wrap">Mod sec ve gunun akisini oturt.</p>
+
+          <div class="meter-grid">
+            <div>
+              <div class="meter-row">
+                <span>Focus</span>
+                <strong id="meter-focus-value">0</strong>
+              </div>
+              <div class="meter-bar"><i id="meter-focus"></i></div>
+            </div>
+            <div>
+              <div class="meter-row">
+                <span>Social</span>
+                <strong id="meter-social-value">0</strong>
+              </div>
+              <div class="meter-bar"><i id="meter-social"></i></div>
+            </div>
+            <div>
+              <div class="meter-row">
+                <span>Play</span>
+                <strong id="meter-play-value">0</strong>
+              </div>
+              <div class="meter-bar"><i id="meter-play"></i></div>
+            </div>
+          </div>
+
+          <p id="status-line" class="status-line safe-wrap">Hub hazir. Bir mod sec ya da refresh bas.</p>
+        </aside>
       </div>
     </section>
 
-    <section class="grid md:grid-cols-2 gap-4 mt-6">
-      <article class="rounded-2xl border theme-card p-5" data-animate style="--stagger:1">
-        <h2 class="text-xl font-semibold">Mod Kutusu</h2>
-        <p class="theme-text-muted text-sm mt-1">Tek tikla aktif moda gec.</p>
-        <div class="mt-3 flex flex-wrap gap-2">
-          <button class="mode-btn w-full px-3 py-1 rounded-lg border theme-button text-sm sm:w-auto" type="button" data-mode="chill">Chill</button>
-          <button class="mode-btn w-full px-3 py-1 rounded-lg border theme-button text-sm sm:w-auto" type="button" data-mode="focus">Focus</button>
-          <button class="mode-btn w-full px-3 py-1 rounded-lg border theme-button text-sm sm:w-auto" type="button" data-mode="hype">Hype</button>
-          <button class="mode-btn w-full px-3 py-1 rounded-lg border theme-button text-sm sm:w-auto" type="button" data-mode="outside">Disari</button>
+    <section class="hub-grid mt-6">
+      <article class="rounded-2xl border theme-card p-5 module-card" data-animate style="--stagger:0.8">
+        <div class="card-top">
+          <div>
+            <p class="text-xs uppercase tracking-widest theme-text-muted">Mood Engine</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap">Bugunun akisini kur.</h2>
+          </div>
+          <span class="hub-pill">live</span>
         </div>
-        <p id="mode-output" class="mt-3 text-sm theme-text-muted safe-wrap">Mod sec.</p>
+        <p class="theme-text-muted text-sm mt-1 safe-wrap">
+          Vibe, mini gorev ve soundtrack birbirini beslesin. Tek tek sec ya da hepsini topluca yenile.
+        </p>
+
+        <div class="split-grid">
+          <article class="output-card">
+            <p class="output-card-label">Vibe</p>
+            <strong id="vibe-output" class="output-card-value safe-wrap">Hazir.</strong>
+          </article>
+          <article class="output-card">
+            <p class="output-card-label">Mini Gorev</p>
+            <strong id="quest-output" class="output-card-value safe-wrap">Baslamaya hazir.</strong>
+          </article>
+          <article class="output-card">
+            <p class="output-card-label">Track</p>
+            <strong id="track-output" class="output-card-value safe-wrap">Bir sey sec.</strong>
+          </article>
+        </div>
+
+        <div class="card-actions">
+          <button id="vibe-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Vibe Cek</button>
+          <button id="quest-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Mini Gorev</button>
+          <button id="track-pick-btn" class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" type="button">Track Sec</button>
+          <button id="refresh-stack-btn" class="w-full px-4 py-2 rounded-xl border theme-button-accent text-center sm:w-auto" type="button">Tam Paket</button>
+        </div>
+
+        <a id="track-link" href="https://www.youtube.com/results?search_query=lofi+focus+mix" target="_blank" rel="noopener" class="track-link trackable-link safe-wrap">Secilen track'i ac</a>
       </article>
 
-      <article class="rounded-2xl border theme-card p-5" data-animate style="--stagger:1.2">
-        <h2 class="text-xl font-semibold">Hizli Cikislar</h2>
-        <p class="theme-text-muted text-sm mt-1">Ek oyun alani ve cark burada.</p>
-        <div class="mt-3 flex flex-wrap gap-2">
-          <a href="/kahnri/cark/" class="w-full px-3 py-1 rounded-lg border theme-button text-sm text-center sm:w-auto">Kader Carki (Yeni Site)</a>
-          <a href="https://www.youtube.com/results?search_query=fun+playlist+mix" target="_blank" rel="noopener" class="w-full px-3 py-1 rounded-lg border theme-button text-sm text-center sm:w-auto">Mix Ac</a>
-          <a href="https://www.google.com/search?q=mini+brain+games" target="_blank" rel="noopener" class="w-full px-3 py-1 rounded-lg border theme-button text-sm text-center sm:w-auto">Mini Oyun Ara</a>
+      <article class="rounded-2xl border theme-card p-5 module-card" data-animate style="--stagger:1">
+        <div class="card-top">
+          <div>
+            <p class="text-xs uppercase tracking-widest theme-text-muted">Launchpad</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap">Hizli cikislar ve kisa kacislar.</h2>
+          </div>
+          <span class="hub-pill">dock</span>
+        </div>
+        <p class="theme-text-muted text-sm mt-1 safe-wrap">Bu alan direkt "neye gideyim?" sorusunu kisaltiyor.</p>
+
+        <div class="dock-grid">
+          <a href="/kahnri/cark/" class="dock-link trackable-link">
+            <span class="dock-tag">Spin</span>
+            <strong>Kader Carki</strong>
+            <p>Kararsizlik geldiyse kaosu kontrollu sekilde buradan ac.</p>
+          </a>
+          <a href="/blog/" class="dock-link trackable-link">
+            <span class="dock-tag">Read</span>
+            <strong>Blog'a Gec</strong>
+            <p>Kafani duzene sokan ya da ilham veren seyler icin sakin gecis.</p>
+          </a>
+          <a href="https://github.com/kahnri" target="_blank" rel="noopener" class="dock-link trackable-link">
+            <span class="dock-tag">Build</span>
+            <strong>GitHub</strong>
+            <p>Bir sey kazmak, kurcalamak ya da push hissi almak icin hizli rota.</p>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=fun+playlist+mix" target="_blank" rel="noopener" class="dock-link trackable-link">
+            <span class="dock-tag">Sound</span>
+            <strong>Mix Ac</strong>
+            <p>Hub sessiz kaldiysa arka plani hizli bir playlist ile doldur.</p>
+          </a>
+          <a href="https://www.google.com/search?q=mini+brain+games" target="_blank" rel="noopener" class="dock-link trackable-link">
+            <span class="dock-tag">Play</span>
+            <strong>Mini Oyun</strong>
+            <p>Beyne ufak bir reset vermek istiyorsan buradan cikis al.</p>
+          </a>
+          <a href="mailto:hi@kaganbagdemir.de?subject=KAHNRI%20Hub%20Notu" class="dock-link trackable-link">
+            <span class="dock-tag">Ping</span>
+            <strong>Kendine Mail</strong>
+            <p>Bir fikri kacirmamak icin kendine hizli bir not gonderebilirsin.</p>
+          </a>
         </div>
       </article>
+
+      <article class="rounded-2xl border theme-card p-5 module-card" data-animate style="--stagger:1.2">
+        <div class="card-top">
+          <div>
+            <p class="text-xs uppercase tracking-widest theme-text-muted">Mini Notes</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap">Kendine kisa not birak.</h2>
+          </div>
+          <span class="hub-pill">save</span>
+        </div>
+        <p class="theme-text-muted text-sm mt-1 safe-wrap">Burasi mini beyin dump alani. Yazdiklarin otomatik kaydolur.</p>
+
+        <textarea id="note-input" class="hub-textarea" spellcheck="false" placeholder="Bugun aklinda ne var? Bir sonraki fikir, mini hedef, random bir thought..."></textarea>
+
+        <div class="meta-row">
+          <span id="note-meta">Bos ama hazir.</span>
+          <button id="clear-note" class="px-3 py-1 rounded-full border theme-button text-sm" type="button">Notu Temizle</button>
+        </div>
+      </article>
+
+      <article class="rounded-2xl border theme-card p-5 module-card" data-animate style="--stagger:1.4">
+        <div class="card-top">
+          <div>
+            <p class="text-xs uppercase tracking-widest theme-text-muted">Daily Check-In</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap">Gunluk ritim paneli.</h2>
+          </div>
+          <span class="hub-pill">today</span>
+        </div>
+        <p class="theme-text-muted text-sm mt-1 safe-wrap">Kucuk seyleri tikla. Hub'in bugunku hissi hemen degissin.</p>
+
+        <div class="check-grid">
+          <button class="check-chip" type="button" data-check="water" data-done="false" aria-pressed="false">
+            <div>
+              <strong>Su</strong>
+              <span>En az 1 bardak</span>
+            </div>
+            <span class="check-chip-mark">+</span>
+          </button>
+          <button class="check-chip" type="button" data-check="move" data-done="false" aria-pressed="false">
+            <div>
+              <strong>Hareket</strong>
+              <span>5-10 dk reset</span>
+            </div>
+            <span class="check-chip-mark">+</span>
+          </button>
+          <button class="check-chip" type="button" data-check="focus" data-done="false" aria-pressed="false">
+            <div>
+              <strong>Deep Work</strong>
+              <span>Kisa sprint</span>
+            </div>
+            <span class="check-chip-mark">+</span>
+          </button>
+          <button class="check-chip" type="button" data-check="reset" data-done="false" aria-pressed="false">
+            <div>
+              <strong>Reset</strong>
+              <span>Nefes veya mola</span>
+            </div>
+            <span class="check-chip-mark">+</span>
+          </button>
+        </div>
+
+        <div class="meta-row">
+          <span id="daily-summary">Bugun yeni basliyor.</span>
+          <button id="reset-day" class="px-3 py-1 rounded-full border theme-button text-sm" type="button">Bugunu Sifirla</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="mode-dock mt-6 rounded-3xl p-5 sm:p-6" data-animate style="--stagger:1.7">
+      <div class="card-top">
+        <div>
+          <p class="text-xs uppercase tracking-widest theme-text-muted">Mode Dock</p>
+          <h2 class="mt-2 text-2xl font-semibold safe-wrap">Hangi versiyonun devrede?</h2>
+        </div>
+        <span class="hub-pill">switch</span>
+      </div>
+      <p class="theme-text-muted text-sm mt-1 safe-wrap">Bir mod sec, renkler ve gunun kisa tavsiyesi ona gore degissin.</p>
+
+      <div class="mode-grid">
+        <button class="mode-btn" type="button" data-mode="chill" data-active="false">
+          <strong>Chill</strong>
+          <span>Dusuk tempo, temiz kafa</span>
+        </button>
+        <button class="mode-btn" type="button" data-mode="focus" data-active="false">
+          <strong>Focus</strong>
+          <span>Net hedef, daha az daginiklik</span>
+        </button>
+        <button class="mode-btn" type="button" data-mode="create" data-active="false">
+          <strong>Create</strong>
+          <span>Yeni sey dene, cikti al</span>
+        </button>
+        <button class="mode-btn" type="button" data-mode="outside" data-active="false">
+          <strong>Outside</strong>
+          <span>Temiz hava, hareket, reset</span>
+        </button>
+        <button class="mode-btn" type="button" data-mode="social" data-active="false">
+          <strong>Social</strong>
+          <span>Mesaj, enerji, akis</span>
+        </button>
+      </div>
+
+      <div class="mode-panel">
+        <p class="text-xs uppercase tracking-widest theme-text-muted">Aktif Mod</p>
+        <h3 id="mode-panel-title" class="mt-2 text-2xl font-semibold safe-wrap">Create Mode</h3>
+        <p id="mode-panel-text" class="mt-2 theme-text-soft safe-wrap">Bir sey baslatmak, kurcalamak ve ortaya minik de olsa bir cikti koymak icin iyi alan.</p>
+        <div id="mode-tip-list" class="mode-tip-list"></div>
+      </div>
     </section>
 
     <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm">
-      <p>KAHNRI Playground · sadece eglence, tamamen senin alanin.</p>
+      <p>KAHNRI HQ · biraz oyun alani, biraz kontrol paneli, tamamen senin ritmin.</p>
       <p class="mt-1">© <span id="y"></span> Kagan Bagdemir</p>
     </footer>
   </main>
@@ -146,89 +846,247 @@ layout: null
   <script src="/assets/theme.js?v=3"></script>
   <script>
   (function(){
+    const storageKeys={
+      mode:'kahnri-hub-mode',
+      note:'kahnri-hub-note',
+      daily:'kahnri-hub-daily'
+    };
+
+    const modes={
+      chill:{
+        label:'Chill',
+        desc:'Bugun yumusak gidiyoruz. Gereksiz baski yok, ritim var.',
+        panel:'Kulaklik, hafif tempo ve temiz enerji. Hedef buyutmeden gunu guzel tasima modu.',
+        focus:46,
+        social:58,
+        play:88,
+        tips:[
+          'Yavas ama kaliteli bir playlist ac.',
+          'Kendine bosluk ver, hiz zorlamasi yapma.',
+          'Kucuk ama keyifli bir gorev sec.'
+        ]
+      },
+      focus:{
+        label:'Focus',
+        desc:'Dikkat dagitici minimum. Tek hedefe yakin dur.',
+        panel:'Bugun net cizgiler iyi gelir. Fazla sekme degil, kisa sprintler ve somut ilerleme.',
+        focus:92,
+        social:32,
+        play:48,
+        tips:[
+          '25 dakikalik tek bir sprint baslat.',
+          'Arka plana sozsuz ya da sakin bir track koy.',
+          'Bugun sadece bir isi gercekten bitir.'
+        ]
+      },
+      create:{
+        label:'Create',
+        desc:'Bir sey cikar. Kusursuz olmasi gerekmiyor, canli olmasi yeter.',
+        panel:'Yaratici enerji acik. Ufak bir deneme, kucuk bir UI fikri ya da random bir not bile yeterli.',
+        focus:72,
+        social:56,
+        play:84,
+        tips:[
+          'Bir fikri taslak halinde bile olsa ortaya koy.',
+          'Merakini kullan, sonuc kaygisi kasma.',
+          'Yeni bir sey dene ya da var olan bir seyi eglenceli yap.'
+        ]
+      },
+      outside:{
+        label:'Outside',
+        desc:'Temiz hava, hareket ve fiziksel reset daha iyi gelecek.',
+        panel:'Disari cikmak ya da en azindan pencere-acik bir reset gunu toparlayabilir. Bedeni oyuna dahil et.',
+        focus:54,
+        social:68,
+        play:74,
+        tips:[
+          'Kisa bir yuruyus bile ritmi degistirir.',
+          'Kulaklik + hava + 10 dakika iyi kombodur.',
+          'Masanin disina cikmak bazen en dogru hamledir.'
+        ]
+      },
+      social:{
+        label:'Social',
+        desc:'Enerji paylas, birine yaz, sahaya biraz insan ekle.',
+        panel:'Tam performans degilse bile bag kurmak iyi gelebilir. Mini mesajlar bazen gunu acar.',
+        focus:52,
+        social:94,
+        play:80,
+        tips:[
+          'Birine kisa ama iyi bir mesaj at.',
+          'Mizah ya da meme enerjisi kullan.',
+          'Kendini izole etmeden gunu hafiflet.'
+        ]
+      }
+    };
+
     const vibes=[
-      'Yuksek enerji / hizli mod',
-      'Sakin ve fokuslu mod',
-      'Tam chill, acele yok',
-      'Kafa dagit, reset at',
-      'Yaratici mod: bir sey uret',
-      'Sokak modu: kulaklik + yuruyus',
-      'Sessiz laboratuvar modu',
-      'Hafif kaotik ama kontrollu mod',
-      'Sadece bugun yasama modu',
-      'Tam konsantrasyon + su ic',
-      'Biraz nostalji, biraz yenilik',
-      'Sadece iyi seyler modu',
-      'Enerji topla ve saldir modu',
-      'Minimalizm ve temizlik modu',
-      'Yol haritasi cizme modu',
-      'Deneysel mod: yeni bir sey dene',
-      'Hafif sosyal, dusuk efor modu',
-      'Muzik + akisa birak modu',
-      'Hedef vurma modu',
-      'Tam reset ve yeniden basla modu'
+      'Hafif kaotik ama yaratici enerji.',
+      'Sakin ama temiz ilerleme modu.',
+      'Bugun reset alip daha guzel donus gunu.',
+      'Kulaklik tak ve akan seyi bozma.',
+      'Hafif hype, dusuk drama.',
+      'Sessiz ama etkili ilerleme.',
+      'Biraz nostalji, biraz yeni seyler.',
+      'Mikro aksiyonlarla buyuk his.',
+      'Bugun kendine alan acma modu.',
+      'Dengeli ama surprize acik enerji.',
+      'Net plan yapmadan ama dagilmadan ak.',
+      'Bir sey uretmek icin dogru an olabilir.'
     ];
+
     const quests=[
-      '10 dakika yuruyus + 1 fotograf cek.',
-      'Bugun birine random iyi bir mesaj at.',
-      '5 dakika boyun/sirt esnetme yap.',
-      '3 satir mini gunluk yaz.',
-      'Masandan gereksiz 5 seyi temizle.',
-      '20 squat + 20 saniye plank.',
-      'Bugun 1 yeni playlist kesfet.',
-      '10 dakika sadece nefesine odaklan.',
-      'Eski bir dosyani duzenle.',
-      'Kisa bir to-do listesi yap ve birini bitir.',
-      'Bir bardak su ic ve alarm kur.',
-      '2 dakikalik mini meditasyon yap.',
-      'Telefon galerinden 10 gereksizi sil.',
-      'Sevdigin bir sahneyi tekrar izle.',
-      '3 yeni fikir not al.',
-      '5 dakikada odani toparla.',
-      'Bugun birine tesekkur et.',
-      'Yeni bir kelime ogren.',
-      'Kendine 15 dakika odul molasi ver.',
-      'Yarim kalan isi 10 dakika ilerlet.',
-      'Bugun 1 seyretme, 1 uretme yap.',
-      '3 dakika pencere kenarinda hava al.',
-      'Kucuk bir hedef belirle ve basla.',
-      'Sessiz bir an yarat ve sadece dinlen.'
+      '10 dakika boyunca tek bir ise odaklan.',
+      'Masandaki gereksiz 5 seyi topla.',
+      'Kendine 3 satirlik mini not yaz.',
+      'Bir bardak su ic ve pencereye git.',
+      'Random iyi bir mesaj at.',
+      'Yeni bir playlist ya da sarki kesfet.',
+      'Kisa bir stretch yap.',
+      'Telefonundan 10 gereksizi sil.',
+      'Bir fikri yarim da olsa not et.',
+      '5 dakikalik mini yuruyus yap.',
+      'Bugun yarim kalan tek bir isi ilerlet.',
+      'Kafani acacak bir sekme disinda her seyi kapa.'
     ];
+
     const tracks=[
       {title:'Lofi focus set',url:'https://www.youtube.com/results?search_query=lofi+focus+mix'},
       {title:'Synthwave ride',url:'https://www.youtube.com/results?search_query=synthwave+mix'},
-      {title:'Turkish indie mix',url:'https://www.youtube.com/results?search_query=turkish+indie+playlist'},
-      {title:'Ambient calm',url:'https://www.youtube.com/results?search_query=ambient+calm+music'},
-      {title:'Deep house sunset',url:'https://www.youtube.com/results?search_query=deep+house+sunset+mix'},
-      {title:'Techno pulse',url:'https://www.youtube.com/results?search_query=techno+mix'},
-      {title:'Jazz cafe focus',url:'https://www.youtube.com/results?search_query=jazz+cafe+music+playlist'},
-      {title:'Drum and bass rush',url:'https://www.youtube.com/results?search_query=drum+and+bass+mix'},
-      {title:'Piano deep work',url:'https://www.youtube.com/results?search_query=piano+for+studying'},
-      {title:'Cinematic motivation',url:'https://www.youtube.com/results?search_query=cinematic+epic+music+mix'},
-      {title:'90s throwback',url:'https://www.youtube.com/results?search_query=90s+hits+playlist'},
       {title:'Indie roadtrip',url:'https://www.youtube.com/results?search_query=indie+roadtrip+playlist'},
+      {title:'Ambient calm',url:'https://www.youtube.com/results?search_query=ambient+calm+music'},
+      {title:'Turkish indie mix',url:'https://www.youtube.com/results?search_query=turkish+indie+playlist'},
       {title:'Night drive retrowave',url:'https://www.youtube.com/results?search_query=night+drive+retrowave'},
-      {title:'Afrobeat energy',url:'https://www.youtube.com/results?search_query=afrobeat+playlist'},
-      {title:'Chillhop beats',url:'https://www.youtube.com/results?search_query=chillhop+beats+mix'},
-      {title:'Classical power',url:'https://www.youtube.com/results?search_query=classical+music+for+focus'},
-      {title:'Turkish rap mix',url:'https://www.youtube.com/results?search_query=turkish+rap+mix'},
-      {title:'Pop workout',url:'https://www.youtube.com/results?search_query=pop+workout+playlist'},
+      {title:'Jazz cafe focus',url:'https://www.youtube.com/results?search_query=jazz+cafe+music+playlist'},
       {title:'Electro swing fun',url:'https://www.youtube.com/results?search_query=electro+swing+mix'},
-      {title:'Acoustic chill',url:'https://www.youtube.com/results?search_query=acoustic+chill+playlist'},
-      {title:'Future garage',url:'https://www.youtube.com/results?search_query=future+garage+mix'},
-      {title:'Dark academia study',url:'https://www.youtube.com/results?search_query=dark+academia+playlist'}
+      {title:'Afrobeat energy',url:'https://www.youtube.com/results?search_query=afrobeat+playlist'},
+      {title:'Piano deep work',url:'https://www.youtube.com/results?search_query=piano+for+studying'}
     ];
 
+    const defaultChecks={
+      water:false,
+      move:false,
+      focus:false,
+      reset:false
+    };
+
+    const hubEl=document.getElementById('kahnri-hub');
+    const heroModeEl=document.getElementById('hero-mode');
+    const actionCountEl=document.getElementById('action-count');
+    const checkCountEl=document.getElementById('check-count');
+    const todayLabelEl=document.getElementById('today-label');
+    const modeOutputEl=document.getElementById('mode-output');
+    const statusLineEl=document.getElementById('status-line');
+    const vibeOutputEl=document.getElementById('vibe-output');
+    const questOutputEl=document.getElementById('quest-output');
+    const trackOutputEl=document.getElementById('track-output');
+    const trackLinkEl=document.getElementById('track-link');
+    const noteInputEl=document.getElementById('note-input');
+    const noteMetaEl=document.getElementById('note-meta');
+    const dailySummaryEl=document.getElementById('daily-summary');
+    const modePanelTitleEl=document.getElementById('mode-panel-title');
+    const modePanelTextEl=document.getElementById('mode-panel-text');
+    const modeTipListEl=document.getElementById('mode-tip-list');
+    const yearEl=document.getElementById('y');
     const vibeBtn=document.getElementById('vibe-btn');
     const questBtn=document.getElementById('quest-btn');
     const trackBtn=document.getElementById('track-btn');
+    const trackPickBtn=document.getElementById('track-pick-btn');
     const comboBtn=document.getElementById('combo-btn');
-    const vibeOut=document.getElementById('vibe-output');
-    const questOut=document.getElementById('quest-output');
-    const trackOut=document.getElementById('track-output');
-    const modeOut=document.getElementById('mode-output');
+    const refreshStackBtn=document.getElementById('refresh-stack-btn');
+    const clearNoteBtn=document.getElementById('clear-note');
+    const resetDayBtn=document.getElementById('reset-day');
     const modeBtns=Array.from(document.querySelectorAll('.mode-btn'));
-    const yearEl=document.getElementById('y');
+    const checkBtns=Array.from(document.querySelectorAll('.check-chip'));
+    const trackableLinks=Array.from(document.querySelectorAll('.trackable-link'));
+    const meterEls={
+      focus:document.getElementById('meter-focus'),
+      social:document.getElementById('meter-social'),
+      play:document.getElementById('meter-play')
+    };
+    const meterValueEls={
+      focus:document.getElementById('meter-focus-value'),
+      social:document.getElementById('meter-social-value'),
+      play:document.getElementById('meter-play-value')
+    };
+
+    let noteTimer=0;
+    let currentMode='create';
+    let currentVibe='Hub hazir.';
+    let currentQuest='Mini gorev sec.';
+    let currentTrack=tracks[0];
+
+    let dailyState=readDailyState();
+
+    function readText(key,fallback){
+      try{
+        const raw=localStorage.getItem(key);
+        return raw===null?fallback:raw;
+      }catch(e){
+        return fallback;
+      }
+    }
+
+    function writeText(key,value){
+      try{
+        localStorage.setItem(key,value);
+      }catch(e){}
+    }
+
+    function readJSON(key,fallback){
+      try{
+        const raw=localStorage.getItem(key);
+        return raw?JSON.parse(raw):fallback;
+      }catch(e){
+        return fallback;
+      }
+    }
+
+    function writeJSON(key,value){
+      try{
+        localStorage.setItem(key,JSON.stringify(value));
+      }catch(e){}
+    }
+
+    function getTodayStamp(){
+      const now=new Date();
+      const year=String(now.getFullYear());
+      const month=String(now.getMonth()+1).padStart(2,'0');
+      const day=String(now.getDate()).padStart(2,'0');
+      return year+'-'+month+'-'+day;
+    }
+
+    function createDailyState(){
+      return {
+        date:getTodayStamp(),
+        actions:0,
+        checks:Object.assign({},defaultChecks)
+      };
+    }
+
+    function readDailyState(){
+      const stored=readJSON(storageKeys.daily,null);
+      if(!stored||stored.date!==getTodayStamp()){
+        return createDailyState();
+      }
+
+      return {
+        date:stored.date,
+        actions:Number(stored.actions)||0,
+        checks:Object.assign({},defaultChecks,stored.checks||{})
+      };
+    }
+
+    function saveDailyState(){
+      writeJSON(storageKeys.daily,dailyState);
+    }
+
+    function ensureTodayState(){
+      if(dailyState.date!==getTodayStamp()){
+        dailyState=createDailyState();
+        saveDailyState();
+      }
+    }
 
     function pick(list){
       return list[Math.floor(Math.random()*list.length)];
@@ -242,78 +1100,303 @@ layout: null
       });
     }
 
-    function setVibe(){
-      vibeOut.textContent=pick(vibes);
-      burst(vibeOut);
+    function pulse(el){
+      if(!el) return;
+      el.classList.remove('pulse');
+      window.requestAnimationFrame(function(){
+        el.classList.add('pulse');
+      });
     }
 
-    function setQuest(){
-      questOut.textContent=pick(quests);
-      burst(questOut);
+    function formatTodayLabel(){
+      try{
+        const label=new Intl.DateTimeFormat('tr-TR',{
+          weekday:'long',
+          day:'numeric',
+          month:'long'
+        }).format(new Date());
+        return label.charAt(0).toUpperCase()+label.slice(1);
+      }catch(e){
+        return 'Bugun';
+      }
     }
 
-    function setTrack(openTab){
-      const selected=pick(tracks);
-      trackOut.textContent=selected.title;
-      burst(trackOut);
+    function formatTime(){
+      try{
+        return new Intl.DateTimeFormat('tr-TR',{
+          hour:'2-digit',
+          minute:'2-digit'
+        }).format(new Date());
+      }catch(e){
+        return '--:--';
+      }
+    }
+
+    function setMeter(name,value){
+      const meterEl=meterEls[name];
+      const valueEl=meterValueEls[name];
+      if(meterEl){
+        meterEl.style.width=String(value)+'%';
+      }
+      if(valueEl){
+        valueEl.textContent=String(value);
+      }
+    }
+
+    function updateTrackLink(){
+      if(!trackLinkEl) return;
+      trackLinkEl.href=currentTrack.url;
+      trackLinkEl.textContent='Secilen track: '+currentTrack.title;
+    }
+
+    function updateStatusLine(prefix){
+      const mode=modes[currentMode];
+      const base=mode.label+' mod aktif. Vibe: '+currentVibe+' Gorev: '+currentQuest+' Track: '+currentTrack.title+'.';
+      statusLineEl.textContent=prefix?prefix+' '+base:base;
+      burst(statusLineEl);
+    }
+
+    function renderDailySummary(){
+      ensureTodayState();
+      const doneCount=Object.values(dailyState.checks).filter(Boolean).length;
+
+      actionCountEl.textContent=String(dailyState.actions);
+      checkCountEl.textContent=doneCount+'/4';
+
+      if(doneCount===0){
+        dailySummaryEl.textContent='Bugun yeni basliyor. Kucuk bir tik yeter.';
+      }else if(doneCount===1){
+        dailySummaryEl.textContent='Baslangic iyi. Ritim kuruluyor.';
+      }else if(doneCount===2){
+        dailySummaryEl.textContent='Yariya geldin. Hub isini yapiyor.';
+      }else if(doneCount===3){
+        dailySummaryEl.textContent='Neredeyse tamam. Bir mini adim daha kaldi.';
+      }else{
+        dailySummaryEl.textContent='Check-in tamam. Bugunluk panel iyi durumda.';
+      }
+    }
+
+    function renderChecks(){
+      ensureTodayState();
+      checkBtns.forEach(function(btn){
+        const key=btn.getAttribute('data-check');
+        const done=Boolean(dailyState.checks[key]);
+        const mark=btn.querySelector('.check-chip-mark');
+        btn.dataset.done=done?'true':'false';
+        btn.setAttribute('aria-pressed',done?'true':'false');
+        if(mark){
+          mark.textContent=done?'v':'+';
+        }
+      });
+      renderDailySummary();
+    }
+
+    function incrementAction(count){
+      ensureTodayState();
+      dailyState.actions+=count||1;
+      saveDailyState();
+      renderDailySummary();
+    }
+
+    function setVibe(countAction){
+      currentVibe=pick(vibes);
+      vibeOutputEl.textContent=currentVibe;
+      burst(vibeOutputEl);
+      if(countAction!==false){
+        incrementAction(1);
+      }
+      updateStatusLine('Vibe yenilendi.');
+    }
+
+    function setQuest(countAction){
+      currentQuest=pick(quests);
+      questOutputEl.textContent=currentQuest;
+      burst(questOutputEl);
+      if(countAction!==false){
+        incrementAction(1);
+      }
+      updateStatusLine('Mini gorev geldi.');
+    }
+
+    function setTrack(openTab,countAction){
+      currentTrack=pick(tracks);
+      trackOutputEl.textContent=currentTrack.title;
+      updateTrackLink();
+      burst(trackOutputEl);
+      if(countAction!==false){
+        incrementAction(1);
+      }
+      updateStatusLine(openTab?'Track acildi.':'Track degisti.');
       if(openTab){
-        window.open(selected.url,'_blank','noopener');
+        window.open(currentTrack.url,'_blank','noopener');
       }
     }
 
-    function runCombo(){
-      setVibe();
-      setQuest();
-      setTrack(false);
-      if(modeOut){
-        modeOut.textContent='Karma mod acildi: hepsi yenilendi.';
+    function refreshAll(countAction){
+      setVibe(false);
+      setQuest(false);
+      setTrack(false,false);
+      if(countAction!==false){
+        incrementAction(1);
       }
+      updateStatusLine('Hub akisi guncellendi.');
     }
 
-    function modeMessage(mode){
-      if(mode==='chill') return 'Chill mod: tempo dusuk, keyif yuksek.';
-      if(mode==='focus') return 'Focus mod: dikkat dagitici yok, tek hedef.';
-      if(mode==='hype') return 'Hype mod: enerji tavan, hizli aksiyon.';
-      if(mode==='outside') return 'Disari mod: kulaklik + temiz hava + yuruyus.';
-      return 'Mod sec.';
-    }
-
-    function bindModes(){
+    function renderMode(){
+      const mode=modes[currentMode]||modes.create;
+      hubEl.dataset.hubMode=currentMode;
+      heroModeEl.textContent=mode.label;
+      modeOutputEl.textContent=mode.desc;
+      modePanelTitleEl.textContent=mode.label+' Mode';
+      modePanelTextEl.textContent=mode.panel;
+      setMeter('focus',mode.focus);
+      setMeter('social',mode.social);
+      setMeter('play',mode.play);
       modeBtns.forEach(function(btn){
+        btn.dataset.active=btn.getAttribute('data-mode')===currentMode?'true':'false';
+      });
+      modeTipListEl.innerHTML=mode.tips.map(function(tip){
+        return '<div class="mode-tip">'+tip+'</div>';
+      }).join('');
+      updateStatusLine();
+    }
+
+    function setMode(modeName,countAction){
+      if(!modes[modeName]) return;
+      currentMode=modeName;
+      writeText(storageKeys.mode,currentMode);
+
+      if(modeName==='focus'){
+        setQuest(false);
+      }else if(modeName==='create'){
+        setVibe(false);
+      }else if(modeName==='outside'){
+        setQuest(false);
+      }else if(modeName==='social'){
+        setVibe(false);
+      }
+
+      renderMode();
+      if(countAction!==false){
+        incrementAction(1);
+      }
+      updateStatusLine('Mod degisti.');
+    }
+
+    function loadNote(){
+      const savedNote=readText(storageKeys.note,'');
+      noteInputEl.value=savedNote;
+      noteMetaEl.textContent=savedNote.trim()?'Kaydedildi. Son guncelleme gorunuyor.':'Bos ama hazir.';
+    }
+
+    function saveNote(){
+      writeText(storageKeys.note,noteInputEl.value);
+      noteMetaEl.textContent=noteInputEl.value.trim()?'Kaydedildi '+formatTime():'Bos ama hazir.';
+      pulse(noteMetaEl);
+    }
+
+    function bindCheckButtons(){
+      checkBtns.forEach(function(btn){
         btn.addEventListener('click',function(){
-          const mode=btn.getAttribute('data-mode');
-          if(modeOut){
-            modeOut.textContent=modeMessage(mode);
-            burst(modeOut);
-          }
-          if(mode==='focus'){
-            setQuest();
-            setTrack(false);
-          }else if(mode==='hype'){
-            setVibe();
-            setTrack(false);
-          }else if(mode==='chill'){
-            setVibe();
-          }else if(mode==='outside'){
-            setQuest();
-          }
+          ensureTodayState();
+          const key=btn.getAttribute('data-check');
+          dailyState.checks[key]=!dailyState.checks[key];
+          saveDailyState();
+          renderChecks();
+          incrementAction(1);
+          updateStatusLine(dailyState.checks[key]?'Check-in eklendi.':'Check-in geri alindi.');
         });
       });
     }
 
-    if(yearEl) yearEl.textContent=String(new Date().getFullYear());
-    if(vibeBtn) vibeBtn.addEventListener('click',setVibe);
-    if(questBtn) questBtn.addEventListener('click',setQuest);
-    if(trackBtn) trackBtn.addEventListener('click',function(){ setTrack(true); });
-    if(comboBtn) comboBtn.addEventListener('click',runCombo);
-
-    bindModes();
-    setVibe();
-    setQuest();
-    setTrack(false);
-    if(modeOut){
-      modeOut.textContent='Mod sec.';
+    function bindModeButtons(){
+      modeBtns.forEach(function(btn){
+        btn.addEventListener('click',function(){
+          setMode(btn.getAttribute('data-mode'),true);
+        });
+      });
     }
+
+    if(yearEl){
+      yearEl.textContent=String(new Date().getFullYear());
+    }
+
+    if(todayLabelEl){
+      todayLabelEl.textContent=formatTodayLabel();
+    }
+
+    loadNote();
+    renderChecks();
+
+    currentMode=readText(storageKeys.mode,'create');
+    if(!modes[currentMode]){
+      currentMode='create';
+    }
+
+    currentVibe=pick(vibes);
+    currentQuest=pick(quests);
+    currentTrack=pick(tracks);
+    vibeOutputEl.textContent=currentVibe;
+    questOutputEl.textContent=currentQuest;
+    trackOutputEl.textContent=currentTrack.title;
+    updateTrackLink();
+    renderMode();
+
+    if(vibeBtn){
+      vibeBtn.addEventListener('click',function(){ setVibe(true); });
+    }
+
+    if(questBtn){
+      questBtn.addEventListener('click',function(){ setQuest(true); });
+    }
+
+    if(trackPickBtn){
+      trackPickBtn.addEventListener('click',function(){ setTrack(false,true); });
+    }
+
+    if(trackBtn){
+      trackBtn.addEventListener('click',function(){ setTrack(true,true); });
+    }
+
+    if(comboBtn){
+      comboBtn.addEventListener('click',function(){ refreshAll(true); });
+    }
+
+    if(refreshStackBtn){
+      refreshStackBtn.addEventListener('click',function(){ refreshAll(true); });
+    }
+
+    if(clearNoteBtn){
+      clearNoteBtn.addEventListener('click',function(){
+        noteInputEl.value='';
+        saveNote();
+      });
+    }
+
+    if(resetDayBtn){
+      resetDayBtn.addEventListener('click',function(){
+        dailyState=createDailyState();
+        saveDailyState();
+        renderChecks();
+        updateStatusLine('Bugun sifirlandi. Taze sayfa acildi.');
+      });
+    }
+
+    if(noteInputEl){
+      noteInputEl.addEventListener('input',function(){
+        window.clearTimeout(noteTimer);
+        noteTimer=window.setTimeout(saveNote,180);
+      });
+    }
+
+    trackableLinks.forEach(function(link){
+      link.addEventListener('click',function(){
+        incrementAction(1);
+      });
+    });
+
+    bindCheckButtons();
+    bindModeButtons();
 
     document.body.classList.add('initial-anim');
     requestAnimationFrame(function(){
