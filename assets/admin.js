@@ -359,13 +359,13 @@
     if (sessionBadgeEl) {
       sessionBadgeEl.textContent = hasToken
         ? t('admin.session.active', 'Panel ici yayin acik')
-        : t('admin.session.web', 'Web commit modu');
+        : t('admin.session.web', 'Web kaydetme modu');
       sessionBadgeEl.classList.toggle('is-active', hasToken);
     }
     if (modeLabelEl) {
       modeLabelEl.textContent = hasToken
         ? t('admin.mode.direct', 'Panel ici yayin')
-        : t('admin.mode.web', 'Web commit');
+        : t('admin.mode.web', 'Web kaydetme');
     }
   }
 
@@ -974,15 +974,15 @@
         openExternalPage(url);
         setStatus(
           copiedLong
-            ? t('admin.msg.web_new_long', 'Yeni dosya commit sayfasi acildi. Icerik panoya kopyalandi; editora yapistirip commit edebilirsin.')
-            : t('admin.msg.web_new_opened', 'Yeni dosya commit sayfasi acildi. Gerekirse icerigi editora yapistirip commit et.'),
+            ? t('admin.msg.web_new_long', 'Yeni dosya kaydetme sayfasi acildi. Icerik panoya kopyalandi; editora yapistirip kaydi tamamlayabilirsin.')
+            : t('admin.msg.web_new_opened', 'Yeni dosya kaydetme sayfasi acildi. Gerekirse icerigi editora yapistirip kaydi tamamla.'),
           false
         );
         return;
       }
 
       openExternalPage(url);
-      setStatus(t('admin.msg.web_new_opened', 'Yeni dosya commit sayfasi acildi. Commit ederek kaydedebilirsin.'), false);
+      setStatus(t('admin.msg.web_new_opened', 'Yeni dosya kaydetme sayfasi acildi. Kaydi oradan tamamlayabilirsin.'), false);
       return;
     }
 
@@ -1007,7 +1007,7 @@
     }
 
     openExternalPage(repoWebBase() + '/delete/' + encodeURIComponent(repoConfig.branch) + '/' + encodePath(path));
-    setStatus(t('admin.msg.web_delete_opened', 'Silme sayfasi acildi. Onaylamak icin commit ekranini tamamla.'), false);
+    setStatus(t('admin.msg.web_delete_opened', 'Silme sayfasi acildi. Onayi web kaydetme ekraninda tamamla.'), false);
   }
 
   async function publishPost(){
@@ -1084,7 +1084,7 @@
     } catch (e) {
       if (isLikelyGithubAuthError(e)) {
         setStatus(
-          t('admin.msg.publish_auth_fallback', 'Panel ici kayit basarisiz. Web commit ekranina yonlendiriyorum.'),
+          t('admin.msg.publish_auth_fallback', 'Panel ici kayit basarisiz. Web kaydetme ekranina yonlendiriyorum.'),
           true
         );
         await openWebSave();
@@ -1257,7 +1257,7 @@
     setStatus(
       getToken()
         ? t('admin.msg.direct_mode_ready', 'Panel ici kaydetme ve silme hazir.')
-        : t('admin.msg.readonly_mode', 'Yazilari acip duzenleyebilirsin. Kaydet ve sil eylemleri web commit ekranina yonlenir.'),
+        : t('admin.msg.readonly_mode', 'Yazilari acip duzenleyebilirsin. Kaydet ve sil eylemleri web kaydetme ekranina yonlenir.'),
       false
     );
 
