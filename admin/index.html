@@ -9,7 +9,116 @@ layout: null
 <base href="/">
 <title data-i18n-title="meta.title.admin">Admin - Kagan Bagdemir</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<style>html.admin-lock body{visibility:hidden;}</style>
+<style>
+html.admin-lock body{visibility:hidden;}
+.admin-shell{display:grid;gap:1.25rem;}
+.admin-stack{display:grid;gap:1.25rem;}
+.admin-hero-copy{max-width:42rem;}
+.admin-hero-grid{display:grid;gap:0.85rem;margin-top:1.5rem;}
+.admin-stat{
+  position:relative;
+  overflow:hidden;
+  padding:1rem;
+  border:1px solid var(--border);
+  border-radius:1rem;
+  background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0)),var(--surface-muted);
+}
+.admin-stat span{
+  display:block;
+  font-size:0.75rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
+.admin-stat strong{
+  display:block;
+  margin-top:0.35rem;
+  color:var(--text-strong);
+  font-size:1.05rem;
+  overflow-wrap:anywhere;
+}
+.admin-toolbar,.admin-inline-meta,.admin-post-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+.admin-inline-meta{gap:0.75rem;}
+.admin-pill,
+.admin-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  padding:0.38rem 0.8rem;
+  border:1px solid var(--border);
+  border-radius:9999px;
+  background:var(--surface-muted);
+  color:var(--text-muted);
+  font-size:0.82rem;
+}
+.admin-pill strong,
+.admin-badge strong{
+  color:var(--text-strong);
+  overflow-wrap:anywhere;
+}
+.admin-badge.is-active{
+  border-color:var(--accent-border);
+  background:var(--accent-bg);
+  color:var(--accent-text);
+}
+.admin-post-list{
+  display:grid;
+  gap:0.8rem;
+  max-height:68vh;
+  overflow:auto;
+  padding-right:0.1rem;
+}
+.admin-post-card{
+  position:relative;
+  padding:1rem;
+  border:1px solid var(--border);
+  border-radius:1rem;
+  background:var(--surface-muted);
+  transition:border-color 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease,background-color 0.25s ease;
+}
+.admin-post-card:hover{
+  border-color:var(--border-strong);
+  transform:translateY(-2px);
+}
+.admin-post-card.is-selected{
+  border-color:var(--accent-border);
+  box-shadow:0 0 0 1px var(--accent-border),0 16px 28px rgba(0,0,0,0.18);
+  background:linear-gradient(135deg,var(--accent-bg),transparent 60%),var(--surface-muted);
+}
+.admin-post-card p{overflow-wrap:anywhere;}
+.admin-post-title{
+  color:var(--text-strong);
+  font-weight:600;
+}
+.admin-content-editor{min-height:22rem;}
+.admin-section-note{
+  max-width:42rem;
+  font-size:0.92rem;
+  line-height:1.7;
+}
+.admin-session-note{
+  font-size:0.78rem;
+  line-height:1.6;
+}
+.admin-link-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+@media (min-width: 768px){
+  .admin-hero-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media (min-width: 1100px){
+  .admin-shell{
+    grid-template-columns:minmax(0,1.55fr) minmax(340px,0.95fr);
+    align-items:start;
+  }
+}
+</style>
 <script>
 (function(){
   try{
@@ -89,144 +198,136 @@ layout: null
       </div>
     </header>
 
-    <section class="mt-5 rounded-2xl p-5 border theme-card" data-animate style="--stagger:0.6">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <h2 class="text-xl font-semibold" data-i18n="admin.github.title"></h2>
-        <span id="github-connection" class="text-sm theme-text-muted" data-i18n="admin.connection.not_ready"></span>
-      </div>
-      <p class="text-sm theme-text-muted mt-1" data-i18n="admin.github.note"></p>
-      <p class="text-sm mt-2 rounded-lg border theme-button px-3 py-2">
-        <strong>Basit ve guvenli yol:</strong> Token girmeden asagidaki editor bolumundeki "GitHub'da..." butonlarini kullan. GitHub oturumunla kaydet/düzenle/sil acilir.
+    <section class="mt-5 rounded-3xl p-5 border theme-card fx-hero" data-animate style="--stagger:0.4">
+      <p class="text-xs tracking-[0.2em] uppercase theme-text-muted">Blog studio</p>
+      <h2 class="mt-2 text-2xl font-semibold theme-text-strong">Sadece yazi yonetimi icin sade bir alan</h2>
+      <p class="mt-2 theme-text-muted admin-hero-copy">
+        Burada sadece blog postu yaziyor, mevcut yazilari aciyor, duzenliyor ve siliyorsun.
+        Repo ayarlari arka planda sabit; panel yuzunde sadece icerik ve akisin kendisi var.
       </p>
+      <div class="admin-hero-grid">
+        <div class="admin-stat">
+          <span>Calisma modu</span>
+          <strong id="admin-mode-label">Panel ici yayin</strong>
+        </div>
+        <div class="admin-stat">
+          <span>Toplam post</span>
+          <strong id="admin-post-count">0</strong>
+        </div>
+        <div class="admin-stat">
+          <span>Aktif dosya</span>
+          <strong id="admin-current-file-label">_posts/</strong>
+        </div>
+      </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 gap-3 mt-4">
-        <label class="block">
-          <span class="text-sm theme-text-muted" data-i18n="admin.token"></span>
-          <input id="github-token" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="password" placeholder="github_pat_..." autocomplete="off">
-          <div class="mt-2 flex flex-wrap items-center gap-3">
-            <label class="inline-flex items-center gap-2 text-sm theme-text-muted">
-              <input id="admin-token-persist" type="checkbox" class="h-4 w-4 accent-emerald-500" checked>
-              <span>Bu tarayicida tokeni hatirla</span>
-            </label>
-            <button id="admin-token-clear" type="button" class="px-2 py-1 rounded-lg border theme-button text-xs">Tokeni Temizle</button>
+    <div class="admin-shell mt-5">
+      <section class="rounded-2xl p-5 border theme-card" data-animate style="--stagger:0.75">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-semibold" data-i18n="admin.editor"></h2>
+            <p class="theme-text-muted mt-1 admin-section-note">
+              Yeni bir post olusturabilir, secili yaziyi duzenleyebilir veya yayindan kaldirabilirsin.
+              Cok dilli alanlar korunuyor; bos birakilan diller kayda eklenmiyor.
+            </p>
           </div>
-        </label>
-        <div class="rounded-lg border theme-button px-3 py-2">
-          <p class="text-sm theme-text-muted" data-i18n="admin.repo_fixed"></p>
-          <p id="admin-repo-label" class="text-xs font-mono mt-1 break-all"></p>
+          <div class="admin-toolbar">
+            <button id="admin-new" class="px-4 py-2 rounded-xl border theme-button" type="button">Yeni post</button>
+            <a href="/blog/" class="px-4 py-2 rounded-xl border theme-button admin-link-button" target="_blank" rel="noopener">Blogu ac</a>
+          </div>
         </div>
-      </div>
 
-      <div class="mt-4 flex flex-wrap gap-2 items-center">
-        <button id="admin-refresh" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.refresh"></button>
-        <button id="github-test" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.test"></button>
-        <a href="https://github.com/settings/personal-access-tokens/new"
-           target="_blank"
-           rel="noopener"
-           class="px-4 py-2 rounded-xl border theme-button text-sm"
-           data-i18n="admin.token_help"></a>
-      </div>
-      <div class="mt-3 flex flex-wrap items-center gap-3">
-        <label class="inline-flex items-center gap-2">
-          <input id="admin-realtime-toggle" type="checkbox" class="h-4 w-4 accent-emerald-500">
-          <span class="text-sm theme-text-muted" data-i18n="admin.realtime.label"></span>
-        </label>
-        <span id="admin-realtime-stamp" class="text-xs theme-text-muted"></span>
-      </div>
-
-      <details class="mt-3 rounded-lg border theme-button px-3 py-2">
-        <summary class="cursor-pointer text-sm theme-text-muted" data-i18n="admin.advanced"></summary>
-        <div class="grid md:grid-cols-3 gap-3 mt-3">
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
           <label class="block">
-            <span class="text-sm theme-text-muted" data-i18n="admin.owner"></span>
-            <input id="github-owner" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="kahnri" autocomplete="off">
+            <span class="text-sm theme-text-muted" data-i18n="admin.title"></span>
+            <input id="admin-title" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="text" data-i18n-ph="admin.ph.title" placeholder="Post title">
           </label>
           <label class="block">
-            <span class="text-sm theme-text-muted" data-i18n="admin.repo"></span>
-            <input id="github-repo" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="kahnri.github.io" autocomplete="off">
+            <span class="text-sm theme-text-muted" data-i18n="admin.date"></span>
+            <input id="admin-date" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="date">
           </label>
           <label class="block">
-            <span class="text-sm theme-text-muted" data-i18n="admin.branch"></span>
-            <input id="github-branch" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" placeholder="main" autocomplete="off">
+            <span class="text-sm theme-text-muted" data-i18n="admin.slug"></span>
+            <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="text" data-i18n-ph="admin.ph.slug" placeholder="auto-from-title">
           </label>
         </div>
-      </details>
-    </section>
 
-    <section class="mt-5 rounded-2xl p-5 border theme-card fx-hero" data-animate style="--stagger:0.9">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <h2 class="text-xl font-semibold" data-i18n="admin.editor"></h2>
-        <span id="admin-editing" class="text-sm theme-text-muted" data-i18n="admin.newpost"></span>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-3 mt-4">
-        <label class="block">
-          <span class="text-sm theme-text-muted" data-i18n="admin.title"></span>
-          <input id="admin-title" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" data-i18n-ph="admin.ph.title" placeholder="Post title">
-        </label>
-        <label class="block">
-          <span class="text-sm theme-text-muted" data-i18n="admin.date"></span>
-          <input id="admin-date" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="date">
-        </label>
-        <label class="block">
-          <span class="text-sm theme-text-muted" data-i18n="admin.slug"></span>
-          <input id="admin-slug" class="mt-1 w-full rounded-lg border theme-button px-3 py-2" type="text" data-i18n-ph="admin.ph.slug" placeholder="auto-from-title">
-        </label>
-      </div>
-
-      <div class="mt-4">
-        <div class="flex flex-wrap items-center gap-2">
-          <button data-lang-tab="tr" class="px-3 py-1 rounded-full border theme-button" type="button">TR</button>
-          <button data-lang-tab="de" class="px-3 py-1 rounded-full border theme-button" type="button">DE</button>
-          <button data-lang-tab="en" class="px-3 py-1 rounded-full border theme-button" type="button">EN</button>
-          <button data-lang-tab="nl" class="px-3 py-1 rounded-full border theme-button" type="button">NL</button>
-          <button data-lang-tab="ja" class="px-3 py-1 rounded-full border theme-button" type="button">JA</button>
-          <span id="admin-active-language" class="text-sm theme-text-muted"></span>
+        <div class="mt-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <button data-lang-tab="tr" class="px-3 py-1 rounded-full border theme-button" type="button">TR</button>
+            <button data-lang-tab="de" class="px-3 py-1 rounded-full border theme-button" type="button">DE</button>
+            <button data-lang-tab="en" class="px-3 py-1 rounded-full border theme-button" type="button">EN</button>
+            <button data-lang-tab="nl" class="px-3 py-1 rounded-full border theme-button" type="button">NL</button>
+            <button data-lang-tab="ja" class="px-3 py-1 rounded-full border theme-button" type="button">JA</button>
+            <span id="admin-active-language" class="text-sm theme-text-muted"></span>
+          </div>
+          <label class="block mt-2">
+            <span class="text-sm theme-text-muted" data-i18n="admin.content"></span>
+            <textarea id="admin-content-editor" class="mt-1 w-full rounded-lg border theme-input px-3 py-2 admin-content-editor" data-i18n-ph="admin.ph.content" placeholder="Write in selected language"></textarea>
+          </label>
         </div>
-        <label class="block mt-2">
-          <span class="text-sm theme-text-muted" data-i18n="admin.content"></span>
-          <textarea id="admin-content-editor" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-64" data-i18n-ph="admin.ph.content" placeholder="Write in selected language"></textarea>
-        </label>
-      </div>
 
-      <div class="mt-4 flex flex-wrap gap-2 items-center">
-        <button id="admin-save" class="px-4 py-2 rounded-xl border theme-button-accent" type="button" data-i18n="admin.publish"></button>
-        <button id="admin-delete" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.delete"></button>
-        <button id="admin-github-web-new" class="px-4 py-2 rounded-xl border theme-button" type="button">GitHub'da Yeni</button>
-        <button id="admin-github-web-edit" class="px-4 py-2 rounded-xl border theme-button" type="button">GitHub'da Duzenle</button>
-        <button id="admin-github-web-delete" class="px-4 py-2 rounded-xl border theme-button" type="button">GitHub'da Sil</button>
-        <button id="admin-reset" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.clear"></button>
-        <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.exit"></button>
-      </div>
-
-      <details class="mt-3 rounded-lg border theme-button px-3 py-2">
-        <summary class="cursor-pointer text-sm theme-text-muted">Ileri araclar (kopya / indir / build)</summary>
-        <div class="mt-3 flex flex-wrap gap-2 items-center">
-        <button id="admin-build" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.build"></button>
-        <button id="admin-copy" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.copy"></button>
-        <button id="admin-download" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.download"></button>
+        <div class="admin-inline-meta mt-3">
+          <span class="admin-pill">
+            <span data-i18n="admin.file"></span>
+            <strong id="admin-file">_posts/</strong>
+          </span>
+          <span class="admin-pill">
+            <span>Durum</span>
+            <strong id="admin-editing" data-i18n="admin.newpost"></strong>
+          </span>
         </div>
-      </details>
 
-      <p id="admin-status" class="text-sm theme-text-muted mt-3" data-i18n="admin.status.ready"></p>
-      <p class="text-sm theme-text-muted mt-1"><span data-i18n="admin.file"></span>: <span id="admin-file">_posts/</span></p>
+        <p id="admin-status" class="text-sm theme-text-muted mt-3" data-i18n="admin.status.ready"></p>
 
-      <label class="block mt-3">
-        <span class="text-sm theme-text-muted" data-i18n="admin.output"></span>
-        <textarea id="admin-output" class="mt-1 w-full rounded-lg border theme-button px-3 py-2 h-40 font-mono text-xs" readonly></textarea>
-      </label>
-    </section>
+        <div class="mt-4 flex flex-wrap gap-2 items-center">
+          <button id="admin-save" class="px-4 py-2 rounded-xl border theme-button-accent" type="button" data-i18n="admin.publish"></button>
+          <button id="admin-delete" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.delete"></button>
+          <button id="admin-reset" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.clear"></button>
+          <button id="admin-lock" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.exit"></button>
+        </div>
+      </section>
 
-    <section class="mt-5 rounded-2xl p-5 border theme-card" data-animate style="--stagger:1.1">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <h3 class="text-lg font-semibold" data-i18n="admin.repo_posts"></h3>
-        <input id="admin-post-search" class="px-3 py-1 rounded-lg border theme-input text-sm" type="search" data-i18n-ph="admin.ph.search" placeholder="Post ara...">
-      </div>
-      <div id="admin-posts" class="mt-3 space-y-3"></div>
-      <p id="admin-posts-empty" class="theme-text-muted mt-3" data-i18n="admin.empty"></p>
-    </section>
+      <aside class="admin-stack">
+        <section class="rounded-2xl p-5 border theme-card" data-animate style="--stagger:1">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-semibold">Yayin erisimi</h3>
+              <p class="theme-text-muted text-sm mt-1">
+                Panel icinden kaydetmek veya silmek icin bir kez yayin anahtarini girmen yeterli.
+              </p>
+            </div>
+            <span id="admin-session-badge" class="admin-badge">Web commit modu</span>
+          </div>
 
-    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm" data-animate style="--stagger:1.3">
+          <label class="block mt-4">
+            <span class="text-sm theme-text-muted" data-i18n="admin.token"></span>
+            <input id="github-token" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="password" placeholder="github_pat_..." autocomplete="off">
+          </label>
+          <p class="theme-text-muted mt-2 admin-session-note">
+            Anahtar sadece bu tarayici oturumunda tutulur. Bos birakirsan yazilari acabilir ve duzenleyebilirsin;
+            kaydetme ve silme sirasinda web commit ekranina yonlendirilirsin.
+          </p>
+        </section>
+
+        <section class="rounded-2xl p-5 border theme-card" data-animate style="--stagger:1.2">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-semibold" data-i18n="admin.repo_posts"></h3>
+              <p class="theme-text-muted text-sm mt-1">
+                Mevcut postlari tara, ac ve secili yazi uzerinde islem yap.
+              </p>
+            </div>
+            <button id="admin-refresh" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.refresh"></button>
+          </div>
+          <input id="admin-post-search" class="mt-4 w-full px-3 py-2 rounded-lg border theme-input text-sm" type="search" data-i18n-ph="admin.ph.search" placeholder="Post ara...">
+          <div id="admin-posts" class="admin-post-list mt-3"></div>
+          <p id="admin-posts-empty" class="theme-text-muted mt-3" data-i18n="admin.empty"></p>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm" data-animate style="--stagger:1.4">
       <p data-i18n="admin.footer"></p>
       <p class="mt-2">&copy; <span id="y"></span> Kagan Bagdemir</p>
     </footer>
@@ -235,7 +336,7 @@ layout: null
 <script src="assets/i18n.js?v=10"></script>
 <script src="assets/lang.js?v=7"></script>
 <script src="assets/theme.js?v=3"></script>
-<script src="assets/admin.js?v=22"></script>
+<script src="assets/admin.js?v=23"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 document.body.classList.add('initial-anim');

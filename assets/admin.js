@@ -2,137 +2,89 @@
   'use strict';
 
   var homeUrl = '/';
-  var configKey = 'admin-github-config-v1';
-  var tokenSessionKey = 'admin-github-token-session-v1';
-  var tokenLocalKey = 'admin-github-token-local-v1';
-  var tokenPersistKey = 'admin-github-token-persist-v1';
   var apiBase = 'https://api.github.com';
-  var fixedRepo = {
+  var repoConfig = {
     owner: 'kahnri',
     repo: 'kahnri.github.io',
     branch: 'main'
   };
-
-  var ownerEl = document.getElementById('github-owner');
-  var repoEl = document.getElementById('github-repo');
-  var branchEl = document.getElementById('github-branch');
-  var tokenEl = document.getElementById('github-token');
-  var tokenPersistEl = document.getElementById('admin-token-persist');
-  var tokenClearEl = document.getElementById('admin-token-clear');
-  var connectionEl = document.getElementById('github-connection');
-  var repoLabelEl = document.getElementById('admin-repo-label');
+  var tokenSessionKey = 'admin-publish-token-session-v2';
+  var draftKey = 'admin-post-draft-v2';
+  var validLangs = ['tr', 'de', 'en', 'nl', 'ja'];
+  var reservedFrontMatterKeys = {
+    layout: true,
+    title: true,
+    date: true,
+    slug: true,
+    permalink: true,
+    tr: true,
+    de: true,
+    en: true,
+    nl: true,
+    ja: true
+  };
 
   var titleEl = document.getElementById('admin-title');
   var dateEl = document.getElementById('admin-date');
   var slugEl = document.getElementById('admin-slug');
   var editorEl = document.getElementById('admin-content-editor');
-  var outputEl = document.getElementById('admin-output');
   var fileEl = document.getElementById('admin-file');
+  var currentFileLabelEl = document.getElementById('admin-current-file-label');
   var activeLangEl = document.getElementById('admin-active-language');
   var editingEl = document.getElementById('admin-editing');
   var statusEl = document.getElementById('admin-status');
-
+  var tokenEl = document.getElementById('github-token');
+  var modeLabelEl = document.getElementById('admin-mode-label');
+  var sessionBadgeEl = document.getElementById('admin-session-badge');
+  var postCountEl = document.getElementById('admin-post-count');
   var postsListEl = document.getElementById('admin-posts');
   var postsEmptyEl = document.getElementById('admin-posts-empty');
   var postSearchEl = document.getElementById('admin-post-search');
-  var realtimeToggleEl = document.getElementById('admin-realtime-toggle');
-  var realtimeStampEl = document.getElementById('admin-realtime-stamp');
 
-  if (!ownerEl || !repoEl || !branchEl || !tokenEl || !titleEl || !dateEl || !slugEl || !editorEl || !outputEl || !fileEl || !activeLangEl || !statusEl || !postsListEl || !postsEmptyEl) {
+  if (
+    !titleEl || !dateEl || !slugEl || !editorEl || !fileEl || !editingEl || !statusEl ||
+    !tokenEl || !postsListEl || !postsEmptyEl
+  ) {
     return;
   }
 
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll('[data-lang-tab]'));
+  var busyButtonIds = ['admin-refresh', 'admin-save', 'admin-delete', 'admin-reset', 'admin-new'];
   var activeLang = 'tr';
-  var contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
+  var contentByLang = emptyLanguageMap();
   var manualSlug = false;
   var editingPath = null;
   var editingSha = null;
   var extraFrontMatter = {};
   var extraFrontMatterOrder = [];
   var allPosts = [];
-  var lastPostsFingerprint = '';
-  var lastRealtimeSyncAt = null;
   var busyCounter = 0;
-  var realtimeTimer = null;
-  var realtimeActiveRequest = null;
-  var realtimeKey = 'admin-realtime-enabled-v1';
-  var realtimeIntervalMs = 12000;
-  var realtimePublicIntervalMs = 90000;
-  var realtimeEnabled = readRealtimePreference();
-  var tokenPersistEnabled = readTokenPersistPreference();
-  var draftKey = 'admin-post-draft-v1';
-  var draftSaveTimer = null;
   var lastSavedSignature = '';
+  var draftSaveTimer = null;
 
-  var busyButtonIds = [
-    'github-test',
-    'admin-refresh',
-    'admin-save',
-    'admin-delete',
-    'admin-github-web-new',
-    'admin-github-web-edit',
-    'admin-github-web-delete',
-    'admin-build',
-    'admin-copy',
-    'admin-download',
-    'admin-reset'
-  ];
-
-  function readRealtimePreference(){
-    try {
-      var raw = localStorage.getItem(realtimeKey);
-      if (raw === null) return true;
-      return raw === '1';
-    } catch (e) {
-      return true;
-    }
-  }
-
-  function saveRealtimePreference(enabled){
-    try {
-      localStorage.setItem(realtimeKey, enabled ? '1' : '0');
-    } catch (e) {}
-  }
-
-  function readTokenPersistPreference(){
-    try {
-      var raw = localStorage.getItem(tokenPersistKey);
-      if (raw === null) return true;
-      return raw === '1';
-    } catch (e) {
-      return true;
-    }
-  }
-
-  function saveTokenPersistPreference(enabled){
-    try {
-      localStorage.setItem(tokenPersistKey, enabled ? '1' : '0');
-    } catch (e) {}
+  function emptyLanguageMap(){
+    return { tr: '', de: '', en: '', nl: '', ja: '' };
   }
 
   function currentSiteLang(){
     try {
       var stored = (localStorage.getItem('lang') || '').toLowerCase();
-      if (stored === 'tr' || stored === 'de' || stored === 'en' || stored === 'nl' || stored === 'ja') {
-        return stored;
-      }
+      if (validLangs.indexOf(stored) >= 0) return stored;
     } catch (e) {}
 
     var htmlLang = String(document.documentElement.lang || '').slice(0, 2).toLowerCase();
-    if (htmlLang === 'tr' || htmlLang === 'de' || htmlLang === 'en' || htmlLang === 'nl' || htmlLang === 'ja') {
-      return htmlLang;
-    }
+    if (validLangs.indexOf(htmlLang) >= 0) return htmlLang;
     return 'tr';
   }
 
   function formatText(text, vars){
     var result = String(text || '');
     if (!vars) return result;
+
     Object.keys(vars).forEach(function(key){
-      var token = '{' + key + '}';
-      result = result.split(token).join(String(vars[key]));
+      result = result.split('{' + key + '}').join(String(vars[key]));
     });
+
     return result;
   }
 
@@ -143,65 +95,115 @@
     return formatText(base, vars);
   }
 
-  function formatSyncTime(date){
-    if (!date) return '';
-    try {
-      return date.toLocaleTimeString(currentSiteLang(), {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
-    } catch (e) {
-      return date.toLocaleTimeString();
+  function escapeHtml(text){
+    return String(text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function slugify(text){
+    return String(text || '')
+      .toLowerCase()
+      .replace(/ı/g, 'i')
+      .replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u')
+      .replace(/ş/g, 's')
+      .replace(/ö/g, 'o')
+      .replace(/ç/g, 'c')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  function yamlEscape(text){
+    return String(text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  }
+
+  function yamlValue(value){
+    var text = String(value || '');
+    if (!text.trim()) return '""';
+    if (/^\[.*\]$/.test(text)) return text;
+    if (/^(true|false|null|~)$/i.test(text)) return text.toLowerCase();
+    if (/^-?\d+(\.\d+)?$/.test(text)) return text;
+    if (/[:#]/.test(text) || /^\s|\s$/.test(text)) {
+      return '"' + yamlEscape(text) + '"';
     }
+    return text;
+  }
+
+  function toBase64Unicode(str){
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function fromBase64Unicode(str){
+    return decodeURIComponent(escape(atob((str || '').replace(/\n/g, ''))));
+  }
+
+  function today(){
+    var now = new Date();
+    var year = String(now.getFullYear());
+    var month = String(now.getMonth() + 1).padStart(2, '0');
+    var day = String(now.getDate()).padStart(2, '0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function normalizeDateInput(value, fallback){
+    var raw = String(value || '').trim();
+    if (!raw) return fallback || today();
+
+    var direct = raw.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (direct && direct[1]) return direct[1];
+
+    if (/^\d{4}\/\d{2}\/\d{2}$/.test(raw)) {
+      return raw.replace(/\//g, '-');
+    }
+
+    var parsed = new Date(raw);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed.toISOString().slice(0, 10);
+    }
+
+    return fallback || today();
+  }
+
+  function encodePath(path){
+    return String(path || '')
+      .split('/')
+      .map(function(part){ return encodeURIComponent(part); })
+      .join('/');
+  }
+
+  function getToken(){
+    return String(tokenEl.value || '').trim();
+  }
+
+  function loadSessionToken(){
+    try {
+      return String(sessionStorage.getItem(tokenSessionKey) || '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function saveSessionToken(value){
+    try {
+      var token = String(value || '').trim();
+      if (!token) {
+        sessionStorage.removeItem(tokenSessionKey);
+        return;
+      }
+      sessionStorage.setItem(tokenSessionKey, token);
+    } catch (e) {}
   }
 
   function setStatus(message, isError){
     statusEl.textContent = message;
     statusEl.style.color = isError ? '#ef4444' : '';
-  }
-
-  function setConnectionStatus(message, isError){
-    connectionEl.textContent = message;
-    connectionEl.style.color = isError ? '#ef4444' : '';
-  }
-
-  function setRealtimeStamp(message, isError){
-    if (!realtimeStampEl) return;
-    realtimeStampEl.textContent = message || '';
-    realtimeStampEl.style.color = isError ? '#ef4444' : '';
-  }
-
-  function postListFingerprint(items){
-    return (items || []).map(function(item){
-      return String(item.path || item.name || '') + '@' + String(item.sha || '');
-    }).join('|');
-  }
-
-  function updateRealtimeStamp(){
-    if (!realtimeStampEl) return;
-
-    if (!realtimeEnabled) {
-      setRealtimeStamp(t('admin.realtime.off', 'Canli senkronizasyon kapali.'), false);
-      return;
-    }
-
-    if (lastRealtimeSyncAt) {
-      setRealtimeStamp(
-        t('admin.realtime.last_sync', 'Canli senkron: son kontrol {time}', {
-          time: formatSyncTime(lastRealtimeSyncAt)
-        }),
-        false
-      );
-      return;
-    }
-
-    if (tokenEl.value.trim()) {
-      setRealtimeStamp(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
-      return;
-    }
-
-    setRealtimeStamp(t('admin.realtime.public_mode', 'Canli senkron acik (token yok: sadece okuma modu).'), false);
   }
 
   function setBusy(isBusy){
@@ -214,51 +216,14 @@
     });
   }
 
-  function applyWriteActionState(){
-    var hasToken = !!tokenEl.value.trim();
-    var saveBtn = document.getElementById('admin-save');
-    var deleteBtn = document.getElementById('admin-delete');
-    if (busyCounter > 0) return;
-
-    [saveBtn, deleteBtn].forEach(function(btn){
-      if (!btn) return;
-      btn.disabled = false;
-      btn.style.opacity = '';
-      btn.style.cursor = '';
-    });
-
-    if (saveBtn) {
-      saveBtn.setAttribute(
-        'title',
-        hasToken
-          ? t('admin.msg.save_api_mode', 'API modu: direkt GitHub repo\'ya yazar.')
-          : t('admin.msg.save_web_mode', 'Token yok: GitHub web editor acilir.')
-      );
-    }
-
-    if (deleteBtn) {
-      deleteBtn.setAttribute(
-        'title',
-        hasToken
-          ? t('admin.msg.delete_api_mode', 'API modu: direkt GitHub repo\'dan siler.')
-          : t('admin.msg.delete_web_mode', 'Token yok: GitHub web silme sayfasi acilir.')
-      );
-    }
-  }
-
   function beginBusy(){
     busyCounter += 1;
-    if (busyCounter === 1) {
-      setBusy(true);
-    }
+    if (busyCounter === 1) setBusy(true);
   }
 
   function endBusy(){
     busyCounter = Math.max(0, busyCounter - 1);
-    if (busyCounter === 0) {
-      setBusy(false);
-      applyWriteActionState();
-    }
+    if (busyCounter === 0) setBusy(false);
   }
 
   async function withBusy(task){
@@ -271,13 +236,11 @@
   }
 
   function snapshotContentByLang(){
-    return {
-      tr: activeLang === 'tr' ? editorEl.value : (contentByLang.tr || ''),
-      de: activeLang === 'de' ? editorEl.value : (contentByLang.de || ''),
-      en: activeLang === 'en' ? editorEl.value : (contentByLang.en || ''),
-      nl: activeLang === 'nl' ? editorEl.value : (contentByLang.nl || ''),
-      ja: activeLang === 'ja' ? editorEl.value : (contentByLang.ja || '')
-    };
+    var snapshot = emptyLanguageMap();
+    validLangs.forEach(function(lang){
+      snapshot[lang] = activeLang === lang ? editorEl.value : (contentByLang[lang] || '');
+    });
+    return snapshot;
   }
 
   function editorStateSnapshot(){
@@ -303,22 +266,19 @@
     }
   }
 
+  function hasUnsavedChanges(){
+    return editorSignature() !== lastSavedSignature;
+  }
+
   function currentEditingLabel(){
     return editingPath
       ? t('admin.msg.editing_path', 'Duzenleniyor: {path}', { path: editingPath })
       : t('admin.newpost', 'Yeni post');
   }
 
-  function hasUnsavedChanges(){
-    return editorSignature() !== lastSavedSignature;
-  }
-
   function updateEditingLabel(){
-    if (!editingEl) return;
     var label = currentEditingLabel();
-    if (hasUnsavedChanges()) {
-      label += ' *';
-    }
+    if (hasUnsavedChanges()) label += ' *';
     editingEl.textContent = label;
   }
 
@@ -332,10 +292,9 @@
     if (String(snapshot.title || '').trim()) return true;
     if (String(snapshot.slug || '').trim()) return true;
     if (String(snapshot.editingPath || '').trim()) return true;
-    if (Array.isArray(snapshot.extraFrontMatterOrder) && snapshot.extraFrontMatterOrder.length) return true;
 
     var langs = snapshot.contentByLang || {};
-    return ['tr', 'de', 'en', 'nl', 'ja'].some(function(lang){
+    return validLangs.some(function(lang){
       return String(langs[lang] || '').trim().length > 0;
     });
   }
@@ -374,6 +333,7 @@
     }
 
     snapshot.updatedAt = new Date().toISOString();
+
     try {
       localStorage.setItem(draftKey, JSON.stringify(snapshot));
     } catch (e) {}
@@ -381,9 +341,7 @@
 
   function scheduleDraftSave(){
     clearDraftSaveTimer();
-    draftSaveTimer = setTimeout(function(){
-      saveDraftNow();
-    }, 300);
+    draftSaveTimer = setTimeout(saveDraftNow, 300);
   }
 
   function confirmDiscardChanges(){
@@ -391,481 +349,24 @@
     return window.confirm(
       t(
         'admin.msg.unsaved_confirm',
-        'Kaydedilmemis degisiklikler var. Devam ederseniz kaybolabilir. Devam edilsin mi?'
+        'Kaydedilmemis degisiklikler var. Devam edersen kaybolabilir. Devam edilsin mi?'
       )
     );
   }
 
-  function slugify(text){
-    return text
-      .toLowerCase()
-      .replace(/ı/g, 'i')
-      .replace(/ğ/g, 'g')
-      .replace(/ü/g, 'u')
-      .replace(/ş/g, 's')
-      .replace(/ö/g, 'o')
-      .replace(/ç/g, 'c')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9\s-]/g, '')
-      .trim()
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-');
-  }
-
-  function yamlEscape(text){
-    return String(text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-  }
-
-  function yamlValue(value){
-    var text = String(value || '');
-    if (!text.trim()) return '""';
-    if (/^\[.*\]$/.test(text)) return text;
-    if (/^(true|false|null|~)$/i.test(text)) return text.toLowerCase();
-    if (/^-?\d+(\.\d+)?$/.test(text)) return text;
-    if (/[:#]/.test(text) || /^\s|\s$/.test(text)) {
-      return '"' + yamlEscape(text) + '"';
+  function syncSessionUi(){
+    var hasToken = !!getToken();
+    if (sessionBadgeEl) {
+      sessionBadgeEl.textContent = hasToken
+        ? t('admin.session.active', 'Panel ici yayin acik')
+        : t('admin.session.web', 'Web commit modu');
+      sessionBadgeEl.classList.toggle('is-active', hasToken);
     }
-    return text;
-  }
-
-  function escapeHtml(text){
-    return String(text || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function toBase64Unicode(str){
-    return btoa(unescape(encodeURIComponent(str)));
-  }
-
-  function fromBase64Unicode(str){
-    return decodeURIComponent(escape(atob((str || '').replace(/\n/g, ''))));
-  }
-
-  function today(){
-    var now = new Date();
-    var year = String(now.getFullYear());
-    var month = String(now.getMonth() + 1).padStart(2, '0');
-    var day = String(now.getDate()).padStart(2, '0');
-    return year + '-' + month + '-' + day;
-  }
-
-  function normalizeDateInput(value, fallback){
-    var raw = String(value || '').trim();
-    if (!raw) return fallback || today();
-
-    var direct = raw.match(/^(\d{4}-\d{2}-\d{2})/);
-    if (direct && direct[1]) {
-      return direct[1];
+    if (modeLabelEl) {
+      modeLabelEl.textContent = hasToken
+        ? t('admin.mode.direct', 'Panel ici yayin')
+        : t('admin.mode.web', 'Web commit');
     }
-
-    if (/^\d{4}\/\d{2}\/\d{2}$/.test(raw)) {
-      return raw.replace(/\//g, '-');
-    }
-
-    var parsed = new Date(raw);
-    if (!Number.isNaN(parsed.getTime())) {
-      return parsed.toISOString().slice(0, 10);
-    }
-
-    return fallback || today();
-  }
-
-  function encodePath(path){
-    return String(path || '')
-      .split('/')
-      .map(function(part){ return encodeURIComponent(part); })
-      .join('/');
-  }
-
-  function loadTokenFromSession(){
-    try {
-      return String(sessionStorage.getItem(tokenSessionKey) || '');
-    } catch (e) {
-      return '';
-    }
-  }
-
-  function saveTokenToSession(value){
-    try {
-      var token = String(value || '').trim();
-      if (!token) {
-        sessionStorage.removeItem(tokenSessionKey);
-        return;
-      }
-      sessionStorage.setItem(tokenSessionKey, token);
-    } catch (e) {}
-  }
-
-  function loadTokenFromLocal(){
-    try {
-      return String(localStorage.getItem(tokenLocalKey) || '');
-    } catch (e) {
-      return '';
-    }
-  }
-
-  function saveTokenToLocal(value){
-    try {
-      var token = String(value || '').trim();
-      if (!token) {
-        localStorage.removeItem(tokenLocalKey);
-        return;
-      }
-      localStorage.setItem(tokenLocalKey, token);
-    } catch (e) {}
-  }
-
-  function loadSavedToken(){
-    var sessionToken = loadTokenFromSession();
-    var localToken = loadTokenFromLocal();
-    if (tokenPersistEnabled) {
-      return localToken || sessionToken || '';
-    }
-    return sessionToken || localToken || '';
-  }
-
-  function persistCurrentToken(){
-    var value = tokenEl.value || '';
-    saveTokenToSession(value);
-    if (tokenPersistEnabled) {
-      saveTokenToLocal(value);
-    } else {
-      saveTokenToLocal('');
-    }
-  }
-
-  function syncTokenPersistUi(){
-    if (tokenPersistEl) {
-      tokenPersistEl.checked = !!tokenPersistEnabled;
-    }
-  }
-
-  function setTokenPersistEnabled(nextEnabled){
-    tokenPersistEnabled = !!nextEnabled;
-    saveTokenPersistPreference(tokenPersistEnabled);
-    syncTokenPersistUi();
-    persistCurrentToken();
-  }
-
-  function clearStoredToken(){
-    tokenEl.value = '';
-    saveTokenToSession('');
-    saveTokenToLocal('');
-    applyWriteActionState();
-    updateRealtimeStamp();
-    setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
-    setStatus(t('admin.msg.token_cleared', 'Token temizlendi.'), false);
-    if (realtimeEnabled) {
-      startRealtimeSync();
-    }
-  }
-
-  function updateRepoLabel(){
-    if (!repoLabelEl) return;
-    var owner = ownerEl.value.trim() || fixedRepo.owner;
-    var repo = repoEl.value.trim() || fixedRepo.repo;
-    var branch = branchEl.value.trim() || fixedRepo.branch;
-    repoLabelEl.textContent = owner + '/' + repo + ' @ ' + branch;
-  }
-
-  function loadConfig(){
-    var defaults = {
-      owner: fixedRepo.owner,
-      repo: fixedRepo.repo,
-      branch: fixedRepo.branch
-    };
-
-    try {
-      var raw = localStorage.getItem(configKey);
-      if (!raw) return defaults;
-      var parsed = JSON.parse(raw);
-      return {
-        owner: String(parsed.owner || defaults.owner),
-        repo: String(parsed.repo || defaults.repo),
-        branch: String(parsed.branch || defaults.branch)
-      };
-    } catch (e) {
-      return defaults;
-    }
-  }
-
-  function saveConfig(){
-    var payload = {
-      owner: ownerEl.value.trim(),
-      repo: repoEl.value.trim(),
-      branch: branchEl.value.trim()
-    };
-
-    try {
-      localStorage.setItem(configKey, JSON.stringify(payload));
-    } catch (e) {}
-  }
-
-  function getConfig(requireToken){
-    var config = {
-      owner: ownerEl.value.trim() || fixedRepo.owner,
-      repo: repoEl.value.trim() || fixedRepo.repo,
-      branch: branchEl.value.trim() || fixedRepo.branch,
-      token: tokenEl.value.trim()
-    };
-
-    ownerEl.value = config.owner;
-    repoEl.value = config.repo;
-    branchEl.value = config.branch;
-
-    if (requireToken && !config.token) {
-      throw new Error(t('admin.msg.token_required', 'GitHub token gerekli.'));
-    }
-
-    return config;
-  }
-
-  async function githubRequest(path, method, token, body){
-    async function runRequest(authHeaderValue){
-      var headers = {
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      };
-
-      if (authHeaderValue) {
-        headers.Authorization = authHeaderValue;
-      }
-
-      if (body !== undefined) {
-        headers['Content-Type'] = 'application/json';
-      }
-
-      var response = await fetch(apiBase + path, {
-        method: method || 'GET',
-        headers: headers,
-        body: body === undefined ? undefined : JSON.stringify(body)
-      });
-
-      var payload = null;
-      try {
-        payload = await response.json();
-      } catch (e) {
-        payload = null;
-      }
-
-      return { response: response, payload: payload };
-    }
-
-    function withGithubHint(message, statusCode){
-      var text = String(message || ('GitHub API error ' + statusCode));
-      var lower = text.toLowerCase();
-
-      if (statusCode === 401) {
-        return text + ' ' + t('admin.msg.token_check_hint', 'Token gecersiz olabilir. Fine-grained PAT icin repo secimi ve Contents (Read/Write) iznini kontrol edin.');
-      }
-
-      if (statusCode === 403 || lower.indexOf('resource not accessible') >= 0) {
-        return text + ' ' + t('admin.msg.token_perm_hint', 'Fine-grained PAT: repo erisimi + Contents (Read/Write) izni gerekli.');
-      }
-
-      if (statusCode === 404 && token) {
-        return text + ' ' + t('admin.msg.token_repo_hint', 'Repo secimi/branch veya token repo erisimi yanlis olabilir.');
-      }
-
-      return text;
-    }
-
-    var result = await runRequest(token ? ('Bearer ' + token) : '');
-
-    if (token && result.response && result.response.status === 401) {
-      result = await runRequest('token ' + token);
-    }
-
-    if (!result.response.ok) {
-      var message = result.payload && result.payload.message ? result.payload.message : ('GitHub API error ' + result.response.status);
-      throw new Error(withGithubHint(message, result.response.status));
-    }
-
-    return result.payload;
-  }
-
-  async function getRepo(config){
-    return githubRequest('/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo), 'GET', config.token);
-  }
-
-  async function getContents(config, path){
-    var route = '/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo) + '/contents/' + encodePath(path) + '?ref=' + encodeURIComponent(config.branch);
-    try {
-      return await githubRequest(route, 'GET', config.token);
-    } catch (e) {
-      if (String(e.message || '').indexOf('404') >= 0 || String(e.message || '').toLowerCase().indexOf('not found') >= 0) {
-        return null;
-      }
-      throw e;
-    }
-  }
-
-  async function putContents(config, path, content, message, sha){
-    var route = '/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo) + '/contents/' + encodePath(path);
-    var body = {
-      message: message,
-      content: toBase64Unicode(content),
-      branch: config.branch
-    };
-    if (sha) {
-      body.sha = sha;
-    }
-    return githubRequest(route, 'PUT', config.token, body);
-  }
-
-  async function deleteContents(config, path, sha, message){
-    var route = '/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo) + '/contents/' + encodePath(path);
-    return githubRequest(route, 'DELETE', config.token, {
-      message: message,
-      sha: sha,
-      branch: config.branch
-    });
-  }
-
-  function githubRepoWebBase(config){
-    return 'https://github.com/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo);
-  }
-
-  function openExternalPage(url){
-    var popup = null;
-    try {
-      popup = window.open(url, '_blank', 'noopener');
-    } catch (e) {
-      popup = null;
-    }
-
-    if (!popup) {
-      window.location.href = url;
-      return false;
-    }
-    return true;
-  }
-
-  function tryCopyOutputSilently(){
-    if (!outputEl.value || !navigator.clipboard || !navigator.clipboard.writeText) {
-      return Promise.resolve(false);
-    }
-    return navigator.clipboard.writeText(outputEl.value).then(function(){
-      return true;
-    }).catch(function(){
-      return false;
-    });
-  }
-
-  function prepareOutputForWebAction(){
-    contentByLang[activeLang] = editorEl.value;
-    build();
-  }
-
-  async function openGithubWebNew(){
-    try {
-      prepareOutputForWebAction();
-      validateForSave();
-      var config = getConfig(false);
-      saveConfig();
-      var path = currentPath();
-
-      var params = new URLSearchParams();
-      params.set('filename', path);
-      params.set('value', outputEl.value);
-      params.set('message', 'Create post: ' + path);
-
-      var baseUrl = githubRepoWebBase(config) + '/new/' + encodeURIComponent(config.branch);
-      var url = baseUrl + '?' + params.toString();
-
-      if (url.length > 7000) {
-        params.delete('value');
-        url = baseUrl + '?' + params.toString();
-        var copiedLong = await tryCopyOutputSilently();
-        openExternalPage(url);
-        setStatus(
-          copiedLong
-            ? t('admin.msg.github_web_new_long_copied', 'Post uzun oldugu icin GitHub yeni dosya sayfasi iceriksiz acildi. Icerik panoya kopyalandi; GitHub editorune yapistirip commit edin.')
-            : t('admin.msg.github_web_new_long', 'Post uzun oldugu icin GitHub yeni dosya sayfasi iceriksiz acildi. Asagidaki ciktiyi kopyalayip GitHub editorune yapistirin.'),
-          false
-        );
-        return;
-      }
-
-      openExternalPage(url);
-      setStatus(t('admin.msg.github_web_new_opened', 'GitHub yeni dosya ekrani acildi. Commit ederek kaydedin.'), false);
-    } catch (e) {
-      setStatus(e.message || t('admin.msg.github_web_new_failed', 'GitHub yeni dosya sayfasi acilamadi.'), true);
-    }
-  }
-
-  async function openGithubWebEdit(){
-    try {
-      prepareOutputForWebAction();
-      var currentBuiltPath = currentPath();
-
-      if (!editingPath) {
-        await openGithubWebNew();
-        return;
-      }
-
-      if (editingPath !== currentBuiltPath) {
-        if (!window.confirm(t('admin.msg.github_web_edit_renamed', 'Slug/tarih degismis. Bu durumda yeni dosya olarak acilacak. Devam edilsin mi?'))) {
-          return;
-        }
-        await openGithubWebNew();
-        return;
-      }
-
-      var config = getConfig(false);
-      saveConfig();
-      var copied = await tryCopyOutputSilently();
-      var url = githubRepoWebBase(config) + '/edit/' + encodeURIComponent(config.branch) + '/' + encodePath(editingPath);
-      openExternalPage(url);
-
-      setStatus(
-        copied
-          ? t('admin.msg.github_web_edit_opened_copied', 'GitHub duzenleme sayfasi acildi. Guncel icerik panoya kopyalandi; GitHub editorune yapistirip commit edin.')
-          : t('admin.msg.github_web_edit_opened', 'GitHub duzenleme sayfasi acildi. Gerekirse asagidaki ciktiyi kopyalayip GitHub editorune yapistirin.'),
-        false
-      );
-    } catch (e) {
-      setStatus(e.message || t('admin.msg.github_web_edit_failed', 'GitHub duzenleme sayfasi acilamadi.'), true);
-    }
-  }
-
-  function isLikelyGithubAuthError(error){
-    var message = String(error && error.message ? error.message : error || '').toLowerCase();
-    return (
-      message.indexOf('401') >= 0 ||
-      message.indexOf('403') >= 0 ||
-      message.indexOf('bad credentials') >= 0 ||
-      message.indexOf('token') >= 0 ||
-      message.indexOf('resource not accessible') >= 0
-    );
-  }
-
-  function openGithubWebDeleteForPath(path){
-    try {
-      if (!path) {
-        throw new Error(t('admin.msg.github_web_delete_pick', 'GitHub uzerinden silmek icin once listeden bir post acin.'));
-      }
-
-      if (!window.confirm(t('admin.msg.github_web_delete_confirm', 'GitHub silme sayfasi acilsin mi? Silme islemi GitHub ekraninda tamamlanir.'))) {
-        return;
-      }
-
-      var config = getConfig(false);
-      saveConfig();
-      var url = githubRepoWebBase(config) + '/delete/' + encodeURIComponent(config.branch) + '/' + encodePath(path);
-      openExternalPage(url);
-      setStatus(t('admin.msg.github_web_delete_opened', 'GitHub silme sayfasi acildi. GitHub ekraninda onaylayin.'), false);
-    } catch (e) {
-      setStatus(e.message || t('admin.msg.github_web_delete_failed', 'GitHub silme sayfasi acilamadi.'), true);
-    }
-  }
-
-  function openGithubWebDelete(){
-    openGithubWebDeleteForPath(editingPath);
   }
 
   function setTabState(){
@@ -879,7 +380,12 @@
         btn.classList.add('theme-button');
       }
     });
-    activeLangEl.textContent = t('admin.msg.editing_lang', 'Editing: {lang}', { lang: activeLang.toUpperCase() });
+
+    if (activeLangEl) {
+      activeLangEl.textContent = t('admin.msg.editing_lang', 'Duzenlenen: {lang}', {
+        lang: activeLang.toUpperCase()
+      });
+    }
   }
 
   function switchLang(nextLang){
@@ -904,20 +410,20 @@
 
   function currentPath(){
     var title = (titleEl.value || '').trim() || 'untitled';
-    var date = dateEl.value || today();
+    var date = normalizeDateInput(dateEl.value, today());
     var slug = normalizedSlug(slugEl.value, title);
     return '_posts/' + date + '-' + slug + '.md';
   }
 
-  function build(){
+  function buildOutput(){
     contentByLang[activeLang] = editorEl.value;
 
     var title = (titleEl.value || '').trim() || 'Untitled';
-    var date = dateEl.value || today();
+    var date = normalizeDateInput(dateEl.value, today());
     var slug = normalizedSlug(slugEl.value, title);
-    if ((slugEl.value || '') !== slug) {
-      slugEl.value = slug;
-    }
+
+    dateEl.value = date;
+    if ((slugEl.value || '') !== slug) slugEl.value = slug;
 
     var lines = [
       '---',
@@ -929,9 +435,7 @@
     ];
 
     extraFrontMatterOrder.forEach(function(key){
-      if (!key || key === 'layout' || key === 'title' || key === 'date' || key === 'slug' || key === 'permalink') {
-        return;
-      }
+      if (!key || reservedFrontMatterKeys[key]) return;
 
       var value = extraFrontMatter[key];
       if (value === undefined || value === null) return;
@@ -950,8 +454,8 @@
       lines.push(key + ': ' + yamlValue(text));
     });
 
-    ['tr', 'de', 'en', 'nl', 'ja'].forEach(function(lang){
-      var value = (contentByLang[lang] || '').trim();
+    validLangs.forEach(function(lang){
+      var value = String(contentByLang[lang] || '').trim();
       if (!value) return;
       lines.push(lang + ': |');
       value.split('\n').forEach(function(line){
@@ -960,17 +464,28 @@
     });
 
     lines.push('---', '');
+    return lines.join('\n');
+  }
 
-    outputEl.value = lines.join('\n');
-    fileEl.textContent = currentPath();
+  function build(){
+    var output = buildOutput();
+    var path = currentPath();
+
+    fileEl.textContent = path;
+    if (currentFileLabelEl) currentFileLabelEl.textContent = path;
+
     updateEditingLabel();
+    syncSessionUi();
     scheduleDraftSave();
+    return output;
   }
 
   function validateForSave(){
+    contentByLang[activeLang] = editorEl.value;
+
     var title = (titleEl.value || '').trim();
     if (!title) {
-      throw new Error(t('admin.msg.title_required', 'Title gerekli.'));
+      throw new Error(t('admin.msg.title_required', 'Baslik gerekli.'));
     }
 
     var selectedDate = dateEl.value || today();
@@ -978,8 +493,8 @@
       throw new Error(t('admin.msg.future_date', 'Gelecek tarihli post varsayilan olarak blogda gorunmez. Tarihi bugun veya gecmis yapin.'));
     }
 
-    var hasContent = ['tr', 'de', 'en', 'nl', 'ja'].some(function(lang){
-      return (contentByLang[lang] || '').trim().length > 0;
+    var hasContent = validLangs.some(function(lang){
+      return String(contentByLang[lang] || '').trim().length > 0;
     });
 
     if (!hasContent) {
@@ -987,73 +502,10 @@
     }
   }
 
-  function copyOutput(){
-    if (!outputEl.value) return;
-    navigator.clipboard.writeText(outputEl.value).then(function(){
-      var btn = document.getElementById('admin-copy');
-      if (!btn) return;
-      var prev = btn.textContent;
-      btn.textContent = t('admin.msg.copy_done', 'Kopyalandi');
-      setTimeout(function(){ btn.textContent = prev; }, 1200);
-    }).catch(function(){
-      setStatus(t('admin.msg.copy_failed', 'Kopyalama basarisiz.'), true);
-    });
-  }
-
-  function downloadOutput(){
-    if (!outputEl.value) return;
-    var filename = currentPath().replace(/^_posts\//, '');
-    var blob = new Blob([outputEl.value], { type: 'text/markdown;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
-  }
-
-  function resetForm(promptUser){
-    if (promptUser) {
-      var resetPromptKey = hasUnsavedChanges() ? 'admin.msg.reset_confirm_dirty' : 'admin.msg.reset_confirm';
-      var resetPromptText = hasUnsavedChanges()
-        ? 'Kaydedilmemis degisiklikler silinecek. Form temizlensin mi?'
-        : 'Form temizlensin mi?';
-      if (!window.confirm(t(resetPromptKey, resetPromptText))) {
-        return;
-      }
-    }
-
-    titleEl.value = '';
-    dateEl.value = today();
-    slugEl.value = '';
-    manualSlug = false;
-    contentByLang = { tr: '', de: '', en: '', nl: '', ja: '' };
-    extraFrontMatter = {};
-    extraFrontMatterOrder = [];
-    activeLang = 'tr';
-    editorEl.value = '';
-    editingPath = null;
-    editingSha = null;
-    setTabState();
-    build();
-    clearDraftFromStorage();
-    markSavedBaseline();
-    setStatus(t('admin.msg.editor_cleared', 'Editor temizlendi.'), false);
-  }
-
-  function lockAndExit(){
-    if (!confirmDiscardChanges()) return;
-    window.location.href = homeUrl;
-  }
-
   function parseFrontMatter(text){
     var result = {};
     var lines = String(text || '').replace(/\r\n/g, '\n').split('\n');
-    if (lines[0] !== '---') {
-      return result;
-    }
+    if (lines[0] !== '---') return result;
 
     var i = 1;
     while (i < lines.length) {
@@ -1102,11 +554,11 @@
 
   function fileMeta(path){
     var name = String(path || '').split('/').pop() || '';
-    var m = name.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/);
+    var match = name.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/);
     return {
       name: name,
-      date: m ? m[1] : '',
-      slug: m ? m[2] : name.replace(/\.md$/, '')
+      date: match ? match[1] : '',
+      slug: match ? match[2] : name.replace(/\.md$/, '')
     };
   }
 
@@ -1128,25 +580,11 @@
   }
 
   function setEditorFromParsed(path, parsed, sha){
-    var reserved = {
-      layout: true,
-      title: true,
-      date: true,
-      slug: true,
-      permalink: true,
-      tr: true,
-      de: true,
-      en: true,
-      nl: true,
-      ja: true
-    };
-
     var meta = fileMeta(path);
     var slugCandidate = parsed.slug || slugFromPermalink(parsed.permalink) || meta.slug || '';
-    var normalizedDate = normalizeDateInput(parsed.date, meta.date || today());
 
     titleEl.value = parsed.title || '';
-    dateEl.value = normalizedDate;
+    dateEl.value = normalizeDateInput(parsed.date, meta.date || today());
     slugEl.value = slugCandidate;
     manualSlug = true;
 
@@ -1161,7 +599,7 @@
     extraFrontMatter = {};
     extraFrontMatterOrder = [];
     Object.keys(parsed).forEach(function(key){
-      if (reserved[key]) return;
+      if (reservedFrontMatterKeys[key]) return;
       extraFrontMatter[key] = parsed[key];
       extraFrontMatterOrder.push(key);
     });
@@ -1207,9 +645,7 @@
       : Object.keys(extraFrontMatter);
 
     activeLang = String(snapshot.activeLang || 'tr').toLowerCase();
-    if (['tr', 'de', 'en', 'nl', 'ja'].indexOf(activeLang) < 0) {
-      activeLang = firstLang(contentByLang);
-    }
+    if (validLangs.indexOf(activeLang) < 0) activeLang = firstLang(contentByLang);
 
     editorEl.value = contentByLang[activeLang] || '';
     editingPath = String(snapshot.editingPath || '').trim() || null;
@@ -1259,27 +695,101 @@
     return true;
   }
 
-  async function testConnection(){
+  async function githubRequest(path, method, token, body){
+    async function runRequest(authHeaderValue){
+      var headers = {
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      };
+
+      if (authHeaderValue) headers.Authorization = authHeaderValue;
+      if (body !== undefined) headers['Content-Type'] = 'application/json';
+
+      var response = await fetch(apiBase + path, {
+        method: method || 'GET',
+        headers: headers,
+        body: body === undefined ? undefined : JSON.stringify(body)
+      });
+
+      var payload = null;
+      try {
+        payload = await response.json();
+      } catch (e) {
+        payload = null;
+      }
+
+      return { response: response, payload: payload };
+    }
+
+    var result = await runRequest(token ? ('Bearer ' + token) : '');
+    if (token && result.response && result.response.status === 401) {
+      result = await runRequest('token ' + token);
+    }
+
+    if (!result.response.ok) {
+      var message = result.payload && result.payload.message
+        ? result.payload.message
+        : ('GitHub API error ' + result.response.status);
+      throw new Error(message);
+    }
+
+    return result.payload;
+  }
+
+  function repoWebBase(){
+    return 'https://github.com/' + encodeURIComponent(repoConfig.owner) + '/' + encodeURIComponent(repoConfig.repo);
+  }
+
+  async function getContents(path, token){
+    var route =
+      '/repos/' + encodeURIComponent(repoConfig.owner) +
+      '/' + encodeURIComponent(repoConfig.repo) +
+      '/contents/' + encodePath(path) +
+      '?ref=' + encodeURIComponent(repoConfig.branch);
+
     try {
-      var config = getConfig(false);
-      saveConfig();
-      var repo = await getRepo(config);
-      setConnectionStatus(t('admin.connection.connected', 'Bagli: {repo} @ {branch}', { repo: repo.full_name, branch: config.branch }), false);
-      setStatus(t('admin.msg.connection_ok', 'GitHub baglantisi basarili.'), false);
+      return await githubRequest(route, 'GET', token);
     } catch (e) {
-      setConnectionStatus(t('admin.connection.error', 'Hata'), true);
-      setStatus(e.message || t('admin.msg.connection_error', 'Baglanti hatasi.'), true);
+      var message = String(e.message || '').toLowerCase();
+      if (message.indexOf('404') >= 0 || message.indexOf('not found') >= 0) {
+        return null;
+      }
+      throw e;
     }
   }
 
-  async function fetchPosts(){
-    var config = getConfig(false);
-    saveConfig();
+  async function putContents(path, content, message, sha, token){
+    var route =
+      '/repos/' + encodeURIComponent(repoConfig.owner) +
+      '/' + encodeURIComponent(repoConfig.repo) +
+      '/contents/' + encodePath(path);
 
-    var list = await getContents(config, '_posts');
-    if (!Array.isArray(list)) {
-      return [];
-    }
+    var body = {
+      message: message,
+      content: toBase64Unicode(content),
+      branch: repoConfig.branch
+    };
+
+    if (sha) body.sha = sha;
+    return githubRequest(route, 'PUT', token, body);
+  }
+
+  async function deleteContents(path, sha, message, token){
+    var route =
+      '/repos/' + encodeURIComponent(repoConfig.owner) +
+      '/' + encodeURIComponent(repoConfig.repo) +
+      '/contents/' + encodePath(path);
+
+    return githubRequest(route, 'DELETE', token, {
+      message: message,
+      sha: sha,
+      branch: repoConfig.branch
+    });
+  }
+
+  async function fetchPosts(){
+    var list = await getContents('_posts', '');
+    if (!Array.isArray(list)) return [];
 
     return list
       .filter(function(item){
@@ -1301,25 +811,23 @@
 
     postsListEl.innerHTML = items.map(function(item){
       var meta = fileMeta(item.path || item.name || '');
-      var safeName = escapeHtml(item.name || '');
-      var safePath = escapeHtml(item.path || '');
-      var safeSha = escapeHtml(item.sha || '');
-      var safeSlug = escapeHtml(meta.slug || '');
+      var selectedClass = editingPath === item.path ? ' is-selected' : '';
 
       return (
-        '<div class="p-3 rounded-xl border theme-card" data-path="' + safePath + '" data-sha="' + safeSha + '" data-slug="' + safeSlug + '">' +
+        '<article class="admin-post-card' + selectedClass + '" data-path="' + escapeHtml(item.path || '') + '" data-sha="' + escapeHtml(item.sha || '') + '" data-slug="' + escapeHtml(meta.slug || '') + '">' +
           '<div class="flex flex-wrap items-center justify-between gap-3">' +
             '<div>' +
-              '<p class="font-semibold">' + safeName + '</p>' +
-              '<p class="text-sm theme-text-muted">' + (meta.date || '-') + ' · ' + (meta.slug || '-') + '</p>' +
+              '<p class="admin-post-title">' + escapeHtml(meta.slug || item.name || '') + '</p>' +
+              '<p class="text-sm theme-text-muted mt-1">' + escapeHtml(meta.date || '-') + '</p>' +
+              '<p class="text-xs theme-text-muted mt-2">' + escapeHtml(item.path || '') + '</p>' +
             '</div>' +
-            '<div class="flex flex-wrap gap-2">' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="edit">' + escapeHtml(t('admin.action.edit', 'Edit')) + '</button>' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="view">' + escapeHtml(t('admin.action.view', 'View')) + '</button>' +
-              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="delete">' + escapeHtml(t('admin.action.delete', 'Delete')) + '</button>' +
+            '<div class="admin-post-actions">' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="edit">' + escapeHtml(t('admin.action.edit', 'Duzenle')) + '</button>' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="view">' + escapeHtml(t('admin.action.view', 'Gor')) + '</button>' +
+              '<button class="px-3 py-1 rounded-full border theme-button" type="button" data-action="delete">' + escapeHtml(t('admin.action.delete', 'Sil')) + '</button>' +
             '</div>' +
           '</div>' +
-        '</div>'
+        '</article>'
       );
     }).join('');
   }
@@ -1333,7 +841,9 @@
 
     var filtered = allPosts.filter(function(item){
       var meta = fileMeta(item.path || item.name || '');
-      var hay = [String(item.name || ''), String(meta.slug || ''), String(meta.date || '')].join(' ').toLowerCase();
+      var hay = [String(item.name || ''), String(meta.slug || ''), String(meta.date || ''), String(item.path || '')]
+        .join(' ')
+        .toLowerCase();
       return hay.indexOf(needle) >= 0;
     });
 
@@ -1343,116 +853,33 @@
   async function refreshPosts(options){
     options = options || {};
     var silent = !!options.silent;
-    var source = options.source || 'manual';
 
     try {
       if (!silent) {
-        setStatus(t('admin.msg.posts_loading', 'Repo postlari aliniyor...'), false);
+        setStatus(t('admin.msg.posts_loading', 'Postlar aliniyor...'), false);
       }
+
       var items = await fetchPosts();
-      var fingerprint = postListFingerprint(items);
-      var changed = fingerprint !== lastPostsFingerprint;
-
       allPosts = items;
-      lastPostsFingerprint = fingerprint;
+
+      if (postCountEl) postCountEl.textContent = String(items.length);
       applyPostFilter();
-      lastRealtimeSyncAt = new Date();
-      updateRealtimeStamp();
 
       if (!silent) {
-        setStatus(t('admin.msg.posts_refreshed', 'Repo postlari guncellendi.'), false);
-      } else if (source === 'realtime' && changed) {
-        setStatus(t('admin.msg.live_updated', 'Canli senkron: repo postlari guncellendi.'), false);
+        setStatus(t('admin.msg.posts_refreshed', 'Post listesi guncellendi.'), false);
       }
-
-      setConnectionStatus(
-        t('admin.connection.connected', 'Bagli: {repo} @ {branch}', {
-          repo: ownerEl.value.trim() + '/' + repoEl.value.trim(),
-          branch: branchEl.value.trim()
-        }),
-        false
-      );
-
-      return { changed: changed, count: items.length };
     } catch (e) {
-      if (!silent) {
-        allPosts = [];
-        lastPostsFingerprint = '';
-        renderPostsList([]);
-        setConnectionStatus(t('admin.connection.error', 'Hata'), true);
-        setStatus(e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.'), true);
-      } else {
-        setRealtimeStamp(
-          t('admin.realtime.sync_error', 'Canli senkron hatasi: {message}', {
-            message: e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.')
-          }),
-          true
-        );
-      }
+      allPosts = [];
+      if (postCountEl) postCountEl.textContent = '0';
+      renderPostsList([]);
+      setStatus(e.message || t('admin.msg.posts_load_failed', 'Post listesi alinamadi.'), true);
       throw e;
-    }
-  }
-
-  async function runRealtimeSync(){
-    if (!realtimeEnabled) {
-      updateRealtimeStamp();
-      return;
-    }
-    if (busyCounter > 0 || realtimeActiveRequest) {
-      return;
-    }
-
-    realtimeActiveRequest = refreshPosts({ silent: true, source: 'realtime' })
-      .catch(function(){})
-      .finally(function(){
-        realtimeActiveRequest = null;
-      });
-
-    await realtimeActiveRequest;
-  }
-
-  function stopRealtimeSync(){
-    if (realtimeTimer) {
-      clearInterval(realtimeTimer);
-      realtimeTimer = null;
-    }
-  }
-
-  function startRealtimeSync(){
-    stopRealtimeSync();
-    updateRealtimeStamp();
-
-    if (!realtimeEnabled) {
-      return;
-    }
-
-    runRealtimeSync();
-    var intervalMs = tokenEl.value.trim() ? realtimeIntervalMs : realtimePublicIntervalMs;
-    realtimeTimer = setInterval(function(){
-      runRealtimeSync();
-    }, intervalMs);
-  }
-
-  function applyRealtimePreference(nextEnabled){
-    realtimeEnabled = !!nextEnabled;
-    saveRealtimePreference(realtimeEnabled);
-
-    if (realtimeToggleEl) {
-      realtimeToggleEl.checked = realtimeEnabled;
-    }
-
-    if (realtimeEnabled) {
-      startRealtimeSync();
-    } else {
-      stopRealtimeSync();
-      updateRealtimeStamp();
     }
   }
 
   async function loadPost(path){
     try {
-      var config = getConfig(false);
-      var file = await getContents(config, path);
+      var file = await getContents(path, '');
       if (!file || !file.content) {
         throw new Error(t('admin.msg.content_read_failed', 'Dosya icerigi okunamadi.'));
       }
@@ -1460,7 +887,8 @@
       var raw = fromBase64Unicode(file.content);
       var parsed = parseFrontMatter(raw);
       setEditorFromParsed(path, parsed, file.sha || null);
-      setStatus(t('admin.msg.post_loaded', 'Post editora yuklendi.'), false);
+      applyPostFilter();
+      setStatus(t('admin.msg.post_loaded', 'Post editore yuklendi.'), false);
       return true;
     } catch (e) {
       setStatus(e.message || t('admin.msg.post_load_failed', 'Post yuklenemedi.'), true);
@@ -1468,33 +896,135 @@
     }
   }
 
-  async function deletePath(path, providedSha){
-    var config = getConfig(true);
-    var sha = providedSha;
+  function isLikelyGithubAuthError(error){
+    var message = String(error && error.message ? error.message : error || '').toLowerCase();
+    return (
+      message.indexOf('401') >= 0 ||
+      message.indexOf('403') >= 0 ||
+      message.indexOf('bad credentials') >= 0 ||
+      message.indexOf('resource not accessible') >= 0 ||
+      message.indexOf('token') >= 0
+    );
+  }
 
-    if (!sha) {
-      var file = await getContents(config, path);
-      if (!file || !file.sha) {
-        throw new Error(t('admin.msg.delete_file_missing', 'Silinecek dosya bulunamadi.'));
-      }
-      sha = file.sha;
+  function openExternalPage(url){
+    var popup = null;
+    try {
+      popup = window.open(url, '_blank', 'noopener');
+    } catch (e) {
+      popup = null;
     }
 
-    await deleteContents(config, path, sha, 'Delete post: ' + path);
+    if (!popup) {
+      window.location.href = url;
+      return false;
+    }
+
+    return true;
+  }
+
+  async function tryCopyText(value){
+    if (!value || !navigator.clipboard || !navigator.clipboard.writeText) {
+      return false;
+    }
+
+    try {
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function openWebSave(){
+    var output = build();
+    validateForSave();
+
+    var path = currentPath();
+    var message = editingPath && editingPath === path
+      ? ('Update post: ' + path)
+      : ('Create post: ' + path);
+
+    if (!editingPath || editingPath !== path) {
+      if (editingPath && editingPath !== path) {
+        var shouldContinue = window.confirm(
+          t(
+            'admin.msg.web_rename_confirm',
+            'Slug veya tarih degisti. Bu kayit yeni dosya olarak acilacak; eski dosyayi ayrica silmen gerekir. Devam edilsin mi?'
+          )
+        );
+        if (!shouldContinue) {
+          setStatus(t('admin.msg.publish_cancelled', 'Yayinlama iptal edildi.'), false);
+          return;
+        }
+      }
+
+      var params = new URLSearchParams();
+      params.set('filename', path);
+      params.set('message', message);
+      params.set('value', output);
+
+      var baseUrl = repoWebBase() + '/new/' + encodeURIComponent(repoConfig.branch);
+      var url = baseUrl + '?' + params.toString();
+
+      if (url.length > 7000) {
+        params.delete('value');
+        url = baseUrl + '?' + params.toString();
+        var copiedLong = await tryCopyText(output);
+        openExternalPage(url);
+        setStatus(
+          copiedLong
+            ? t('admin.msg.web_new_long', 'Yeni dosya commit sayfasi acildi. Icerik panoya kopyalandi; editora yapistirip commit edebilirsin.')
+            : t('admin.msg.web_new_opened', 'Yeni dosya commit sayfasi acildi. Gerekirse icerigi editora yapistirip commit et.'),
+          false
+        );
+        return;
+      }
+
+      openExternalPage(url);
+      setStatus(t('admin.msg.web_new_opened', 'Yeni dosya commit sayfasi acildi. Commit ederek kaydedebilirsin.'), false);
+      return;
+    }
+
+    var copied = await tryCopyText(output);
+    openExternalPage(repoWebBase() + '/edit/' + encodeURIComponent(repoConfig.branch) + '/' + encodePath(editingPath));
+    setStatus(
+      copied
+        ? t('admin.msg.web_edit_opened_copied', 'Duzenleme sayfasi acildi. Guncel icerik panoya kopyalandi.')
+        : t('admin.msg.web_edit_opened', 'Duzenleme sayfasi acildi. Gerekirse guncel icerigi editora yapistirabilirsin.'),
+      false
+    );
+  }
+
+  function openWebDelete(path){
+    if (!path) {
+      setStatus(t('admin.msg.select_post_to_delete', 'Silinecek post secin.'), true);
+      return;
+    }
+
+    if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post silinsin mi?'))) {
+      return;
+    }
+
+    openExternalPage(repoWebBase() + '/delete/' + encodeURIComponent(repoConfig.branch) + '/' + encodePath(path));
+    setStatus(t('admin.msg.web_delete_opened', 'Silme sayfasi acildi. Onaylamak icin commit ekranini tamamla.'), false);
   }
 
   async function publishPost(){
-    try {
-      contentByLang[activeLang] = editorEl.value;
-      validateForSave();
-      build();
+    var token = getToken();
 
-      var config = getConfig(true);
-      saveConfig();
+    if (!token) {
+      await openWebSave();
+      return;
+    }
+
+    try {
+      var output = build();
+      validateForSave();
 
       var path = currentPath();
       var renaming = !!editingPath && editingPath !== path;
-      var existing = await getContents(config, path);
+      var existing = await getContents(path, token);
       var sha = existing && existing.sha ? existing.sha : null;
       var oldPathSha = null;
 
@@ -1509,7 +1039,7 @@
       }
 
       if (editingPath && renaming && editingSha) {
-        var sourceFile = await getContents(config, editingPath);
+        var sourceFile = await getContents(editingPath, token);
         if (!sourceFile || !sourceFile.sha) {
           throw new Error(t('admin.msg.rename_source_missing', 'Eski dosya repo tarafinda bulunamadi. Once listeyi yenileyin.'));
         }
@@ -1526,69 +1056,131 @@
         }
       }
 
-      var saveResponse = await putContents(config, path, outputEl.value, (sha ? 'Update post: ' : 'Create post: ') + path, sha);
+      var saveResponse = await putContents(path, output, (sha ? 'Update post: ' : 'Create post: ') + path, sha, token);
 
       if (editingPath && renaming) {
         try {
           var deleteSha = oldPathSha;
           if (!deleteSha) {
-            var oldFile = await getContents(config, editingPath);
-            if (oldFile && oldFile.sha) {
-              deleteSha = oldFile.sha;
-            }
+            var oldFile = await getContents(editingPath, token);
+            if (oldFile && oldFile.sha) deleteSha = oldFile.sha;
           }
           if (deleteSha) {
-            await deleteContents(config, editingPath, deleteSha, 'Delete old renamed post: ' + editingPath);
+            await deleteContents(editingPath, deleteSha, 'Delete old renamed post: ' + editingPath, token);
           }
         } catch (e) {}
       }
 
       editingPath = path;
-      editingSha = saveResponse && saveResponse.content && saveResponse.content.sha ? saveResponse.content.sha : null;
+      editingSha = saveResponse && saveResponse.content && saveResponse.content.sha
+        ? saveResponse.content.sha
+        : null;
+
       clearDraftFromStorage();
       markSavedBaseline();
-      setStatus(t('admin.msg.published', 'Post GitHub\'a yazildi. Pages build sonrasi herkese acik olacak.'), false);
-      await refreshPosts();
+      setStatus(t('admin.msg.published', 'Post kaydedildi ve yayinlandi.'), false);
+      await refreshPosts({ silent: true });
+      applyPostFilter();
     } catch (e) {
       if (isLikelyGithubAuthError(e)) {
         setStatus(
-          t('admin.msg.publish_auth_fallback', 'API publish basarisiz (token/yetki). "GitHub\'da Yeni/Duzenle" butonlariyla kaydedin.'),
+          t('admin.msg.publish_auth_fallback', 'Panel ici kayit basarisiz. Web commit ekranina yonlendiriyorum.'),
           true
         );
+        await openWebSave();
         return;
       }
+
       setStatus(e.message || t('admin.msg.publish_failed', 'Yayinlama basarisiz.'), true);
     }
   }
 
-  async function deleteCurrent(){
-    try {
-      var path = editingPath || currentPath();
-      if (!path || path === '_posts/') {
-        throw new Error(t('admin.msg.select_post_to_delete', 'Silinecek post secin.'));
-      }
+  async function deletePath(path, providedSha){
+    var token = getToken();
+    if (!token) {
+      openWebDelete(path);
+      return true;
+    }
 
-      if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post GitHub\'dan silinsin mi?'))) {
+    var sha = providedSha;
+    if (!sha) {
+      var file = await getContents(path, token);
+      if (!file || !file.sha) {
+        throw new Error(t('admin.msg.delete_file_missing', 'Silinecek dosya bulunamadi.'));
+      }
+      sha = file.sha;
+    }
+
+    await deleteContents(path, sha, 'Delete post: ' + path, token);
+    return false;
+  }
+
+  async function deleteCurrent(){
+    if (!editingPath) {
+      setStatus(t('admin.msg.select_post_to_delete', 'Silinecek post secin.'), true);
+      return;
+    }
+
+    if (!getToken()) {
+      openWebDelete(editingPath);
+      return;
+    }
+
+    try {
+      if (!window.confirm(t('admin.msg.confirm_delete_current', 'Bu post silinsin mi?'))) {
         return;
       }
 
-      await deletePath(path, editingPath === path ? editingSha : null);
+      await deletePath(editingPath, editingSha);
       resetForm(false);
-      setStatus(t('admin.msg.deleted', 'Post GitHub\'dan silindi.'), false);
-      await refreshPosts();
+      setStatus(t('admin.msg.deleted', 'Post silindi.'), false);
+      await refreshPosts({ silent: true });
+      applyPostFilter();
     } catch (e) {
       if (isLikelyGithubAuthError(e)) {
         setStatus(
-          t('admin.msg.delete_auth_fallback', 'API ile silme basarisiz. GitHub web silme sayfasini kullanabilirsiniz.'),
+          t('admin.msg.delete_auth_fallback', 'Panel ici silme basarisiz. Web silme ekranina yonlendiriyorum.'),
           true
         );
-        if (editingPath) {
-          openGithubWebDeleteForPath(editingPath);
-        }
+        openWebDelete(editingPath);
         return;
       }
+
       setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
     }
+  }
+
+  function resetForm(promptUser){
+    if (promptUser) {
+      var message = hasUnsavedChanges()
+        ? t('admin.msg.reset_confirm_dirty', 'Kaydedilmemis degisiklikler silinecek. Form temizlensin mi?')
+        : t('admin.msg.reset_confirm', 'Form temizlensin mi?');
+      if (!window.confirm(message)) return;
+    }
+
+    titleEl.value = '';
+    dateEl.value = today();
+    slugEl.value = '';
+    manualSlug = false;
+    contentByLang = emptyLanguageMap();
+    extraFrontMatter = {};
+    extraFrontMatterOrder = [];
+    activeLang = 'tr';
+    editorEl.value = '';
+    editingPath = null;
+    editingSha = null;
+
+    setTabState();
+    build();
+    clearDraftFromStorage();
+    markSavedBaseline();
+    applyPostFilter();
+    setStatus(t('admin.msg.editor_cleared', 'Editor temizlendi.'), false);
+  }
+
+  function lockAndExit(){
+    if (!confirmDiscardChanges()) return;
+    window.location.href = homeUrl;
   }
 
   async function handlePostsClick(event){
@@ -1604,48 +1196,30 @@
     var slug = card.getAttribute('data-slug');
 
     if (action === 'edit') {
-      if (!confirmDiscardChanges()) {
-        return;
-      }
-      var loaded = await withBusy(function(){
+      if (!confirmDiscardChanges()) return;
+      await withBusy(function(){
         return loadPost(path);
       });
-      if (loaded === false && window.confirm(t('admin.msg.open_github_edit_fallback', 'Post editora yuklenemedi. GitHub duzenleme sayfasi acilsin mi?'))) {
-        try {
-          var editConfig = getConfig(false);
-          saveConfig();
-          openExternalPage(githubRepoWebBase(editConfig) + '/edit/' + encodeURIComponent(editConfig.branch) + '/' + encodePath(path));
-        } catch (e) {
-          setStatus(e.message || t('admin.msg.github_web_edit_failed', 'GitHub duzenleme sayfasi acilamadi.'), true);
-        }
-      }
       return;
     }
 
     if (action === 'view') {
       if (slug) {
         openExternalPage('/blog/' + encodeURIComponent(slug) + '/');
-      } else {
-        try {
-          var viewConfig = getConfig(false);
-          saveConfig();
-          openExternalPage(githubRepoWebBase(viewConfig) + '/blob/' + encodeURIComponent(viewConfig.branch) + '/' + encodePath(path));
-        } catch (e) {
-          setStatus(e.message || t('admin.msg.view_failed', 'Post acilamadi.'), true);
-        }
       }
       return;
     }
 
     if (action === 'delete') {
-      if (!tokenEl.value.trim()) {
-        openGithubWebDeleteForPath(path);
+      if (!getToken()) {
+        openWebDelete(path);
         return;
       }
 
       if (!window.confirm(t('admin.msg.confirm_delete_selected', 'Secili post silinsin mi?'))) {
         return;
       }
+
       try {
         await withBusy(async function(){
           await deletePath(path, sha || null);
@@ -1653,47 +1227,46 @@
             resetForm(false);
           }
           setStatus(t('admin.msg.deleted_path', 'Post silindi: {path}', { path: path }), false);
-          await refreshPosts();
+          await refreshPosts({ silent: true });
+          applyPostFilter();
         });
       } catch (e) {
         if (isLikelyGithubAuthError(e)) {
           setStatus(
-            t('admin.msg.delete_auth_fallback', 'API ile silme basarisiz. GitHub web silme sayfasini kullanabilirsiniz.'),
+            t('admin.msg.delete_auth_fallback', 'Panel ici silme basarisiz. Web silme ekranina yonlendiriyorum.'),
             true
           );
-          openGithubWebDeleteForPath(path);
+          openWebDelete(path);
           return;
         }
+
         setStatus(e.message || t('admin.msg.delete_failed', 'Silme basarisiz.'), true);
       }
     }
   }
 
   function initialize(){
-    var saved = loadConfig();
-    ownerEl.value = saved.owner;
-    repoEl.value = saved.repo;
-    branchEl.value = saved.branch;
-    syncTokenPersistUi();
-    tokenEl.value = loadSavedToken();
-
+    tokenEl.value = loadSessionToken();
     dateEl.value = today();
+
     setTabState();
     build();
     markSavedBaseline();
-    setStatus(t('admin.status.ready', 'Hazir'), false);
-    setConnectionStatus(t('admin.connection.not_ready', 'Hazir degil'), false);
+    syncSessionUi();
 
-    if (realtimeToggleEl) {
-      realtimeToggleEl.checked = realtimeEnabled;
+    setStatus(
+      getToken()
+        ? t('admin.msg.direct_mode_ready', 'Panel ici kaydetme ve silme hazir.')
+        : t('admin.msg.readonly_mode', 'Yazilari acip duzenleyebilirsin. Kaydet ve sil eylemleri web commit ekranina yonlenir.'),
+      false
+    );
+
+    if (!maybeRestoreDraft()) {
+      build();
+      markSavedBaseline();
     }
-    updateRepoLabel();
-    applyWriteActionState();
-    if (!tokenEl.value.trim()) {
-      setStatus(t('admin.msg.readonly_mode', 'Listeleme ve duzenleme acik. Token yoksa "GitHub\'da..." butonlariyla devam edin; API publish/sil icin token gerekir.'), false);
-    }
-    updateRealtimeStamp();
-    maybeRestoreDraft();
+
+    refreshPosts().catch(function(){});
   }
 
   titleEl.addEventListener('input', function(){
@@ -1716,132 +1289,67 @@
     });
   });
 
-  var testBtn = document.getElementById('github-test');
+  tokenEl.addEventListener('input', function(){
+    saveSessionToken(tokenEl.value);
+    syncSessionUi();
+  });
+
+  if (postSearchEl) {
+    postSearchEl.addEventListener('input', applyPostFilter);
+  }
+
   var refreshBtn = document.getElementById('admin-refresh');
   var saveBtn = document.getElementById('admin-save');
   var deleteBtn = document.getElementById('admin-delete');
-  var githubWebNewActionBtn = document.getElementById('admin-github-web-new');
-  var githubWebEditActionBtn = document.getElementById('admin-github-web-edit');
-  var githubWebDeleteActionBtn = document.getElementById('admin-github-web-delete');
-  var buildBtn = document.getElementById('admin-build');
-  var copyBtn = document.getElementById('admin-copy');
-  var downloadBtn = document.getElementById('admin-download');
   var resetBtn = document.getElementById('admin-reset');
+  var newBtn = document.getElementById('admin-new');
   var lockBtn = document.getElementById('admin-lock');
   var topLockBtn = document.getElementById('admin-logout-top');
 
-  if (testBtn) testBtn.addEventListener('click', function(){
-    withBusy(testConnection).catch(function(){});
-  });
-  if (refreshBtn) refreshBtn.addEventListener('click', function(){
-    withBusy(refreshPosts).catch(function(){});
-  });
-  if (saveBtn) saveBtn.addEventListener('click', function(){
-    if (!tokenEl.value.trim()) {
-      openGithubWebEdit().catch(function(){});
-      return;
-    }
-    withBusy(publishPost).catch(function(){});
-  });
-  if (deleteBtn) deleteBtn.addEventListener('click', function(){
-    if (!tokenEl.value.trim()) {
-      openGithubWebDelete();
-      return;
-    }
-    withBusy(deleteCurrent).catch(function(){});
-  });
-  if (githubWebNewActionBtn) githubWebNewActionBtn.addEventListener('click', function(){
-    openGithubWebNew().catch(function(){});
-  });
-  if (githubWebEditActionBtn) githubWebEditActionBtn.addEventListener('click', function(){
-    openGithubWebEdit().catch(function(){});
-  });
-  if (githubWebDeleteActionBtn) githubWebDeleteActionBtn.addEventListener('click', openGithubWebDelete);
-  if (buildBtn) buildBtn.addEventListener('click', build);
-  if (copyBtn) copyBtn.addEventListener('click', copyOutput);
-  if (downloadBtn) downloadBtn.addEventListener('click', downloadOutput);
-  if (resetBtn) resetBtn.addEventListener('click', function(){ resetForm(true); });
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', function(){
+      withBusy(refreshPosts).catch(function(){});
+    });
+  }
+
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function(){
+      withBusy(publishPost).catch(function(){});
+    });
+  }
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', function(){
+      withBusy(deleteCurrent).catch(function(){});
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function(){
+      resetForm(true);
+    });
+  }
+
+  if (newBtn) {
+    newBtn.addEventListener('click', function(){
+      if (!confirmDiscardChanges()) return;
+      resetForm(false);
+    });
+  }
+
   if (lockBtn) lockBtn.addEventListener('click', lockAndExit);
   if (topLockBtn) topLockBtn.addEventListener('click', lockAndExit);
-  if (postSearchEl) postSearchEl.addEventListener('input', applyPostFilter);
-  if (realtimeToggleEl) realtimeToggleEl.addEventListener('change', function(){
-    applyRealtimePreference(realtimeToggleEl.checked);
-  });
-
-  [ownerEl, repoEl, branchEl].forEach(function(el){
-    el.addEventListener('change', function(){
-      saveConfig();
-      updateRepoLabel();
-      if (realtimeEnabled) {
-        startRealtimeSync();
-      } else {
-        updateRealtimeStamp();
-      }
-    });
-  });
-
-  tokenEl.addEventListener('input', function(){
-    persistCurrentToken();
-    applyWriteActionState();
-    updateRealtimeStamp();
-  });
-
-  tokenEl.addEventListener('change', function(){
-    persistCurrentToken();
-    applyWriteActionState();
-    if (realtimeEnabled) {
-      startRealtimeSync();
-    } else {
-      updateRealtimeStamp();
-    }
-  });
-
-  if (tokenPersistEl) tokenPersistEl.addEventListener('change', function(){
-    setTokenPersistEnabled(tokenPersistEl.checked);
-    setStatus(
-      tokenPersistEnabled
-        ? t('admin.msg.token_persist_on', 'Token bu tarayicida hatirlanacak.')
-        : t('admin.msg.token_persist_off', 'Token sadece bu sekmede tutulacak.'),
-      false
-    );
-  });
-
-  if (tokenClearEl) tokenClearEl.addEventListener('click', clearStoredToken);
 
   postsListEl.addEventListener('click', handlePostsClick);
+
   document.addEventListener('langchange', function(){
     setTabState();
+    syncSessionUi();
     updateEditingLabel();
-    applyWriteActionState();
-    updateRepoLabel();
     applyPostFilter();
-    updateRealtimeStamp();
   });
+
+  window.addEventListener('beforeunload', saveDraftNow);
 
   initialize();
-  withBusy(function(){
-    return refreshPosts();
-  }).catch(function(){});
-  startRealtimeSync();
-
-  window.addEventListener('focus', function(){
-    runRealtimeSync();
-  });
-
-  document.addEventListener('visibilitychange', function(){
-    if (document.visibilityState === 'visible') {
-      runRealtimeSync();
-    }
-  });
-
-  window.addEventListener('beforeunload', function(event){
-    if (hasUnsavedChanges()) {
-      event.preventDefault();
-      event.returnValue = '';
-      saveDraftNow();
-    } else {
-      clearDraftSaveTimer();
-    }
-    stopRealtimeSync();
-  });
 })();
