@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CAD / Technical Drawing — Kagan Bagdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <meta name="description" content="CAD and technical drawing portfolio notes by Kagan Bagdemir focused on automotive parts, dimensions, tolerances, and manufacturing readability.">
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=4">
+  <meta name="color-scheme" content="light dark">
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <nav class="flex flex-wrap items-center gap-3">
+        <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+        <a href="/dev/" class="text-sm theme-text-muted transition"
+           data-lang-text
+           data-lang-text-tr="Tum Isler"
+           data-lang-text-de="Alle Arbeiten"
+           data-lang-text-en="All Work"
+           data-lang-text-nl="All Work"
+           data-lang-text-ja="All Work">Tum Isler</a>
+      </nav>
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <label for="lang-select-cad" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-cad" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="mt-6 rounded-2xl border theme-card fx-hero p-5 sm:p-7" data-animate style="--stagger:0.4">
+      <p class="text-xs uppercase tracking-widest signal-tag">Design / Manufacturing</p>
+      <h1 class="mt-3 text-3xl font-semibold safe-wrap sm:text-5xl"
+          data-lang-text
+          data-lang-text-tr="CAD / Teknik Cizim Portfoyu"
+          data-lang-text-de="CAD / Technische Zeichnung Portfolio"
+          data-lang-text-en="CAD / Technical Drawing Portfolio"
+          data-lang-text-nl="CAD / Technical Drawing Portfolio"
+          data-lang-text-ja="CAD / Technical Drawing Portfolio">CAD / Teknik Cizim Portfoyu</h1>
+      <p class="mt-4 max-w-3xl theme-text-soft safe-wrap"
+         data-lang-text
+         data-lang-text-tr="Bu alan teknik cizimi sadece gorsel modelleme degil; olculendirme, tolerans dusuncesi ve uretilebilirlik acisindan nasil ele aldigimi gostermek icin ayrildi."
+         data-lang-text-de="Dieser Bereich zeigt, wie ich technische Zeichnungen nicht nur als Modellierung, sondern als Sprache fuer Bemassung, Toleranzen und Fertigbarkeit verstehe."
+         data-lang-text-en="This section shows how I approach technical drawings not only as modeling output, but as a language for dimensions, tolerances, and manufacturability."
+         data-lang-text-nl="This section shows how I approach technical drawings not only as modeling output, but as a language for dimensions, tolerances, and manufacturability."
+         data-lang-text-ja="This section shows how I approach technical drawings not only as modeling output, but as a language for dimensions, tolerances, and manufacturability.">Bu alan teknik cizimi sadece gorsel modelleme degil; olculendirme, tolerans dusuncesi ve uretilebilirlik acisindan nasil ele aldigimi gostermek icin ayrildi.</p>
+    </section>
+
+    <section class="mt-6 grid gap-4 md:grid-cols-3" data-animate style="--stagger:0.8">
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest theme-text-muted">01</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Olculendirme"
+            data-lang-text-de="Bemassung"
+            data-lang-text-en="Dimensioning"
+            data-lang-text-nl="Dimensioning"
+            data-lang-text-ja="Dimensioning">Olculendirme</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Bir parcanin sadece sekli degil, hangi olculerin uretim ve kontrol icin kritik oldugu onemli."
+           data-lang-text-de="Nicht nur die Form eines Bauteils ist wichtig, sondern welche Masse fuer Fertigung und Kontrolle kritisch sind."
+           data-lang-text-en="The point is not only the part shape, but which dimensions matter for manufacturing and inspection."
+           data-lang-text-nl="The point is not only the part shape, but which dimensions matter for manufacturing and inspection."
+           data-lang-text-ja="The point is not only the part shape, but which dimensions matter for manufacturing and inspection.">Bir parcanin sadece sekli degil, hangi olculerin uretim ve kontrol icin kritik oldugu onemli.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest theme-text-muted">02</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Tolerans mantigi"
+            data-lang-text-de="Toleranzlogik"
+            data-lang-text-en="Tolerance logic"
+            data-lang-text-nl="Tolerance logic"
+            data-lang-text-ja="Tolerance logic">Tolerans mantigi</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Gereksiz dar tolerans maliyeti artirir; gereksiz genis tolerans ise montaj ve kalite riskini buyutur."
+           data-lang-text-de="Zu enge Toleranzen erhoehen Kosten; zu weite Toleranzen erhoehen Montage- und Qualitaetsrisiken."
+           data-lang-text-en="Overly tight tolerances increase cost; overly loose tolerances increase assembly and quality risk."
+           data-lang-text-nl="Overly tight tolerances increase cost; overly loose tolerances increase assembly and quality risk."
+           data-lang-text-ja="Overly tight tolerances increase cost; overly loose tolerances increase assembly and quality risk.">Gereksiz dar tolerans maliyeti artirir; gereksiz genis tolerans ise montaj ve kalite riskini buyutur.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest theme-text-muted">03</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Uretilebilirlik"
+            data-lang-text-de="Fertigbarkeit"
+            data-lang-text-en="Manufacturability"
+            data-lang-text-nl="Manufacturability"
+            data-lang-text-ja="Manufacturability">Uretilebilirlik</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Cizim, uretim ve kalite ekiplerinin ayni parcayi ayni sekilde anlamasini saglamali."
+           data-lang-text-de="Die Zeichnung soll Fertigung und Qualitaet helfen, dasselbe Bauteil gleich zu verstehen."
+           data-lang-text-en="A drawing should help manufacturing and quality teams understand the same part in the same way."
+           data-lang-text-nl="A drawing should help manufacturing and quality teams understand the same part in the same way."
+           data-lang-text-ja="A drawing should help manufacturing and quality teams understand the same part in the same way.">Cizim, uretim ve kalite ekiplerinin ayni parcayi ayni sekilde anlamasini saglamali.</p>
+      </article>
+    </section>
+
+    <section class="mt-6 rounded-2xl border theme-card p-5 sm:p-6" data-animate style="--stagger:1.1">
+      <h2 class="text-2xl font-semibold safe-wrap"
+          data-lang-text
+          data-lang-text-tr="Bu sayfaya eklenecek somut cizimler"
+          data-lang-text-de="Konkrete Zeichnungen fuer diese Seite"
+          data-lang-text-en="Concrete drawings to add here"
+          data-lang-text-nl="Concrete drawings to add here"
+          data-lang-text-ja="Concrete drawings to add here">Bu sayfaya eklenecek somut cizimler</h2>
+      <div class="mt-4 grid gap-3 md:grid-cols-2">
+        <p class="rounded-xl border theme-border p-4 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Otomotiv veya makine parcasi icin olculendirilmis teknik cizim ornegi."
+           data-lang-text-de="Technische Zeichnung eines Automotive- oder Maschinenbauteils mit Bemassung."
+           data-lang-text-en="Dimensioned technical drawing for an automotive or mechanical part."
+           data-lang-text-nl="Dimensioned technical drawing for an automotive or mechanical part."
+           data-lang-text-ja="Dimensioned technical drawing for an automotive or mechanical part.">Otomotiv veya makine parcasi icin olculendirilmis teknik cizim ornegi.</p>
+        <p class="rounded-xl border theme-border p-4 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Ayni parca icin tolerans secimi ve nedenleri."
+           data-lang-text-de="Toleranzauswahl fuer dasselbe Bauteil mit Begruendung."
+           data-lang-text-en="Tolerance choices for the same part with reasoning."
+           data-lang-text-nl="Tolerance choices for the same part with reasoning."
+           data-lang-text-ja="Tolerance choices for the same part with reasoning.">Ayni parca icin tolerans secimi ve nedenleri.</p>
+      </div>
+    </section>
+  </main>
+
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=3"></script>
+<script>
+document.body.classList.add('initial-anim');
+requestAnimationFrame(function(){
+  document.body.classList.add('initial-anim-run');
+});
+</script>
+</body>
+</html>

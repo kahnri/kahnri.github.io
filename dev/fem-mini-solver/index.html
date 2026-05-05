@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FEM Mini-Solver — Kagan Bagdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <meta name="description" content="Interactive 2D truss FEM mini-solver by Kagan Bagdemir with stiffness assembly, displacement, reaction, and stress outputs.">
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=4">
+  <link rel="stylesheet" href="/assets/projects/fem-mini-solver/fem.css?v=1">
+  <meta name="color-scheme" content="light dark">
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <main class="fem-shell mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <nav class="flex flex-wrap items-center gap-3">
+        <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+        <a href="/dev/warehouse-kpi-dashboard/" class="text-sm theme-text-muted transition"
+           data-lang-text
+           data-lang-text-tr="Warehouse KPI"
+           data-lang-text-de="Warehouse KPI"
+           data-lang-text-en="Warehouse KPI"
+           data-lang-text-nl="Warehouse KPI"
+           data-lang-text-ja="Warehouse KPI">Warehouse KPI</a>
+      </nav>
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <label for="lang-select-fem" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-fem" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="fem-hero mt-6" data-animate style="--stagger:0.4">
+      <div>
+        <p class="fem-kicker"
+           data-lang-text
+           data-lang-text-tr="Engineering / Computation"
+           data-lang-text-de="Engineering / Computation"
+           data-lang-text-en="Engineering / Computation"
+           data-lang-text-nl="Engineering / Computation"
+           data-lang-text-ja="Engineering / Computation">Engineering / Computation</p>
+        <h1 class="mt-3 text-3xl font-semibold leading-tight safe-wrap sm:text-4xl"
+            data-lang-text
+            data-lang-text-tr="FEM Mini-Solver: 2D cubuk sistemini matristen sonuca coz."
+            data-lang-text-de="FEM Mini-Solver: 2D-Stabwerk von Matrix bis Ergebnis."
+            data-lang-text-en="FEM Mini-Solver: solve a 2D truss from matrix to result."
+            data-lang-text-nl="FEM Mini-Solver: solve a 2D truss from matrix to result."
+            data-lang-text-ja="FEM Mini-Solver: solve a 2D truss from matrix to result.">FEM Mini-Solver: 2D cubuk sistemini matristen sonuca coz.</h1>
+        <p class="fem-lead theme-text-soft mt-4 safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Bu V1, kucuk ama gercek bir sonlu eleman zinciri kurar: global rijitlik matrisi, mesnet sartlari, yer degistirme, mesnet reaksiyonu ve eleman gerilmesi."
+           data-lang-text-de="Diese V1 zeigt eine kleine, aber echte FEM-Kette: globale Steifigkeitsmatrix, Randbedingungen, Verschiebung, Lagerreaktion und Elementspannung."
+           data-lang-text-en="This V1 runs a small but real finite-element chain: global stiffness matrix, supports, displacement, support reaction, and element stress."
+           data-lang-text-nl="This V1 runs a small but real finite-element chain: global stiffness matrix, supports, displacement, support reaction, and element stress."
+           data-lang-text-ja="This V1 runs a small but real finite-element chain: global stiffness matrix, supports, displacement, support reaction, and element stress.">Bu V1, kucuk ama gercek bir sonlu eleman zinciri kurar: global rijitlik matrisi, mesnet sartlari, yer degistirme, mesnet reaksiyonu ve eleman gerilmesi.</p>
+        <div class="fem-pill-row mt-5">
+          <span class="fem-pill">Python / NumPy</span>
+          <span class="fem-pill">2D Truss</span>
+          <span class="fem-pill">6 DOF</span>
+          <span class="fem-pill">GitHub Pages Demo</span>
+        </div>
+      </div>
+
+      <aside class="fem-panel theme-card border rounded-lg p-5">
+        <p class="fem-kicker"
+           data-lang-text
+           data-lang-text-tr="V1 kabul kriteri"
+           data-lang-text-de="V1 Abnahmekriterien"
+           data-lang-text-en="V1 acceptance"
+           data-lang-text-nl="V1 acceptance"
+           data-lang-text-ja="V1 acceptance">V1 kabul kriteri</p>
+        <div class="fem-check-list mt-4">
+          <p data-lang-text
+             data-lang-text-tr="Singular olmayan 3 elemanli bracket modeli."
+             data-lang-text-de="Nicht-singulaeres Bracket-Modell mit 3 Elementen."
+             data-lang-text-en="Non-singular 3-element bracket model."
+             data-lang-text-nl="Non-singular 3-element bracket model."
+             data-lang-text-ja="Non-singular 3-element bracket model.">Singular olmayan 3 elemanli bracket modeli.</p>
+          <p data-lang-text
+             data-lang-text-tr="Yer degistirme, reaksiyon ve gerilme sayisal cikti olarak gorunur."
+             data-lang-text-de="Verschiebung, Reaktion und Spannung sind numerisch sichtbar."
+             data-lang-text-en="Displacement, reaction, and stress are visible as numeric outputs."
+             data-lang-text-nl="Displacement, reaction, and stress are visible as numeric outputs."
+             data-lang-text-ja="Displacement, reaction, and stress are visible as numeric outputs.">Yer degistirme, reaksiyon ve gerilme sayisal cikti olarak gorunur.</p>
+          <p data-lang-text
+             data-lang-text-tr="Python referans solver ile web demosu ayni fiziksel modeli cozer."
+             data-lang-text-de="Python-Referenzsolver und Web-Demo loesen dasselbe physikalische Modell."
+             data-lang-text-en="The Python reference solver and web demo solve the same physical model."
+             data-lang-text-nl="The Python reference solver and web demo solve the same physical model."
+             data-lang-text-ja="The Python reference solver and web demo solve the same physical model.">Python referans solver ile web demosu ayni fiziksel modeli cozer.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="fem-workbench mt-6" aria-labelledby="fem-model-title" data-animate style="--stagger:0.8">
+      <article class="fem-panel fem-visual-panel theme-card border rounded-lg p-4 sm:p-5">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p class="fem-kicker"
+               data-lang-text
+               data-lang-text-tr="Canli model"
+               data-lang-text-de="Live-Modell"
+               data-lang-text-en="Live model"
+               data-lang-text-nl="Live model"
+               data-lang-text-ja="Live model">Canli model</p>
+            <h2 id="fem-model-title" class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Uc cubuklu 2D bracket"
+                data-lang-text-de="2D-Bracket mit drei Staeben"
+                data-lang-text-en="Three-bar 2D bracket"
+                data-lang-text-nl="Three-bar 2D bracket"
+                data-lang-text-ja="Three-bar 2D bracket">Uc cubuklu 2D bracket</h2>
+          </div>
+          <p class="fem-status" id="solver-status">Solved</p>
+        </div>
+        <div class="fem-svg-frame mt-4">
+          <svg id="fem-svg" class="fem-svg" viewBox="0 0 720 420" role="img" aria-label="2D truss FEM model"></svg>
+        </div>
+        <div class="fem-legend mt-4">
+          <span><i class="fem-legend-line fem-legend-line--base"></i><span data-lang-text data-lang-text-tr="Referans geometri" data-lang-text-de="Referenzgeometrie" data-lang-text-en="Reference geometry" data-lang-text-nl="Reference geometry" data-lang-text-ja="Reference geometry">Referans geometri</span></span>
+          <span><i class="fem-legend-line fem-legend-line--tension"></i><span data-lang-text data-lang-text-tr="Cekme" data-lang-text-de="Zug" data-lang-text-en="Tension" data-lang-text-nl="Tension" data-lang-text-ja="Tension">Cekme</span></span>
+          <span><i class="fem-legend-line fem-legend-line--compression"></i><span data-lang-text data-lang-text-tr="Basma" data-lang-text-de="Druck" data-lang-text-en="Compression" data-lang-text-nl="Compression" data-lang-text-ja="Compression">Basma</span></span>
+        </div>
+      </article>
+
+      <form class="fem-panel fem-controls theme-card border rounded-lg p-4 sm:p-5" id="fem-controls">
+        <p class="fem-kicker"
+           data-lang-text
+           data-lang-text-tr="Parametreler"
+           data-lang-text-de="Parameter"
+           data-lang-text-en="Parameters"
+           data-lang-text-nl="Parameters"
+           data-lang-text-ja="Parameters">Parametreler</p>
+        <div class="fem-control-list mt-4">
+          <label class="fem-control" for="e-gpa">
+            <span data-lang-text data-lang-text-tr="Elastisite modulu" data-lang-text-de="Elastizitaetsmodul" data-lang-text-en="Elastic modulus" data-lang-text-nl="Elastic modulus" data-lang-text-ja="Elastic modulus">Elastisite modulu</span>
+            <output id="e-gpa-value">210 GPa</output>
+            <input id="e-gpa" type="range" min="70" max="210" step="10" value="210">
+          </label>
+          <label class="fem-control" for="area-mm2">
+            <span data-lang-text data-lang-text-tr="Kesit alani" data-lang-text-de="Querschnittsflaeche" data-lang-text-en="Cross-section area" data-lang-text-nl="Cross-section area" data-lang-text-ja="Cross-section area">Kesit alani</span>
+            <output id="area-mm2-value">2500 mm2</output>
+            <input id="area-mm2" type="range" min="800" max="5000" step="100" value="2500">
+          </label>
+          <label class="fem-control" for="load-y-kn">
+            <span data-lang-text data-lang-text-tr="Dikey yuk" data-lang-text-de="Vertikale Last" data-lang-text-en="Vertical load" data-lang-text-nl="Vertical load" data-lang-text-ja="Vertical load">Dikey yuk</span>
+            <output id="load-y-kn-value">12 kN</output>
+            <input id="load-y-kn" type="range" min="4" max="30" step="1" value="12">
+          </label>
+          <label class="fem-control" for="load-x-kn">
+            <span data-lang-text data-lang-text-tr="Yatay yuk" data-lang-text-de="Horizontale Last" data-lang-text-en="Horizontal load" data-lang-text-nl="Horizontal load" data-lang-text-ja="Horizontal load">Yatay yuk</span>
+            <output id="load-x-kn-value">0 kN</output>
+            <input id="load-x-kn" type="range" min="-8" max="8" step="1" value="0">
+          </label>
+          <label class="fem-control" for="deform-scale">
+            <span data-lang-text data-lang-text-tr="Deformasyon buyutme" data-lang-text-de="Deformationsvergroesserung" data-lang-text-en="Deformation magnifier" data-lang-text-nl="Deformation magnifier" data-lang-text-ja="Deformation magnifier">Deformasyon buyutme</span>
+            <output id="deform-scale-value">1800x</output>
+            <input id="deform-scale" type="range" min="400" max="3200" step="100" value="1800">
+          </label>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-5">
+          <button class="px-4 py-2 rounded-lg border theme-button-accent" id="reset-model" type="button"
+                  data-lang-text
+                  data-lang-text-tr="Varsayilan"
+                  data-lang-text-de="Standard"
+                  data-lang-text-en="Reset"
+                  data-lang-text-nl="Reset"
+                  data-lang-text-ja="Reset">Varsayilan</button>
+          <a class="px-4 py-2 rounded-lg border theme-button" href="/assets/projects/fem-mini-solver/python/fem_solver.py"
+             data-lang-text
+             data-lang-text-tr="Python kodu"
+             data-lang-text-de="Python-Code"
+             data-lang-text-en="Python code"
+             data-lang-text-nl="Python code"
+             data-lang-text-ja="Python code">Python kodu</a>
+        </div>
+      </form>
+    </section>
+
+    <section class="fem-grid fem-grid--metrics mt-6" aria-label="FEM result metrics" data-animate style="--stagger:1.1">
+      <article class="fem-panel fem-metric theme-card border rounded-lg p-4">
+        <p class="fem-mini-label" data-lang-text data-lang-text-tr="Maks. yer degistirme" data-lang-text-de="Max. Verschiebung" data-lang-text-en="Max displacement" data-lang-text-nl="Max displacement" data-lang-text-ja="Max displacement">Maks. yer degistirme</p>
+        <strong id="max-displacement">--</strong>
+        <span class="theme-text-muted" id="max-displacement-note">Node C</span>
+      </article>
+      <article class="fem-panel fem-metric theme-card border rounded-lg p-4">
+        <p class="fem-mini-label" data-lang-text data-lang-text-tr="Maks. gerilme" data-lang-text-de="Max. Spannung" data-lang-text-en="Max stress" data-lang-text-nl="Max stress" data-lang-text-ja="Max stress">Maks. gerilme</p>
+        <strong id="max-stress">--</strong>
+        <span class="theme-text-muted" id="max-stress-note">Element</span>
+      </article>
+      <article class="fem-panel fem-metric theme-card border rounded-lg p-4">
+        <p class="fem-mini-label" data-lang-text data-lang-text-tr="Denge kontrolu" data-lang-text-de="Gleichgewicht" data-lang-text-en="Equilibrium check" data-lang-text-nl="Equilibrium check" data-lang-text-ja="Equilibrium check">Denge kontrolu</p>
+        <strong id="reaction-balance">--</strong>
+        <span class="theme-text-muted" id="reaction-balance-note">Fx / Fy</span>
+      </article>
+    </section>
+
+    <section class="fem-grid fem-grid--tables mt-6" data-animate style="--stagger:1.4">
+      <article class="fem-panel theme-card border rounded-lg p-4 sm:p-5">
+        <p class="fem-kicker" data-lang-text data-lang-text-tr="Nodal cikti" data-lang-text-de="Knotenergebnis" data-lang-text-en="Nodal output" data-lang-text-nl="Nodal output" data-lang-text-ja="Nodal output">Nodal cikti</p>
+        <div class="fem-table-wrap mt-4">
+          <table class="fem-table">
+            <thead>
+              <tr>
+                <th>Node</th>
+                <th>Ux [mm]</th>
+                <th>Uy [mm]</th>
+                <th>|U| [mm]</th>
+              </tr>
+            </thead>
+            <tbody id="displacement-rows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="fem-panel theme-card border rounded-lg p-4 sm:p-5">
+        <p class="fem-kicker" data-lang-text data-lang-text-tr="Eleman cikti" data-lang-text-de="Elementergebnis" data-lang-text-en="Element output" data-lang-text-nl="Element output" data-lang-text-ja="Element output">Eleman cikti</p>
+        <div class="fem-table-wrap mt-4">
+          <table class="fem-table">
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>L [m]</th>
+                <th>Stress [MPa]</th>
+                <th>N [kN]</th>
+              </tr>
+            </thead>
+            <tbody id="element-rows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="fem-grid fem-grid--details mt-6" data-animate style="--stagger:1.7">
+      <article class="fem-panel theme-card border rounded-lg p-4 sm:p-5">
+        <p class="fem-kicker"
+           data-lang-text
+           data-lang-text-tr="Muhendis notu"
+           data-lang-text-de="Engineering-Notiz"
+           data-lang-text-en="Engineer note"
+           data-lang-text-nl="Engineer note"
+           data-lang-text-ja="Engineer note">Muhendis notu</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="V1'de hakim olman gereken zincir"
+            data-lang-text-de="Die Kette, die du in V1 beherrschen sollst"
+            data-lang-text-en="The chain to own in V1"
+            data-lang-text-nl="The chain to own in V1"
+            data-lang-text-ja="The chain to own in V1">V1'de hakim olman gereken zincir</h2>
+        <div class="fem-step-list mt-4">
+          <p><strong>1.</strong> <span data-lang-text data-lang-text-tr="Her node iki DOF tasir: x ve y yer degistirmesi." data-lang-text-de="Jeder Knoten traegt zwei DOF: x- und y-Verschiebung." data-lang-text-en="Each node carries two DOFs: x and y displacement." data-lang-text-nl="Each node carries two DOFs: x and y displacement." data-lang-text-ja="Each node carries two DOFs: x and y displacement.">Her node iki DOF tasir: x ve y yer degistirmesi.</span></p>
+          <p><strong>2.</strong> <span data-lang-text data-lang-text-tr="Her eleman kendi rijitligini global koordinata donusturur." data-lang-text-de="Jedes Element transformiert seine Steifigkeit in globale Koordinaten." data-lang-text-en="Each element transforms its stiffness into global coordinates." data-lang-text-nl="Each element transforms its stiffness into global coordinates." data-lang-text-ja="Each element transforms its stiffness into global coordinates.">Her eleman kendi rijitligini global koordinata donusturur.</span></p>
+          <p><strong>3.</strong> <span data-lang-text data-lang-text-tr="Mesnetlenen DOF'lar ayrilir; bilinmeyen yer degistirmeler serbest DOF'lardan cozulur." data-lang-text-de="Fixierte DOF werden getrennt; unbekannte Verschiebungen werden aus freien DOF geloest." data-lang-text-en="Fixed DOFs are separated; unknown displacements are solved on the free DOFs." data-lang-text-nl="Fixed DOFs are separated; unknown displacements are solved on the free DOFs." data-lang-text-ja="Fixed DOFs are separated; unknown displacements are solved on the free DOFs.">Mesnetlenen DOF'lar ayrilir; bilinmeyen yer degistirmeler serbest DOF'lardan cozulur.</span></p>
+          <p><strong>4.</strong> <span data-lang-text data-lang-text-tr="Gerilme, eleman eksenindeki uzama oranindan gelir: sigma = E * epsilon." data-lang-text-de="Spannung kommt aus der Dehnung entlang der Elementachse: sigma = E * epsilon." data-lang-text-en="Stress comes from axial strain: sigma = E * epsilon." data-lang-text-nl="Stress comes from axial strain: sigma = E * epsilon." data-lang-text-ja="Stress comes from axial strain: sigma = E * epsilon.">Gerilme, eleman eksenindeki uzama oranindan gelir: sigma = E * epsilon.</span></p>
+        </div>
+      </article>
+
+      <article class="fem-panel theme-card border rounded-lg p-4 sm:p-5">
+        <p class="fem-kicker"
+           data-lang-text
+           data-lang-text-tr="Referans dogrulama"
+           data-lang-text-de="Referenzpruefung"
+           data-lang-text-en="Reference checks"
+           data-lang-text-nl="Reference checks"
+           data-lang-text-ja="Reference checks">Referans dogrulama</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Python dosyasi iki temel kontrol icerir"
+            data-lang-text-de="Die Python-Datei enthaelt zwei Grundpruefungen"
+            data-lang-text-en="The Python file includes two core checks"
+            data-lang-text-nl="The Python file includes two core checks"
+            data-lang-text-ja="The Python file includes two core checks">Python dosyasi iki temel kontrol icerir</h2>
+        <div class="fem-code-note mt-4">
+          <code>python3 assets/projects/fem-mini-solver/python/fem_solver.py</code>
+        </div>
+        <div class="fem-check-list mt-4">
+          <p data-lang-text
+             data-lang-text-tr="Tek cubuk analitik kontrolu: delta = F L / A E."
+             data-lang-text-de="Analytischer Ein-Stab-Check: delta = F L / A E."
+             data-lang-text-en="Single-bar analytic check: delta = F L / A E."
+             data-lang-text-nl="Single-bar analytic check: delta = F L / A E."
+             data-lang-text-ja="Single-bar analytic check: delta = F L / A E.">Tek cubuk analitik kontrolu: delta = F L / A E.</p>
+          <p data-lang-text
+             data-lang-text-tr="Global denge kontrolu: dis yukler + mesnet reaksiyonlari sifira yakin olmali."
+             data-lang-text-de="Globaler Gleichgewichtscheck: aeussere Lasten + Lagerreaktionen muessen nahe null sein."
+             data-lang-text-en="Global equilibrium check: external loads plus reactions must be near zero."
+             data-lang-text-nl="Global equilibrium check: external loads plus reactions must be near zero."
+             data-lang-text-ja="Global equilibrium check: external loads plus reactions must be near zero.">Global denge kontrolu: dis yukler + mesnet reaksiyonlari sifira yakin olmali.</p>
+        </div>
+      </article>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm">
+      <p class="mini-footer-note">Kagan Bagdemir · FEM Mini-Solver V1 · Python/NumPy + browser demo</p>
+    </footer>
+  </main>
+
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=3"></script>
+<script src="/assets/projects/fem-mini-solver/js/fem-solver.js?v=1"></script>
+<script>
+addEventListener('DOMContentLoaded',function(){
+  document.body.classList.add('initial-anim');
+  requestAnimationFrame(function(){
+    document.body.classList.add('initial-anim-run');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+.fem-shell {
+  max-width: 1180px;
+}
+
+.fem-hero,
+.fem-workbench,
+.fem-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.fem-hero {
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  align-items: stretch;
+}
+
+.fem-workbench {
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.75fr);
+}
+
+.fem-grid--metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fem-grid--tables,
+.fem-grid--details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fem-panel > * {
+  position: relative;
+}
+
+.fem-kicker,
+.fem-mini-label {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--accent-text);
+}
+
+.fem-lead {
+  max-width: 66ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.fem-pill-row,
+.fem-legend,
+.fem-check-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.fem-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--chip-bg);
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.fem-check-list {
+  display: grid;
+}
+
+.fem-check-list p,
+.fem-step-list p {
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+.fem-check-list p,
+.fem-step-list p,
+.fem-code-note {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.fem-svg-frame {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    rgba(255, 255, 255, 0.018);
+  background-size: 28px 28px;
+  overflow: hidden;
+}
+
+.fem-svg {
+  width: 100%;
+  min-height: 360px;
+}
+
+.fem-legend {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.fem-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fem-legend-line {
+  width: 2.2rem;
+  height: 0;
+  border-top: 4px solid;
+  border-radius: 9999px;
+}
+
+.fem-legend-line--base {
+  border-top-style: dashed;
+  border-color: rgba(161, 161, 170, 0.8);
+}
+
+.fem-legend-line--tension {
+  border-color: #fb7185;
+}
+
+.fem-legend-line--compression {
+  border-color: #60a5fa;
+}
+
+.fem-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(16, 185, 129, 0.42);
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-text);
+  font-size: 0.86rem;
+}
+
+.fem-status::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 9999px;
+  background: #34d399;
+}
+
+.fem-control-list,
+.fem-step-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.fem-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 0.75rem;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.fem-control output {
+  color: var(--text-strong);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+}
+
+.fem-control input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: #10b981;
+}
+
+.fem-metric {
+  min-height: 138px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fem-metric strong {
+  color: var(--text-strong);
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.fem-table-wrap {
+  overflow-x: auto;
+}
+
+.fem-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  font-size: 0.9rem;
+}
+
+.fem-table th,
+.fem-table td {
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.fem-table th:first-child,
+.fem-table td:first-child {
+  text-align: left;
+}
+
+.fem-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.fem-table td {
+  color: var(--text-soft);
+}
+
+.fem-code-note code {
+  display: block;
+  overflow-x: auto;
+  color: var(--text-strong);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+  font-size: 0.86rem;
+}
+
+.fem-svg text {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  fill: var(--text-strong);
+}
+
+.fem-node-label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fem-load-label,
+.fem-element-label {
+  font-size: 12px;
+  fill: var(--text-muted);
+}
+
+@media (max-width: 980px) {
+  .fem-hero,
+  .fem-workbench,
+  .fem-grid--tables,
+  .fem-grid--details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .fem-grid--metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .fem-svg {
+    min-height: 300px;
+  }
+
+  .fem-metric {
+    min-height: 0;
+  }
+}

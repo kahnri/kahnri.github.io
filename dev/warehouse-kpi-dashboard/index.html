@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Warehouse KPI Dashboard — Kagan Bağdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=4">
+  <link rel="stylesheet" href="/assets/projects/warehouse-kpi/dashboard.css?v=1">
+  <meta name="color-scheme" content="light dark">
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <main class="dashboard-shell mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <label for="lang-select-dev" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-dev" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="mt-6 rounded-[1.75rem] border theme-card p-5 sm:p-8 dashboard-hero" data-animate style="--stagger:0.4">
+      <div class="dashboard-grid dashboard-grid--hero">
+        <div>
+          <p class="dashboard-kicker"
+             data-lang-text
+             data-lang-text-tr="Operations / Analytics Case"
+             data-lang-text-de="Operations / Analytics Case"
+             data-lang-text-en="Operations / Analytics Case"
+             data-lang-text-nl="Operations / Analytics Case"
+             data-lang-text-ja="Operations / Analytics Case">Operations / Analytics Case</p>
+          <h1 id="dashboard-main-title" class="mt-3 text-3xl font-semibold safe-wrap sm:text-5xl"
+              data-lang-text
+              data-lang-text-tr="Warehouse KPI Dashboard"
+              data-lang-text-de="Warehouse KPI Dashboard"
+              data-lang-text-en="Warehouse KPI Dashboard"
+              data-lang-text-nl="Warehouse KPI Dashboard"
+              data-lang-text-ja="Warehouse KPI Dashboard">Warehouse KPI Dashboard</h1>
+          <p class="dashboard-lead theme-text-soft mt-4 safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Bu sayfa depo operasyonlarindaki ham olay verisini, ekiplerin karar vermesini hizlandiran bir KPI gorunurlugune cevirme denemesi. Amac sadece raporlamak degil; gecikmeyi, backlogu ve servis riskini erken gormek."
+             data-lang-text-de="Diese Seite ist ein Versuch, rohe Warehouse-Events in eine KPI-Sicht zu übersetzen, die Entscheidungen im Team beschleunigt. Das Ziel ist nicht bloß Reporting, sondern Verzögerungen, Backlog und Service-Risiken früh sichtbar zu machen."
+             data-lang-text-en="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early."
+             data-lang-text-nl="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early."
+             data-lang-text-ja="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early.">Bu sayfa depo operasyonlarindaki ham olay verisini, ekiplerin karar vermesini hizlandiran bir KPI gorunurlugune cevirme denemesi. Amac sadece raporlamak degil; gecikmeyi, backlogu ve servis riskini erken gormek.</p>
+          <div class="dashboard-pill-row mt-6">
+            <span class="dashboard-pill"
+                  data-lang-text
+                  data-lang-text-tr="Lead time yerine karar kalitesi"
+                  data-lang-text-de="Nicht nur Lead Time, sondern Entscheidungsqualität"
+                  data-lang-text-en="Not just lead time, but decision quality"
+                  data-lang-text-nl="Not just lead time, but decision quality"
+                  data-lang-text-ja="Not just lead time, but decision quality">Lead time yerine karar kalitesi</span>
+            <span class="dashboard-pill"
+                  data-lang-text
+                  data-lang-text-tr="Mock data + acik metric tanimlari"
+                  data-lang-text-de="Mock-Daten + klare Metric-Definitionen"
+                  data-lang-text-en="Mock data + explicit metric definitions"
+                  data-lang-text-nl="Mock data + explicit metric definitions"
+                  data-lang-text-ja="Mock data + explicit metric definitions">Mock data + acik metric tanimlari</span>
+            <span class="dashboard-pill"
+                  data-lang-text
+                  data-lang-text-tr="Portfolio case study + canli demo"
+                  data-lang-text-de="Portfolio-Case-Study + Live-Demo"
+                  data-lang-text-en="Portfolio case study + live demo"
+                  data-lang-text-nl="Portfolio case study + live demo"
+                  data-lang-text-ja="Portfolio case study + live demo">Portfolio case study + canli demo</span>
+          </div>
+        </div>
+
+        <article class="rounded-2xl border p-5 theme-card">
+          <p class="dashboard-status"><span id="status-text">Demo data active</span></p>
+          <div class="dashboard-stat-list mt-5">
+            <div class="dashboard-stat">
+              <span class="theme-text-muted"
+                    data-lang-text
+                    data-lang-text-tr="Scope"
+                    data-lang-text-de="Scope"
+                    data-lang-text-en="Scope"
+                    data-lang-text-nl="Scope"
+                    data-lang-text-ja="Scope">Scope</span>
+              <strong data-lang-text
+                      data-lang-text-tr="Outbound + inventory"
+                      data-lang-text-de="Outbound + Inventory"
+                      data-lang-text-en="Outbound + inventory"
+                      data-lang-text-nl="Outbound + inventory"
+                      data-lang-text-ja="Outbound + inventory">Outbound + inventory</strong>
+            </div>
+            <div class="dashboard-stat">
+              <span class="theme-text-muted"
+                    data-lang-text
+                    data-lang-text-tr="Gorunumdeki kayitlar"
+                    data-lang-text-de="Datensätze in der Ansicht"
+                    data-lang-text-en="Records in current view"
+                    data-lang-text-nl="Records in current view"
+                    data-lang-text-ja="Records in current view">Gorunumdeki kayitlar</span>
+              <strong id="record-count">—</strong>
+            </div>
+            <div class="dashboard-stat">
+              <span class="theme-text-muted"
+                    data-lang-text
+                    data-lang-text-tr="Veri penceresi"
+                    data-lang-text-de="Datenfenster"
+                    data-lang-text-en="Data window"
+                    data-lang-text-nl="Data window"
+                    data-lang-text-ja="Data window">Veri penceresi</span>
+              <strong id="source-window-value">—</strong>
+            </div>
+            <div class="dashboard-stat">
+              <span class="theme-text-muted"
+                    data-lang-text
+                    data-lang-text-tr="Kaynak karmasi"
+                    data-lang-text-de="Quellenmix"
+                    data-lang-text-en="Source mix"
+                    data-lang-text-nl="Source mix"
+                    data-lang-text-ja="Source mix">Kaynak karmasi</span>
+              <strong id="dataset-summary">—</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-6 dashboard-grid dashboard-grid--hero" data-animate style="--stagger:0.8">
+      <article class="rounded-2xl border theme-card p-5 sm:p-6">
+        <p class="dashboard-kicker"
+           data-lang-text
+           data-lang-text-tr="Bu dashboard hangi sorulara cevap vermeli?"
+           data-lang-text-de="Welche Fragen sollte das Dashboard beantworten?"
+           data-lang-text-en="What questions should this dashboard answer?"
+           data-lang-text-nl="What questions should this dashboard answer?"
+           data-lang-text-ja="What questions should this dashboard answer?">Bu dashboard hangi sorulara cevap vermeli?</p>
+
+        <div data-lang-content="tr" class="dashboard-bullet-list mt-4" style="display:none;">
+          <ul class="dashboard-bullet-list list-disc pl-5">
+            <li>Hangi zone veya vardiya servis seviyesini dusuruyor?</li>
+            <li>Backlog nerede birikiyor ve bugunku risk hangi noktada?</li>
+            <li>Surec performansi sadece gecikme mi, yoksa pick accuracy ve stok dogrulugu da mi sorunlu?</li>
+          </ul>
+        </div>
+        <div data-lang-content="de" class="dashboard-bullet-list mt-4" style="display:none;">
+          <ul class="dashboard-bullet-list list-disc pl-5">
+            <li>Welche Zone oder Schicht drückt das Service-Level nach unten?</li>
+            <li>Wo baut sich Backlog auf und wo liegt das heutige Risiko?</li>
+            <li>Ist nur die Geschwindigkeit kritisch oder auch Picking Accuracy und Bestandsgenauigkeit?</li>
+          </ul>
+        </div>
+        <div data-lang-content="en" class="dashboard-bullet-list mt-4" style="display:none;">
+          <ul class="dashboard-bullet-list list-disc pl-5">
+            <li>Which zone or shift is pulling service level down?</li>
+            <li>Where is backlog accumulating and where is today’s operating risk?</li>
+            <li>Is the issue only speed, or are picking accuracy and inventory accuracy also degrading?</li>
+          </ul>
+        </div>
+        <div data-lang-content="nl" class="dashboard-bullet-list mt-4" style="display:none;">
+          <ul class="dashboard-bullet-list list-disc pl-5">
+            <li>Which zone or shift is pulling service level down?</li>
+            <li>Where is backlog accumulating and where is today’s operating risk?</li>
+            <li>Is the issue only speed, or are picking accuracy and inventory accuracy also degrading?</li>
+          </ul>
+        </div>
+        <div data-lang-content="ja" class="dashboard-bullet-list mt-4" style="display:none;">
+          <ul class="dashboard-bullet-list list-disc pl-5">
+            <li>Which zone or shift is pulling service level down?</li>
+            <li>Where is backlog accumulating and where is today’s operating risk?</li>
+            <li>Is the issue only speed, or are picking accuracy and inventory accuracy also degrading?</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="rounded-2xl border theme-card p-5 sm:p-6">
+        <p class="dashboard-kicker"
+           data-lang-text
+           data-lang-text-tr="Canli filtreler"
+           data-lang-text-de="Live-Filter"
+           data-lang-text-en="Live filters"
+           data-lang-text-nl="Live filters"
+           data-lang-text-ja="Live filters">Canli filtreler</p>
+        <div class="dashboard-filter-grid mt-4">
+          <div class="dashboard-filter">
+            <label id="filter-window-label" for="filter-window">Zaman penceresi</label>
+            <select id="filter-window" class="px-3 py-2 rounded-xl border theme-input"></select>
+          </div>
+          <div class="dashboard-filter">
+            <label id="filter-zone-label" for="filter-zone">Bolge</label>
+            <select id="filter-zone" class="px-3 py-2 rounded-xl border theme-input"></select>
+          </div>
+          <div class="dashboard-filter">
+            <label id="filter-shift-label" for="filter-shift">Vardiya</label>
+            <select id="filter-shift" class="px-3 py-2 rounded-xl border theme-input"></select>
+          </div>
+        </div>
+        <p class="dashboard-note theme-text-muted mt-4 safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Tum KPI'lar ayni secili veri penceresinden yeniden hesaplanir. Bu nokta mulakatta onemlidir: filtre sadece charti degil, metric mantigini da etkiler."
+           data-lang-text-de="Alle KPIs werden aus demselben gefilterten Datenfenster neu berechnet. Genau das ist im Interview wichtig: Der Filter ändert nicht nur das Chart, sondern die Kennzahlenlogik selbst."
+           data-lang-text-en="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself."
+           data-lang-text-nl="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself."
+           data-lang-text-ja="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself.">Tum KPI'lar ayni secili veri penceresinden yeniden hesaplanir. Bu nokta mulakatta onemlidir: filtre sadece charti degil, metric mantigini da etkiler.</p>
+      </article>
+    </section>
+
+    <div id="dashboard-loading" class="dashboard-loading mt-6" data-animate style="--stagger:1.1">Mock veri ve KPI hesaplari yukleniyor...</div>
+    <div id="dashboard-error" class="dashboard-error dashboard-hidden mt-6"></div>
+
+    <div id="dashboard-content" class="dashboard-hidden">
+      <section class="mt-6">
+        <div id="dashboard-metrics" class="dashboard-grid dashboard-grid--metrics"></div>
+      </section>
+
+      <section class="mt-6 dashboard-grid dashboard-grid--charts">
+        <article class="rounded-2xl border theme-card p-5 sm:p-6 dashboard-chart">
+          <div>
+            <p class="dashboard-kicker"
+               data-lang-text
+               data-lang-text-tr="Gunluk servis seviyesi trendi"
+               data-lang-text-de="Täglicher Service-Level-Trend"
+               data-lang-text-en="Daily service-level trend"
+               data-lang-text-nl="Daily service-level trend"
+               data-lang-text-ja="Daily service-level trend">Gunluk servis seviyesi trendi</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="On-time shipment dalgalanmasi"
+                data-lang-text-de="Schwankung der On-time-Shipment-Rate"
+                data-lang-text-en="On-time shipment movement"
+                data-lang-text-nl="On-time shipment movement"
+                data-lang-text-ja="On-time shipment movement">On-time shipment dalgalanmasi</h2>
+            <p id="trend-subtitle" class="mt-2 theme-text-muted safe-wrap">Barlar sevk edilen siparis sayisini, cizgi ise gunluk on-time shipment oranini gosterir.</p>
+          </div>
+          <div id="trend-chart"></div>
+          <div id="trend-legend" class="dashboard-chart-legend"></div>
+        </article>
+
+        <article class="rounded-2xl border theme-card p-5 sm:p-6 dashboard-chart">
+          <div>
+            <p class="dashboard-kicker"
+               data-lang-text
+               data-lang-text-tr="Bottleneck görünümü"
+               data-lang-text-de="Bottleneck-Ansicht"
+               data-lang-text-en="Bottleneck view"
+               data-lang-text-nl="Bottleneck view"
+               data-lang-text-ja="Bottleneck view">Bottleneck görünümü</p>
+            <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Zone bazli backlog"
+                data-lang-text-de="Backlog nach Zone"
+                data-lang-text-en="Backlog by zone"
+                data-lang-text-nl="Backlog by zone"
+                data-lang-text-ja="Backlog by zone">Zone bazli backlog</h2>
+            <p id="breakdown-subtitle" class="mt-2 theme-text-muted safe-wrap">Zone bazli backlog ve service seviyesi kirilimi.</p>
+          </div>
+          <div id="breakdown-chart"></div>
+        </article>
+      </section>
+
+      <section class="mt-6 dashboard-grid dashboard-grid--details">
+        <article class="rounded-2xl border theme-card p-5 sm:p-6">
+          <p class="dashboard-kicker"
+             data-lang-text
+             data-lang-text-tr="Decision signals"
+             data-lang-text-de="Decision Signals"
+             data-lang-text-en="Decision signals"
+             data-lang-text-nl="Decision signals"
+             data-lang-text-ja="Decision signals">Decision signals</p>
+          <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+              data-lang-text
+              data-lang-text-tr="Bu ekrandan cikarilabilecek ilk yorumlar"
+              data-lang-text-de="Erste Interpretationen aus dem Dashboard"
+              data-lang-text-en="First takeaways from the dashboard"
+              data-lang-text-nl="First takeaways from the dashboard"
+              data-lang-text-ja="First takeaways from the dashboard">Bu ekrandan cikarilabilecek ilk yorumlar</h2>
+          <p id="insight-subtitle" class="mt-2 theme-text-muted safe-wrap">Bu bolum sadece sayi gostermek yerine karar sinyali uretir.</p>
+          <div id="insight-list" class="mt-4"></div>
+        </article>
+
+        <article class="rounded-2xl border theme-card p-5 sm:p-6">
+          <p class="dashboard-kicker"
+             data-lang-text
+             data-lang-text-tr="Data model"
+             data-lang-text-de="Datenmodell"
+             data-lang-text-en="Data model"
+             data-lang-text-nl="Data model"
+             data-lang-text-ja="Data model">Data model</p>
+          <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+              data-lang-text
+              data-lang-text-tr="KPI'lar hangi olaylardan türetiliyor?"
+              data-lang-text-de="Aus welchen Events werden die KPIs abgeleitet?"
+              data-lang-text-en="Which events produce these KPIs?"
+              data-lang-text-nl="Which events produce these KPIs?"
+              data-lang-text-ja="Which events produce these KPIs?">KPI'lar hangi olaylardan türetiliyor?</h2>
+          <div class="dashboard-data-model mt-4">
+            <div class="dashboard-data-box">
+              <strong>orders</strong>
+              <p class="theme-text-muted safe-wrap"><span class="dashboard-code">order_id</span>, <span class="dashboard-code">created_at</span>, <span class="dashboard-code">promised_ship_at</span>, <span class="dashboard-code">shipped_at</span>, <span class="dashboard-code">zone</span>, <span class="dashboard-code">shift</span>, <span class="dashboard-code">lines</span>, <span class="dashboard-code">pick_errors</span></p>
+            </div>
+            <div class="dashboard-data-box">
+              <strong>receipts</strong>
+              <p class="theme-text-muted safe-wrap"><span class="dashboard-code">receipt_id</span>, <span class="dashboard-code">received_at</span>, <span class="dashboard-code">available_at</span>, <span class="dashboard-code">zone</span>, <span class="dashboard-code">shift</span>, <span class="dashboard-code">units</span></p>
+            </div>
+            <div class="dashboard-data-box">
+              <strong>inventory_checks</strong>
+              <p class="theme-text-muted safe-wrap"><span class="dashboard-code">check_id</span>, <span class="dashboard-code">checked_at</span>, <span class="dashboard-code">system_units</span>, <span class="dashboard-code">counted_units</span>, <span class="dashboard-code">zone</span>, <span class="dashboard-code">shift</span></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-6 rounded-2xl border theme-card p-5 sm:p-6">
+        <p class="dashboard-kicker"
+           data-lang-text
+           data-lang-text-tr="Metric definitions"
+           data-lang-text-de="Metric Definitions"
+           data-lang-text-en="Metric definitions"
+           data-lang-text-nl="Metric definitions"
+           data-lang-text-ja="Metric definitions">Metric definitions</p>
+        <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Metriklerin formulu ve yorumu"
+            data-lang-text-de="Formeln und Interpretation der Kennzahlen"
+            data-lang-text-en="Metric formulas and interpretation"
+            data-lang-text-nl="Metric formulas and interpretation"
+            data-lang-text-ja="Metric formulas and interpretation">Metriklerin formulu ve yorumu</h2>
+        <div class="dashboard-definition-list mt-5">
+          <div class="dashboard-definition-item">
+            <strong>On-time shipment %</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: zamaninda cikmis sevkiyat / toplam sevk edilen siparis. Servis seviyesinin ilk gostergesidir."
+               data-lang-text-de="Formel: termingerecht versandte Sendungen / alle versandten Aufträge. Ein erster Indikator für das Service-Level."
+               data-lang-text-en="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level."
+               data-lang-text-nl="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level."
+               data-lang-text-ja="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level.">Formul: zamaninda cikmis sevkiyat / toplam sevk edilen siparis. Servis seviyesinin ilk gostergesidir.</p>
+          </div>
+          <div class="dashboard-definition-item">
+            <strong>Order cycle time</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: ortalama shipped_at - created_at. Surecin hizini ve darboğaz etkisini gostermek icin kullanilir."
+               data-lang-text-de="Formel: Durchschnitt aus shipped_at - created_at. Zeigt Geschwindigkeit und Bottleneck-Effekt des Prozesses."
+               data-lang-text-en="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect."
+               data-lang-text-nl="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect."
+               data-lang-text-ja="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect.">Formul: ortalama shipped_at - created_at. Surecin hizini ve darboğaz etkisini gostermek icin kullanilir.</p>
+          </div>
+          <div class="dashboard-definition-item">
+            <strong>Picking accuracy %</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: (pick line - hata) / pick line. Hizli ama hatali islem yapan bir operasyonu yakalamak icin kritik."
+               data-lang-text-de="Formel: (Pick-Linien - Fehler) / Pick-Linien. Wichtig, um schnelle, aber fehleranfällige Abläufe sichtbar zu machen."
+               data-lang-text-en="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations."
+               data-lang-text-nl="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations."
+               data-lang-text-ja="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations.">Formul: (pick line - hata) / pick line. Hizli ama hatali islem yapan bir operasyonu yakalamak icin kritik.</p>
+          </div>
+          <div class="dashboard-definition-item">
+            <strong>Open backlog</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: secili pencerede hala kapanmamis siparis sayisi. Geciken operasyon yukunu anlamak icin kullanilir."
+               data-lang-text-de="Formel: Anzahl der im gewählten Zeitraum noch offenen Aufträge. Hilft, operative Last und Rückstau zu erkennen."
+               data-lang-text-en="Formula: number of orders still open inside the selected window. Helps show delayed operational load."
+               data-lang-text-nl="Formula: number of orders still open inside the selected window. Helps show delayed operational load."
+               data-lang-text-ja="Formula: number of orders still open inside the selected window. Helps show delayed operational load.">Formul: secili pencerede hala kapanmamis siparis sayisi. Geciken operasyon yukunu anlamak icin kullanilir.</p>
+          </div>
+          <div class="dashboard-definition-item">
+            <strong>Inventory accuracy %</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: tam eslesen sayimlar / toplam cycle count. Sayim sapmasi varsa servis riski sadece outbound tarafinda degildir demektir."
+               data-lang-text-de="Formel: exakte Counts / alle Cycle Counts. Wenn hier Abweichungen auftreten, liegt das Risiko nicht nur im Outbound."
+               data-lang-text-en="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue."
+               data-lang-text-nl="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue."
+               data-lang-text-ja="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue.">Formul: tam eslesen sayimlar / toplam cycle count. Sayim sapmasi varsa servis riski sadece outbound tarafinda degildir demektir.</p>
+          </div>
+          <div class="dashboard-definition-item">
+            <strong>Dock-to-stock</strong>
+            <p class="theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Formul: ortalama available_at - received_at. Inbound tarafindaki yavaslik downstream performansi da bozar."
+               data-lang-text-de="Formel: Durchschnitt aus available_at - received_at. Langsame Inbound-Prozesse wirken direkt auf nachgelagerte Performance."
+               data-lang-text-en="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too."
+               data-lang-text-nl="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too."
+               data-lang-text-ja="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too.">Formul: ortalama available_at - received_at. Inbound tarafindaki yavaslik downstream performansi da bozar.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=3"></script>
+<script src="/assets/projects/warehouse-kpi/js/dashboard.js?v=1"></script>
+<script>
+addEventListener('DOMContentLoaded',function(){
+  document.body.classList.add('initial-anim');
+  requestAnimationFrame(function(){
+    document.body.classList.add('initial-anim-run');
+  });
+});
+</script>
+</body>
+</html>
