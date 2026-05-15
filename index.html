@@ -12,8 +12,7 @@ layout: null
 (function(){
   try{
     const stored=localStorage.getItem('theme-preference');
-    const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme=stored|| (systemDark?'dark':'light');
+    const theme=stored||'dark';
     document.documentElement.dataset.theme=theme;
   }catch(e){
     document.documentElement.dataset.theme='dark';
@@ -441,7 +440,7 @@ layout: null
 
 <script src="assets/i18n.js?v=6"></script>
 <script src="assets/lang.js?v=6"></script>
-<script src="assets/theme.js?v=4"></script>
+<script src="assets/theme.js?v=5"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 

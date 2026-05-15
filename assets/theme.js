@@ -91,13 +91,7 @@
     const btn = ensureButton();
     setupToggle(btn);
 
-    try {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(event){
-        if (!storedTheme) {
-          setTheme(event.matches ? 'dark' : 'light', false);
-        }
-      });
-    } catch (e) {}
+    // Dark is the portfolio's primary theme; system theme changes should not flip it.
   }
 
   storedTheme = readStored();
