@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kronolojik Basarimlar - Kagan Bagdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const systemDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme=stored||(systemDark?'dark':'light');
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <meta name="description" content="Kagan Bagdemir'in egitim, is deneyimi, projeler ve teknik gelisim kronolojisi.">
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=8">
+  <meta name="color-scheme" content="light dark">
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <a href="/blog/" class="px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog">Blog</a>
+        <label for="lang-select-chronology" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-chronology" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="chronology-hero mt-6 rounded-3xl border theme-card fx-hero p-5 sm:p-8" data-animate style="--stagger:0.4">
+      <p class="text-xs uppercase tracking-widest signal-tag"
+         data-lang-text
+         data-lang-text-tr="Kronolojik Basarimlar"
+         data-lang-text-de="Chronologische Erfolge"
+         data-lang-text-en="Chronological Achievements"
+         data-lang-text-nl="Chronological Achievements"
+         data-lang-text-ja="Chronological Achievements">Kronolojik Basarimlar</p>
+      <h1 class="mt-3 text-3xl font-black leading-tight safe-wrap sm:text-5xl"
+          data-lang-text
+          data-lang-text-tr="Yil yil teknik gelisim, is deneyimi ve projeler."
+          data-lang-text-de="Jahr fuer Jahr: technisches Wachstum, Erfahrung und Projekte."
+          data-lang-text-en="Year by year: technical growth, experience, and projects."
+          data-lang-text-nl="Year by year: technical growth, experience, and projects."
+          data-lang-text-ja="Year by year: technical growth, experience, and projects.">Yil yil teknik gelisim, is deneyimi ve projeler.</h1>
+      <p class="mt-4 max-w-3xl theme-text-soft safe-wrap"
+         data-lang-text
+         data-lang-text-tr="Bu sayfa CV'nin daha okunur ve etkileyici versiyonu gibi dusunuldu: hangi yilda ne yaptim, hangi beceriyi kazandim ve bugün hedefledigim data, logistics IT ve engineering rollerine nasil baglaniyor?"
+         data-lang-text-de="Diese Seite ist als lesbare, staerkere Version meines Lebenslaufs gedacht: Was habe ich wann gemacht, welche Kompetenzen sind entstanden und wie passt das zu Data-, Logistics-IT- und Engineering-Rollen?"
+         data-lang-text-en="Think of this page as a stronger, easier-to-read version of my CV: what I did each year, what I learned, and how it connects to data, logistics IT, and engineering roles."
+         data-lang-text-nl="Think of this page as a stronger, easier-to-read version of my CV: what I did each year, what I learned, and how it connects to data, logistics IT, and engineering roles."
+         data-lang-text-ja="Think of this page as a stronger, easier-to-read version of my CV: what I did each year, what I learned, and how it connects to data, logistics IT, and engineering roles.">Bu sayfa CV'nin daha okunur ve etkileyici versiyonu gibi dusunuldu: hangi yilda ne yaptim, hangi beceriyi kazandim ve bugün hedefledigim data, logistics IT ve engineering rollerine nasil baglaniyor?</p>
+      <div class="chronology-hero-actions mt-6 flex flex-wrap gap-3">
+        <a class="px-4 py-2 rounded-xl border theme-button-accent"
+           href="/cv.pdf"
+           target="_blank"
+           rel="noopener"
+           data-i18n="btn.cv">CV / Ozgecmis (PDF)</a>
+        <a class="px-4 py-2 rounded-xl border theme-button"
+           href="/#selected-work"
+           data-lang-text
+           data-lang-text-tr="Secili Islere Git"
+           data-lang-text-de="Ausgewaehlte Arbeiten ansehen"
+           data-lang-text-en="View Selected Work"
+           data-lang-text-nl="View Selected Work"
+           data-lang-text-ja="View Selected Work">Secili Islere Git</a>
+      </div>
+    </section>
+
+    <section class="chronology-summary mt-6 grid gap-4 md:grid-cols-3" aria-label="Kisa ozet" data-animate style="--stagger:0.8">
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Focus</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Engineering + Data"
+            data-lang-text-de="Engineering + Data"
+            data-lang-text-en="Engineering + Data"
+            data-lang-text-nl="Engineering + Data"
+            data-lang-text-ja="Engineering + Data">Engineering + Data</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Makine muhendisligi temelini veri, dashboard ve lojistik sistemlerle birlestiriyorum."
+           data-lang-text-de="Ich verbinde Maschinenbau-Grundlagen mit Daten, Dashboards und Logistiksystemen."
+           data-lang-text-en="I combine mechanical engineering fundamentals with data, dashboards, and logistics systems."
+           data-lang-text-nl="I combine mechanical engineering fundamentals with data, dashboards, and logistics systems."
+           data-lang-text-ja="I combine mechanical engineering fundamentals with data, dashboards, and logistics systems.">Makine muhendisligi temelini veri, dashboard ve lojistik sistemlerle birlestiriyorum.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Industry</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Otomotiv ve filtre uretimi"
+            data-lang-text-de="Automotive und Filterproduktion"
+            data-lang-text-en="Automotive and filter production"
+            data-lang-text-nl="Automotive and filter production"
+            data-lang-text-ja="Automotive and filter production">Otomotiv ve filtre uretimi</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Mercedes partner servisinden R&D filtre tasarimina uzanan pratik deneyim."
+           data-lang-text-de="Praktische Erfahrung vom Mercedes-Vertragspartner bis zur R&D-Filterkonstruktion."
+           data-lang-text-en="Practical experience from a Mercedes service partner to R&D filter design."
+           data-lang-text-nl="Practical experience from a Mercedes service partner to R&D filter design."
+           data-lang-text-ja="Practical experience from a Mercedes service partner to R&D filter design.">Mercedes partner servisinden R&D filtre tasarimina uzanan pratik deneyim.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Direction</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Logistics IT hedefi"
+            data-lang-text-de="Zielrichtung Logistics IT"
+            data-lang-text-en="Logistics IT direction"
+            data-lang-text-nl="Logistics IT direction"
+            data-lang-text-ja="Logistics IT direction">Logistics IT hedefi</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="TU Dortmund masteriyle uretim, lojistik ve data analitigini ayni hatta topluyorum."
+           data-lang-text-de="Mit dem Master an der TU Dortmund fuehre ich Produktion, Logistik und Data Analytics zusammen."
+           data-lang-text-en="With my TU Dortmund master's path, I bring production, logistics, and data analytics together."
+           data-lang-text-nl="With my TU Dortmund master's path, I bring production, logistics, and data analytics together."
+           data-lang-text-ja="With my TU Dortmund master's path, I bring production, logistics, and data analytics together.">TU Dortmund masteriyle uretim, lojistik ve data analitigini ayni hatta topluyorum.</p>
+      </article>
+    </section>
+
+    <section class="chronology-shell mt-6 rounded-3xl border theme-card p-5 sm:p-7" data-animate style="--stagger:1">
+      <div class="chronology-heading">
+        <p class="text-xs uppercase tracking-widest theme-text-muted"
+           data-lang-text
+           data-lang-text-tr="Timeline"
+           data-lang-text-de="Zeitleiste"
+           data-lang-text-en="Timeline"
+           data-lang-text-nl="Timeline"
+           data-lang-text-ja="Timeline">Timeline</p>
+        <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="CV'deki donum noktalari, daha net bir hikaye olarak."
+            data-lang-text-de="Die Stationen aus meinem Lebenslauf als klare Geschichte."
+            data-lang-text-en="My CV milestones as a clearer story."
+            data-lang-text-nl="My CV milestones as a clearer story."
+            data-lang-text-ja="My CV milestones as a clearer story.">CV'deki donum noktalari, daha net bir hikaye olarak.</h2>
+      </div>
+
+      <div class="chronology-timeline mt-6">
+        <article class="chronology-item chronology-item-now">
+          <div class="chronology-year">2026</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Portfolio / Projects</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Portfolyoyu teknik case-study seviyesine tasidim."
+                data-lang-text-de="Ich habe mein Portfolio auf Case-Study-Niveau gebracht."
+                data-lang-text-en="I moved my portfolio toward technical case studies."
+                data-lang-text-nl="I moved my portfolio toward technical case studies."
+                data-lang-text-ja="I moved my portfolio toward technical case studies.">Portfolyoyu teknik case-study seviyesine tasidim.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Warehouse KPI Dashboard, FEM Mini-Solver, CAD / Teknik Cizim sayfalari ve cok dilli bachelor thesis sayfasi ile yeteneklerimi sadece listelemek yerine calisan orneklerle gostermeye basladim."
+               data-lang-text-de="Mit Warehouse KPI Dashboard, FEM Mini-Solver, CAD-/Zeichnungsseite und mehrsprachiger Bachelorarbeit zeige ich Kompetenzen nicht nur als Liste, sondern als nachvollziehbare Beispiele."
+               data-lang-text-en="With the Warehouse KPI Dashboard, FEM Mini-Solver, CAD page, and multilingual bachelor thesis page, I started showing my skills through concrete work instead of only listing them."
+               data-lang-text-nl="With the Warehouse KPI Dashboard, FEM Mini-Solver, CAD page, and multilingual bachelor thesis page, I started showing my skills through concrete work instead of only listing them."
+               data-lang-text-ja="With the Warehouse KPI Dashboard, FEM Mini-Solver, CAD page, and multilingual bachelor thesis page, I started showing my skills through concrete work instead of only listing them.">Warehouse KPI Dashboard, FEM Mini-Solver, CAD / Teknik Cizim sayfalari ve cok dilli bachelor thesis sayfasi ile yeteneklerimi sadece listelemek yerine calisan orneklerle gostermeye basladim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2024 - Heute</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Dortmund / Work</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Pruser Event Gruppe ile Dortmund'da calisma deneyimi."
+                data-lang-text-de="Studienbegleitende Arbeit bei der Prueser Event Gruppe in Dortmund."
+                data-lang-text-en="Student-side work experience with Prueser Event Gruppe in Dortmund."
+                data-lang-text-nl="Student-side work experience with Prueser Event Gruppe in Dortmund."
+                data-lang-text-ja="Student-side work experience with Prueser Event Gruppe in Dortmund.">Pruser Event Gruppe ile Dortmund'da calisma deneyimi.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Etkinlik ve organizasyon tarafinda calisarak Almanya'daki profesyonel iletisim, musteri temaslari ve zaman baskisi altinda koordinasyon becerilerimi guclendirdim."
+               data-lang-text-de="In Event und Organisation staerke ich professionelle Kommunikation, Kundenkontakt und Koordination unter Zeitdruck in Deutschland."
+               data-lang-text-en="Through event and organization work, I strengthen professional communication, customer contact, and coordination under time pressure in Germany."
+               data-lang-text-nl="Through event and organization work, I strengthen professional communication, customer contact, and coordination under time pressure in Germany."
+               data-lang-text-ja="Through event and organization work, I strengthen professional communication, customer contact, and coordination under time pressure in Germany.">Etkinlik ve organizasyon tarafinda calisarak Almanya'daki profesyonel iletisim, musteri temaslari ve zaman baskisi altinda koordinasyon becerilerimi guclendirdim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2023 - Heute</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">TU Dortmund</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="M.Sc. Maschinenbau - IT in Produktion und Logistik."
+                data-lang-text-de="M.Sc. Maschinenbau - IT in Produktion und Logistik."
+                data-lang-text-en="M.Sc. Mechanical Engineering - IT in Production and Logistics."
+                data-lang-text-nl="M.Sc. Mechanical Engineering - IT in Production and Logistics."
+                data-lang-text-ja="M.Sc. Mechanical Engineering - IT in Production and Logistics.">M.Sc. Maschinenbau - IT in Produktion und Logistik.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Simulasyon, uretim yonetimi ve surec optimizasyonu odagiyla makine muhendisligi arka planimi logistics IT ve data analytics tarafina tasiyorum."
+               data-lang-text-de="Mit Fokus auf Simulation in der Logistik, Produktionsmanagement und Prozessoptimierung bringe ich meinen Maschinenbau-Hintergrund in Richtung Logistics IT und Data Analytics."
+               data-lang-text-en="With a focus on logistics simulation, production management, and process optimization, I connect my mechanical engineering background with logistics IT and data analytics."
+               data-lang-text-nl="With a focus on logistics simulation, production management, and process optimization, I connect my mechanical engineering background with logistics IT and data analytics."
+               data-lang-text-ja="With a focus on logistics simulation, production management, and process optimization, I connect my mechanical engineering background with logistics IT and data analytics.">Simulasyon, uretim yonetimi ve surec optimizasyonu odagiyla makine muhendisligi arka planimi logistics IT ve data analytics tarafina tasiyorum.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2022 - 2023</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">R&D / Automotive</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Filtorq Filter'de R&D Engineer olarak filtre tasarimi."
+                data-lang-text-de="R&D Engineer bei Filtorq Filter: Filterkonstruktion und technische Zeichnung."
+                data-lang-text-en="R&D Engineer at Filtorq Filter: filter design and technical drawings."
+                data-lang-text-nl="R&D Engineer at Filtorq Filter: filter design and technical drawings."
+                data-lang-text-ja="R&D Engineer at Filtorq Filter: filter design and technical drawings.">Filtorq Filter'de R&D Engineer olarak filtre tasarimi.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="SolidWorks ile yeni arac filtrelerinin 3D modellemesini yaptim, akiskan performansini iyilestirmeye yonelik simulasyonlarla calistim ve ISO normlarina uygun teknik cizimler hazirladim."
+               data-lang-text-de="Ich konstruierte Fahrzeugfilter in SolidWorks, arbeitete mit Stroemungssimulationen zur Leistungsoptimierung und erstellte technische Zeichnungen nach ISO-Normen."
+               data-lang-text-en="I designed vehicle filters in SolidWorks, worked with flow simulations for performance optimization, and created technical drawings according to ISO standards."
+               data-lang-text-nl="I designed vehicle filters in SolidWorks, worked with flow simulations for performance optimization, and created technical drawings according to ISO standards."
+               data-lang-text-ja="I designed vehicle filters in SolidWorks, worked with flow simulations for performance optimization, and created technical drawings according to ISO standards.">SolidWorks ile yeni arac filtrelerinin 3D modellemesini yaptim, akiskan performansini iyilestirmeye yonelik simulasyonlarla calistim ve ISO normlarina uygun teknik cizimler hazirladim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2022</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Bachelor Thesis</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="B.Sc. Fahrzeugtechnik ve filtre malzeme parametreleri tezi."
+                data-lang-text-de="B.Sc. Fahrzeugtechnik und Bachelorarbeit zu Filter-Materialparametern."
+                data-lang-text-en="B.Sc. Vehicle Technology and thesis on filter material parameters."
+                data-lang-text-nl="B.Sc. Vehicle Technology and thesis on filter material parameters."
+                data-lang-text-ja="B.Sc. Vehicle Technology and thesis on filter material parameters.">B.Sc. Fahrzeugtechnik ve filtre malzeme parametreleri tezi.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Afyon Kocatepe Universitesi'nde lisansimi tamamladim. Bitirme tezimde arac filtre uretimindeki malzeme parametrelerinin filtrasyon verimliligine etkisini analiz ettim."
+               data-lang-text-de="Ich schloss mein Bachelorstudium an der Afyon Kocatepe Universitaet ab. In der Arbeit analysierte ich den Einfluss von Materialparametern auf die Filtrationseffizienz von Fahrzeugfiltern."
+               data-lang-text-en="I completed my bachelor's degree at Afyon Kocatepe University. My thesis analyzed how material parameters in vehicle filter production affect filtration efficiency."
+               data-lang-text-nl="I completed my bachelor's degree at Afyon Kocatepe University. My thesis analyzed how material parameters in vehicle filter production affect filtration efficiency."
+               data-lang-text-ja="I completed my bachelor's degree at Afyon Kocatepe University. My thesis analyzed how material parameters in vehicle filter production affect filtration efficiency.">Afyon Kocatepe Universitesi'nde lisansimi tamamladim. Bitirme tezimde arac filtre uretimindeki malzeme parametrelerinin filtrasyon verimliligine etkisini analiz ettim.</p>
+            <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button"
+               href="/blog/bachelor-thesis-filter-materials/"
+               data-lang-text
+               data-lang-text-tr="Tez sayfasini ac"
+               data-lang-text-de="Thesis-Seite oeffnen"
+               data-lang-text-en="Open thesis page"
+               data-lang-text-nl="Open thesis page"
+               data-lang-text-ja="Open thesis page">Tez sayfasini ac</a>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2021 - 2022</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Production / Quality</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Filtorq Filter staji: uretim planlama, Lean ve APQP."
+                data-lang-text-de="Praktikum bei Filtorq Filter: Produktionsplanung, Lean und APQP."
+                data-lang-text-en="Internship at Filtorq Filter: production planning, Lean, and APQP."
+                data-lang-text-nl="Internship at Filtorq Filter: production planning, Lean, and APQP."
+                data-lang-text-ja="Internship at Filtorq Filter: production planning, Lean, and APQP.">Filtorq Filter staji: uretim planlama, Lean ve APQP.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Uretim planlamayi destekledim; 5S, Kaizen ve APQP kalite surecleriyle otomotiv uretiminde surec dusuncesi kazandim."
+               data-lang-text-de="Ich unterstuetzte die Produktionsplanung und sammelte mit 5S, Kaizen und APQP praktische Prozess- und Qualitaetserfahrung in der Automotive-Produktion."
+               data-lang-text-en="I supported production planning and gained practical process and quality experience through 5S, Kaizen, and APQP in automotive production."
+               data-lang-text-nl="I supported production planning and gained practical process and quality experience through 5S, Kaizen, and APQP in automotive production."
+               data-lang-text-ja="I supported production planning and gained practical process and quality experience through 5S, Kaizen, and APQP in automotive production.">Uretim planlamayi destekledim; 5S, Kaizen ve APQP kalite surecleriyle otomotiv uretiminde surec dusuncesi kazandim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2019 - 2023</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Business / Systems Thinking</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Ataturk Universitesi B.Sc. Isletme ile teknik bakisa is perspektifi ekledim."
+                data-lang-text-de="B.Sc. Betriebswirtschaftslehre an der Atatuerk Universitaet als Ergaenzung zur Technik."
+                data-lang-text-en="B.Sc. Business Administration at Atatuerk University as a business complement to engineering."
+                data-lang-text-nl="B.Sc. Business Administration at Atatuerk University as a business complement to engineering."
+                data-lang-text-ja="B.Sc. Business Administration at Atatuerk University as a business complement to engineering.">Ataturk Universitesi B.Sc. Isletme ile teknik bakisa is perspektifi ekledim.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Uzaktan egitimle isletme okuyarak operasyon, organizasyon ve karar verme tarafini teknik egitimimle birlikte dusunmeyi ogrendim."
+               data-lang-text-de="Im Fernstudium lernte ich, Operations, Organisation und Entscheidungen zusammen mit meiner technischen Ausbildung zu betrachten."
+               data-lang-text-en="Through distance learning, I learned to view operations, organization, and decision-making together with my technical education."
+               data-lang-text-nl="Through distance learning, I learned to view operations, organization, and decision-making together with my technical education."
+               data-lang-text-ja="Through distance learning, I learned to view operations, organization, and decision-making together with my technical education.">Uzaktan egitimle isletme okuyarak operasyon, organizasyon ve karar verme tarafini teknik egitimimle birlikte dusunmeyi ogrendim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2019</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Mercedes Partner</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Hastalya Automotive staji: hata analizi ve servis surecleri."
+                data-lang-text-de="Praktikum bei Hastalya Automotive: Fehleranalyse und Serviceprozesse."
+                data-lang-text-en="Internship at Hastalya Automotive: diagnostics and service processes."
+                data-lang-text-nl="Internship at Hastalya Automotive: diagnostics and service processes."
+                data-lang-text-ja="Internship at Hastalya Automotive: diagnostics and service processes.">Hastalya Automotive staji: hata analizi ve servis surecleri.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Mercedes yetkili partnerinde arac sistemlerinde hata tespiti, teknik analiz ve bakim sureclerini gozlemleyip destekledim."
+               data-lang-text-de="Bei einem Mercedes-Vertragspartner unterstuetzte ich Fehlerdiagnose, technische Analyse und Wartungsprozesse an Fahrzeugsystemen."
+               data-lang-text-en="At a Mercedes authorized partner, I supported diagnostics, technical analysis, and maintenance processes on vehicle systems."
+               data-lang-text-nl="At a Mercedes authorized partner, I supported diagnostics, technical analysis, and maintenance processes on vehicle systems."
+               data-lang-text-ja="At a Mercedes authorized partner, I supported diagnostics, technical analysis, and maintenance processes on vehicle systems.">Mercedes yetkili partnerinde arac sistemlerinde hata tespiti, teknik analiz ve bakim sureclerini gozlemleyip destekledim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2018 - 2020</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Web / Coding</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Anadolu Universitesi Webdesign & Coding."
+                data-lang-text-de="Anadolu Universitaet: Webdesign & Coding."
+                data-lang-text-en="Anadolu University: Webdesign & Coding."
+                data-lang-text-nl="Anadolu University: Webdesign & Coding."
+                data-lang-text-ja="Anadolu University: Webdesign & Coding.">Anadolu Universitesi Webdesign & Coding.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Yazilim ve web tarafina erken temas ederek bugunku portfolio, dashboard ve teknik demo calismalarimin temelini attim."
+               data-lang-text-de="Der fruehe Kontakt zu Web und Coding bildet heute die Basis fuer Portfolio, Dashboards und technische Demos."
+               data-lang-text-en="Early exposure to web and coding became the basis for my current portfolio, dashboards, and technical demos."
+               data-lang-text-nl="Early exposure to web and coding became the basis for my current portfolio, dashboards, and technical demos."
+               data-lang-text-ja="Early exposure to web and coding became the basis for my current portfolio, dashboards, and technical demos.">Yazilim ve web tarafina erken temas ederek bugunku portfolio, dashboard ve teknik demo calismalarimin temelini attim.</p>
+          </div>
+        </article>
+
+        <article class="chronology-item">
+          <div class="chronology-year">2017</div>
+          <div class="chronology-dot" aria-hidden="true"></div>
+          <div class="chronology-card">
+            <p class="text-xs uppercase tracking-widest signal-tag">Start</p>
+            <h3 class="mt-2 text-xl font-semibold safe-wrap"
+                data-lang-text
+                data-lang-text-tr="Fahrzeugtechnik ile otomotiv ve muhendislik yolculugu basladi."
+                data-lang-text-de="Start in Fahrzeugtechnik: mein Einstieg in Automotive und Engineering."
+                data-lang-text-en="Vehicle Technology: the start of my automotive and engineering path."
+                data-lang-text-nl="Vehicle Technology: the start of my automotive and engineering path."
+                data-lang-text-ja="Vehicle Technology: the start of my automotive and engineering path.">Fahrzeugtechnik ile otomotiv ve muhendislik yolculugu basladi.</h3>
+            <p class="mt-2 theme-text-muted safe-wrap"
+               data-lang-text
+               data-lang-text-tr="Afyon Kocatepe Universitesi'nde arac teknolojisi egitimiyle teknik cizim, sistem mantigi ve otomotiv uretimine giris yaptim."
+               data-lang-text-de="An der Afyon Kocatepe Universitaet begann ich mit Fahrzeugtechnik und baute Grundlagen in Zeichnung, Systemdenken und Automotive auf."
+               data-lang-text-en="At Afyon Kocatepe University, I started building foundations in technical drawing, systems thinking, and automotive engineering."
+               data-lang-text-nl="At Afyon Kocatepe University, I started building foundations in technical drawing, systems thinking, and automotive engineering."
+               data-lang-text-ja="At Afyon Kocatepe University, I started building foundations in technical drawing, systems thinking, and automotive engineering.">Afyon Kocatepe Universitesi'nde arac teknolojisi egitimiyle teknik cizim, sistem mantigi ve otomotiv uretimine giris yaptim.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:1.4">
+      <p>
+        <span data-lang-text
+              data-lang-text-tr="Bu kronoloji CV dosyasindaki bilgiler ve portfolio projeleri temel alinarak hazirlandi."
+              data-lang-text-de="Diese Chronologie basiert auf meinem CV und den Portfolio-Projekten."
+              data-lang-text-en="This chronology is based on my CV and portfolio projects."
+              data-lang-text-nl="This chronology is based on my CV and portfolio projects."
+              data-lang-text-ja="This chronology is based on my CV and portfolio projects.">Bu kronoloji CV dosyasindaki bilgiler ve portfolio projeleri temel alinarak hazirlandi.</span>
+      </p>
+      <p class="mt-2">© <span id="y"></span> Kagan Bağdemir</p>
+    </footer>
+  </main>
+
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=4"></script>
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+document.body.classList.add('initial-anim');
+requestAnimationFrame(function(){
+  document.body.classList.add('initial-anim-run');
+});
+</script>
+</body>
+</html>
