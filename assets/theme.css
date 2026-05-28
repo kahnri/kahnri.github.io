@@ -104,24 +104,23 @@ body > main > header::after {
 .site-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.68rem;
+  gap: 0.72rem;
   min-width: 0;
   color: var(--text-strong);
   text-decoration: none;
 }
 
 .site-brand-mark {
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 2.9rem;
+  height: 2.9rem;
   flex: 0 0 auto;
-  border-radius: 0.92rem;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.34)) drop-shadow(0 0 16px rgba(142, 232, 171, 0.14));
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.38)) drop-shadow(0 0 18px rgba(142, 232, 171, 0.18));
   transition: transform 0.26s ease, filter 0.26s ease;
 }
 
 .site-brand:hover .site-brand-mark {
-  transform: translateY(-1px) rotate(-3deg) scale(1.04);
-  filter: drop-shadow(0 13px 28px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(142, 232, 171, 0.22));
+  transform: translateY(-1px) rotate(-2deg) scale(1.035);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.44)) drop-shadow(0 0 24px rgba(115, 214, 255, 0.2));
 }
 
 .site-brand-copy {
@@ -132,11 +131,15 @@ body > main > header::after {
 
 .site-brand-name {
   color: var(--text-strong);
+  background: linear-gradient(92deg, var(--text-strong), var(--accent-text) 58%, var(--cool-text));
+  -webkit-background-clip: text;
+  background-clip: text;
   font-size: clamp(0.9rem, 1.55vw, 1.08rem);
   font-weight: 950;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.115em;
   line-height: 0.96;
   white-space: nowrap;
+  -webkit-text-fill-color: transparent;
 }
 
 .site-brand-line {
@@ -1780,14 +1783,13 @@ body.initial-anim-run main::before {
   }
 
   .site-brand-mark {
-    width: 2.18rem;
-    height: 2.18rem;
-    border-radius: 0.72rem;
+    width: 2.36rem;
+    height: 2.36rem;
   }
 
   .site-brand-name {
-    font-size: 0.82rem;
-    letter-spacing: 0.07em;
+    font-size: 0.84rem;
+    letter-spacing: 0.075em;
   }
 
   .site-brand-line {

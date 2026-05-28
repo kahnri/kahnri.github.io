@@ -1,33 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="KB">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Kagan Bagdemir KB logo">
   <defs>
-    <linearGradient id="kb-bg" x1="9" y1="7" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#18201a"/>
-      <stop offset="0.48" stop-color="#0b0e0b"/>
-      <stop offset="1" stop-color="#172f2c"/>
+    <linearGradient id="badge-fill" x1="14" y1="10" x2="84" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c281f"/>
+      <stop offset="0.46" stop-color="#070b08"/>
+      <stop offset="1" stop-color="#102f31"/>
     </linearGradient>
-    <linearGradient id="kb-accent" x1="14" y1="16" x2="54" y2="50" gradientUnits="userSpaceOnUse">
+    <linearGradient id="edge" x1="12" y1="18" x2="88" y2="77" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#8ee8ab"/>
-      <stop offset="0.55" stop-color="#73d6ff"/>
+      <stop offset="0.46" stop-color="#73d6ff"/>
       <stop offset="1" stop-color="#f4bd50"/>
     </linearGradient>
-    <filter id="kb-glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="1.6" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <linearGradient id="mono" x1="26" y1="22" x2="80" y2="74" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7fff3"/>
+      <stop offset="0.58" stop-color="#d7f7ff"/>
+      <stop offset="1" stop-color="#8ee8ab"/>
+    </linearGradient>
+    <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M12 0H0V12" fill="none" stroke="#f2f7ef" stroke-width="0.65" opacity="0.12"/>
+    </pattern>
+    <filter id="depth" x="-24%" y="-24%" width="148%" height="148%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.42"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#8ee8ab" flood-opacity="0.16"/>
     </filter>
+    <clipPath id="badge-clip">
+      <path d="M48 5 76 15 91 41 84 72 59 91H27L12 72 5 41 20 15Z"/>
+    </clipPath>
   </defs>
-  <rect width="64" height="64" rx="15" fill="url(#kb-bg)"/>
-  <path d="M10 42 42 10M22 55 56 21" stroke="#8ee8ab" stroke-width="1.1" stroke-linecap="round" opacity="0.18"/>
-  <path d="M9 49H56M9 15H56" stroke="#ffffff" stroke-width="1" opacity="0.07"/>
-  <rect x="7" y="7" width="50" height="50" rx="12" fill="none" stroke="url(#kb-accent)" stroke-width="1.6" opacity="0.9"/>
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#kb-glow)">
-    <path d="M17 15V49" stroke="#f2f7ef" stroke-width="5"/>
-    <path d="M20 32 34 16M20 32 35 48" stroke="url(#kb-accent)" stroke-width="5"/>
-    <path d="M36 15V49" stroke="#f2f7ef" stroke-width="5"/>
-    <path d="M36 16H43C49 16 53 19.5 53 24.5S49 32 43 32H36" stroke="#f2f7ef" stroke-width="4.6"/>
-    <path d="M36 32H44C51 32 55 35.6 55 40.7 55 46.1 50.5 49 43 49H36" stroke="#f2f7ef" stroke-width="4.6"/>
+  <g filter="url(#depth)">
+    <path d="M48 5 76 15 91 41 84 72 59 91H27L12 72 5 41 20 15Z" fill="url(#badge-fill)"/>
+    <g clip-path="url(#badge-clip)">
+      <rect width="96" height="96" fill="url(#grid)"/>
+      <path d="M8 71 72 7M25 92 93 24" stroke="#8ee8ab" stroke-width="1.1" opacity="0.16"/>
+      <path d="M7 39H89M13 63H83" stroke="#73d6ff" stroke-width="0.9" opacity="0.12"/>
+      <circle cx="75" cy="24" r="18" fill="#73d6ff" opacity="0.08"/>
+      <circle cx="28" cy="75" r="22" fill="#8ee8ab" opacity="0.07"/>
+    </g>
+    <path d="M48 5 76 15 91 41 84 72 59 91H27L12 72 5 41 20 15Z" fill="none" stroke="#f2f7ef" stroke-width="1.1" opacity="0.22"/>
+    <path d="M48 9 73 18 86 42 80 69 57 86H30L16 69 10 42 23 18Z" fill="none" stroke="url(#edge)" stroke-width="2.2"/>
   </g>
-  <circle cx="20" cy="32" r="2.6" fill="#f4bd50"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 25V72" stroke="url(#mono)" stroke-width="7.2"/>
+    <path d="M32 48 52 25M32 48 54 72" stroke="url(#edge)" stroke-width="7.2"/>
+    <path d="M57 25V72" stroke="#f7fff3" stroke-width="7.2"/>
+    <path d="M57 25H67.5C76.4 25 82 29.7 82 37.2 82 44.7 76 49 67.6 49H57" stroke="#f7fff3" stroke-width="6.3"/>
+    <path d="M57 49H69.4C79 49 85.5 53.7 85.5 61.2 85.5 69.2 78.7 72 69.2 72H57" stroke="#f7fff3" stroke-width="6.3"/>
+  </g>
+  <g fill="url(#edge)">
+    <circle cx="32" cy="48" r="3.6"/>
+    <circle cx="57" cy="49" r="2.2"/>
+  </g>
+  <path d="M18 24H31M65 82H78" stroke="url(#edge)" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
 </svg>
