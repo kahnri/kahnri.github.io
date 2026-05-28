@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projekte und Ziele - Kagan Bagdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script>
+  (function(){
+    try{
+      const stored=localStorage.getItem('theme-preference');
+      const theme=stored||'dark';
+      document.documentElement.dataset.theme=theme;
+    }catch(e){
+      document.documentElement.dataset.theme='dark';
+    }
+  })();
+  </script>
+  <meta name="description" content="Textfixx and future project roadmap by Kagan Bagdemir.">
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=9">
+  <meta name="color-scheme" content="light dark">
+  <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="projects-goals-page">
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
+      <a href="/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+      <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <a href="/kronolojik-basarimlar/"
+           class="px-3 py-1 rounded-full border theme-button transition"
+           data-lang-text
+           data-lang-text-tr="Basarilar"
+           data-lang-text-de="Erfolge"
+           data-lang-text-en="Achievements"
+           data-lang-text-nl="Achievements"
+           data-lang-text-ja="Achievements">Basarilar</a>
+        <a href="/blog/" class="px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog">Blog</a>
+        <label for="lang-select-projects" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-projects" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
+          <option value="tr" data-i18n="lang.tr">Turkce</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
+          <span data-theme-icon aria-hidden="true">🌙</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="projects-hero mt-6 rounded-3xl border theme-card fx-hero p-5 sm:p-8" data-animate style="--stagger:0.4">
+      <p class="text-xs uppercase tracking-widest signal-tag"
+         data-lang-text
+         data-lang-text-tr="Portfolio Roadmap"
+         data-lang-text-de="Portfolio Roadmap"
+         data-lang-text-en="Portfolio Roadmap"
+         data-lang-text-nl="Portfolio Roadmap"
+         data-lang-text-ja="Portfolio Roadmap">Portfolio Roadmap</p>
+      <h1 class="mt-3 text-3xl font-black leading-tight safe-wrap sm:text-5xl"
+          data-lang-text
+          data-lang-text-tr="Projeler ve hedefler."
+          data-lang-text-de="Projekte und Ziele."
+          data-lang-text-en="Projects and goals."
+          data-lang-text-nl="Projects and goals."
+          data-lang-text-ja="Projects and goals.">Projeler ve hedefler.</h1>
+      <p class="mt-4 max-w-3xl theme-text-soft safe-wrap"
+         data-lang-text
+         data-lang-text-tr="Burasi portfolyonun canli yol haritasi: Textfixx gibi uzerinde calistigim fikirler ve yakinda dolduracagim proje alanlari tek yerde duracak."
+         data-lang-text-de="Das ist die lebendige Roadmap meines Portfolios: aktive Ideen wie Textfixx und vorbereitete Projektplaetze fuer kommende Arbeiten an einem Ort."
+         data-lang-text-en="This is the living roadmap of my portfolio: active ideas like Textfixx and prepared spaces for upcoming projects in one place."
+         data-lang-text-nl="This is the living roadmap of my portfolio: active ideas like Textfixx and prepared spaces for upcoming projects in one place."
+         data-lang-text-ja="This is the living roadmap of my portfolio: active ideas like Textfixx and prepared spaces for upcoming projects in one place.">Burasi portfolyonun canli yol haritasi: Textfixx gibi uzerinde calistigim fikirler ve yakinda dolduracagim proje alanlari tek yerde duracak.</p>
+      <div class="projects-hero-actions mt-6 flex flex-wrap gap-3">
+        <a class="px-4 py-2 rounded-xl border theme-button-accent"
+           href="#textfixx"
+           data-lang-text
+           data-lang-text-tr="Textfixx'e git"
+           data-lang-text-de="Zu Textfixx"
+           data-lang-text-en="Go to Textfixx"
+           data-lang-text-nl="Go to Textfixx"
+           data-lang-text-ja="Go to Textfixx">Textfixx'e git</a>
+        <a class="px-4 py-2 rounded-xl border theme-button"
+           href="#future-projects"
+           data-lang-text
+           data-lang-text-tr="Gelecek proje alanlari"
+           data-lang-text-de="Kommende Projektplaetze"
+           data-lang-text-en="Future project spaces"
+           data-lang-text-nl="Future project spaces"
+           data-lang-text-ja="Future project spaces">Gelecek proje alanlari</a>
+      </div>
+    </section>
+
+    <section class="project-roadmap-stats mt-6 grid gap-4 md:grid-cols-3" aria-label="Roadmap summary" data-animate style="--stagger:0.8">
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Now</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap">Textfixx</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Aktif fikir: yaziyi daha net, dogal ve cok dilli hale getiren yardimci."
+           data-lang-text-de="Aktive Idee: ein Helfer, der Texte klarer, natuerlicher und mehrsprachig macht."
+           data-lang-text-en="Active idea: a helper that makes writing clearer, more natural, and multilingual."
+           data-lang-text-nl="Active idea: a helper that makes writing clearer, more natural, and multilingual."
+           data-lang-text-ja="Active idea: a helper that makes writing clearer, more natural, and multilingual.">Aktif fikir: yaziyi daha net, dogal ve cok dilli hale getiren yardimci.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Next</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="3 hazir proje slotu"
+            data-lang-text-de="3 vorbereitete Projektplaetze"
+            data-lang-text-en="3 prepared project slots"
+            data-lang-text-nl="3 prepared project slots"
+            data-lang-text-ja="3 prepared project slots">3 hazir proje slotu</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Yeni fikir geldiginde kartlar bos sayfa gibi beklemeyecek; hemen doldurulacak alanlari hazir."
+           data-lang-text-de="Neue Ideen starten nicht mehr bei null; die Struktur fuer weitere Projekte ist schon da."
+           data-lang-text-en="New ideas will not start from zero; the structure for more projects is already prepared."
+           data-lang-text-nl="New ideas will not start from zero; the structure for more projects is already prepared."
+           data-lang-text-ja="New ideas will not start from zero; the structure for more projects is already prepared.">Yeni fikir geldiginde kartlar bos sayfa gibi beklemeyecek; hemen doldurulacak alanlari hazir.</p>
+      </article>
+      <article class="rounded-2xl border theme-card p-5">
+        <p class="text-xs uppercase tracking-widest signal-tag">Goal</p>
+        <h2 class="mt-2 text-xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Mulakat hikayesi"
+            data-lang-text-de="Interview Story"
+            data-lang-text-en="Interview story"
+            data-lang-text-nl="Interview story"
+            data-lang-text-ja="Interview story">Mulakat hikayesi</h2>
+        <p class="mt-2 theme-text-muted safe-wrap"
+           data-lang-text
+           data-lang-text-tr="Her proje neden var, ne cozuyor ve hangi beceriyi gosteriyor sorularina cevap verecek."
+           data-lang-text-de="Jedes Projekt soll zeigen: warum es existiert, was es loest und welche Kompetenz dahintersteht."
+           data-lang-text-en="Each project should answer why it exists, what it solves, and which skill it demonstrates."
+           data-lang-text-nl="Each project should answer why it exists, what it solves, and which skill it demonstrates."
+           data-lang-text-ja="Each project should answer why it exists, what it solves, and which skill it demonstrates.">Her proje neden var, ne cozuyor ve hangi beceriyi gosteriyor sorularina cevap verecek.</p>
+      </article>
+    </section>
+
+    <section id="textfixx" class="textfixx-spotlight mt-6 rounded-3xl border theme-card p-5 sm:p-7" data-animate style="--stagger:1">
+      <div class="project-spotlight-grid">
+        <div>
+          <p class="text-xs uppercase tracking-widest signal-tag">Active Build / Writing Tool</p>
+          <h2 class="mt-3 text-3xl font-black safe-wrap sm:text-4xl">Textfixx</h2>
+          <p class="mt-4 theme-text-soft safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Textfixx, yazilari hizlica temizlemek, tonu duzeltmek ve cok dilli hale getirmek icin dusundugum pratik bir yazim yardimcisi."
+             data-lang-text-de="Textfixx ist als praktischer Schreibhelfer gedacht, um Texte schnell zu bereinigen, den Ton zu verbessern und mehrsprachig nutzbar zu machen."
+             data-lang-text-en="Textfixx is a practical writing helper idea for cleaning up text, improving tone, and making writing usable across languages."
+             data-lang-text-nl="Textfixx is a practical writing helper idea for cleaning up text, improving tone, and making writing usable across languages."
+             data-lang-text-ja="Textfixx is a practical writing helper idea for cleaning up text, improving tone, and making writing usable across languages.">Textfixx, yazilari hizlica temizlemek, tonu duzeltmek ve cok dilli hale getirmek icin dusundugum pratik bir yazim yardimcisi.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="rounded-full border theme-chip px-3 py-1 text-sm">Writing UX</span>
+            <span class="rounded-full border theme-chip px-3 py-1 text-sm">Deutsch / English / Turkce</span>
+            <span class="rounded-full border theme-chip px-3 py-1 text-sm">Browser Plugin</span>
+          </div>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3">
+            <div class="project-mini-metric">
+              <span>01</span>
+              <strong data-lang-text data-lang-text-tr="Metin duzeltme" data-lang-text-de="Textkorrektur" data-lang-text-en="Text cleanup" data-lang-text-nl="Text cleanup" data-lang-text-ja="Text cleanup">Metin duzeltme</strong>
+            </div>
+            <div class="project-mini-metric">
+              <span>02</span>
+              <strong data-lang-text data-lang-text-tr="Ton iyilestirme" data-lang-text-de="Ton verbessern" data-lang-text-en="Tone polish" data-lang-text-nl="Tone polish" data-lang-text-ja="Tone polish">Ton iyilestirme</strong>
+            </div>
+            <div class="project-mini-metric">
+              <span>03</span>
+              <strong data-lang-text data-lang-text-tr="Cok dilli destek" data-lang-text-de="Mehrsprachigkeit" data-lang-text-en="Multilingual flow" data-lang-text-nl="Multilingual flow" data-lang-text-ja="Multilingual flow">Cok dilli destek</strong>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a class="px-4 py-2 rounded-xl border theme-button-accent"
+               href="/blog/textfix/"
+               data-lang-text
+               data-lang-text-tr="Blog notunu ac"
+               data-lang-text-de="Blognotiz oeffnen"
+               data-lang-text-en="Open blog note"
+               data-lang-text-nl="Open blog note"
+               data-lang-text-ja="Open blog note">Blog notunu ac</a>
+            <span class="px-4 py-2 rounded-xl border theme-button project-muted-action"
+                  data-lang-text
+                  data-lang-text-tr="Demo yakinda"
+                  data-lang-text-de="Demo folgt"
+                  data-lang-text-en="Demo coming soon"
+                  data-lang-text-nl="Demo coming soon"
+                  data-lang-text-ja="Demo coming soon">Demo yakinda</span>
+          </div>
+        </div>
+
+        <aside class="textfixx-preview rounded-2xl border theme-card p-4" aria-label="Textfixx preview">
+          <div class="preview-window-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <p class="mt-4 text-xs uppercase tracking-widest theme-text-muted">Textfixx Draft</p>
+          <div class="preview-line preview-line-muted mt-3"
+               data-lang-text
+               data-lang-text-tr="Once: Bu mail biraz karisik oldu..."
+               data-lang-text-de="Vorher: Diese Mail klingt noch holprig..."
+               data-lang-text-en="Before: This mail sounds a bit rough..."
+               data-lang-text-nl="Before: This mail sounds a bit rough..."
+               data-lang-text-ja="Before: This mail sounds a bit rough...">Once: Bu mail biraz karisik oldu...</div>
+          <div class="preview-arrow" aria-hidden="true">&darr;</div>
+          <div class="preview-line preview-line-active"
+               data-lang-text
+               data-lang-text-tr="Sonra: Net, saygili ve basvuruya uygun bir metin."
+               data-lang-text-de="Nachher: Klar, freundlich und passend fuer Bewerbungen."
+               data-lang-text-en="After: Clear, polite, and suitable for applications."
+               data-lang-text-nl="After: Clear, polite, and suitable for applications."
+               data-lang-text-ja="After: Clear, polite, and suitable for applications.">Sonra: Net, saygili ve basvuruya uygun bir metin.</div>
+          <div class="preview-orbit" aria-hidden="true"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="future-projects" class="mt-6" data-animate style="--stagger:1.2">
+      <div class="mb-4">
+        <p class="text-xs uppercase tracking-widest theme-text-muted"
+           data-lang-text
+           data-lang-text-tr="Sonradan eklenecek alanlar"
+           data-lang-text-de="Plaetze fuer spaetere Projekte"
+           data-lang-text-en="Spaces for later projects"
+           data-lang-text-nl="Spaces for later projects"
+           data-lang-text-ja="Spaces for later projects">Sonradan eklenecek alanlar</p>
+        <h2 class="mt-2 text-2xl font-semibold safe-wrap"
+            data-lang-text
+            data-lang-text-tr="Siradaki fikirler icin hazir uc kart."
+            data-lang-text-de="Drei vorbereitete Karten fuer die naechsten Ideen."
+            data-lang-text-en="Three prepared cards for the next ideas."
+            data-lang-text-nl="Three prepared cards for the next ideas."
+            data-lang-text-ja="Three prepared cards for the next ideas.">Siradaki fikirler icin hazir uc kart.</h2>
+      </div>
+      <div class="future-project-grid grid gap-4 md:grid-cols-3">
+        <article class="future-project-card rounded-2xl border theme-card p-5">
+          <p class="text-xs uppercase tracking-widest signal-tag">Project Slot 02</p>
+          <h3 class="mt-2 text-xl font-semibold safe-wrap"
+              data-lang-text
+              data-lang-text-tr="Yeni proje alani"
+              data-lang-text-de="Neuer Projektplatz"
+              data-lang-text-en="New project space"
+              data-lang-text-nl="New project space"
+              data-lang-text-ja="New project space">Yeni proje alani</h3>
+          <p class="mt-2 theme-text-muted safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Buraya sonradan proje adi, problem, kullandigim teknoloji ve demo linki eklenecek."
+             data-lang-text-de="Hier kommen spaeter Projektname, Problem, verwendete Technologien und Demo-Link hinein."
+             data-lang-text-en="This will later hold the project name, problem, technologies, and demo link."
+             data-lang-text-nl="This will later hold the project name, problem, technologies, and demo link."
+             data-lang-text-ja="This will later hold the project name, problem, technologies, and demo link.">Buraya sonradan proje adi, problem, kullandigim teknoloji ve demo linki eklenecek.</p>
+        </article>
+        <article class="future-project-card rounded-2xl border theme-card p-5">
+          <p class="text-xs uppercase tracking-widest signal-tag">Project Slot 03</p>
+          <h3 class="mt-2 text-xl font-semibold safe-wrap"
+              data-lang-text
+              data-lang-text-tr="Yeni proje alani"
+              data-lang-text-de="Neuer Projektplatz"
+              data-lang-text-en="New project space"
+              data-lang-text-nl="New project space"
+              data-lang-text-ja="New project space">Yeni proje alani</h3>
+          <p class="mt-2 theme-text-muted safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Bu kart, ileride eklenecek data, lojistik veya engineering odakli bir case icin hazir."
+             data-lang-text-de="Diese Karte ist fuer einen spaeteren Case aus Data, Logistik oder Engineering vorbereitet."
+             data-lang-text-en="This card is ready for a later data, logistics, or engineering case."
+             data-lang-text-nl="This card is ready for a later data, logistics, or engineering case."
+             data-lang-text-ja="This card is ready for a later data, logistics, or engineering case.">Bu kart, ileride eklenecek data, lojistik veya engineering odakli bir case icin hazir.</p>
+        </article>
+        <article class="future-project-card rounded-2xl border theme-card p-5">
+          <p class="text-xs uppercase tracking-widest signal-tag">Project Slot 04</p>
+          <h3 class="mt-2 text-xl font-semibold safe-wrap"
+              data-lang-text
+              data-lang-text-tr="Yeni proje alani"
+              data-lang-text-de="Neuer Projektplatz"
+              data-lang-text-en="New project space"
+              data-lang-text-nl="New project space"
+              data-lang-text-ja="New project space">Yeni proje alani</h3>
+          <p class="mt-2 theme-text-muted safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Gelistirme notlari, hedef, durum ve yayin linki icin temiz bir alan olarak ayrildi."
+             data-lang-text-de="Reserviert fuer Entwicklungsnotizen, Ziel, Status und spaeteren Veroeffentlichungslink."
+             data-lang-text-en="Reserved for development notes, goal, status, and a future release link."
+             data-lang-text-nl="Reserved for development notes, goal, status, and a future release link."
+             data-lang-text-ja="Reserved for development notes, goal, status, and a future release link.">Gelistirme notlari, hedef, durum ve yayin linki icin temiz bir alan olarak ayrildi.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:1.4">
+      <p>
+        <span data-lang-text
+              data-lang-text-tr="Bu sayfa aktif projeleri ve yakinda eklenecek fikirleri takip etmek icin hazirlandi."
+              data-lang-text-de="Diese Seite sammelt aktive Projekte und Ideen, die spaeter ausgebaut werden."
+              data-lang-text-en="This page tracks active projects and ideas that will be expanded later."
+              data-lang-text-nl="This page tracks active projects and ideas that will be expanded later."
+              data-lang-text-ja="This page tracks active projects and ideas that will be expanded later.">Bu sayfa aktif projeleri ve yakinda eklenecek fikirleri takip etmek icin hazirlandi.</span>
+      </p>
+      <p class="mt-2">© <span id="y"></span> Kagan Bagdemir</p>
+    </footer>
+  </main>
+
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=5"></script>
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+document.body.classList.add('initial-anim');
+requestAnimationFrame(function(){
+  document.body.classList.add('initial-anim-run');
+});
+</script>
+</body>
+</html>
