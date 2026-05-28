@@ -7,6 +7,7 @@ layout: null
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title data-i18n-title="meta.title.blog">Blog — Kagan Bağdemir</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=2">
   <script>
   (function(){
     try{
@@ -19,7 +20,7 @@ layout: null
   })();
   </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
-  <link rel="stylesheet" href="/assets/theme.css?v=9">
+  <link rel="stylesheet" href="/assets/theme.css?v=10">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
@@ -27,7 +28,19 @@ layout: null
 <body>
   <main class="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
     <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
-      <a href="/" class="text-lg font-bold tracking-wide sm:text-xl">KAGAN BAGDEMIR</a>
+      <a href="/" class="site-brand site-brand-link" aria-label="Kagan Bagdemir ana sayfa">
+        <img class="site-brand-mark" src="/assets/logo-mark.svg?v=1" width="44" height="44" alt="">
+        <span class="site-brand-copy">
+          <span class="site-brand-name">KAGAN BAGDEMIR</span>
+          <span class="site-brand-line"
+                data-lang-text
+                data-lang-text-tr="Data · Lojistik · Engineering"
+                data-lang-text-de="Daten · Logistik · Engineering"
+                data-lang-text-en="Data · Logistics · Engineering"
+                data-lang-text-nl="Data · Logistics · Engineering"
+                data-lang-text-ja="Data · Logistics · Engineering">Data · Lojistik · Engineering</span>
+        </span>
+      </a>
       <div class="flex w-full items-center justify-between gap-3 flex-wrap sm:w-auto sm:justify-end">
         <input id="q" class="order-last w-full px-3 py-2 rounded-lg border theme-input text-sm sm:order-none sm:w-auto md:block"
                type="search" data-i18n-ph="blog.search" placeholder="Ara...">

@@ -96,6 +96,59 @@ body > main > header::after {
   pointer-events: none;
 }
 
+.site-brand-heading {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.68rem;
+  min-width: 0;
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.site-brand-mark {
+  width: 2.65rem;
+  height: 2.65rem;
+  flex: 0 0 auto;
+  border-radius: 0.92rem;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.34)) drop-shadow(0 0 16px rgba(142, 232, 171, 0.14));
+  transition: transform 0.26s ease, filter 0.26s ease;
+}
+
+.site-brand:hover .site-brand-mark {
+  transform: translateY(-1px) rotate(-3deg) scale(1.04);
+  filter: drop-shadow(0 13px 28px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(142, 232, 171, 0.22));
+}
+
+.site-brand-copy {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.site-brand-name {
+  color: var(--text-strong);
+  font-size: clamp(0.9rem, 1.55vw, 1.08rem);
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  line-height: 0.96;
+  white-space: nowrap;
+}
+
+.site-brand-line {
+  color: var(--text-muted);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -1270,7 +1323,8 @@ html[data-theme="light"] body::after {
 .theme-button:focus-visible,
 .theme-button-icon:focus-visible,
 .theme-button-accent:focus-visible,
-.theme-input:focus-visible {
+.theme-input:focus-visible,
+.site-brand:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
   box-shadow: 0 0 0 6px var(--focus-ring-bg);
@@ -1719,6 +1773,25 @@ body.initial-anim-run main::before {
     flex: 0 0 auto;
     font-size: 0.95rem;
     line-height: 1.1;
+  }
+
+  .site-brand {
+    gap: 0.5rem;
+  }
+
+  .site-brand-mark {
+    width: 2.18rem;
+    height: 2.18rem;
+    border-radius: 0.72rem;
+  }
+
+  .site-brand-name {
+    font-size: 0.82rem;
+    letter-spacing: 0.07em;
+  }
+
+  .site-brand-line {
+    display: none;
   }
 
   body > main > header > h1.text-lg {
