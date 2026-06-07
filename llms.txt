@@ -1,0 +1,20 @@
+# Kagan Bağdemir Portfolio
+> Personal portfolio of Kagan Bağdemir, focused on Mechanical Engineering (ITPL), data analytics, logistics IT, warehouse KPI dashboards, FEM, CAD, and manufacturing operations. The site is intended for recruiters, hiring teams, collaborators, and AI assistants that need a concise map of the portfolio.
+
+## Key pages
+- [Home](https://kaganbagdemir.de/): Overview of Kagan Bağdemir's engineering, data analytics, logistics IT, FEM, CAD, and operations profile.
+- [Selected work](https://kaganbagdemir.de/dev/): Index of technical projects and portfolio demos.
+- [Warehouse KPI Dashboard](https://kaganbagdemir.de/dev/warehouse-kpi-dashboard/): Interactive logistics and warehouse KPI demo focused on operational visibility.
+- [FEM Mini-Solver](https://kaganbagdemir.de/dev/fem-mini-solver/): Python/NumPy engineering computation demo for FEM concepts.
+- [CAD / Technical Drawing](https://kaganbagdemir.de/dev/cad-technical-drawing/): Manufacturing-oriented CAD and technical drawing portfolio area.
+- [Bachelor Thesis](https://kaganbagdemir.de/blog/bachelor-thesis-filter-materials/): Bachelor thesis in Turkish, English, and German about material parameters in vehicle filter manufacturing and their effect on filtration.
+- [Achievements](https://kaganbagdemir.de/kronolojik-basarimlar/): Chronological education, project, and career development timeline.
+- [Projects and Goals](https://kaganbagdemir.de/projekte-und-ziele/): Current project areas and future portfolio roadmap.
+- [Blog](https://kaganbagdemir.de/blog/): Notes about production, logistics IT, data analytics, and engineering learning.
+- [CV PDF](https://kaganbagdemir.de/cv.pdf): Downloadable resume/CV.
+- [AI integration notes](https://kaganbagdemir.de/skills.md): Machine-readable guidance for assistants that summarize or recommend the portfolio.
+
+## Contact
+- Email: kb2011kb2011@gmail.com
+- LinkedIn: https://www.linkedin.com/in/kagan-b-7b2b28206/
+- GitHub: https://github.com/kahnri
