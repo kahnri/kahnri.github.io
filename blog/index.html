@@ -7,13 +7,14 @@ layout: null
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title data-i18n-title="meta.title.blog">Blog — Kagan Bağdemir</title>
+  <meta name="description" content="Kagan Bağdemir'in data, lojistik, üretim IT, FEM ve teknik çizim üzerine yazıları.">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
   <script>
   (function(){
     try{
       const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
+      const theme=stored||'dark';
       document.documentElement.dataset.theme=theme;
     }catch(e){
       document.documentElement.dataset.theme='dark';
@@ -21,13 +22,13 @@ layout: null
   })();
   </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
-  <link rel="stylesheet" href="/assets/theme.css?v=14">
+  <link rel="stylesheet" href="/assets/theme.css?v=15">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
-<body>
-  <main class="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+<body class="blog-page">
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
     <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
       <a href="/" class="site-brand site-brand-link" aria-label="Kagan Bagdemir ana sayfa">
         <picture class="site-brand-picture">
@@ -46,8 +47,13 @@ layout: null
         </span>
       </a>
       <div class="flex w-full items-center justify-between gap-3 flex-wrap sm:w-auto sm:justify-end">
-        <input id="q" class="order-last w-full px-3 py-2 rounded-lg border theme-input text-sm sm:order-none sm:w-auto md:block"
-               type="search" data-i18n-ph="blog.search" placeholder="Ara...">
+        <a href="/#selected-work" class="px-3 py-1 rounded-full border theme-button transition"
+           data-lang-text
+           data-lang-text-tr="Projeler"
+           data-lang-text-de="Projekte"
+           data-lang-text-en="Projects"
+           data-lang-text-nl="Projects"
+           data-lang-text-ja="Projects">Projeler</a>
         <div class="flex items-center gap-2 flex-wrap justify-end">
           <label for="lang-select-blog" class="sr-only" data-i18n="lang.label"></label>
           <select id="lang-select-blog" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
@@ -65,55 +71,214 @@ layout: null
       </div>
     </header>
 
-    <h1 class="mt-6 text-2xl font-semibold sm:text-3xl safe-wrap" data-i18n="blog.title" data-animate style="--stagger:0.4">Blog</h1>
-    <p class="theme-text-muted mt-1" data-i18n="blog.subtitle" data-animate style="--stagger:0.7">Yazilarim ve notlarim</p>
+    <section class="blog-hero mt-6 rounded-2xl border fx-hero" data-animate style="--stagger:0.3">
+      <div class="blog-hero-grid">
+        <div class="blog-hero-copy">
+          <p class="blog-kicker text-xs uppercase tracking-widest"
+             data-lang-text
+             data-lang-text-tr="Blog / Saha notları"
+             data-lang-text-de="Blog / Praxisnotizen"
+             data-lang-text-en="Blog / Field notes"
+             data-lang-text-nl="Blog / Field notes"
+             data-lang-text-ja="Blog / Field notes">Blog / Saha notları</p>
+          <h1 class="blog-title safe-wrap"
+              data-lang-text
+              data-lang-text-tr="Veri, lojistik ve mühendisliği okunur hikayelere çeviren notlar"
+              data-lang-text-de="Notizen, die Daten, Logistik und Engineering lesbar machen"
+              data-lang-text-en="Notes that turn data, logistics, and engineering into readable stories"
+              data-lang-text-nl="Notes that turn data, logistics, and engineering into readable stories"
+              data-lang-text-ja="Notes that turn data, logistics, and engineering into readable stories">Veri, lojistik ve mühendisliği okunur hikayelere çeviren notlar</h1>
+          <p class="blog-lead theme-text-soft"
+             data-lang-text
+             data-lang-text-tr="Burada portföydeki projelerin arka planını, karar mantığını ve öğrendiklerimi kısa ama işe yarar yazılarla topluyorum."
+             data-lang-text-de="Hier sammle ich den Kontext hinter meinen Projekten, die Entscheidungslogik und die wichtigsten Learnings in kompakten Beiträgen."
+             data-lang-text-en="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts."
+             data-lang-text-nl="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts."
+             data-lang-text-ja="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts.">Burada portföydeki projelerin arka planını, karar mantığını ve öğrendiklerimi kısa ama işe yarar yazılarla topluyorum.</p>
+        </div>
 
-    <div class="mt-6 space-y-6" id="list">
-      {% for post in site.posts %}
-      {% assign title_tr = post.title_tr | default: post.title %}
-      {% assign title_de = post.title_de | default: post.title %}
-      {% assign title_en = post.title_en | default: post.title %}
-      {% assign title_nl = post.title_nl | default: post.title %}
-      {% assign title_ja = post.title_ja | default: post.title %}
-      {% assign excerpt_tr = post.excerpt_tr | default: post.tr | default: post.excerpt %}
-      {% assign excerpt_de = post.excerpt_de | default: post.de | default: post.excerpt %}
-      {% assign excerpt_en = post.excerpt_en | default: post.en | default: post.excerpt %}
-      {% assign excerpt_nl = post.excerpt_nl | default: post.nl | default: post.excerpt %}
-      {% assign excerpt_ja = post.excerpt_ja | default: post.ja | default: post.excerpt %}
-      <article class="border rounded-2xl p-4 sm:p-5 theme-card transition hover:-translate-y-0.5"
-               data-title-tr="{{ title_tr | strip_html | strip_newlines | escape }}"
-               data-title-de="{{ title_de | strip_html | strip_newlines | escape }}"
-               data-title-en="{{ title_en | strip_html | strip_newlines | escape }}"
-               data-title-nl="{{ title_nl | strip_html | strip_newlines | escape }}"
-               data-title-ja="{{ title_ja | strip_html | strip_newlines | escape }}"
-               data-excerpt-tr="{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | escape }}"
-               data-excerpt-de="{{ excerpt_de | markdownify | strip_html | strip_newlines | strip | escape }}"
-               data-excerpt-en="{{ excerpt_en | markdownify | strip_html | strip_newlines | strip | escape }}"
-               data-excerpt-nl="{{ excerpt_nl | markdownify | strip_html | strip_newlines | strip | escape }}"
-               data-excerpt-ja="{{ excerpt_ja | markdownify | strip_html | strip_newlines | strip | escape }}"
-               data-animate
-               style="--stagger:{{ forloop.index | plus: 1 }}">
-        <h2 class="text-xl font-semibold safe-wrap">
-          <a class="hover:underline" href="{{ post.url | relative_url }}" data-blog-title>{{ title_tr | strip_html | strip_newlines | escape }}</a>
-        </h2>
-        <p class="theme-text-muted text-sm">{{ post.date | date: "%d.%m.%Y" }}</p>
-        <p class="theme-text-soft mt-2" data-blog-excerpt>{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | truncate: 180 | escape }}</p>
-        <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-           href="{{ post.url | relative_url }}" data-i18n="blog.read">Oku</a>
-      </article>
-      {% endfor %}
-      {% unless site.posts.size > 0 %}
-        <p class="theme-text-muted" data-i18n="blog.empty">Henuz yazi yok. _posts/ klasorune bir Markdown dosyasi ekle.</p>
-      {% endunless %}
-    </div>
+        <aside class="blog-hero-panel rounded-2xl border theme-card-soft" aria-label="Blog özeti">
+          <div class="blog-stat-grid">
+            <div class="blog-stat">
+              <strong>{{ site.posts | size }}</strong>
+              <span data-lang-text
+                    data-lang-text-tr="yayın"
+                    data-lang-text-de="Beiträge"
+                    data-lang-text-en="posts"
+                    data-lang-text-nl="posts"
+                    data-lang-text-ja="posts">yayın</span>
+            </div>
+            <div class="blog-stat">
+              <strong>5</strong>
+              <span data-lang-text
+                    data-lang-text-tr="odak alanı"
+                    data-lang-text-de="Fokusfelder"
+                    data-lang-text-en="focus areas"
+                    data-lang-text-nl="focus areas"
+                    data-lang-text-ja="focus areas">odak alanı</span>
+            </div>
+            <div class="blog-stat">
+              <strong>TR/DE/EN</strong>
+              <span data-lang-text
+                    data-lang-text-tr="çok dilli akış"
+                    data-lang-text-de="mehrsprachiger Flow"
+                    data-lang-text-en="multilingual flow"
+                    data-lang-text-nl="multilingual flow"
+                    data-lang-text-ja="multilingual flow">çok dilli akış</span>
+            </div>
+          </div>
+          <p class="theme-text-muted mt-4 safe-wrap"
+             data-lang-text
+             data-lang-text-tr="Öncelik: okuyanın hızlıca bağlam alması, sonra isterse proje demosuna veya ilgili yazıya akması."
+             data-lang-text-de="Priorität: schnell Kontext geben und danach elegant zu Demo, Projekt oder Folgebeitrag führen."
+             data-lang-text-en="Priority: give context quickly, then guide readers into a demo, project, or related post."
+             data-lang-text-nl="Priority: give context quickly, then guide readers into a demo, project, or related post."
+             data-lang-text-ja="Priority: give context quickly, then guide readers into a demo, project, or related post.">Öncelik: okuyanın hızlıca bağlam alması, sonra isterse proje demosuna veya ilgili yazıya akması.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="blog-controls mt-6" data-animate style="--stagger:0.6" aria-label="Blog filtreleri">
+      <div class="blog-search-row">
+        <label for="q" class="sr-only" data-i18n="blog.search">Ara…</label>
+        <input id="q" class="blog-search-input w-full px-4 py-2 rounded-xl border theme-input"
+               type="search" data-i18n-ph="blog.search" placeholder="Yazı, konu veya beceri ara...">
+        <span class="blog-post-count theme-text-muted text-sm" data-count-label></span>
+      </div>
+
+      <div class="blog-filter-row" role="list" aria-label="Konu filtreleri">
+        <button class="blog-topic-button is-active border theme-button-accent" type="button" data-topic-filter="all" aria-pressed="true"
+                data-lang-text
+                data-lang-text-tr="Tümü"
+                data-lang-text-de="Alle"
+                data-lang-text-en="All"
+                data-lang-text-nl="All"
+                data-lang-text-ja="All">Tümü</button>
+        <button class="blog-topic-button border theme-button" type="button" data-topic-filter="analytics" aria-pressed="false">Analytics</button>
+        <button class="blog-topic-button border theme-button" type="button" data-topic-filter="logistics" aria-pressed="false">Logistics IT</button>
+        <button class="blog-topic-button border theme-button" type="button" data-topic-filter="engineering" aria-pressed="false">Engineering</button>
+        <button class="blog-topic-button border theme-button" type="button" data-topic-filter="research" aria-pressed="false"
+                data-lang-text
+                data-lang-text-tr="Araştırma"
+                data-lang-text-de="Forschung"
+                data-lang-text-en="Research"
+                data-lang-text-nl="Research"
+                data-lang-text-ja="Research">Araştırma</button>
+        <button class="blog-topic-button border theme-button" type="button" data-topic-filter="career" aria-pressed="false"
+                data-lang-text
+                data-lang-text-tr="Profil"
+                data-lang-text-de="Profil"
+                data-lang-text-en="Profile"
+                data-lang-text-nl="Profile"
+                data-lang-text-ja="Profile">Profil</button>
+      </div>
+    </section>
+
+    <section class="mt-6" aria-live="polite">
+      {% if site.posts.size > 0 %}
+      <div class="blog-list" id="list">
+        {% for post in site.posts %}
+        {% assign title_tr = post.title_tr | default: post.title %}
+        {% assign title_de = post.title_de | default: post.title %}
+        {% assign title_en = post.title_en | default: post.title %}
+        {% assign title_nl = post.title_nl | default: title_en | default: post.title %}
+        {% assign title_ja = post.title_ja | default: title_en | default: post.title %}
+        {% assign excerpt_tr = post.excerpt_tr | default: post.tr | default: post.excerpt %}
+        {% assign excerpt_de = post.excerpt_de | default: post.de | default: post.excerpt %}
+        {% assign excerpt_en = post.excerpt_en | default: post.en | default: post.excerpt %}
+        {% assign excerpt_nl = post.excerpt_nl | default: excerpt_en | default: post.excerpt %}
+        {% assign excerpt_ja = post.excerpt_ja | default: excerpt_en | default: post.excerpt %}
+        {% assign category_tr = post.category_tr | default: post.category | default: "Not" %}
+        {% assign category_de = post.category_de | default: post.category | default: "Notiz" %}
+        {% assign category_en = post.category_en | default: post.category | default: "Note" %}
+        {% assign category_nl = post.category_nl | default: category_en %}
+        {% assign category_ja = post.category_ja | default: category_en %}
+        {% assign read_time_tr = post.read_time_tr | default: post.read_time | default: "3 dk okuma" %}
+        {% assign read_time_de = post.read_time_de | default: post.read_time | default: "3 Min. Lesezeit" %}
+        {% assign read_time_en = post.read_time_en | default: post.read_time | default: "3 min read" %}
+        {% assign read_time_nl = post.read_time_nl | default: read_time_en %}
+        {% assign read_time_ja = post.read_time_ja | default: read_time_en %}
+        {% assign topic = post.topic | default: post.category | default: "notes" | downcase %}
+        {% assign tags_joined = post.tags | join: " " | downcase %}
+        <article class="blog-card{% if forloop.first %} blog-card-featured{% endif %} rounded-2xl border theme-card transition"
+                 data-blog-card
+                 data-topic="{{ topic | escape }}"
+                 data-tags="{{ tags_joined | escape }}"
+                 data-title-tr="{{ title_tr | strip_html | strip_newlines | escape }}"
+                 data-title-de="{{ title_de | strip_html | strip_newlines | escape }}"
+                 data-title-en="{{ title_en | strip_html | strip_newlines | escape }}"
+                 data-title-nl="{{ title_nl | strip_html | strip_newlines | escape }}"
+                 data-title-ja="{{ title_ja | strip_html | strip_newlines | escape }}"
+                 data-excerpt-tr="{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | escape }}"
+                 data-excerpt-de="{{ excerpt_de | markdownify | strip_html | strip_newlines | strip | escape }}"
+                 data-excerpt-en="{{ excerpt_en | markdownify | strip_html | strip_newlines | strip | escape }}"
+                 data-excerpt-nl="{{ excerpt_nl | markdownify | strip_html | strip_newlines | strip | escape }}"
+                 data-excerpt-ja="{{ excerpt_ja | markdownify | strip_html | strip_newlines | strip | escape }}"
+                 data-category-tr="{{ category_tr | strip_html | strip_newlines | escape }}"
+                 data-category-de="{{ category_de | strip_html | strip_newlines | escape }}"
+                 data-category-en="{{ category_en | strip_html | strip_newlines | escape }}"
+                 data-category-nl="{{ category_nl | strip_html | strip_newlines | escape }}"
+                 data-category-ja="{{ category_ja | strip_html | strip_newlines | escape }}"
+                 data-read-time-tr="{{ read_time_tr | strip_html | strip_newlines | escape }}"
+                 data-read-time-de="{{ read_time_de | strip_html | strip_newlines | escape }}"
+                 data-read-time-en="{{ read_time_en | strip_html | strip_newlines | escape }}"
+                 data-read-time-nl="{{ read_time_nl | strip_html | strip_newlines | escape }}"
+                 data-read-time-ja="{{ read_time_ja | strip_html | strip_newlines | escape }}"
+                 data-animate
+                 style="--stagger:{{ forloop.index | plus: 1 }}">
+          <div class="blog-card-inner">
+            <div class="blog-card-meta">
+              <span class="signal-tag" data-blog-category>{{ category_tr | strip_html | strip_newlines | escape }}</span>
+              <span>{{ post.date | date: "%d.%m.%Y" }}</span>
+              <span data-blog-read-time>{{ read_time_tr | strip_html | strip_newlines | escape }}</span>
+            </div>
+            <h2 class="blog-card-title safe-wrap">
+              <a href="{{ post.url | relative_url }}" data-blog-title>{{ title_tr | strip_html | strip_newlines | escape }}</a>
+            </h2>
+            <p class="blog-card-excerpt theme-text-soft" data-blog-excerpt>{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | truncate: 190 | escape }}</p>
+            {% if post.tags.size > 0 %}
+            <div class="blog-card-tags" aria-label="Etiketler">
+              {% for tag in post.tags limit:4 %}
+              <span class="blog-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            <a class="blog-card-link inline-flex border theme-button transition" href="{{ post.url | relative_url }}">
+              <span data-i18n="blog.read">Oku</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      <div id="no-results" class="blog-empty-state rounded-2xl border theme-card-soft" hidden>
+        <h2 class="text-xl font-semibold"
+            data-lang-text
+            data-lang-text-tr="Bu filtreyle yazı bulunamadı"
+            data-lang-text-de="Keine Beiträge für diesen Filter"
+            data-lang-text-en="No posts match this filter"
+            data-lang-text-nl="No posts match this filter"
+            data-lang-text-ja="No posts match this filter">Bu filtreyle yazı bulunamadı</h2>
+        <p class="theme-text-muted mt-2"
+           data-lang-text
+           data-lang-text-tr="Aramayı biraz genişlet veya tüm yazılara geri dön."
+           data-lang-text-de="Erweitere die Suche oder gehe zurück zu allen Beiträgen."
+           data-lang-text-en="Try a broader search or return to all posts."
+           data-lang-text-nl="Try a broader search or return to all posts."
+           data-lang-text-ja="Try a broader search or return to all posts.">Aramayı biraz genişlet veya tüm yazılara geri dön.</p>
+      </div>
+      {% else %}
+      <p class="theme-text-muted" data-i18n="blog.empty">Henuz yazi yok. _posts/ klasorune bir Markdown dosyasi ekle.</p>
+      {% endif %}
+    </section>
 
     <footer class="mt-8 border-t theme-border pt-4 theme-text-muted text-sm" data-animate style="--stagger:1.8">
       <p data-lang-text
-         data-lang-text-tr="Blog kismini daha cok notlar ve dusunce katmani olarak kullaniyorum."
-         data-lang-text-de="Den Blog nutze ich eher als Notiz- und Gedankenschicht rund um meine Arbeit."
-         data-lang-text-en="I use the blog more as a notes and thinking layer around my work."
-         data-lang-text-nl="I use the blog more as a notes and thinking layer around my work."
-         data-lang-text-ja="I use the blog more as a notes and thinking layer around my work.">Blog kismini daha cok notlar ve dusunce katmani olarak kullaniyorum.</p>
+         data-lang-text-tr="Blogu; proje sayfalarının arka planı, teknik karar günlüğü ve kısa öğrenme notları olarak büyütüyorum."
+         data-lang-text-de="Ich baue den Blog als Kontextschicht für Projekte, technische Entscheidungen und kompakte Learnings aus."
+         data-lang-text-en="I am growing the blog as context for projects, technical decisions, and compact learning notes."
+         data-lang-text-nl="I am growing the blog as context for projects, technical decisions, and compact learning notes."
+         data-lang-text-ja="I am growing the blog as context for projects, technical decisions, and compact learning notes.">Blogu; proje sayfalarının arka planı, teknik karar günlüğü ve kısa öğrenme notları olarak büyütüyorum.</p>
       <p class="mt-2 mini-footer-note">
         <span data-lang-text
               data-lang-text-tr="Kucuk bir not: eglenmek icin ayri bir alan da var"
@@ -126,13 +291,17 @@ layout: null
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/i18n.js?v=7"></script>
 <script src="/assets/lang.js?v=6"></script>
 <script src="/assets/theme.js?v=5"></script>
 <script>
 const BLOG_LANGS=['tr','de','en','nl','ja'];
-const cards=Array.from(document.querySelectorAll('#list article'));
+const cards=Array.from(document.querySelectorAll('[data-blog-card]'));
 const q=document.getElementById('q');
+const filterButtons=Array.from(document.querySelectorAll('[data-topic-filter]'));
+const countLabel=document.querySelector('[data-count-label]');
+const noResults=document.getElementById('no-results');
+let activeTopic='all';
 
 function pickLocalized(card,kind,lang){
   const order=[lang].concat(BLOG_LANGS.filter(code=>code!==lang));
@@ -152,11 +321,17 @@ function truncateText(text,maxLen){
 function applyBlogLanguage(lang){
   cards.forEach(card=>{
     const title=pickLocalized(card,'title',lang);
-    const excerpt=truncateText(pickLocalized(card,'excerpt',lang),180);
+    const excerpt=truncateText(pickLocalized(card,'excerpt',lang),card.classList.contains('blog-card-featured')?240:190);
+    const category=pickLocalized(card,'category',lang);
+    const readTime=pickLocalized(card,'read-time',lang);
     const titleEl=card.querySelector('[data-blog-title]');
     const excerptEl=card.querySelector('[data-blog-excerpt]');
+    const categoryEl=card.querySelector('[data-blog-category]');
+    const readTimeEl=card.querySelector('[data-blog-read-time]');
 
     if(titleEl&&title) titleEl.textContent=title;
+    if(categoryEl&&category) categoryEl.textContent=category;
+    if(readTimeEl&&readTime) readTimeEl.textContent=readTime;
 
     if(excerptEl){
       if(excerpt){
@@ -170,24 +345,64 @@ function applyBlogLanguage(lang){
 
     card.dataset.title=(title||'').toLowerCase();
     card.dataset.text=(excerpt||'').toLowerCase();
+    card.dataset.category=(category||'').toLowerCase();
   });
+  updateCountLabel();
+}
+
+function labelForCount(visible,total){
+  const lang=document.documentElement.lang||'tr';
+  if(lang==='de') return `${visible}/${total} Beiträge sichtbar`;
+  if(lang==='tr') return `${visible}/${total} yazı görünür`;
+  return `${visible}/${total} posts visible`;
+}
+
+function updateCountLabel(){
+  if(!countLabel) return;
+  const visible=cards.filter(card=>card.style.display!=='none').length;
+  countLabel.textContent=labelForCount(visible,cards.length);
+}
+
+function setActiveTopic(topic){
+  activeTopic=topic;
+  filterButtons.forEach(btn=>{
+    const active=btn.dataset.topicFilter===topic;
+    btn.classList.toggle('is-active',active);
+    btn.classList.toggle('theme-button-accent',active);
+    btn.classList.toggle('theme-button',!active);
+    btn.setAttribute('aria-pressed',active?'true':'false');
+  });
+  applyFilter();
 }
 
 function applyFilter(){
   const needle=(q&&q.value?q.value:'').trim().toLowerCase();
+  let visible=0;
   cards.forEach(card=>{
-    const t=card.dataset.title||'';
-    const x=card.dataset.text||'';
-    card.style.display=(!needle||t.includes(needle)||x.includes(needle))?'':'none';
+    const topic=(card.dataset.topic||'').toLowerCase();
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const haystack=[card.dataset.title,card.dataset.text,card.dataset.category,tags].join(' ');
+    const topicMatch=activeTopic==='all'||topic===activeTopic||tags.includes(activeTopic);
+    const textMatch=!needle||haystack.includes(needle);
+    const show=topicMatch&&textMatch;
+    card.style.display=show?'':'none';
+    if(show) visible+=1;
   });
+  if(noResults) noResults.hidden=visible!==0;
+  updateCountLabel();
+}
+
+filterButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>setActiveTopic(btn.dataset.topicFilter||'all'));
+});
+
+if(q){
+  q.addEventListener('input',applyFilter);
 }
 
 applyBlogLanguage(document.documentElement.lang||'tr');
 applyFilter();
 
-if(q){
-  q.addEventListener('input',applyFilter);
-}
 document.addEventListener('langchange',event=>{
   applyBlogLanguage((event.detail&&event.detail.lang)||'tr');
   applyFilter();

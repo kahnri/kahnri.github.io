@@ -1,39 +1,70 @@
 ---
 layout: post
 title: "Die Auswirkung der in der Fahrzeugfilterherstellung verwendeten Materialparameter auf die Filtration"
-title_tr: "Araç Filtre İmalatında Kullanılan Malzeme Parametrelerinin Filtrasyona Etkisi"
-title_de: "Die Auswirkung der in der Fahrzeugfilterherstellung verwendeten Materialparameter auf die Filtration"
-title_en: "The Effect of Material Parameters Used in Vehicle Filter Manufacturing on Filtration"
+date: 2026-05-03
+slug: bachelor-thesis-filter-materials
+permalink: /blog/bachelor-thesis-filter-materials/
+topic: research
+category: research
+category_tr: "Araştırma / Tez"
+category_de: "Forschung / Thesis"
+category_en: "Research / Thesis"
+category_nl: "Research / Thesis"
+category_ja: "Research / Thesis"
+read_time_tr: "5 dk okuma"
+read_time_de: "5 Min. Lesezeit"
+read_time_en: "5 min read"
+read_time_nl: "5 min read"
+read_time_ja: "5 min read"
+title_tr: "Araç Filtre İmalatında Malzeme Parametreleri Filtrasyonu Nasıl Etkiler?"
+title_de: "Wie Materialparameter in Fahrzeugfiltern die Filtration beeinflussen"
+title_en: "How Material Parameters in Vehicle Filters Influence Filtration"
+title_nl: "How Material Parameters in Vehicle Filters Influence Filtration"
+title_ja: "How Material Parameters in Vehicle Filters Influence Filtration"
 description: "Bachelor thesis by Kagan Bagdemir on filter materials, permeability, burst pressure, pore size, and filtration performance in vehicle filter manufacturing."
-tags: [Bachelor Thesis, Automotive Engineering, Filtration, Filter Materials, Permeability, CAD, Kagan Bagdemir]
-excerpt_tr: "Araç filtre üretiminde kullanılan malzeme parametrelerinin filtrasyon performansına etkisini inceleyen lisans bitirme tezi."
-excerpt_de: "Bachelorarbeit über den Einfluss von Materialparametern in der Fahrzeugfilterherstellung auf die Filtrationsleistung."
-excerpt_en: "Bachelor thesis on how material parameters in vehicle filter manufacturing affect filtration performance."
+excerpt: "Lisans tezimin pratik özeti: filtre kağıdı, kapak ve conta gibi parçaların malzeme parametreleri filtrasyon performansını nasıl değiştirir?"
+excerpt_tr: "Lisans tezimin pratik özeti: filtre kağıdı, kapak ve conta gibi parçaların malzeme parametreleri filtrasyon performansını nasıl değiştirir?"
+excerpt_de: "Eine praxisnahe Zusammenfassung meiner Bachelorarbeit: Wie Materialparameter von Filterpapier, Deckel und Dichtung die Filtrationsleistung beeinflussen."
+excerpt_en: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
+excerpt_nl: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
+excerpt_ja: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
+tags: [Bachelor Thesis, Automotive Engineering, Filtration, Filter Materials, Permeability, CAD]
 tr: |
-  # Lisans Bitirme Tezi
+  # Araç filtrelerinde malzeme neden kritik?
 
-  **Başlık:** Araç Filtre İmalatında Kullanılan Malzeme Parametrelerinin Filtrasyona Etkisi  
-  **Üniversite:** Afyon Kocatepe Üniversitesi  
-  **Fakülte / Bölüm:** Teknoloji Fakültesi · Otomotiv Mühendisliği  
-  **Yıl:** 2022  
-  **Danışman:** Doç. Dr. Fatih AKSOY  
-  **Uzunluk:** xiii + 60 sayfa
+  Lisans bitirme tezim, araç filtre imalatında kullanılan malzeme parametrelerinin filtrasyon performansına etkisini inceliyordu. Konu ilk bakışta dar görünebilir; fakat aslında çok temel bir mühendislik sorusuna bağlanıyor:
 
-  ## Kısa Özet
+  > Aynı görevi yapan iki filtre, neden sahada farklı performans gösterir?
 
-  Bu araştırmada genel olarak filtrasyon işlemi yapan filtrelerin genel yapısı, ne işe yaradıkları ve kullanılan malzemelerin filtrasyona etkisi incelenmiştir.
+  Cevap çoğu zaman yalnızca formda değil, malzeme parametrelerinde saklıdır.
 
-  Araçların çalışma yapısını korunmak için filtrelere ihtiyaç duyar. Filtreler aracın performansına etki ettiği için, filtrelerin önemi çok büyüktür. Bu durumdan kaynaklı olarak araçta kullanılan filtrenin üretiminde kullanılan malzemelerinin kalitesi, filtrasyon verimini olumlu veya olumsuz şekilde etkileyebilmektedir. Filtreler birçok malzemeden üretilebilir, fakat temel olarak kağıt, kapak, conta gibi ana filtre parçalarından oluşurlar. Bu ana parçaların malzeme parametreleri filtrenin işlevine birinci dereceden etki ederler.
+  ## Tezin ana fikri
 
-  Her malzeme için farklı parametreler önem taşımaktadır. Kağıtlar için hava geçirgenliği, patlatma basıncı ve gözenek büyüklüğü gibi parametreler önem taşırken, kapaklarda kullanılan malzemelerin bileşenleri ve malzeme karışımları önem taşır.
+  Filtre, sadece akışı durduran veya kir tutan bir parça değildir. Hava, yağ, yakıt veya polen filtresi fark etmeksizin; malzeme seçimi, geçirgenlik ve dayanım arasında hassas bir denge kurar.
 
-  ## Bu tezde odaklandığım başlıklar
+  Tezde özellikle şu başlıkları inceledim:
 
-  - Araçlarda kullanılan filtre türlerinin karşılaştırılması
-  - Filtre kağıdı, kapak ve conta gibi ana parçaların rolü
-  - Hava geçirgenliği, patlatma basıncı ve gözenek boyutu gibi parametrelerin etkisi
-  - Hava, polen, yağ ve yakıt filtrelerinde kullanılan malzemelerin değerlendirilmesi
-  - Filtrasyon performansının malzeme seçimiyle ilişkisi
+  - filtre kağıdının hava geçirgenliği,
+  - patlatma basıncı,
+  - gözenek yapısı ve gözenek boyutu,
+  - kapak ve conta malzemelerinin dayanım davranışı,
+  - malzeme kalitesinin filtrasyon verimine etkisi.
+
+  ## Mühendislik açısından çıkarım
+
+  Bir filtrenin iyi çalışması için sadece küçük parçacıkları tutması yetmez. Aynı zamanda akışı gereğinden fazla boğmaması, basınca dayanması ve kullanım süresi boyunca formunu koruması gerekir.
+
+  Bu yüzden iyi filtre tasarımı üç soruyu birlikte düşünür:
+
+  1. Hangi parçacıklar tutulmalı?
+  2. Akış ne kadar serbest kalmalı?
+  3. Malzeme hangi basınç ve sıcaklık koşullarında bozulmadan kalmalı?
+
+  ## Portföyde neden yer alıyor?
+
+  Bu çalışma benim için sadece akademik bir belge değil. Malzeme, üretim, ölçüm ve performans ilişkisini birlikte düşünmeyi öğreten önemli bir mühendislik örneği.
+
+  Bugün data analytics veya logistics IT tarafında çalışırken de benzer bir bakış kullanıyorum: önce sistemi anlamak, sonra doğru parametreleri seçmek, ardından sonucu ölçülebilir hale getirmek.
 
   ## Dosyalar
 
@@ -41,35 +72,42 @@ tr: |
   - [İngilizce çeviri (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
   - [Almanca çeviri (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 
-  _Not: Orijinal tez PDF olarak, çeviriler ise düzenlenebilir DOCX formatında paylaşılmıştır._
-
-  **Anahtar kelimeler:** Filtre, Filtrasyon, Malzeme, Geçirgenlik, Basınç, Gözenek
-
 de: |
-  # Bachelorarbeit
+  # Warum Materialparameter bei Fahrzeugfiltern wichtig sind
 
-  **Titel:** Die Auswirkung der in der Fahrzeugfilterherstellung verwendeten Materialparameter auf die Filtration  
-  **Universität:** Afyon Kocatepe Universität  
-  **Fakultät / Studiengang:** Fakultät für Technologie · Automobilingenieurwesen  
-  **Jahr:** 2022  
-  **Betreuer:** Doz. Dr. Fatih AKSOY  
-  **Umfang:** xiii + 60 Seiten
+  Meine Bachelorarbeit untersucht, wie Materialparameter in der Fahrzeugfilterherstellung die Filtrationsleistung beeinflussen. Die Frage klingt zunächst eng, führt aber zu einem sehr grundlegenden Engineering-Thema:
 
-  ## Kurzfassung
+  > Warum können zwei Filter mit derselben Aufgabe in der Praxis unterschiedlich performen?
 
-  In dieser Studie werden die allgemeine Struktur von Filtern, die bei Filtrationsprozessen eingesetzt werden, ihre Funktionen sowie die Auswirkungen der in ihnen verwendeten Materialien auf die Filtrationsleistung untersucht.
+  Die Antwort liegt oft nicht nur in der Form, sondern in den Materialparametern.
 
-  Fahrzeuge benötigen Filter, um ihre Betriebssysteme zu schützen. Da Filter die Fahrzeugleistung direkt beeinflussen, ist ihre Bedeutung sehr hoch. Aus diesem Grund kann die Qualität der bei der Herstellung eines Fahrzeugfilters verwendeten Materialien die Filtrationseffizienz sowohl positiv als auch negativ beeinflussen. Filter können aus vielen Materialien hergestellt werden; im Wesentlichen bestehen sie jedoch aus Hauptkomponenten wie Papier, Deckel und Dichtung. Die Materialparameter dieser Hauptkomponenten beeinflussen die Funktion des Filters unmittelbar.
+  ## Kerngedanke der Arbeit
 
-  Für jedes Material sind unterschiedliche Parameter wichtig. Bei Papieren sind beispielsweise Luftdurchlässigkeit, Berstdruck und Porengröße von Bedeutung, während bei Deckeln die Bestandteile des Materials und die verwendeten Materialmischungen im Vordergrund stehen.
+  Ein Filter ist nicht nur ein Bauteil, das Partikel zurückhält. Ob Luft-, Öl-, Kraftstoff- oder Pollenfilter: Die Materialwahl muss Durchlässigkeit, Festigkeit und Lebensdauer ausbalancieren.
 
-  ## Schwerpunkte der Arbeit
+  Untersucht wurden unter anderem:
 
-  - Vergleich verschiedener in Fahrzeugen eingesetzter Filtertypen
-  - Rolle der Hauptkomponenten wie Filterpapier, Deckel und Dichtung
-  - Einfluss von Luftdurchlässigkeit, Berstdruck und Porengröße
-  - Bewertung der Materialien in Luft-, Pollen-, Öl- und Kraftstofffiltern
-  - Zusammenhang zwischen Materialwahl und Filtrationsleistung
+  - Luftdurchlässigkeit des Filterpapiers,
+  - Berstdruck,
+  - Porenstruktur und Porengröße,
+  - Festigkeitsverhalten von Deckel- und Dichtungsmaterialien,
+  - Einfluss der Materialqualität auf den Filtrationswirkungsgrad.
+
+  ## Engineering-Learning
+
+  Ein guter Filter muss nicht nur Partikel zurückhalten. Er darf den Durchfluss nicht unnötig stark behindern, muss Druck aushalten und während der Nutzung formstabil bleiben.
+
+  Gute Filterauslegung verbindet deshalb drei Fragen:
+
+  1. Welche Partikel müssen zurückgehalten werden?
+  2. Wie frei muss der Durchfluss bleiben?
+  3. Unter welchen Druck- und Temperaturbedingungen bleibt das Material stabil?
+
+  ## Warum im Portfolio?
+
+  Für mich ist diese Arbeit mehr als ein akademisches Dokument. Sie zeigt, wie Material, Produktion, Messung und Performance zusammenhängen.
+
+  Auch in Data Analytics oder Logistics IT nutze ich eine ähnliche Denkweise: erst das System verstehen, dann relevante Parameter auswählen und die Wirkung messbar machen.
 
   ## Dateien
 
@@ -77,35 +115,42 @@ de: |
   - [Englische Übersetzung (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
   - [Deutsche Übersetzung (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 
-  _Hinweis: Die Originalarbeit liegt als PDF vor, die Übersetzungen derzeit als bearbeitbare DOCX-Dateien._
-
-  **Schlüsselwörter:** Filter, Filtration, Material, Durchlässigkeit, Druck, Pore
-
 en: |
-  # Bachelor Thesis
+  # Why material parameters matter in vehicle filters
 
-  **Title:** The Effect of Material Parameters Used in Vehicle Filter Manufacturing on Filtration  
-  **University:** Afyon Kocatepe University  
-  **Faculty / Department:** Faculty of Technology · Department of Automotive Engineering  
-  **Year:** 2022  
-  **Supervisor:** Assoc. Prof. Dr. Fatih AKSOY  
-  **Length:** xiii + 60 pages
+  My bachelor thesis studied how material parameters used in vehicle filter manufacturing affect filtration performance. The topic may sound narrow at first, but it leads to a basic engineering question:
 
-  ## Abstract
+  > Why can two filters with the same task behave differently in real use?
 
-  This study examines the general structure of filters used in filtration processes, their functions, and the effect of the materials used in them on filtration performance.
+  The answer is often not only in the shape. It is in the material parameters.
 
-  Vehicles need filters in order to protect their operating systems. Since filters directly affect vehicle performance, their importance is very high. For this reason, the quality of the materials used in the production of a vehicle filter can influence filtration efficiency either positively or negatively. Filters can be manufactured from many materials; however, they basically consist of main components such as paper, cover, and gasket. The material parameters of these main components directly affect the function of the filter.
+  ## Core idea
 
-  Different parameters are important for each material. For papers, parameters such as air permeability, burst pressure, and pore size are important, whereas for covers, the components of the material and the material mixtures used are of primary importance.
+  A filter is not only a part that holds back particles. Whether it is an air, oil, fuel, or cabin filter, the material choice balances permeability, strength, and service life.
 
-  ## Focus areas
+  The thesis focused on:
 
-  - Comparison of filter types used in vehicles
-  - Role of core components such as filter paper, covers, and gaskets
-  - Impact of air permeability, burst pressure, and pore size
-  - Evaluation of materials used in air, cabin, oil, and fuel filters
-  - Relationship between material selection and filtration performance
+  - air permeability of filter paper,
+  - burst pressure,
+  - pore structure and pore size,
+  - strength behavior of covers and gasket materials,
+  - the effect of material quality on filtration efficiency.
+
+  ## Engineering takeaway
+
+  A good filter must do more than catch particles. It should not restrict the flow too much, it must handle pressure, and it has to keep its shape during use.
+
+  Good filter design therefore connects three questions:
+
+  1. Which particles need to be captured?
+  2. How freely should the flow pass?
+  3. Under which pressure and temperature conditions does the material stay stable?
+
+  ## Why it belongs in the portfolio
+
+  For me, this thesis is more than an academic document. It is a useful example of connecting material, production, measurement, and performance.
+
+  I use a similar way of thinking in data analytics and logistics IT: understand the system first, choose the relevant parameters, and then make the effect measurable.
 
   ## Files
 
@@ -113,7 +158,33 @@ en: |
   - [English translation (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
   - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 
-  _Note: The original thesis is available as a PDF, while the translations are currently provided as editable DOCX files._
+nl: |
+  # Why material parameters matter in vehicle filters
 
-  **Keywords:** Filter, Filtration, Material, Permeability, Pressure, Pore
+  My bachelor thesis studied how material parameters used in vehicle filter manufacturing affect filtration performance.
+
+  A good filter must do more than catch particles. It should not restrict the flow too much, it must handle pressure, and it has to keep its shape during use.
+
+  The thesis focuses on air permeability, burst pressure, pore size, covers, gasket materials, and the relationship between material choice and filtration efficiency.
+
+  ## Files
+
+  - [Original Turkish thesis (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
+  - [English translation (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
+  - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
+
+ja: |
+  # Why material parameters matter in vehicle filters
+
+  My bachelor thesis studied how material parameters used in vehicle filter manufacturing affect filtration performance.
+
+  A good filter must do more than catch particles. It should not restrict the flow too much, it must handle pressure, and it has to keep its shape during use.
+
+  The thesis focuses on air permeability, burst pressure, pore size, covers, gasket materials, and the relationship between material choice and filtration efficiency.
+
+  ## Files
+
+  - [Original Turkish thesis (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
+  - [English translation (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
+  - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 ---

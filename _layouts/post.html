@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | escape }} — Kagan Bağdemir</title>
+  <meta name="description" content="{{ page.description | default: page.excerpt_tr | default: page.excerpt | strip_html | strip_newlines | escape }}">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
   <script>
   (function(){
     try{
       const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
+      const theme=stored||'dark';
       document.documentElement.dataset.theme=theme;
     }catch(e){
       document.documentElement.dataset.theme='dark';
@@ -18,16 +19,25 @@
   })();
   </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
-  <link rel="stylesheet" href="/assets/theme.css?v=14">
+  <link rel="stylesheet" href="/assets/theme.css?v=15">
   <meta name="color-scheme" content="light dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
-<body>
+<body class="post-page">
+  <div class="post-reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+
   <main class="max-w-3xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
     <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
-      <a href="/blog/" class="text-sm theme-text-muted transition">&larr; <span data-i18n="post.back">Blog</span></a>
+      <a href="/blog/" class="post-back-link theme-text-muted transition">← <span data-i18n="post.back">Blog</span></a>
       <div class="flex w-full items-center justify-between gap-2 flex-wrap sm:w-auto sm:justify-end">
+        <a href="/#selected-work" class="px-3 py-1 rounded-full border theme-button transition"
+           data-lang-text
+           data-lang-text-tr="Projeler"
+           data-lang-text-de="Projekte"
+           data-lang-text-en="Projects"
+           data-lang-text-nl="Projects"
+           data-lang-text-ja="Projects">Projeler</a>
         <label for="lang-select-post" class="sr-only" data-i18n="lang.label"></label>
         <select id="lang-select-post" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
           <option value="tr" data-i18n="lang.tr">Turkce</option>
@@ -43,46 +53,149 @@
       </div>
     </header>
 
-    <article class="mt-6" data-animate style="--stagger:0.6">
-      {% assign page_title_tr = page.title_tr | default: page.title %}
-      {% assign page_title_de = page.title_de | default: page.title %}
-      {% assign page_title_en = page.title_en | default: page.title %}
-      {% assign page_title_nl = page.title_nl | default: page.title %}
-      {% assign page_title_ja = page.title_ja | default: page.title %}
-      <h1 id="post-main-title"
-          class="text-2xl font-semibold safe-wrap sm:text-3xl"
-          data-lang-text
-          data-lang-text-tr="{{ page_title_tr | strip_html | strip_newlines | escape }}"
-          data-lang-text-de="{{ page_title_de | strip_html | strip_newlines | escape }}"
-          data-lang-text-en="{{ page_title_en | strip_html | strip_newlines | escape }}"
-          data-lang-text-nl="{{ page_title_nl | strip_html | strip_newlines | escape }}"
-          data-lang-text-ja="{{ page_title_ja | strip_html | strip_newlines | escape }}">{{ page_title_tr | strip_html | strip_newlines | escape }}</h1>
-      <p class="theme-text-muted text-sm mt-1">
-        {{ page.date | date: "%d.%m.%Y" }}
-      </p>
+    {% assign page_title_tr = page.title_tr | default: page.title %}
+    {% assign page_title_de = page.title_de | default: page.title %}
+    {% assign page_title_en = page.title_en | default: page.title %}
+    {% assign page_title_nl = page.title_nl | default: page_title_en | default: page.title %}
+    {% assign page_title_ja = page.title_ja | default: page_title_en | default: page.title %}
+    {% assign lead_tr = page.excerpt_tr | default: page.description_tr | default: page.description | default: page.excerpt %}
+    {% assign lead_de = page.excerpt_de | default: page.description_de | default: page.description | default: page.excerpt %}
+    {% assign lead_en = page.excerpt_en | default: page.description_en | default: page.description | default: page.excerpt %}
+    {% assign lead_nl = page.excerpt_nl | default: lead_en %}
+    {% assign lead_ja = page.excerpt_ja | default: lead_en %}
+    {% assign category_tr = page.category_tr | default: page.category | default: "Not" %}
+    {% assign category_de = page.category_de | default: page.category | default: "Notiz" %}
+    {% assign category_en = page.category_en | default: page.category | default: "Note" %}
+    {% assign category_nl = page.category_nl | default: category_en %}
+    {% assign category_ja = page.category_ja | default: category_en %}
+    {% assign read_time_tr = page.read_time_tr | default: page.read_time | default: "3 dk okuma" %}
+    {% assign read_time_de = page.read_time_de | default: page.read_time | default: "3 Min. Lesezeit" %}
+    {% assign read_time_en = page.read_time_en | default: page.read_time | default: "3 min read" %}
+    {% assign read_time_nl = page.read_time_nl | default: read_time_en %}
+    {% assign read_time_ja = page.read_time_ja | default: read_time_en %}
 
-      <!-- Çok dilli içerik -->
-      <div id="post-tr" data-lang-content="tr" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {% if page.tr %}{{ page.tr | markdownify }}{% endif %}
-      </div>
-      <div id="post-de" data-lang-content="de" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {% if page.de %}{{ page.de | markdownify }}{% endif %}
-      </div>
-      <div id="post-en" data-lang-content="en" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {% if page.en %}{{ page.en | markdownify }}{% endif %}
-      </div>
-      <div id="post-nl" data-lang-content="nl" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {% if page.nl %}{{ page.nl | markdownify }}{% endif %}
-      </div>
-      <div id="post-ja" data-lang-content="ja" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {% if page.ja %}{{ page.ja | markdownify }}{% endif %}
+    <article class="post-article mt-6" data-animate style="--stagger:0.5">
+      <div class="post-hero rounded-2xl border fx-hero">
+        <p class="post-kicker text-xs uppercase tracking-widest signal-tag"
+           data-lang-text
+           data-lang-text-tr="{{ category_tr | strip_html | strip_newlines | escape }}"
+           data-lang-text-de="{{ category_de | strip_html | strip_newlines | escape }}"
+           data-lang-text-en="{{ category_en | strip_html | strip_newlines | escape }}"
+           data-lang-text-nl="{{ category_nl | strip_html | strip_newlines | escape }}"
+           data-lang-text-ja="{{ category_ja | strip_html | strip_newlines | escape }}">{{ category_tr | strip_html | strip_newlines | escape }}</p>
+        <h1 id="post-main-title"
+            class="post-title safe-wrap"
+            data-lang-text
+            data-lang-text-tr="{{ page_title_tr | strip_html | strip_newlines | escape }}"
+            data-lang-text-de="{{ page_title_de | strip_html | strip_newlines | escape }}"
+            data-lang-text-en="{{ page_title_en | strip_html | strip_newlines | escape }}"
+            data-lang-text-nl="{{ page_title_nl | strip_html | strip_newlines | escape }}"
+            data-lang-text-ja="{{ page_title_ja | strip_html | strip_newlines | escape }}">{{ page_title_tr | strip_html | strip_newlines | escape }}</h1>
+        <p class="post-lead theme-text-soft"
+           data-lang-text
+           data-lang-text-tr="{{ lead_tr | markdownify | strip_html | strip_newlines | strip | escape }}"
+           data-lang-text-de="{{ lead_de | markdownify | strip_html | strip_newlines | strip | escape }}"
+           data-lang-text-en="{{ lead_en | markdownify | strip_html | strip_newlines | strip | escape }}"
+           data-lang-text-nl="{{ lead_nl | markdownify | strip_html | strip_newlines | strip | escape }}"
+           data-lang-text-ja="{{ lead_ja | markdownify | strip_html | strip_newlines | strip | escape }}">{{ lead_tr | markdownify | strip_html | strip_newlines | strip | escape }}</p>
+
+        <div class="post-meta-strip">
+          <span>{{ page.date | date: "%d.%m.%Y" }}</span>
+          <span data-lang-text
+                data-lang-text-tr="{{ read_time_tr | strip_html | strip_newlines | escape }}"
+                data-lang-text-de="{{ read_time_de | strip_html | strip_newlines | escape }}"
+                data-lang-text-en="{{ read_time_en | strip_html | strip_newlines | escape }}"
+                data-lang-text-nl="{{ read_time_nl | strip_html | strip_newlines | escape }}"
+                data-lang-text-ja="{{ read_time_ja | strip_html | strip_newlines | escape }}">{{ read_time_tr | strip_html | strip_newlines | escape }}</span>
+        </div>
+
+        {% if page.tags.size > 0 %}
+        <div class="post-tag-row" aria-label="Etiketler">
+          {% for tag in page.tags limit:6 %}
+          <span class="blog-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
 
-      <!-- Fallback: tek dilli içerik -->
-      <div id="post-default" class="theme-prose mt-6 max-w-none safe-wrap" style="display:none;">
-        {{ content }}
+      <div class="post-content-shell rounded-2xl border theme-card-soft">
+        <div id="post-tr" data-lang-content="tr" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {% if page.tr %}{{ page.tr | markdownify }}{% endif %}
+        </div>
+        <div id="post-de" data-lang-content="de" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {% if page.de %}{{ page.de | markdownify }}{% endif %}
+        </div>
+        <div id="post-en" data-lang-content="en" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {% if page.en %}{{ page.en | markdownify }}{% endif %}
+        </div>
+        <div id="post-nl" data-lang-content="nl" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {% if page.nl %}{{ page.nl | markdownify }}{% endif %}
+        </div>
+        <div id="post-ja" data-lang-content="ja" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {% if page.ja %}{{ page.ja | markdownify }}{% endif %}
+        </div>
+
+        <div id="post-default" class="theme-prose max-w-none safe-wrap" style="display:none;">
+          {{ content }}
+        </div>
       </div>
     </article>
+
+    <nav class="post-nav-grid mt-6" aria-label="Yakın yazılar">
+      {% if page.previous %}
+      {% assign previous_title = page.previous.title_tr | default: page.previous.title %}
+      <a class="post-nav-card rounded-2xl border theme-card transition" href="{{ page.previous.url | relative_url }}">
+        <span class="theme-text-muted text-sm"
+              data-lang-text
+              data-lang-text-tr="Önceki yazı"
+              data-lang-text-de="Vorheriger Beitrag"
+              data-lang-text-en="Previous post"
+              data-lang-text-nl="Previous post"
+              data-lang-text-ja="Previous post">Önceki yazı</span>
+        <strong class="safe-wrap">{{ previous_title | strip_html | strip_newlines | escape }}</strong>
+      </a>
+      {% endif %}
+      {% if page.next %}
+      {% assign next_title = page.next.title_tr | default: page.next.title %}
+      <a class="post-nav-card rounded-2xl border theme-card transition" href="{{ page.next.url | relative_url }}">
+        <span class="theme-text-muted text-sm"
+              data-lang-text
+              data-lang-text-tr="Sonraki yazı"
+              data-lang-text-de="Nächster Beitrag"
+              data-lang-text-en="Next post"
+              data-lang-text-nl="Next post"
+              data-lang-text-ja="Next post">Sonraki yazı</span>
+        <strong class="safe-wrap">{{ next_title | strip_html | strip_newlines | escape }}</strong>
+      </a>
+      {% endif %}
+    </nav>
+
+    <section class="post-cta mt-6 rounded-2xl border theme-card" data-animate style="--stagger:1.1">
+      <h2 class="text-xl font-semibold safe-wrap"
+          data-lang-text
+          data-lang-text-tr="Bir sonraki durak"
+          data-lang-text-de="Nächster Halt"
+          data-lang-text-en="Next stop"
+          data-lang-text-nl="Next stop"
+          data-lang-text-ja="Next stop">Bir sonraki durak</h2>
+      <p class="mt-2 theme-text-muted"
+         data-lang-text
+         data-lang-text-tr="Yazının bağlamını projelerde görmek istersen seçili işlere dönebilir ya da tüm blog akışını tarayabilirsin."
+         data-lang-text-de="Wenn du den Kontext im Projekt sehen möchtest, geh zurück zu den ausgewählten Arbeiten oder stöbere weiter im Blog."
+         data-lang-text-en="If you want to see the context in projects, jump back to selected work or keep browsing the blog."
+         data-lang-text-nl="If you want to see the context in projects, jump back to selected work or keep browsing the blog."
+         data-lang-text-ja="If you want to see the context in projects, jump back to selected work or keep browsing the blog.">Yazının bağlamını projelerde görmek istersen seçili işlere dönebilir ya da tüm blog akışını tarayabilirsin.</p>
+      <div class="post-cta-actions mt-4">
+        <a class="px-4 py-2 rounded-xl border theme-button-accent" href="/blog/" data-i18n="recent.all">Tum yazilar</a>
+        <a class="px-4 py-2 rounded-xl border theme-button" href="/#selected-work"
+           data-lang-text
+           data-lang-text-tr="Projeler"
+           data-lang-text-de="Projekte"
+           data-lang-text-en="Projects"
+           data-lang-text-nl="Projects"
+           data-lang-text-ja="Projects">Projeler</a>
+      </div>
+    </section>
 
     <footer class="mt-10 border-t theme-border pt-5 theme-text-muted text-sm">
       <p>© {{ "now" | date: "%Y" }} Kagan Bağdemir · <a href="/#impressum" data-i18n="footer.impressum">Impressum</a></p>
@@ -98,7 +211,7 @@
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/i18n.js?v=7"></script>
 <script src="/assets/lang.js?v=6"></script>
 <script src="/assets/theme.js?v=5"></script>
 <script>
@@ -109,8 +222,21 @@ function syncPostPageTitle(){
   if(!current) return;
   document.title=current+' — Kagan Bağdemir';
 }
+
+function updateReadingProgress(){
+  var bar=document.querySelector('[data-reading-progress]');
+  if(!bar) return;
+  var doc=document.documentElement;
+  var max=doc.scrollHeight-window.innerHeight;
+  var progress=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
+  bar.style.transform='scaleX('+progress+')';
+}
+
 syncPostPageTitle();
+updateReadingProgress();
 document.addEventListener('langchange',syncPostPageTitle);
+window.addEventListener('scroll',updateReadingProgress,{passive:true});
+window.addEventListener('resize',updateReadingProgress);
 
 document.body.classList.add('initial-anim');
 requestAnimationFrame(function(){
