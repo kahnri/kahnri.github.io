@@ -24,7 +24,7 @@
 
   function updateIcons(theme){
     document.querySelectorAll('[data-theme-icon]').forEach(function(icon){
-      icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      icon.textContent = theme === 'dark' ? 'HELL' : 'DUNKEL';
     });
   }
 
@@ -58,7 +58,7 @@
       btn.id = 'theme-toggle';
       btn.type = 'button';
       btn.className = 'theme-toggle-fixed';
-      btn.innerHTML = '<span data-theme-icon aria-hidden="true">🌙</span><span class="sr-only">Toggle theme</span>';
+      btn.innerHTML = '<span data-theme-icon aria-hidden="true">HELL</span><span class="sr-only">Toggle theme</span>';
       document.body.appendChild(btn);
       return btn;
     }
@@ -67,7 +67,7 @@
       const icon = document.createElement('span');
       icon.setAttribute('data-theme-icon', '');
       icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = currentTheme() === 'dark' ? '🌙' : '☀️';
+      icon.textContent = currentTheme() === 'dark' ? 'HELL' : 'DUNKEL';
       btn.prepend(icon);
     }
 

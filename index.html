@@ -6,7 +6,7 @@ layout: null
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n-title="meta.title.home">Kagan Bağdemir — Data & Logistics</title>
+<title data-i18n-title="meta.title.home">Kagan Bağdemir — Data &amp; Logistics</title>
 <meta name="description" content="Portfolio of Kagan Bağdemir — Mechanical Engineering (ITPL), data analytics, logistics IT, FEM, and CAD for manufacturing and operations roles.">
 <meta name="author" content="Kagan Bağdemir">
 <link rel="canonical" href="https://kaganbagdemir.de/">
@@ -79,758 +79,486 @@ layout: null
 }
 </script>
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
-<link rel="stylesheet" href="assets/theme.css?v=14">
-<style>
-.klausur-top-banner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  min-height: 3.15rem;
-  margin: 0 0 0.85rem;
-  overflow: hidden;
-  border: 1px solid rgba(245, 207, 116, 0.42);
-  border-radius: 1.15rem;
-  background:
-    radial-gradient(circle at 8% 18%, rgba(245, 207, 116, 0.2), transparent 14rem),
-    radial-gradient(circle at 92% 70%, rgba(116, 244, 241, 0.16), transparent 16rem),
-    linear-gradient(90deg, rgba(245, 207, 116, 0.13), rgba(116, 244, 241, 0.08)),
-    var(--surface-rail);
-  box-shadow: 0 18px 45px var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  color: var(--text-strong);
-  isolation: isolate;
-}
-
-.klausur-top-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, var(--surface-rail), transparent 18%, transparent 82%, var(--surface-rail)),
-    repeating-linear-gradient(110deg, transparent 0 16px, rgba(255, 255, 255, 0.055) 16px 17px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.klausur-badge {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 2.35rem;
-  height: 2.35rem;
-  margin-left: 0.55rem;
-  border: 1px solid rgba(116, 244, 241, 0.52);
-  border-radius: 999px;
-  background:
-    conic-gradient(from 0deg, rgba(116, 244, 241, 0.9), rgba(245, 207, 116, 0.92), rgba(170, 247, 197, 0.86), rgba(116, 244, 241, 0.9));
-  color: #04100f;
-  font-size: 0.68rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  animation: klausurBadgeSpin 5.6s linear infinite;
-}
-
-.klausur-badge::after {
-  content: "";
-  position: absolute;
-  inset: 0.18rem;
-  border-radius: inherit;
-  border: 1px solid rgba(4, 16, 15, 0.28);
-}
-
-.klausur-track-wrap {
-  position: relative;
-  z-index: 0;
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  padding: 0.78rem 0;
-}
-
-.klausur-track {
-  display: flex;
-  width: max-content;
-  min-width: 200%;
-  gap: 1.25rem;
-  align-items: center;
-  white-space: nowrap;
-  animation: klausurTicker 18s linear infinite;
-}
-
-.klausur-track span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  color: var(--signal-text);
-  font-size: clamp(0.8rem, 2.4vw, 0.98rem);
-  font-weight: 950;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  text-shadow: 0 0 18px rgba(245, 207, 116, 0.24);
-}
-
-.klausur-track span::before {
-  content: "";
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 999px;
-  background: var(--accent-text);
-  box-shadow: 0 0 16px rgba(116, 244, 241, 0.7);
-}
-
-@keyframes klausurTicker {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
-@keyframes klausurBadgeSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (max-width: 520px) {
-  .klausur-top-banner {
-    gap: 0.55rem;
-    min-height: 2.9rem;
-    border-radius: 1rem;
-  }
-
-  .klausur-badge {
-    width: 2rem;
-    height: 2rem;
-    margin-left: 0.45rem;
-    font-size: 0.58rem;
-  }
-
-  .klausur-track {
-    gap: 1rem;
-    animation-duration: 14s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .klausur-badge,
-  .klausur-track {
-    animation: none;
-  }
-}
-</style>
+<link rel="stylesheet" href="/assets/theme.css?v=16">
+<link rel="stylesheet" href="/assets/portfolio.css?v=1">
 <meta name="color-scheme" content="light dark">
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="scroll-progress-rail" aria-hidden="true"><span></span></div>
-  <div class="ambient-scroll-field" aria-hidden="true">
-    <span style="--x:12%; --y:18%; --d:0.22; --s:1"></span>
-    <span style="--x:84%; --y:16%; --d:-0.18; --s:0.74"></span>
-    <span style="--x:9%; --y:68%; --d:-0.28; --s:0.58"></span>
-    <span style="--x:78%; --y:76%; --d:0.34; --s:0.9"></span>
-    <span style="--x:48%; --y:38%; --d:0.14; --s:0.48"></span>
-  </div>
-  <main id="main-content" class="relative isolate max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
-    <div class="klausur-top-banner" role="status" aria-label="Ekime kadar kapalıyız. Klausurphase.">
-      <span class="klausur-badge" aria-hidden="true">KB</span>
-      <div class="klausur-track-wrap" aria-hidden="true">
-        <div class="klausur-track">
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-          <span>Ekime kadar kapalıyız · Klausurphase :D</span>
-        </div>
-      </div>
-      <span class="sr-only">Ekime kadar kapalıyız. Klausurphase.</span>
-    </div>
-    <header class="flex flex-wrap items-start justify-between gap-3 sm:items-center" data-animate style="--stagger:0">
-      <h1 class="site-brand-heading">
-        <a href="/" class="site-brand" aria-label="Kagan Bagdemir ana sayfa">
-          <picture class="site-brand-picture">
-            <source srcset="/assets/logo-mark.webp?v=1" type="image/webp">
-            <img class="site-brand-mark" src="/assets/logo-mark.png?v=2" width="50" height="50" alt="" decoding="async">
-          </picture>
-          <span class="site-brand-copy">
-            <span class="site-brand-name">KAGAN BAGDEMIR</span>
-            <span class="site-brand-line"
-                  data-lang-text
-                  data-lang-text-tr="Data · Lojistik · Engineering"
-                  data-lang-text-de="Daten · Logistik · Engineering"
-                  data-lang-text-en="Data · Logistics · Engineering"
-                  data-lang-text-nl="Data · Logistics · Engineering"
-                  data-lang-text-ja="Data · Logistics · Engineering">Data · Lojistik · Engineering</span>
-          </span>
-        </a>
-      </h1>
-      <div class="flex w-full items-center justify-between gap-3 flex-wrap sm:w-auto sm:justify-end">
+
+  <main id="main-content" class="portfolio-site">
+    <header class="portfolio-header" data-animate style="--stagger:0">
+      <a href="/" class="site-brand" aria-label="Kagan Bagdemir ana sayfa">
+        <picture class="site-brand-picture">
+          <source srcset="/assets/logo-mark.webp?v=1" type="image/webp">
+          <img class="site-brand-mark" src="/assets/logo-mark.png?v=2" width="64" height="64" alt="" decoding="async">
+        </picture>
+        <span class="site-brand-copy">
+          <span class="site-brand-name">KAGAN BAGDEMIR</span>
+          <span class="site-brand-line">Mechanical Engineering (ITPL)<br>Data Analytics &amp; Logistics IT</span>
+        </span>
+      </a>
+
+      <nav class="portfolio-nav" aria-label="Hauptnavigation">
         <a href="/kronolojik-basarimlar/"
-           class="hidden md:inline px-3 py-1 rounded-full border theme-button transition"
            data-lang-text
-           data-lang-text-tr="Basarilar"
+           data-lang-text-tr="Başarılar"
            data-lang-text-de="Erfolge"
            data-lang-text-en="Achievements"
            data-lang-text-nl="Achievements"
-           data-lang-text-ja="Achievements">Basarilar</a>
+           data-lang-text-ja="Achievements">Başarılar</a>
         <a href="/projekte-und-ziele/"
-           class="hidden md:inline px-3 py-1 rounded-full border theme-button transition"
            data-lang-text
-           data-lang-text-tr="Projeler ve Hedefler"
+           data-lang-text-tr="Projeler &amp; Hedefler"
            data-lang-text-de="Projekte &amp; Ziele"
            data-lang-text-en="Projects &amp; Goals"
            data-lang-text-nl="Projects &amp; Goals"
-           data-lang-text-ja="Projects &amp; Goals">Projeler ve Hedefler</a>
-        <a href="/blog/" class="hidden md:inline px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog">Blog</a>
-        <div class="flex items-center gap-2 flex-wrap justify-end">
-          <a id="admin-login" href="/admin/" class="px-3 py-1 rounded-full border theme-button" data-i18n="nav.admin">Admin</a>
-          <label for="lang-select-home" class="sr-only" data-i18n="lang.label"></label>
-          <select id="lang-select-home" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px] sm:min-w-[116px]">
-            <option value="tr" data-i18n="lang.tr">Turkce</option>
-            <option value="de" data-i18n="lang.de">Deutsch</option>
-            <option value="en" data-i18n="lang.en">English</option>
-            <option value="nl" data-i18n="lang.nl">Nederlands</option>
-            <option value="ja" data-i18n="lang.ja">日本語</option>
-          </select>
-          <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-            <span data-theme-icon aria-hidden="true">🌙</span>
-            <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
-          </button>
-        </div>
+           data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+        <a href="/blog/" data-i18n="nav.blog">Blog</a>
+      </nav>
+
+      <div class="portfolio-controls">
+        <label for="lang-select-home" class="sr-only" data-i18n="lang.label"></label>
+        <select id="lang-select-home" data-lang-select class="theme-input portfolio-language">
+          <option value="tr" data-i18n="lang.tr">Türkçe</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+          <option value="ja" data-i18n="lang.ja">日本語</option>
+        </select>
+        <button id="theme-toggle" class="theme-button-icon portfolio-theme-toggle" type="button">
+          <span data-theme-icon aria-hidden="true">HELL</span>
+          <span class="sr-only" data-i18n="btn.theme">Tema değiştir</span>
+        </button>
       </div>
-      <div class="mobile-nav-extra flex w-full gap-2 overflow-x-auto pb-1 md:hidden">
-        <a href="/kronolojik-basarimlar/"
-           class="whitespace-nowrap px-3 py-1 rounded-full border theme-button transition"
-           data-lang-text
-           data-lang-text-tr="Basarilar"
-           data-lang-text-de="Erfolge"
-           data-lang-text-en="Achievements"
-           data-lang-text-nl="Achievements"
-           data-lang-text-ja="Achievements">Basarilar</a>
-        <a href="/projekte-und-ziele/"
-           class="whitespace-nowrap px-3 py-1 rounded-full border theme-button transition"
-           data-lang-text
-           data-lang-text-tr="Projeler ve Hedefler"
-           data-lang-text-de="Projekte &amp; Ziele"
-           data-lang-text-en="Projects &amp; Goals"
-           data-lang-text-nl="Projects &amp; Goals"
-           data-lang-text-ja="Projects &amp; Goals">Projeler ve Hedefler</a>
-        <a href="/blog/" class="whitespace-nowrap px-3 py-1 rounded-full border theme-button transition" data-i18n="nav.blog">Blog</a>
-      </div>
+
+      <details class="portfolio-mobile-menu">
+        <summary>MENÜ</summary>
+        <nav aria-label="Mobile Navigation">
+          <a href="/kronolojik-basarimlar/"
+             data-lang-text
+             data-lang-text-tr="Başarılar"
+             data-lang-text-de="Erfolge"
+             data-lang-text-en="Achievements"
+             data-lang-text-nl="Achievements"
+             data-lang-text-ja="Achievements">Başarılar</a>
+          <a href="/projekte-und-ziele/"
+             data-lang-text
+             data-lang-text-tr="Projeler &amp; Hedefler"
+             data-lang-text-de="Projekte &amp; Ziele"
+             data-lang-text-en="Projects &amp; Goals"
+             data-lang-text-nl="Projects &amp; Goals"
+             data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+          <a href="/blog/" data-i18n="nav.blog">Blog</a>
+        </nav>
+      </details>
     </header>
 
-    <section class="hero-intro mt-6 rounded-2xl border theme-card fx-hero p-5 sm:p-6" data-animate style="--stagger:1">
-      <div class="hero-shell">
-        <div>
-          <p class="hero-kicker text-xs uppercase tracking-widest theme-text-muted"
+    <section class="swiss-hero" aria-labelledby="portfolio-title">
+      <div class="swiss-hero-copy">
+        <p class="swiss-kicker">PORTFOLIO</p>
+        <h1 id="portfolio-title" class="swiss-title">
+          <span data-lang-text
+                data-lang-text-tr="Tekniği anla."
+                data-lang-text-de="Technik verstehen."
+                data-lang-text-en="Understand engineering."
+                data-lang-text-nl="Understand engineering."
+                data-lang-text-ja="Understand engineering.">Tekniği anla.</span>
+          <span data-lang-text
+                data-lang-text-tr="Veriyi kullan."
+                data-lang-text-de="Daten nutzen."
+                data-lang-text-en="Use data."
+                data-lang-text-nl="Use data."
+                data-lang-text-ja="Use data.">Veriyi kullan.</span>
+          <span data-lang-text
+                data-lang-text-tr="Süreçleri iyileştir."
+                data-lang-text-de="Abläufe verbessern."
+                data-lang-text-en="Improve operations."
+                data-lang-text-nl="Improve operations."
+                data-lang-text-ja="Improve operations.">Süreçleri iyileştir.</span>
+        </h1>
+      </div>
+
+      <aside class="swiss-profile-card" aria-label="Profil özeti">
+        <dl class="swiss-meta-list">
+          <div>
+            <dt data-lang-text
+                data-lang-text-tr="Konum"
+                data-lang-text-de="Standort"
+                data-lang-text-en="Location"
+                data-lang-text-nl="Location"
+                data-lang-text-ja="Location">Konum</dt>
+            <dd>Dortmund, Deutschland</dd>
+          </div>
+          <div>
+            <dt data-lang-text
+                data-lang-text-tr="Üniversite"
+                data-lang-text-de="Hochschule"
+                data-lang-text-en="University"
+                data-lang-text-nl="University"
+                data-lang-text-ja="University">Üniversite</dt>
+            <dd>TU Dortmund<br>Mechanical Engineering (ITPL)</dd>
+          </div>
+          <div>
+            <dt data-lang-text
+                data-lang-text-tr="İletişim"
+                data-lang-text-de="Kontakt"
+                data-lang-text-en="Contact"
+                data-lang-text-nl="Contact"
+                data-lang-text-ja="Contact">İletişim</dt>
+            <dd>
+              <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a><br>
+              <a href="https://www.linkedin.com/in/kagan-b-7b2b28206/" target="_blank" rel="noopener">LinkedIn</a>
+            </dd>
+          </div>
+          <div>
+            <dt data-lang-text
+                data-lang-text-tr="Uygunluk"
+                data-lang-text-de="Verfügbarkeit"
+                data-lang-text-en="Availability"
+                data-lang-text-nl="Availability"
+                data-lang-text-ja="Availability">Uygunluk</dt>
+            <dd data-lang-text
+                data-lang-text-tr="Ekim 2026'dan itibaren"
+                data-lang-text-de="Ab Oktober 2026"
+                data-lang-text-en="From October 2026"
+                data-lang-text-nl="From October 2026"
+                data-lang-text-ja="From October 2026">Ekim 2026'dan itibaren</dd>
+          </div>
+        </dl>
+
+        <div class="swiss-profile-actions">
+          <a class="swiss-action swiss-action-primary"
+             href="mailto:kb2011kb2011@gmail.com?subject=Kontakt%20%C3%BCber%20Ihre%20Website&amp;body=Guten%20Tag%20Herr%20Bagdemir%2C%0A%0Aich%20bin%20auf%20Ihre%20Website%20aufmerksam%20geworden%20und%20m%C3%B6chte%20gern%20mit%20Ihnen%20%C3%BCber%20eine%20m%C3%B6gliche%20Zusammenarbeit%20sprechen.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen"
              data-lang-text
-             data-lang-text-tr="Portfolio · Veri · Lojistik · Engineering"
-             data-lang-text-de="Portfolio · Daten · Logistik · Engineering"
-             data-lang-text-en="Portfolio · Data · Logistics · Engineering"
-             data-lang-text-nl="Portfolio · Data · Logistics · Engineering"
-             data-lang-text-ja="Portfolio · Data · Logistics · Engineering">Portfolio · Veri · Lojistik · Engineering</p>
-
-          <h2 class="hero-title safe-wrap text-3xl font-black leading-tight mt-3 sm:text-4xl md:text-5xl"
-              data-lang-text
-              data-lang-text-tr="Data. Lojistik. Engineering. Çalışan sistemler."
-              data-lang-text-de="Daten. Logistik. Engineering. Nutzbare Systeme."
-              data-lang-text-en="Data. Logistics. Engineering. Usable systems."
-              data-lang-text-nl="Data. Logistics. Engineering. Usable systems."
-              data-lang-text-ja="Data. Logistics. Engineering. Usable systems.">Data. Lojistik. Engineering. Çalışan sistemler.</h2>
-
-          <p class="mt-3 hero-lead theme-text-soft safe-wrap"
+             data-lang-text-tr="İletişime geç"
+             data-lang-text-de="Kontakt aufnehmen"
+             data-lang-text-en="Get in touch"
+             data-lang-text-nl="Get in touch"
+             data-lang-text-ja="Get in touch">İletişime geç</a>
+          <a class="swiss-action" href="/cv.pdf" target="_blank" rel="noopener"
              data-lang-text
-             data-lang-text-tr="TU Dortmund çevresinde Mechanical Engineering (ITPL) geçmişimle warehouse data, KPI dashboard, FEM ve CAD tarafında gerçek problemleri sade sistemlere çeviriyorum."
-             data-lang-text-de="Mit Maschinenbau (ITPL) rund um die TU Dortmund übersetze ich Warehouse-Daten, KPI-Dashboards, FEM und CAD in klare Systeme für reale Prozesse."
-             data-lang-text-en="With a Mechanical Engineering (ITPL) background around TU Dortmund, I translate warehouse data, KPI dashboards, FEM, and CAD into clear systems for real processes."
-             data-lang-text-nl="With a Mechanical Engineering (ITPL) background around TU Dortmund, I translate warehouse data, KPI dashboards, FEM, and CAD into clear systems for real processes."
-             data-lang-text-ja="With a Mechanical Engineering (ITPL) background around TU Dortmund, I translate warehouse data, KPI dashboards, FEM, and CAD into clear systems for real processes.">TU Dortmund çevresinde Mechanical Engineering (ITPL) geçmişimle warehouse data, KPI dashboard, FEM ve CAD tarafında gerçek problemleri sade sistemlere çeviriyorum.</p>
-
-          <div class="author-context mt-4 rounded-2xl border theme-card-soft p-3 text-sm theme-text-soft">
-            <p><strong>Kagan Bağdemir</strong> | Mechanical Engineering (ITPL), TU Dortmund | Data Analytics &amp; Logistics IT specialist</p>
-            <p class="mt-1">Last updated: <time datetime="2026-06-07">7 June 2026</time></p>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mt-4 text-sm theme-text-soft">
-            <span class="px-3 py-1 rounded-full border theme-chip">Python / NumPy</span>
-            <span class="px-3 py-1 rounded-full border theme-chip">Data Analytics</span>
-            <span class="px-3 py-1 rounded-full border theme-chip">Logistics IT</span>
-            <span class="px-3 py-1 rounded-full border theme-chip">FEM / CAD</span>
-          </div>
-
-          <div class="flex flex-wrap gap-3 mt-5">
-            <a class="w-full px-4 py-2 rounded-xl border theme-button-accent text-center sm:w-auto" href="mailto:kb2011kb2011@gmail.com?subject=Kontakt%20%C3%BCber%20Ihre%20Website&body=Guten%20Tag%20Herr%20Bagdemir%2C%0A%0Aich%20bin%20auf%20Ihre%20Website%20aufmerksam%20geworden%20und%20m%C3%B6chte%20gern%20mit%20Ihnen%20%C3%BCber%20eine%20m%C3%B6gliche%20Zusammenarbeit%20sprechen.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen" data-i18n="btn.email">E-posta</a>
-            <a class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" href="/cv.pdf" target="_blank" rel="noopener" data-i18n="btn.cv">CV / Ozgecmis (PDF)</a>
-            <a class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" href="https://www.linkedin.com/in/kagan-b-7b2b28206/" target="_blank" rel="noopener" data-i18n="btn.linkedin">LinkedIn</a>
-            <a class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto" href="https://github.com/kahnri" target="_blank" rel="noopener" data-i18n="btn.github">GitHub</a>
-            <a class="w-full px-4 py-2 rounded-xl border theme-button text-center sm:w-auto"
-               href="#selected-work"
-               data-lang-text
-               data-lang-text-tr="Secili Isler"
-               data-lang-text-de="Ausgewählte Arbeiten"
-               data-lang-text-en="Selected Work"
-               data-lang-text-nl="Selected Work"
-               data-lang-text-ja="Selected Work">Secili Isler</a>
-          </div>
+             data-lang-text-tr="CV'yi aç"
+             data-lang-text-de="Lebenslauf"
+             data-lang-text-en="Resume"
+             data-lang-text-nl="Resume"
+             data-lang-text-ja="Resume">CV'yi aç</a>
         </div>
+      </aside>
+    </section>
 
-        <aside class="hero-visual-panel rounded-2xl border" data-animate style="--stagger:1.4">
-          <div class="cockpit-status">
-            <p class="text-xs uppercase tracking-widest theme-text-muted"
+    <div class="klausur-strip" role="status" aria-label="Ekime kadar Klausurphase">
+      <div class="klausur-strip-track" aria-hidden="true">
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+        <span data-lang-text
+              data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
+              data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
+              data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
+              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+      </div>
+      <span class="sr-only">Ekime kadar Klausurphase.</span>
+    </div>
+
+    <section id="selected-work" class="project-index" aria-labelledby="project-index-title">
+      <header class="project-index-header">
+        <div>
+          <p class="swiss-kicker"
              data-lang-text
-             data-lang-text-tr="Canli Operasyon Simulasyonu"
-             data-lang-text-de="Live Operations-Simulation"
-             data-lang-text-en="Live Operations Simulation"
-             data-lang-text-nl="Live Operations Simulation"
-             data-lang-text-ja="Live Operations Simulation">Canli Operasyon Simulasyonu</p>
-            <span class="status-pill">SYSTEM ONLINE</span>
-          </div>
+             data-lang-text-tr="SEÇİLİ ÇALIŞMALAR"
+             data-lang-text-de="AUSGEWÄHLTE ARBEITEN"
+             data-lang-text-en="SELECTED WORK"
+             data-lang-text-nl="SELECTED WORK"
+             data-lang-text-ja="SELECTED WORK">SEÇİLİ ÇALIŞMALAR</p>
+          <h2 id="project-index-title"
+              data-lang-text
+              data-lang-text-tr="Proje indeksi"
+              data-lang-text-de="Projektindex"
+              data-lang-text-en="Project index"
+              data-lang-text-nl="Project index"
+              data-lang-text-ja="Project index">Proje indeksi</h2>
+        </div>
+        <a class="project-index-all" href="/projekte-und-ziele/"
+           data-lang-text
+           data-lang-text-tr="Tüm projeler"
+           data-lang-text-de="Alle Projekte"
+           data-lang-text-en="All projects"
+           data-lang-text-nl="All projects"
+           data-lang-text-ja="All projects">Tüm projeler</a>
+      </header>
 
-          <div class="orbit-map" aria-hidden="true">
-            <div class="orbit-ring orbit-ring-one"></div>
-            <div class="orbit-ring orbit-ring-two"></div>
-            <div class="orbit-core">
-              <span>KB</span>
-            </div>
-            <span class="data-node node-a"></span>
-            <span class="data-node node-b"></span>
-            <span class="data-node node-c"></span>
-            <span class="route-line route-one"></span>
-            <span class="route-line route-two"></span>
-            <span class="scan-beam"></span>
-          </div>
+      <div class="project-index-list">
+        <a class="project-index-row" href="/dev/warehouse-kpi-dashboard/">
+          <span class="project-number">01</span>
+          <span class="project-discipline">DATA ANALYTICS<br>LOGISTICS IT</span>
+          <span class="project-main">
+            <strong>Warehouse KPI Dashboard</strong>
+            <span data-lang-text
+                  data-lang-text-tr="Depo yükünü, sevkiyat performansını ve çevrim süresini okunur KPI'larla analiz eden interaktif uygulama."
+                  data-lang-text-de="Interaktives Dashboard zur Analyse von Lagerauslastung, Versandqualität und Durchlaufzeit."
+                  data-lang-text-en="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis."
+                  data-lang-text-nl="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis."
+                  data-lang-text-ja="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis.">Depo yükünü, sevkiyat performansını ve çevrim süresini okunur KPI'larla analiz eden interaktif uygulama.</span>
+          </span>
+          <span class="project-action"
+                data-lang-text
+                data-lang-text-tr="PROJEYİ AÇ"
+                data-lang-text-de="PROJEKT ÖFFNEN"
+                data-lang-text-en="OPEN PROJECT"
+                data-lang-text-nl="OPEN PROJECT"
+                data-lang-text-ja="OPEN PROJECT">PROJEYİ AÇ</span>
+        </a>
 
-          <div class="metric-card metric-card-a">
-            <span class="metric-label">OTD</span>
-            <strong>96.4%</strong>
-            <span class="metric-trend">+4.8</span>
-          </div>
+        <a class="project-index-row" href="/dev/fem-mini-solver/">
+          <span class="project-number">02</span>
+          <span class="project-discipline">MECHANICAL<br>ENGINEERING</span>
+          <span class="project-main">
+            <strong>FEM Mini-Solver</strong>
+            <span data-lang-text
+                  data-lang-text-tr="2D kafes sistemlerinde rijitlik matrisi, sınır şartları, yer değiştirme ve gerilme sonuçlarını görünür yapan Python çözücüsü."
+                  data-lang-text-de="Python-basierter FEM-Solver für Steifigkeitsmatrix, Randbedingungen, Verschiebung und Spannung in 2D-Strukturen."
+                  data-lang-text-en="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures."
+                  data-lang-text-nl="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures."
+                  data-lang-text-ja="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures.">2D kafes sistemlerinde rijitlik matrisi, sınır şartları, yer değiştirme ve gerilme sonuçlarını görünür yapan Python çözücüsü.</span>
+          </span>
+          <span class="project-action"
+                data-lang-text
+                data-lang-text-tr="DEMOYU AÇ"
+                data-lang-text-de="DEMO ÖFFNEN"
+                data-lang-text-en="OPEN DEMO"
+                data-lang-text-nl="OPEN DEMO"
+                data-lang-text-ja="OPEN DEMO">DEMOYU AÇ</span>
+        </a>
 
-          <div class="metric-card metric-card-b">
-            <span class="metric-label">Cycle</span>
-            <strong>18m</strong>
-            <span class="metric-trend">-12%</span>
-          </div>
+        <a class="project-index-row" href="/dev/cad-technical-drawing/">
+          <span class="project-number">03</span>
+          <span class="project-discipline">DESIGN &amp;<br>ENGINEERING</span>
+          <span class="project-main">
+            <strong>CAD / Technische Zeichnung</strong>
+            <span data-lang-text
+                  data-lang-text-tr="Ölçülendirme, tolerans, üretilebilirlik ve teknik iletişim odağında CAD ve teknik çizim portfolyosu."
+                  data-lang-text-de="CAD- und Zeichnungsportfolio mit Fokus auf Bemaßung, Toleranzen, Fertigbarkeit und technische Kommunikation."
+                  data-lang-text-en="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication."
+                  data-lang-text-nl="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication."
+                  data-lang-text-ja="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication.">Ölçülendirme, tolerans, üretilebilirlik ve teknik iletişim odağında CAD ve teknik çizim portfolyosu.</span>
+          </span>
+          <span class="project-action"
+                data-lang-text
+                data-lang-text-tr="PORTFOLYOYU AÇ"
+                data-lang-text-de="PORTFOLIO ÖFFNEN"
+                data-lang-text-en="OPEN PORTFOLIO"
+                data-lang-text-nl="OPEN PORTFOLIO"
+                data-lang-text-ja="OPEN PORTFOLIO">PORTFOLYOYU AÇ</span>
+        </a>
 
-          <div class="metric-card metric-card-c">
-            <span class="metric-label">FEM</span>
-            <strong>2D</strong>
-            <span class="metric-trend">mesh ok</span>
-          </div>
-
-          <div class="signal-bars" aria-hidden="true">
-            <span style="--bar:36%"></span>
-            <span style="--bar:58%"></span>
-            <span style="--bar:44%"></span>
-            <span style="--bar:78%"></span>
-            <span style="--bar:66%"></span>
-            <span style="--bar:88%"></span>
-          </div>
-
-          <p class="cockpit-caption safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Dashboard, FEM ve üretim bilgisini tek ekranda düsünen bir mühendis profili."
-             data-lang-text-de="Ein Engineering-Profil, das Dashboard, FEM und Produktionsverständnis zusammen denkt."
-             data-lang-text-en="An engineering profile that thinks in dashboards, FEM, and production reality at once."
-             data-lang-text-nl="An engineering profile that thinks in dashboards, FEM, and production reality at once."
-             data-lang-text-ja="An engineering profile that thinks in dashboards, FEM, and production reality at once.">Dashboard, FEM ve üretim bilgisini tek ekranda düsünen bir mühendis profili.</p>
-        </aside>
+        <a class="project-index-row" href="/blog/bachelor-thesis-filter-materials/">
+          <span class="project-number">04</span>
+          <span class="project-discipline">WISSENSCHAFTLICHES<br>ARBEITEN</span>
+          <span class="project-main">
+            <strong>Bachelorarbeit</strong>
+            <span data-lang-text
+                  data-lang-text-tr="Araç filtresi üretiminde malzeme parametreleri, geçirgenlik, gözenek yapısı ve filtrasyon performansı üzerine araştırma."
+                  data-lang-text-de="Untersuchung zu Materialparametern, Permeabilität, Porenstruktur und Filtrationsleistung in Fahrzeugfiltern."
+                  data-lang-text-en="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters."
+                  data-lang-text-nl="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters."
+                  data-lang-text-ja="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters.">Araç filtresi üretiminde malzeme parametreleri, geçirgenlik, gözenek yapısı ve filtrasyon performansı üzerine araştırma.</span>
+          </span>
+          <span class="project-action"
+                data-lang-text
+                data-lang-text-tr="TEZİ İNCELE"
+                data-lang-text-de="THESIS ANSEHEN"
+                data-lang-text-en="VIEW THESIS"
+                data-lang-text-nl="VIEW THESIS"
+                data-lang-text-ja="VIEW THESIS">TEZİ İNCELE</span>
+        </a>
       </div>
     </section>
 
-    <section id="profile-summary" class="mt-6 rounded-2xl border theme-card p-5 sm:p-6" data-animate style="--stagger:1.75">
-      <p class="text-xs uppercase tracking-widest theme-text-muted"
-         data-lang-text
-         data-lang-text-tr="Profil derinligi"
-         data-lang-text-de="Profil mit Substanz"
-         data-lang-text-en="Profile depth"
-         data-lang-text-nl="Profile depth"
-         data-lang-text-ja="Profile depth">Profil derinligi</p>
-      <h2 class="mt-2 text-2xl font-semibold safe-wrap"
-          data-lang-text
-          data-lang-text-tr="Kagan Bağdemir hangi problemler üzerinde çalışıyor?"
-          data-lang-text-de="An welchen Problemen arbeitet Kagan Bağdemir?"
-          data-lang-text-en="What problems does Kagan Bağdemir work on?"
-          data-lang-text-nl="What problems does Kagan Bağdemir work on?"
-          data-lang-text-ja="What problems does Kagan Bağdemir work on?">Kagan Bağdemir hangi problemler üzerinde çalışıyor?</h2>
-      <p class="mt-3 theme-text-soft safe-wrap"
-         data-lang-text
-         data-lang-text-tr="Mechanical Engineering (ITPL) temelim, üretim ve lojistikteki fiziksel süreçleri veriyle birlikte okumamı sağlıyor. Bir depoda siparişin ne kadar sürede aktığını, bir üretim hattında hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD/FEM tarafında nasıl düşünülmesi gerektiğini aynı çerçevede ele alıyorum. Bu portfolyo, sadece güzel görünen ekranlar değil; problem tanımı, ölçüm mantığı, mühendislik sezgisi ve uygulanabilir çıktı üretme biçimimi göstermek için tasarlandı."
-         data-lang-text-de="Mein Maschinenbau-ITPL-Hintergrund hilft mir, physische Produktions- und Logistikprozesse zusammen mit Daten zu lesen. Ich betrachte, wie lange ein Auftrag im Lager wirklich fließt, welche KPI in einer Produktionsumgebung eine Entscheidung auslöst und wie ein technisches Bauteil auf CAD/FEM-Ebene gedacht werden sollte. Dieses Portfolio zeigt deshalb nicht nur Oberflächen, sondern meine Art, Probleme zu definieren, Messlogik aufzubauen, Engineering-Kontext zu behalten und nutzbare Ergebnisse zu liefern."
-         data-lang-text-en="My Mechanical Engineering (ITPL) background helps me read physical production and logistics processes together with data. I look at how long an order really flows through a warehouse, which KPI actually supports a decision in a manufacturing environment, and how a technical component should be considered from a CAD/FEM perspective. This portfolio is built to show more than screens: it shows how I define problems, structure measurement logic, keep engineering context, and deliver usable outputs."
-         data-lang-text-nl="My Mechanical Engineering (ITPL) background helps me read physical production and logistics processes together with data. I look at how long an order really flows through a warehouse, which KPI actually supports a decision in a manufacturing environment, and how a technical component should be considered from a CAD/FEM perspective. This portfolio is built to show more than screens: it shows how I define problems, structure measurement logic, keep engineering context, and deliver usable outputs."
-         data-lang-text-ja="My Mechanical Engineering (ITPL) background helps me read physical production and logistics processes together with data. I look at how long an order really flows through a warehouse, which KPI actually supports a decision in a manufacturing environment, and how a technical component should be considered from a CAD/FEM perspective. This portfolio is built to show more than screens: it shows how I define problems, structure measurement logic, keep engineering context, and deliver usable outputs.">Mechanical Engineering (ITPL) temelim, üretim ve lojistikteki fiziksel süreçleri veriyle birlikte okumamı sağlıyor. Bir depoda siparişin ne kadar sürede aktığını, bir üretim hattında hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD/FEM tarafında nasıl düşünülmesi gerektiğini aynı çerçevede ele alıyorum. Bu portfolyo, sadece güzel görünen ekranlar değil; problem tanımı, ölçüm mantığı, mühendislik sezgisi ve uygulanabilir çıktı üretme biçimimi göstermek için tasarlandı.</p>
+    <section id="profile-summary" class="portfolio-profile" aria-labelledby="profile-title">
+      <div class="portfolio-profile-intro">
+        <p class="swiss-kicker"
+           data-lang-text
+           data-lang-text-tr="PROFİL"
+           data-lang-text-de="PROFIL"
+           data-lang-text-en="PROFILE"
+           data-lang-text-nl="PROFILE"
+           data-lang-text-ja="PROFILE">PROFİL</p>
+        <h2 id="profile-title"
+            data-lang-text
+            data-lang-text-tr="Kagan Bağdemir hangi problemleri çözüyor?"
+            data-lang-text-de="Welche Probleme löst Kagan Bağdemir?"
+            data-lang-text-en="What problems does Kagan Bağdemir solve?"
+            data-lang-text-nl="What problems does Kagan Bağdemir solve?"
+            data-lang-text-ja="What problems does Kagan Bağdemir solve?">Kagan Bağdemir hangi problemleri çözüyor?</h2>
+        <p data-lang-text
+           data-lang-text-tr="Mechanical Engineering (ITPL) eğitimim sayesinde fiziksel üretim ve lojistik süreçlerini yalnızca tablo olarak değil, gerçek sistemler olarak okuyorum. Bir siparişin depoda nerede beklediğini, hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD ve FEM tarafında nasıl ele alınması gerektiğini aynı problem çözme yaklaşımında birleştiriyorum. Hedefim karmaşıklığı süslemek değil; onu ölçülebilir, anlaşılır ve uygulanabilir hale getirmek."
+           data-lang-text-de="Durch mein Studium im Maschinenbau (ITPL) betrachte ich Produktions- und Logistikprozesse nicht nur als Tabellen, sondern als reale Systeme. Ich verbinde die Frage, wo ein Auftrag im Lager wartet, welche KPI tatsächlich eine Entscheidung unterstützt und wie ein Bauteil in CAD und FEM gedacht werden sollte, in einem gemeinsamen Problemlösungsansatz. Mein Ziel ist nicht, Komplexität zu dekorieren, sondern sie messbar, verständlich und nutzbar zu machen."
+           data-lang-text-en="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable."
+           data-lang-text-nl="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable."
+           data-lang-text-ja="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable.">Mechanical Engineering (ITPL) eğitimim sayesinde fiziksel üretim ve lojistik süreçlerini yalnızca tablo olarak değil, gerçek sistemler olarak okuyorum. Bir siparişin depoda nerede beklediğini, hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD ve FEM tarafında nasıl ele alınması gerektiğini aynı problem çözme yaklaşımında birleştiriyorum. Hedefim karmaşıklığı süslemek değil; onu ölçülebilir, anlaşılır ve uygulanabilir hale getirmek.</p>
+      </div>
 
-      <div class="grid gap-4 mt-4 md:grid-cols-3">
-        <article class="rounded-2xl border theme-card-soft p-4">
-          <h3 class="text-lg font-semibold safe-wrap"
-              data-lang-text
+      <div class="portfolio-profile-grid">
+        <article>
+          <span class="profile-number">01</span>
+          <h3 data-lang-text
               data-lang-text-tr="Hangi teknik araçları kullanıyorum?"
               data-lang-text-de="Welche technischen Werkzeuge nutze ich?"
               data-lang-text-en="Which technical tools do I use?"
               data-lang-text-nl="Which technical tools do I use?"
               data-lang-text-ja="Which technical tools do I use?">Hangi teknik araçları kullanıyorum?</h3>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Veri tarafında Python, NumPy, pandas ve görselleştirme mantığını; mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel FEM yaklaşımını birleştiriyorum. KPI çalışmalarında lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri sadece raporlamak yerine kök neden, darboğaz ve aksiyon sorularına bağlamayı hedefliyorum."
-             data-lang-text-de="Auf der Datenseite kombiniere ich Python, NumPy, pandas und Visualisierungslogik; auf der Engineering-Seite CAD, technische Zeichnung, Toleranzdenken und grundlegende FEM-Methodik. Bei KPI-Arbeit verbinde ich Kennzahlen wie Lead Time, Picking Accuracy, On-time Delivery, Cycle Time und OEE nicht nur mit Reporting, sondern mit Fragen nach Ursache, Engpass und nächster Aktion."
-             data-lang-text-en="On the data side I combine Python, NumPy, pandas, and visualization logic; on the engineering side I use CAD, technical drawing, tolerance thinking, and basic FEM methodology. In KPI work, I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE with root cause, bottleneck, and next-action questions instead of treating them as reporting-only numbers."
-             data-lang-text-nl="On the data side I combine Python, NumPy, pandas, and visualization logic; on the engineering side I use CAD, technical drawing, tolerance thinking, and basic FEM methodology. In KPI work, I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE with root cause, bottleneck, and next-action questions instead of treating them as reporting-only numbers."
-             data-lang-text-ja="On the data side I combine Python, NumPy, pandas, and visualization logic; on the engineering side I use CAD, technical drawing, tolerance thinking, and basic FEM methodology. In KPI work, I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE with root cause, bottleneck, and next-action questions instead of treating them as reporting-only numbers.">Veri tarafında Python, NumPy, pandas ve görselleştirme mantığını; mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel FEM yaklaşımını birleştiriyorum. KPI çalışmalarında lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri sadece raporlamak yerine kök neden, darboğaz ve aksiyon sorularına bağlamayı hedefliyorum.</p>
+          <p data-lang-text
+             data-lang-text-tr="Veri tarafında Python, NumPy ve pandas ile analiz, veri temizleme ve prototipleme yapıyorum. Operasyonel görünürlük için lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri iş sorularına bağlıyorum. Mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel sonlu elemanlar yaklaşımını kullanıyorum. Araç seçimini gösterişe göre değil, problemi en açık şekilde çözmesine göre yapıyorum."
+             data-lang-text-de="Auf der Datenseite arbeite ich mit Python, NumPy und pandas für Analyse, Datenbereinigung und Prototyping. Kennzahlen wie Lead Time, Picking Accuracy, On-time Delivery, Cycle Time und OEE verbinde ich mit konkreten operativen Fragen. Im Engineering nutze ich CAD, technische Zeichnung, Toleranzdenken und grundlegende FEM-Methodik. Das Werkzeug wähle ich danach, wie klar es das Problem löst."
+             data-lang-text-en="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods."
+             data-lang-text-nl="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods."
+             data-lang-text-ja="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods.">Veri tarafında Python, NumPy ve pandas ile analiz, veri temizleme ve prototipleme yapıyorum. Operasyonel görünürlük için lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri iş sorularına bağlıyorum. Mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel sonlu elemanlar yaklaşımını kullanıyorum. Araç seçimini gösterişe göre değil, problemi en açık şekilde çözmesine göre yapıyorum.</p>
         </article>
 
-        <article class="rounded-2xl border theme-card-soft p-4">
-          <h3 class="text-lg font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Hangi projeler bu profili gösteriyor?"
-              data-lang-text-de="Welche Projekte zeigen dieses Profil?"
-              data-lang-text-en="Which projects show this profile?"
-              data-lang-text-nl="Which projects show this profile?"
-              data-lang-text-ja="Which projects show this profile?">Hangi projeler bu profili gösteriyor?</h3>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Warehouse KPI Dashboard projesi operasyon metriklerini anlaşılır bir kontrol paneline dönüştürüyor. FEM Mini-Solver, rijitlik matrisi, sınır şartı ve yer değiştirme gibi kavramları küçük ama okunur bir hesaplama demosuna indiriyor. CAD / Teknik Çizim bölümü üretilebilirlik, ölçülendirme ve norm bilincini öne çıkarıyor. Lisans tezim ise araç filtre imalatında kullanılan malzeme parametrelerinin filtrasyona etkisini üç dilde erişilebilir hale getiriyor."
-             data-lang-text-de="Das Warehouse KPI Dashboard übersetzt operative Metriken in ein verständliches Kontrollpanel. Der FEM Mini-Solver reduziert Begriffe wie Steifigkeitsmatrix, Randbedingung und Verschiebung auf eine kleine, lesbare Berechnungsdemo. Der CAD-/Technische-Zeichnung-Bereich betont Herstellbarkeit, Bemaßung und Normbewusstsein. Meine Bachelorarbeit macht den Einfluss von Materialparametern in der Fahrzeugfilterfertigung auf die Filtration in drei Sprachen zugänglich."
-             data-lang-text-en="The Warehouse KPI Dashboard translates operational metrics into a readable control panel. The FEM Mini-Solver turns concepts such as stiffness matrix, boundary conditions, and displacement into a small but understandable computation demo. The CAD / Technical Drawing area highlights manufacturability, dimensioning, and standards awareness. My bachelor thesis makes the effect of material parameters in vehicle filter manufacturing on filtration available in three languages."
-             data-lang-text-nl="The Warehouse KPI Dashboard translates operational metrics into a readable control panel. The FEM Mini-Solver turns concepts such as stiffness matrix, boundary conditions, and displacement into a small but understandable computation demo. The CAD / Technical Drawing area highlights manufacturability, dimensioning, and standards awareness. My bachelor thesis makes the effect of material parameters in vehicle filter manufacturing on filtration available in three languages."
-             data-lang-text-ja="The Warehouse KPI Dashboard translates operational metrics into a readable control panel. The FEM Mini-Solver turns concepts such as stiffness matrix, boundary conditions, and displacement into a small but understandable computation demo. The CAD / Technical Drawing area highlights manufacturability, dimensioning, and standards awareness. My bachelor thesis makes the effect of material parameters in vehicle filter manufacturing on filtration available in three languages.">Warehouse KPI Dashboard projesi operasyon metriklerini anlaşılır bir kontrol paneline dönüştürüyor. FEM Mini-Solver, rijitlik matrisi, sınır şartı ve yer değiştirme gibi kavramları küçük ama okunur bir hesaplama demosuna indiriyor. CAD / Teknik Çizim bölümü üretilebilirlik, ölçülendirme ve norm bilincini öne çıkarıyor. Lisans tezim ise araç filtre imalatında kullanılan malzeme parametrelerinin filtrasyona etkisini üç dilde erişilebilir hale getiriyor.</p>
+        <article>
+          <span class="profile-number">02</span>
+          <h3 data-lang-text
+              data-lang-text-tr="Projelerde nasıl çalışıyorum?"
+              data-lang-text-de="Wie arbeite ich in Projekten?"
+              data-lang-text-en="How do I work on projects?"
+              data-lang-text-nl="How do I work on projects?"
+              data-lang-text-ja="How do I work on projects?">Projelerde nasıl çalışıyorum?</h3>
+          <p data-lang-text
+             data-lang-text-tr="Önce problemi ve başarı ölçütünü netleştiriyorum. Sonra gerekli veriyi, varsayımları ve sınırları görünür hale getiriyorum. Dashboard projesinde grafik sayısını artırmak yerine hangi metriğin hangi kararı desteklediğini soruyorum; FEM projesinde yalnızca sonuç göstermek yerine matris kurulumunu ve sınır şartlarını anlaşılır kılıyorum. Bu yaklaşım, hem teknik doğruluğu hem de çıktının iş ortamında kullanılabilir olmasını koruyor."
+             data-lang-text-de="Zuerst kläre ich Problem und Erfolgskriterium. Danach mache ich Daten, Annahmen und Grenzen sichtbar. Beim Dashboard frage ich nicht nach mehr Charts, sondern danach, welche Kennzahl welche Entscheidung unterstützt. Beim FEM-Projekt zeige ich nicht nur Ergebnisse, sondern mache Matrixaufbau und Randbedingungen nachvollziehbar. So bleiben technische Richtigkeit und praktische Nutzbarkeit zusammen."
+             data-lang-text-en="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together."
+             data-lang-text-nl="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together."
+             data-lang-text-ja="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together.">Önce problemi ve başarı ölçütünü netleştiriyorum. Sonra gerekli veriyi, varsayımları ve sınırları görünür hale getiriyorum. Dashboard projesinde grafik sayısını artırmak yerine hangi metriğin hangi kararı desteklediğini soruyorum; FEM projesinde yalnızca sonuç göstermek yerine matris kurulumunu ve sınır şartlarını anlaşılır kılıyorum. Bu yaklaşım, hem teknik doğruluğu hem de çıktının iş ortamında kullanılabilir olmasını koruyor.</p>
         </article>
 
-        <article class="rounded-2xl border theme-card-soft p-4">
-          <h3 class="text-lg font-semibold safe-wrap"
-              data-lang-text
+        <article>
+          <span class="profile-number">03</span>
+          <h3 data-lang-text
               data-lang-text-tr="Hangi rolleri hedefliyorum?"
               data-lang-text-de="Welche Rollen suche ich?"
               data-lang-text-en="Which roles am I targeting?"
               data-lang-text-nl="Which roles am I targeting?"
               data-lang-text-ja="Which roles am I targeting?">Hangi rolleri hedefliyorum?</h3>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Üretim operasyonları, lojistik optimizasyonu, warehouse analytics, junior data analytics ve manufacturing engineering kesişimindeki rollere odaklanıyorum. Özellikle gerçek süreç verisini temizleyip doğru metriklere bağlayan, ekiplerin daha hızlı karar almasına yardım eden ve teknik bağlamı kaybetmeyen işlerde değer üretebileceğime inanıyorum."
-             data-lang-text-de="Ich fokussiere Rollen an der Schnittstelle von Produktionsprozessen, Logistikoptimierung, Warehouse Analytics, Junior Data Analytics und Manufacturing Engineering. Besonders stark sehe ich meinen Beitrag dort, wo reale Prozessdaten bereinigt, mit sinnvollen Metriken verbunden und in schnellere Entscheidungen übersetzt werden, ohne den technischen Kontext zu verlieren."
-             data-lang-text-en="I am targeting roles at the intersection of manufacturing operations, logistics optimization, warehouse analytics, junior data analytics, and manufacturing engineering. I can contribute most where real process data needs to be cleaned, connected to useful metrics, and translated into faster decisions without losing the technical context."
-             data-lang-text-nl="I am targeting roles at the intersection of manufacturing operations, logistics optimization, warehouse analytics, junior data analytics, and manufacturing engineering. I can contribute most where real process data needs to be cleaned, connected to useful metrics, and translated into faster decisions without losing the technical context."
-             data-lang-text-ja="I am targeting roles at the intersection of manufacturing operations, logistics optimization, warehouse analytics, junior data analytics, and manufacturing engineering. I can contribute most where real process data needs to be cleaned, connected to useful metrics, and translated into faster decisions without losing the technical context.">Üretim operasyonları, lojistik optimizasyonu, warehouse analytics, junior data analytics ve manufacturing engineering kesişimindeki rollere odaklanıyorum. Özellikle gerçek süreç verisini temizleyip doğru metriklere bağlayan, ekiplerin daha hızlı karar almasına yardım eden ve teknik bağlamı kaybetmeyen işlerde değer üretebileceğime inanıyorum.</p>
-        </article>
-      </div>
-
-      <p class="mt-4 theme-text-muted safe-wrap">
-        <span data-lang-text
-              data-lang-text-tr="Daha derin düşünce notları için"
-              data-lang-text-de="Für tiefere Notizen:"
-              data-lang-text-en="For deeper notes:"
-              data-lang-text-nl="For deeper notes:"
-              data-lang-text-ja="For deeper notes:">Daha derin düşünce notları için</span>
-        <a class="footer-side-link" href="/blog/">Blog</a>
-        <span data-lang-text
-              data-lang-text-tr="; somut demo ve proje ayrıntıları için"
-              data-lang-text-de="; konkrete Demos und Projektkontext:"
-              data-lang-text-en="; for concrete demos and project context:"
-              data-lang-text-nl="; for concrete demos and project context:"
-              data-lang-text-ja="; for concrete demos and project context:">; somut demo ve proje ayrıntıları için</span>
-        <a class="footer-side-link" href="#selected-work"
-           data-lang-text
-           data-lang-text-tr="Secili Isler"
-           data-lang-text-de="Ausgewählte Arbeiten"
-           data-lang-text-en="Selected Work"
-           data-lang-text-nl="Selected Work"
-           data-lang-text-ja="Selected Work">Secili Isler</a>.
-      </p>
-    </section>
-
-    <section class="mt-6" data-animate style="--stagger:1.9">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p class="text-xs uppercase tracking-widest theme-text-muted"
-             data-lang-text
-             data-lang-text-tr="Ne getiriyorum"
-             data-lang-text-de="Was ich mitbringe"
-             data-lang-text-en="What I bring"
-             data-lang-text-nl="What I bring"
-             data-lang-text-ja="What I bring">Ne getiriyorum</p>
-          <h3 class="mt-2 text-2xl font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Sadece arac kullanimi degil, problemi anlama ve sade cozum kurma odagi."
-              data-lang-text-de="Nicht nur Tool-Nutzung, sondern ein klarer Fokus auf Problemverständnis und saubere Lösungen."
-              data-lang-text-en="Not just tool usage, but a clear focus on understanding the problem and building clean solutions."
-              data-lang-text-nl="Not just tool usage, but a clear focus on understanding the problem and building clean solutions."
-              data-lang-text-ja="Not just tool usage, but a clear focus on understanding the problem and building clean solutions.">Sadece arac kullanimi degil, problemi anlama ve sade cozum kurma odagi.</h3>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-4 mt-4">
-        <article class="rounded-2xl border theme-card p-5 signal-card">
-          <p class="text-xs uppercase tracking-widest signal-tag">01</p>
-          <h4 class="mt-2 text-xl font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Operasyon verisini aksiyona ceviririm"
-              data-lang-text-de="Ich übersetze operative Daten in konkrete nächste Schritte"
-              data-lang-text-en="I turn operational data into clear next actions"
-              data-lang-text-nl="I turn operational data into clear next actions"
-              data-lang-text-ja="I turn operational data into clear next actions">Operasyon verisini aksiyona ceviririm</h4>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Lead time, picking accuracy veya OEE gibi KPI'lari sadece raporlamak degil, karar vermeyi kolaylastiran bir yapida sunmayi önemsiyorum."
-             data-lang-text-de="Bei KPIs wie Lead Time, Picking Accuracy oder OEE ist mir wichtig, dass sie nicht nur berichtet, sondern als Entscheidungshilfe aufgebaut werden."
-             data-lang-text-en="For KPIs like lead time, picking accuracy, or OEE, I care about building views that support decisions instead of just reporting numbers."
-             data-lang-text-nl="For KPIs like lead time, picking accuracy, or OEE, I care about building views that support decisions instead of just reporting numbers."
-             data-lang-text-ja="For KPIs like lead time, picking accuracy, or OEE, I care about building views that support decisions instead of just reporting numbers.">Lead time, picking accuracy veya OEE gibi KPI'lari sadece raporlamak degil, karar vermeyi kolaylastiran bir yapida sunmayi önemsiyorum.</p>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-5 signal-card">
-          <p class="text-xs uppercase tracking-widest signal-tag">02</p>
-          <h4 class="mt-2 text-xl font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Mühendislik detayindan kopmam"
-              data-lang-text-de="Ich verliere den Engineering-Kontext nicht aus dem Blick"
-              data-lang-text-en="I keep analytics close to the engineering reality"
-              data-lang-text-nl="I keep analytics close to the engineering reality"
-              data-lang-text-ja="I keep analytics close to the engineering reality">Mühendislik detayindan kopmam</h4>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="FEM mantigi, CAD ve teknik cizim bilgisi sayesinde veri tarafinda kurdugum yapilarin fiziksel sistemle bagini koruyabiliyorum."
-             data-lang-text-de="Durch FEM-Logik, CAD und technische Zeichnung kann ich analytische Arbeit näher an das reale physische System anbinden."
-             data-lang-text-en="With FEM logic, CAD, and technical drawing experience, I can keep analytical work tied to the real physical system."
-             data-lang-text-nl="With FEM logic, CAD, and technical drawing experience, I can keep analytical work tied to the real physical system."
-             data-lang-text-ja="With FEM logic, CAD, and technical drawing experience, I can keep analytical work tied to the real physical system.">FEM mantigi, CAD ve teknik cizim bilgisi sayesinde veri tarafinda kurdugum yapilarin fiziksel sistemle bagini koruyabiliyorum.</p>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-5 signal-card">
-          <p class="text-xs uppercase tracking-widest signal-tag">03</p>
-          <h4 class="mt-2 text-xl font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Sade, okunur ve ekip dostu is cikarmaya calisirim"
-              data-lang-text-de="Ich arbeite gern klar, lesbar und teamtauglich"
-              data-lang-text-en="I aim for work that is clear, readable, and team-friendly"
-              data-lang-text-nl="I aim for work that is clear, readable, and team-friendly"
-              data-lang-text-ja="I aim for work that is clear, readable, and team-friendly">Sade, okunur ve ekip dostu is cikarmaya calisirim</h4>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Kod, dashboard veya dokumantasyon fark etmeksizin; hizli anlasilan ve devralinabilir bir ciktigın daha degerli oldugunu dusunuyorum."
-             data-lang-text-de="Ob Code, Dashboard oder Dokumentation: Ich halte Ergebnisse für wertvoller, wenn sie schnell verständlich und gut übernehmbar sind."
-             data-lang-text-en="Whether it is code, dashboards, or documentation, I value outputs that are easy to understand and easy for others to continue."
-             data-lang-text-nl="Whether it is code, dashboards, or documentation, I value outputs that are easy to understand and easy for others to continue."
-             data-lang-text-ja="Whether it is code, dashboards, or documentation, I value outputs that are easy to understand and easy for others to continue.">Kod, dashboard veya dokumantasyon fark etmeksizin; hizli anlasilan ve devralinabilir bir ciktigın daha degerli oldugunu dusunuyorum.</p>
+          <p data-lang-text
+             data-lang-text-tr="Lojistik optimizasyonu, üretim operasyonları, veri analitiği ve teknik proje geliştirme kesişimindeki Werkstudent, staj ve junior rolleriyle ilgileniyorum. Özellikle depo ve üretim verisini operasyonel kararlara çeviren, mühendislik bağlamını koruyan ve farklı ekipler arasında anlaşılır iletişim gerektiren görevler bana uygun. Dortmund ve çevresinde, Ekim 2026'dan itibaren gerçek süreçlerle çalışabileceğim ekiplerle görüşmeye açığım."
+             data-lang-text-de="Ich suche Werkstudenten-, Praktikums- und Junior-Rollen an der Schnittstelle von Logistikoptimierung, Produktionsbetrieb, Datenanalyse und technischer Projektentwicklung. Besonders passen Aufgaben, die Lager- und Produktionsdaten in operative Entscheidungen übersetzen, Engineering-Kontext bewahren und klare Kommunikation zwischen Teams verlangen. Ab Oktober 2026 bin ich im Raum Dortmund offen für Gespräche."
+             data-lang-text-en="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026."
+             data-lang-text-nl="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026."
+             data-lang-text-ja="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026.">Lojistik optimizasyonu, üretim operasyonları, veri analitiği ve teknik proje geliştirme kesişimindeki Werkstudent, staj ve junior rolleriyle ilgileniyorum. Özellikle depo ve üretim verisini operasyonel kararlara çeviren, mühendislik bağlamını koruyan ve farklı ekipler arasında anlaşılır iletişim gerektiren görevler bana uygun. Dortmund ve çevresinde, Ekim 2026'dan itibaren gerçek süreçlerle çalışabileceğim ekiplerle görüşmeye açığım.</p>
         </article>
       </div>
     </section>
 
-    <section id="selected-work" class="mt-6 rounded-2xl border theme-card p-5 sm:p-6" data-animate style="--stagger:2.3">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p class="text-xs uppercase tracking-widest theme-text-muted"
-             data-lang-text
-             data-lang-text-tr="Secili Isler"
-             data-lang-text-de="Ausgewählte Arbeiten"
-             data-lang-text-en="Selected work"
-             data-lang-text-nl="Selected work"
-             data-lang-text-ja="Selected work">Secili Isler</p>
-          <h3 class="mt-2 text-2xl font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Probleme nasil ele aldigimi gosteren is ornekleri"
-              data-lang-text-de="Arbeiten, die zeigen, wie ich Probleme strukturiere und löse"
-              data-lang-text-en="Work samples that show how I structure and solve problems"
-              data-lang-text-nl="Work samples that show how I structure and solve problems"
-              data-lang-text-ja="Work samples that show how I structure and solve problems">Probleme nasil ele aldigimi gosteren is ornekleri</h3>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Bunlar sadece arac listesi degil; veri, süreç ve mühendislik taraflarini birlikte dusunme seklimi gosteriyor."
-             data-lang-text-de="Das hier ist keine reine Tool-Liste, sondern ein Einblick darin, wie ich Daten, Prozesse und Engineering zusammen denke."
-             data-lang-text-en="This is not just a tool list, but a view into how I connect data, process thinking, and engineering."
-             data-lang-text-nl="This is not just a tool list, but a view into how I connect data, process thinking, and engineering."
-             data-lang-text-ja="This is not just a tool list, but a view into how I connect data, process thinking, and engineering.">Bunlar sadece arac listesi degil; veri, süreç ve mühendislik taraflarini birlikte dusunme seklimi gosteriyor.</p>
-        </div>
-        <a class="px-4 py-2 rounded-xl border theme-button text-center"
-           href="/blog/"
-           data-i18n="btn.blog">Blog</a>
+    <section class="thesis-band" aria-labelledby="thesis-title">
+      <div>
+        <p class="swiss-kicker">BACHELOR THESIS · TR / DE / EN</p>
+        <h2 id="thesis-title"
+            data-lang-text
+            data-lang-text-tr="Araç filtresi malzemeleri filtrasyon performansını nasıl etkiler?"
+            data-lang-text-de="Wie beeinflussen Materialparameter die Filtrationsleistung von Fahrzeugfiltern?"
+            data-lang-text-en="How do material parameters affect vehicle-filter performance?"
+            data-lang-text-nl="How do material parameters affect vehicle-filter performance?"
+            data-lang-text-ja="How do material parameters affect vehicle-filter performance?">Araç filtresi malzemeleri filtrasyon performansını nasıl etkiler?</h2>
+        <p data-lang-text
+           data-lang-text-tr="Lisans tezim; filtre kağıdı, kapak ve conta malzemelerindeki geçirgenlik, dayanım ve gözenek parametrelerinin filtrasyon davranışına etkisini inceliyor. Çalışmanın özeti ve üç dilde dosyaları tek sayfada bulunuyor."
+           data-lang-text-de="Meine Bachelorarbeit untersucht, wie Permeabilität, Festigkeit und Porenparameter von Filterpapier, Deckel- und Dichtungsmaterialien das Filtrationsverhalten beeinflussen. Zusammenfassung und Dateien in drei Sprachen stehen auf einer Seite bereit."
+           data-lang-text-en="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page."
+           data-lang-text-nl="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page."
+           data-lang-text-ja="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page.">Lisans tezim; filtre kağıdı, kapak ve conta malzemelerindeki geçirgenlik, dayanım ve gözenek parametrelerinin filtrasyon davranışına etkisini inceliyor. Çalışmanın özeti ve üç dilde dosyaları tek sayfada bulunuyor.</p>
       </div>
-
-      <div class="grid md:grid-cols-2 gap-4 mt-5">
-        <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5">
-          <p class="text-xs uppercase tracking-widest signal-tag"
-             data-lang-text
-             data-lang-text-tr="Arastirma / Tez"
-             data-lang-text-de="Forschung / Thesis"
-             data-lang-text-en="Research / Thesis"
-             data-lang-text-nl="Research / Thesis"
-             data-lang-text-ja="Research / Thesis">Arastirma / Tez</p>
-          <h4 class="mt-2 text-lg font-semibold safe-wrap"
-              data-lang-text
-              data-lang-text-tr="Lisans Bitirme Tezi: Filtre Malzeme Parametreleri"
-              data-lang-text-de="Bachelorarbeit: Materialparameter in Fahrzeugfiltern"
-              data-lang-text-en="Bachelor Thesis: Material Parameters in Vehicle Filters"
-              data-lang-text-nl="Bachelor Thesis: Material Parameters in Vehicle Filters"
-              data-lang-text-ja="Bachelor Thesis: Material Parameters in Vehicle Filters">Lisans Bitirme Tezi: Filtre Malzeme Parametreleri</h4>
-          <p class="mt-2 theme-text-muted safe-wrap"
-             data-lang-text
-             data-lang-text-tr="Araç filtre üretiminde kullanılan malzeme parametrelerinin filtrasyon performansına etkisini inceleyen çok dilli tez sayfası ve indirilebilir dosyalar."
-             data-lang-text-de="Mehrsprachige Thesis-Seite mit Download-Dateien zur Wirkung von Materialparametern in der Fahrzeugfilterherstellung auf die Filtration."
-             data-lang-text-en="A multilingual thesis page with downloadable files on how material parameters in vehicle filter manufacturing affect filtration."
-             data-lang-text-nl="A multilingual thesis page with downloadable files on how material parameters in vehicle filter manufacturing affect filtration."
-             data-lang-text-ja="A multilingual thesis page with downloadable files on how material parameters in vehicle filter manufacturing affect filtration.">Araç filtre üretiminde kullanılan malzeme parametrelerinin filtrasyon performansına etkisini inceleyen çok dilli tez sayfası ve indirilebilir dosyalar.</p>
-          <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-             href="/blog/bachelor-thesis-filter-materials/"
-             data-lang-text
-             data-lang-text-tr="Tezi Gor"
-             data-lang-text-de="Arbeit ansehen"
-             data-lang-text-en="View Thesis"
-             data-lang-text-nl="View Thesis"
-             data-lang-text-ja="View Thesis">Tezi Gor</a>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5">
-          <p class="text-xs uppercase tracking-widest signal-tag">Analytics / Operations</p>
-          <h4 class="mt-2 text-lg font-semibold" data-i18n="cards.kpiTitle">Warehouse KPI Dashboard</h4>
-          <p class="mt-2 theme-text-muted" data-i18n="cards.kpi">Lead time, picking accuracy, OEE; Python→pandas→viz; aksiyon alinabilir metrikler.</p>
-          <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-             href="/dev/warehouse-kpi-dashboard/"
-             data-lang-text
-             data-lang-text-tr="Dashboard Ac"
-             data-lang-text-de="Dashboard öffnen"
-             data-lang-text-en="Open Dashboard"
-             data-lang-text-nl="Open Dashboard"
-             data-lang-text-ja="Open Dashboard">Dashboard Ac</a>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5">
-          <p class="text-xs uppercase tracking-widest signal-tag">Engineering / Computation</p>
-          <h4 class="mt-2 text-lg font-semibold" data-i18n="cards.femTitle">FEM Mini-Solver (Python/NumPy)</h4>
-          <p class="mt-2 theme-text-muted" data-i18n="cards.fem">2D elemanlarla demolar; DOF, kuresel rijitlik, yer degistirme & gerilme.</p>
-          <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-             href="/dev/fem-mini-solver/"
-             data-lang-text
-             data-lang-text-tr="Canli Demo"
-             data-lang-text-de="Live-Demo"
-             data-lang-text-en="Live Demo"
-             data-lang-text-nl="Live Demo"
-             data-lang-text-ja="Live Demo">Canli Demo</a>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5">
-          <p class="text-xs uppercase tracking-widest signal-tag">Design / Manufacturing</p>
-          <h4 class="mt-2 text-lg font-semibold" data-i18n="cards.cadTitle">CAD / Teknik Cizim</h4>
-          <p class="mt-2 theme-text-muted" data-i18n="cards.cad">Otomotiv parcalari; olculendirme, toleranslar, normlar; portfoy.</p>
-          <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition"
-             href="/dev/cad-technical-drawing/"
-             data-lang-text
-             data-lang-text-tr="Portfoy Ac"
-             data-lang-text-de="Portfolio öffnen"
-             data-lang-text-en="Open Portfolio"
-             data-lang-text-nl="Open Portfolio"
-             data-lang-text-ja="Open Portfolio">Portfoy Ac</a>
-        </article>
-
-        <article class="rounded-2xl border theme-card p-4 transition hover:-translate-y-0.5 sm:p-5">
-          <p class="text-xs uppercase tracking-widest signal-tag">Writing / Context</p>
-          <h4 class="mt-2 text-lg font-semibold" data-i18n="cards.blogTitle">Blog / Notlar</h4>
-          <p class="mt-2 theme-text-muted" data-i18n="cards.blogTxt">IT in Produktion & Logistik uzerine kisa yazilar.</p>
-          <a class="inline-block mt-3 px-3 py-1 rounded-lg border theme-button transition" href="/blog/" data-i18n="btn.blog">Blog</a>
-        </article>
-      </div>
+      <a class="swiss-action swiss-action-primary" href="/blog/bachelor-thesis-filter-materials/"
+         data-lang-text
+         data-lang-text-tr="TEZ SAYFASINI AÇ"
+         data-lang-text-de="THESIS ÖFFNEN"
+         data-lang-text-en="OPEN THESIS"
+         data-lang-text-nl="OPEN THESIS"
+         data-lang-text-ja="OPEN THESIS">TEZ SAYFASINI AÇ</a>
     </section>
 
-    {% include recent-posts.html %}
+    <footer class="portfolio-footer">
+      <div class="portfolio-footer-primary">
+        <p>
+          <strong>Kagan Bağdemir</strong><br>
+          Dortmund · Mechanical Engineering (ITPL)<br>
+          <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a>
+        </p>
+        <nav aria-label="Footer Navigation">
+          <a href="/blog/">Blog</a>
+          <a href="/kronolojik-basarimlar/"
+             data-lang-text
+             data-lang-text-tr="Başarılar"
+             data-lang-text-de="Erfolge"
+             data-lang-text-en="Achievements"
+             data-lang-text-nl="Achievements"
+             data-lang-text-ja="Achievements">Başarılar</a>
+          <a href="/projekte-und-ziele/"
+             data-lang-text
+             data-lang-text-tr="Projeler &amp; Hedefler"
+             data-lang-text-de="Projekte &amp; Ziele"
+             data-lang-text-en="Projects &amp; Goals"
+             data-lang-text-nl="Projects &amp; Goals"
+             data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+          <a href="/cv.pdf" target="_blank" rel="noopener">CV</a>
+        </nav>
+      </div>
 
-    <footer class="mt-8 border-t theme-border pt-5 theme-text-muted text-sm" data-animate style="--stagger:3.4">
-      <nav class="flex flex-wrap gap-x-3 gap-y-2">
-        <a href="#impressum" data-i18n="footer.impressum">Impressum</a>
-        <a href="#datenschutz" data-i18n="footer.privacy">Datenschutzerklarung</a>
-      </nav>
-      <div id="impressum" class="mt-3">
-        <h4 class="font-semibold theme-text-strong" data-i18n="footer.impressum">Impressum</h4>
+      <div class="portfolio-footer-legal">
+        <p>
+          <span data-i18n="footer.impressum">Impressum</span> ·
+          <span data-i18n="footer.privacy">Datenschutzerklärung</span>
+        </p>
         <p>
           <span data-lang-text
-                data-lang-text-tr="Kagan Bagdemir · Dortmund · E-posta:"
-                data-lang-text-de="Kagan Bagdemir · Dortmund · E-Mail:"
-                data-lang-text-en="Kagan Bagdemir · Dortmund · E-mail:"
-                data-lang-text-nl="Kagan Bagdemir · Dortmund · E-mail:"
-                data-lang-text-ja="Kagan Bagdemir · Dortmund · E-Mail:">Kagan Bagdemir · Dortmund · E-posta:</span>
-          <a href="mailto:kb2011kb2011@gmail.com"
-             class="footer-side-link"
-             aria-label="E-Mail an Kagan Bagdemir senden">kb2011kb2011@gmail.com</a>
+                data-lang-text-tr="Son güncelleme"
+                data-lang-text-de="Zuletzt aktualisiert"
+                data-lang-text-en="Last updated"
+                data-lang-text-nl="Last updated"
+                data-lang-text-ja="Last updated">Son güncelleme</span>:
+          <time datetime="2026-08-12">12.08.2026</time>
         </p>
+        <p class="portfolio-playground-link">
+          <a href="/kahnri/">KAHNRI / PLAYGROUND</a>
+        </p>
+        <p>© <span id="y"></span> Kagan Bağdemir</p>
       </div>
-      <div id="datenschutz" class="mt-3">
-        <h4 class="font-semibold theme-text-strong" data-i18n="footer.privacy">Datenschutzerklarung</h4>
-        <p data-i18n="footer.privacy_text">Bu sitede cerez kullanilmiyor. Analytics ekleyince metni guncelle.</p>
-      </div>
-      <p class="mt-3 mini-footer-note">
-        <span data-lang-text
-              data-lang-text-tr="Kucuk bir not: eglenmek icin ayri bir alan da var"
-              data-lang-text-de="Kleine Randnotiz: Es gibt auch einen separaten Spielplatz"
-              data-lang-text-en="Small side note: there is also a separate playground"
-              data-lang-text-nl="Small side note: there is also a separate playground"
-              data-lang-text-ja="Small side note: there is also a separate playground">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
-        · <a href="/kahnri/" class="footer-side-link">KAHNRI</a>
-      </p>
-      <p class="mt-2">© <span id="y"></span> Kagan Bağdemir</p>
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=6"></script>
-<script src="assets/lang.js?v=6"></script>
-<script src="assets/theme.js?v=5"></script>
+<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/lang.js?v=6"></script>
+<script src="/assets/theme.js?v=6"></script>
 <script>
-document.getElementById('y').textContent=new Date().getFullYear();
-
-const SITE_LANGS=['tr','de','en','nl','ja'];
-function pickLocalized(card,kind,lang){
-  const order=[lang].concat(SITE_LANGS.filter(code=>code!==lang));
-  for(const code of order){
-    const value=(card.getAttribute(`data-${kind}-${code}`)||'').trim();
-    if(value) return value;
-  }
-  return '';
-}
-function truncateText(text,maxLen){
-  if(!text) return '';
-  if(text.length<=maxLen) return text;
-  return text.slice(0,maxLen-1)+'…';
-}
-function applyRecentLanguage(lang){
-  document.querySelectorAll('[data-recent-card]').forEach(card=>{
-    const titleEl=card.querySelector('[data-recent-title]');
-    const excerptEl=card.querySelector('[data-recent-excerpt]');
-    const title=pickLocalized(card,'title',lang);
-    const excerpt=truncateText(pickLocalized(card,'excerpt',lang),140);
-    if(titleEl&&title){ titleEl.textContent=title; }
-    if(excerptEl){
-      if(excerpt){
-        excerptEl.textContent=excerpt;
-        excerptEl.style.display='';
-      }else{
-        excerptEl.textContent='';
-        excerptEl.style.display='none';
-      }
-    }
-  });
-}
-
-applyRecentLanguage(document.documentElement.lang||'tr');
-document.addEventListener('langchange',event=>{
-  applyRecentLanguage((event.detail&&event.detail.lang)||'tr');
-});
-
-const firstVisitKey='landingAnimationPlayed';
-let shouldAnimate=false;
-try{
-  shouldAnimate=!sessionStorage.getItem(firstVisitKey);
-}catch(e){
-  shouldAnimate=true;
-}
-if(shouldAnimate){
-  document.body.classList.add('initial-anim');
-  const runAnimation=()=>requestAnimationFrame(()=>document.body.classList.add('initial-anim-run'));
-  if(document.readyState==='loading'){
-    window.addEventListener('DOMContentLoaded',runAnimation,{once:true});
-  }else{
-    runAnimation();
-  }
-  try{
-    sessionStorage.setItem(firstVisitKey,'1');
-  }catch(e){}
-}
+document.getElementById('y').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
