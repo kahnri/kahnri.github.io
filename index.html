@@ -2,7 +2,7 @@
 layout: null
 ---
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,17 +27,6 @@ layout: null
 <meta name="twitter:image:alt" content="Kagan Bağdemir portfolio preview with KB logo and Data, Logistics, Engineering title.">
 <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-<script>
-(function(){
-  try{
-    const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
-    document.documentElement.dataset.theme=theme;
-  }catch(e){
-    document.documentElement.dataset.theme='dark';
-  }
-})();
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -81,40 +70,61 @@ layout: null
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
 <link rel="stylesheet" href="/assets/theme.css?v=16">
 <link rel="stylesheet" href="/assets/portfolio.css?v=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body class="home-page">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content"
+     data-lang-text
+     data-lang-text-tr="Ana icerige gec"
+     data-lang-text-de="Zum Hauptinhalt springen"
+     data-lang-text-en="Skip to main content"
+     data-lang-text-nl="Naar hoofdinhoud"
+     data-lang-text-ja="メインコンテンツへ移動">Ana icerige gec</a>
 
   <main id="main-content" class="portfolio-site">
     <header class="portfolio-header" data-animate style="--stagger:0">
-      <a href="/" class="site-brand" aria-label="Kagan Bagdemir ana sayfa">
+      <a href="/" class="site-brand" aria-label="Kagan Bagdemir ana sayfa"
+         data-lang-aria-label
+         data-lang-aria-label-tr="Kagan Bagdemir ana sayfa"
+         data-lang-aria-label-de="Startseite von Kagan Bagdemir"
+         data-lang-aria-label-en="Kagan Bagdemir home page"
+         data-lang-aria-label-nl="Startpagina van Kagan Bagdemir"
+         data-lang-aria-label-ja="Kagan Bagdemir ホームページ">
         <picture class="site-brand-picture">
           <source srcset="/assets/logo-mark.webp?v=1" type="image/webp">
           <img class="site-brand-mark" src="/assets/logo-mark.png?v=2" width="64" height="64" alt="" decoding="async">
         </picture>
         <span class="site-brand-copy">
           <span class="site-brand-name">KAGAN BAGDEMIR</span>
-          <span class="site-brand-line">Mechanical Engineering (ITPL)<br>Data Analytics &amp; Logistics IT</span>
+          <span class="site-brand-line">
+            <span data-lang-text data-lang-text-tr="Makine Muhendisligi (ITPL)" data-lang-text-de="Maschinenbau (ITPL)" data-lang-text-en="Mechanical Engineering (ITPL)" data-lang-text-nl="Werktuigbouwkunde (ITPL)" data-lang-text-ja="機械工学 (ITPL)">Makine Muhendisligi (ITPL)</span><br>
+            <span data-lang-text data-lang-text-tr="Veri Analitigi &amp; Lojistik IT" data-lang-text-de="Data Analytics &amp; Logistik IT" data-lang-text-en="Data Analytics &amp; Logistics IT" data-lang-text-nl="Data-analyse &amp; Logistieke IT" data-lang-text-ja="データ分析 &amp; 物流IT">Veri Analitigi &amp; Lojistik IT</span>
+          </span>
         </span>
       </a>
 
-      <nav class="portfolio-nav" aria-label="Hauptnavigation">
+      <nav class="portfolio-nav" aria-label="Ana navigasyon"
+           data-lang-aria-label
+           data-lang-aria-label-tr="Ana navigasyon"
+           data-lang-aria-label-de="Hauptnavigation"
+           data-lang-aria-label-en="Main navigation"
+           data-lang-aria-label-nl="Hoofdnavigatie"
+           data-lang-aria-label-ja="メインナビゲーション">
         <a href="/kronolojik-basarimlar/"
            data-lang-text
            data-lang-text-tr="Başarılar"
            data-lang-text-de="Erfolge"
            data-lang-text-en="Achievements"
-           data-lang-text-nl="Achievements"
-           data-lang-text-ja="Achievements">Başarılar</a>
+           data-lang-text-nl="Prestaties"
+           data-lang-text-ja="実績">Başarılar</a>
         <a href="/projekte-und-ziele/"
            data-lang-text
            data-lang-text-tr="Projeler &amp; Hedefler"
            data-lang-text-de="Projekte &amp; Ziele"
            data-lang-text-en="Projects &amp; Goals"
-           data-lang-text-nl="Projects &amp; Goals"
-           data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+           data-lang-text-nl="Projecten &amp; Doelen"
+           data-lang-text-ja="プロジェクトと目標">Projeler &amp; Hedefler</a>
         <a href="/blog/" data-i18n="nav.blog">Blog</a>
       </nav>
 
@@ -127,29 +137,31 @@ layout: null
           <option value="nl" data-i18n="lang.nl">Nederlands</option>
           <option value="ja" data-i18n="lang.ja">日本語</option>
         </select>
-        <button id="theme-toggle" class="theme-button-icon portfolio-theme-toggle" type="button">
-          <span data-theme-icon aria-hidden="true">HELL</span>
-          <span class="sr-only" data-i18n="btn.theme">Tema değiştir</span>
-        </button>
       </div>
 
       <details class="portfolio-mobile-menu">
-        <summary>MENÜ</summary>
-        <nav aria-label="Mobile Navigation">
+        <summary data-lang-text data-lang-text-tr="MENU" data-lang-text-de="MENU" data-lang-text-en="MENU" data-lang-text-nl="MENU" data-lang-text-ja="メニュー">MENU</summary>
+        <nav aria-label="Mobil navigasyon"
+             data-lang-aria-label
+             data-lang-aria-label-tr="Mobil navigasyon"
+             data-lang-aria-label-de="Mobile Navigation"
+             data-lang-aria-label-en="Mobile navigation"
+             data-lang-aria-label-nl="Mobiele navigatie"
+             data-lang-aria-label-ja="モバイルナビゲーション">
           <a href="/kronolojik-basarimlar/"
              data-lang-text
              data-lang-text-tr="Başarılar"
              data-lang-text-de="Erfolge"
              data-lang-text-en="Achievements"
-             data-lang-text-nl="Achievements"
-             data-lang-text-ja="Achievements">Başarılar</a>
+             data-lang-text-nl="Prestaties"
+             data-lang-text-ja="実績">Başarılar</a>
           <a href="/projekte-und-ziele/"
              data-lang-text
              data-lang-text-tr="Projeler &amp; Hedefler"
              data-lang-text-de="Projekte &amp; Ziele"
              data-lang-text-en="Projects &amp; Goals"
-             data-lang-text-nl="Projects &amp; Goals"
-             data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+             data-lang-text-nl="Projecten &amp; Doelen"
+             data-lang-text-ja="プロジェクトと目標">Projeler &amp; Hedefler</a>
           <a href="/blog/" data-i18n="nav.blog">Blog</a>
         </nav>
       </details>
@@ -163,41 +175,47 @@ layout: null
                 data-lang-text-tr="Tekniği anla."
                 data-lang-text-de="Technik verstehen."
                 data-lang-text-en="Understand engineering."
-                data-lang-text-nl="Understand engineering."
-                data-lang-text-ja="Understand engineering.">Tekniği anla.</span>
+                data-lang-text-nl="Begrijp techniek."
+                data-lang-text-ja="エンジニアリングを理解する。">Tekniği anla.</span>
           <span data-lang-text
                 data-lang-text-tr="Veriyi kullan."
                 data-lang-text-de="Daten nutzen."
                 data-lang-text-en="Use data."
-                data-lang-text-nl="Use data."
-                data-lang-text-ja="Use data.">Veriyi kullan.</span>
+                data-lang-text-nl="Gebruik gegevens."
+                data-lang-text-ja="データを使用します。">Veriyi kullan.</span>
           <span data-lang-text
                 data-lang-text-tr="Süreçleri iyileştir."
                 data-lang-text-de="Abläufe verbessern."
                 data-lang-text-en="Improve operations."
-                data-lang-text-nl="Improve operations."
-                data-lang-text-ja="Improve operations.">Süreçleri iyileştir.</span>
+                data-lang-text-nl="Verbeter de bedrijfsvoering."
+                data-lang-text-ja="運用を改善します。">Süreçleri iyileştir.</span>
         </h1>
       </div>
 
-      <aside class="swiss-profile-card" aria-label="Profil özeti">
+      <aside class="swiss-profile-card" aria-label="Profil ozeti"
+             data-lang-aria-label
+             data-lang-aria-label-tr="Profil ozeti"
+             data-lang-aria-label-de="Profilzusammenfassung"
+             data-lang-aria-label-en="Profile summary"
+             data-lang-aria-label-nl="Profieloverzicht"
+             data-lang-aria-label-ja="プロフィール概要">
         <dl class="swiss-meta-list">
           <div>
             <dt data-lang-text
                 data-lang-text-tr="Konum"
                 data-lang-text-de="Standort"
                 data-lang-text-en="Location"
-                data-lang-text-nl="Location"
-                data-lang-text-ja="Location">Konum</dt>
-            <dd>Dortmund, Deutschland</dd>
+                data-lang-text-nl="Locatie"
+                data-lang-text-ja="場所">Konum</dt>
+            <dd data-lang-text data-lang-text-tr="Dortmund, Almanya" data-lang-text-de="Dortmund, Deutschland" data-lang-text-en="Dortmund, Germany" data-lang-text-nl="Dortmund, Duitsland" data-lang-text-ja="ドルトムント、ドイツ">Dortmund, Almanya</dd>
           </div>
           <div>
             <dt data-lang-text
                 data-lang-text-tr="Üniversite"
                 data-lang-text-de="Hochschule"
                 data-lang-text-en="University"
-                data-lang-text-nl="University"
-                data-lang-text-ja="University">Üniversite</dt>
+                data-lang-text-nl="Universiteit"
+                data-lang-text-ja="大学">Üniversite</dt>
             <dd>TU Dortmund<br>Mechanical Engineering (ITPL)</dd>
           </div>
           <div>
@@ -206,7 +224,7 @@ layout: null
                 data-lang-text-de="Kontakt"
                 data-lang-text-en="Contact"
                 data-lang-text-nl="Contact"
-                data-lang-text-ja="Contact">İletişim</dt>
+                data-lang-text-ja="連絡先">İletişim</dt>
             <dd>
               <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a><br>
               <a href="https://www.linkedin.com/in/kagan-b-7b2b28206/" target="_blank" rel="noopener">LinkedIn</a>
@@ -217,14 +235,14 @@ layout: null
                 data-lang-text-tr="Uygunluk"
                 data-lang-text-de="Verfügbarkeit"
                 data-lang-text-en="Availability"
-                data-lang-text-nl="Availability"
-                data-lang-text-ja="Availability">Uygunluk</dt>
+                data-lang-text-nl="Beschikbaarheid"
+                data-lang-text-ja="応募可能時期">Uygunluk</dt>
             <dd data-lang-text
                 data-lang-text-tr="Ekim 2026'dan itibaren"
                 data-lang-text-de="Ab Oktober 2026"
                 data-lang-text-en="From October 2026"
-                data-lang-text-nl="From October 2026"
-                data-lang-text-ja="From October 2026">Ekim 2026'dan itibaren</dd>
+                data-lang-text-nl="Vanaf oktober 2026"
+                data-lang-text-ja="2026年10月～">Ekim 2026'dan itibaren</dd>
           </div>
         </dl>
 
@@ -235,59 +253,65 @@ layout: null
              data-lang-text-tr="İletişime geç"
              data-lang-text-de="Kontakt aufnehmen"
              data-lang-text-en="Get in touch"
-             data-lang-text-nl="Get in touch"
-             data-lang-text-ja="Get in touch">İletişime geç</a>
+             data-lang-text-nl="Neem contact op"
+             data-lang-text-ja="連絡する">İletişime geç</a>
           <a class="swiss-action" href="/cv.pdf" target="_blank" rel="noopener"
              data-lang-text
              data-lang-text-tr="CV'yi aç"
              data-lang-text-de="Lebenslauf"
              data-lang-text-en="Resume"
-             data-lang-text-nl="Resume"
-             data-lang-text-ja="Resume">CV'yi aç</a>
+             data-lang-text-nl="CV"
+             data-lang-text-ja="履歴書">CV'yi aç</a>
         </div>
       </aside>
     </section>
 
-    <div class="klausur-strip" role="status" aria-label="Ekime kadar Klausurphase">
+    <div class="klausur-strip" role="status" aria-label="Ekime kadar sinav donemi"
+         data-lang-aria-label
+         data-lang-aria-label-tr="Ekime kadar sinav donemi"
+         data-lang-aria-label-de="Klausurphase bis Oktober"
+         data-lang-aria-label-en="Exam phase until October"
+         data-lang-aria-label-nl="Examenfase tot oktober"
+         data-lang-aria-label-ja="10月まで試験期間">
       <div class="klausur-strip-track" aria-hidden="true">
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
         <span data-lang-text
               data-lang-text-tr="EKİME KADAR KLAUSURPHASE"
               data-lang-text-de="KLAUSURPHASE BIS OKTOBER"
               data-lang-text-en="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-nl="EXAM PHASE UNTIL OCTOBER"
-              data-lang-text-ja="EXAM PHASE UNTIL OCTOBER">EKİME KADAR KLAUSURPHASE</span>
+              data-lang-text-nl="EXAMENFASE TOT OKTOBER"
+              data-lang-text-ja="試験期間は10月まで">EKİME KADAR KLAUSURPHASE</span>
       </div>
-      <span class="sr-only">Ekime kadar Klausurphase.</span>
+      <span class="sr-only" data-lang-text data-lang-text-tr="Ekime kadar sinav donemi." data-lang-text-de="Klausurphase bis Oktober." data-lang-text-en="Exam phase until October." data-lang-text-nl="Examenfase tot oktober." data-lang-text-ja="10月まで試験期間です。">Ekime kadar sinav donemi.</span>
     </div>
 
     <section id="selected-work" class="project-index" aria-labelledby="project-index-title">
@@ -298,108 +322,120 @@ layout: null
              data-lang-text-tr="SEÇİLİ ÇALIŞMALAR"
              data-lang-text-de="AUSGEWÄHLTE ARBEITEN"
              data-lang-text-en="SELECTED WORK"
-             data-lang-text-nl="SELECTED WORK"
-             data-lang-text-ja="SELECTED WORK">SEÇİLİ ÇALIŞMALAR</p>
+             data-lang-text-nl="GESELECTEERD WERK"
+             data-lang-text-ja="主な実績">SEÇİLİ ÇALIŞMALAR</p>
           <h2 id="project-index-title"
               data-lang-text
               data-lang-text-tr="Proje indeksi"
               data-lang-text-de="Projektindex"
               data-lang-text-en="Project index"
-              data-lang-text-nl="Project index"
-              data-lang-text-ja="Project index">Proje indeksi</h2>
+              data-lang-text-nl="Projectindex"
+              data-lang-text-ja="プロジェクトインデックス">Proje indeksi</h2>
         </div>
         <a class="project-index-all" href="/projekte-und-ziele/"
            data-lang-text
            data-lang-text-tr="Tüm projeler"
            data-lang-text-de="Alle Projekte"
            data-lang-text-en="All projects"
-           data-lang-text-nl="All projects"
-           data-lang-text-ja="All projects">Tüm projeler</a>
+           data-lang-text-nl="Alle projecten"
+           data-lang-text-ja="すべてのプロジェクト">Tüm projeler</a>
       </header>
 
       <div class="project-index-list">
         <a class="project-index-row" href="/dev/warehouse-kpi-dashboard/">
           <span class="project-number">01</span>
-          <span class="project-discipline">DATA ANALYTICS<br>LOGISTICS IT</span>
+          <span class="project-discipline">
+            <span data-lang-text data-lang-text-tr="VERI ANALITIGI" data-lang-text-de="DATA ANALYTICS" data-lang-text-en="DATA ANALYTICS" data-lang-text-nl="DATA-ANALYSE" data-lang-text-ja="データ分析">VERI ANALITIGI</span><br>
+            <span data-lang-text data-lang-text-tr="LOJISTIK IT" data-lang-text-de="LOGISTIK IT" data-lang-text-en="LOGISTICS IT" data-lang-text-nl="LOGISTIEKE IT" data-lang-text-ja="物流IT">LOJISTIK IT</span>
+          </span>
           <span class="project-main">
             <strong>Warehouse KPI Dashboard</strong>
             <span data-lang-text
                   data-lang-text-tr="Depo yükünü, sevkiyat performansını ve çevrim süresini okunur KPI'larla analiz eden interaktif uygulama."
                   data-lang-text-de="Interaktives Dashboard zur Analyse von Lagerauslastung, Versandqualität und Durchlaufzeit."
                   data-lang-text-en="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis."
-                  data-lang-text-nl="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis."
-                  data-lang-text-ja="Interactive dashboard for warehouse utilization, shipping quality, and cycle-time analysis.">Depo yükünü, sevkiyat performansını ve çevrim süresini okunur KPI'larla analiz eden interaktif uygulama.</span>
+                  data-lang-text-nl="Interactief dashboard voor magazijngebruik, verzendkwaliteit en cyclustijdanalyse."
+                  data-lang-text-ja="倉庫の利用状況、出荷品質、サイクルタイム分析のためのインタラクティブなダッシュボード。">Depo yükünü, sevkiyat performansını ve çevrim süresini okunur KPI'larla analiz eden interaktif uygulama.</span>
           </span>
           <span class="project-action"
                 data-lang-text
                 data-lang-text-tr="PROJEYİ AÇ"
                 data-lang-text-de="PROJEKT ÖFFNEN"
                 data-lang-text-en="OPEN PROJECT"
-                data-lang-text-nl="OPEN PROJECT"
-                data-lang-text-ja="OPEN PROJECT">PROJEYİ AÇ</span>
+                data-lang-text-nl="PROJECT OPENEN"
+                data-lang-text-ja="プロジェクトを開く">PROJEYİ AÇ</span>
         </a>
 
         <a class="project-index-row" href="/dev/fem-mini-solver/">
           <span class="project-number">02</span>
-          <span class="project-discipline">MECHANICAL<br>ENGINEERING</span>
+          <span class="project-discipline">
+            <span data-lang-text data-lang-text-tr="MAKINE" data-lang-text-de="MASCHINEN" data-lang-text-en="MECHANICAL" data-lang-text-nl="WERKTUIG" data-lang-text-ja="機械">MAKINE</span><br>
+            <span data-lang-text data-lang-text-tr="MUHENDISLIGI" data-lang-text-de="BAU" data-lang-text-en="ENGINEERING" data-lang-text-nl="BOUWKUNDE" data-lang-text-ja="工学">MUHENDISLIGI</span>
+          </span>
           <span class="project-main">
             <strong>FEM Mini-Solver</strong>
             <span data-lang-text
                   data-lang-text-tr="2D kafes sistemlerinde rijitlik matrisi, sınır şartları, yer değiştirme ve gerilme sonuçlarını görünür yapan Python çözücüsü."
                   data-lang-text-de="Python-basierter FEM-Solver für Steifigkeitsmatrix, Randbedingungen, Verschiebung und Spannung in 2D-Strukturen."
                   data-lang-text-en="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures."
-                  data-lang-text-nl="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures."
-                  data-lang-text-ja="Python FEM solver exposing stiffness, boundary conditions, displacement, and stress in 2D structures.">2D kafes sistemlerinde rijitlik matrisi, sınır şartları, yer değiştirme ve gerilme sonuçlarını görünür yapan Python çözücüsü.</span>
+                  data-lang-text-nl="Python FEM-oplosser die stijfheid, randvoorwaarden, verplaatsing en spanning in 2D-structuren blootlegt."
+                  data-lang-text-ja="2D 構造の剛性、境界条件、変位、応力を明らかにする Python FEM ソルバー。">2D kafes sistemlerinde rijitlik matrisi, sınır şartları, yer değiştirme ve gerilme sonuçlarını görünür yapan Python çözücüsü.</span>
           </span>
           <span class="project-action"
                 data-lang-text
                 data-lang-text-tr="DEMOYU AÇ"
                 data-lang-text-de="DEMO ÖFFNEN"
                 data-lang-text-en="OPEN DEMO"
-                data-lang-text-nl="OPEN DEMO"
-                data-lang-text-ja="OPEN DEMO">DEMOYU AÇ</span>
+                data-lang-text-nl="DEMO OPENEN"
+                data-lang-text-ja="オープンデモ">DEMOYU AÇ</span>
         </a>
 
         <a class="project-index-row" href="/dev/cad-technical-drawing/">
           <span class="project-number">03</span>
-          <span class="project-discipline">DESIGN &amp;<br>ENGINEERING</span>
+          <span class="project-discipline">
+            <span data-lang-text data-lang-text-tr="TASARIM &amp;" data-lang-text-de="DESIGN &amp;" data-lang-text-en="DESIGN &amp;" data-lang-text-nl="ONTWERP &amp;" data-lang-text-ja="設計 &amp;">TASARIM &amp;</span><br>
+            <span data-lang-text data-lang-text-tr="MUHENDISLIK" data-lang-text-de="ENGINEERING" data-lang-text-en="ENGINEERING" data-lang-text-nl="ENGINEERING" data-lang-text-ja="エンジニアリング">MUHENDISLIK</span>
+          </span>
           <span class="project-main">
-            <strong>CAD / Technische Zeichnung</strong>
+            <strong data-lang-text data-lang-text-tr="CAD / Teknik Cizim" data-lang-text-de="CAD / Technische Zeichnung" data-lang-text-en="CAD / Technical Drawing" data-lang-text-nl="CAD / Technische Tekening" data-lang-text-ja="CAD / 技術製図">CAD / Teknik Cizim</strong>
             <span data-lang-text
                   data-lang-text-tr="Ölçülendirme, tolerans, üretilebilirlik ve teknik iletişim odağında CAD ve teknik çizim portfolyosu."
                   data-lang-text-de="CAD- und Zeichnungsportfolio mit Fokus auf Bemaßung, Toleranzen, Fertigbarkeit und technische Kommunikation."
                   data-lang-text-en="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication."
-                  data-lang-text-nl="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication."
-                  data-lang-text-ja="CAD and drawing portfolio focused on dimensions, tolerances, manufacturability, and technical communication.">Ölçülendirme, tolerans, üretilebilirlik ve teknik iletişim odağında CAD ve teknik çizim portfolyosu.</span>
+                  data-lang-text-nl="CAD- en tekeningenportfolio gericht op afmetingen, toleranties, maakbaarheid en technische communicatie."
+                  data-lang-text-ja="寸法、公差、製造可能性、技術コミュニケーションに重点を置いた CAD および図面のポートフォリオ。">Ölçülendirme, tolerans, üretilebilirlik ve teknik iletişim odağında CAD ve teknik çizim portfolyosu.</span>
           </span>
           <span class="project-action"
                 data-lang-text
                 data-lang-text-tr="PORTFOLYOYU AÇ"
                 data-lang-text-de="PORTFOLIO ÖFFNEN"
                 data-lang-text-en="OPEN PORTFOLIO"
-                data-lang-text-nl="OPEN PORTFOLIO"
-                data-lang-text-ja="OPEN PORTFOLIO">PORTFOLYOYU AÇ</span>
+                data-lang-text-nl="PORTFOLIO OPENEN"
+                data-lang-text-ja="ポートフォリオを開く">PORTFOLYOYU AÇ</span>
         </a>
 
         <a class="project-index-row" href="/blog/bachelor-thesis-filter-materials/">
           <span class="project-number">04</span>
-          <span class="project-discipline">WISSENSCHAFTLICHES<br>ARBEITEN</span>
+          <span class="project-discipline">
+            <span data-lang-text data-lang-text-tr="BILIMSEL" data-lang-text-de="WISSENSCHAFTLICHES" data-lang-text-en="SCIENTIFIC" data-lang-text-nl="WETENSCHAPPELIJK" data-lang-text-ja="学術">BILIMSEL</span><br>
+            <span data-lang-text data-lang-text-tr="CALISMA" data-lang-text-de="ARBEITEN" data-lang-text-en="WORK" data-lang-text-nl="WERK" data-lang-text-ja="研究">CALISMA</span>
+          </span>
           <span class="project-main">
-            <strong>Bachelorarbeit</strong>
+            <strong data-lang-text data-lang-text-tr="Lisans Tezi" data-lang-text-de="Bachelorarbeit" data-lang-text-en="Bachelor Thesis" data-lang-text-nl="Bachelorscriptie" data-lang-text-ja="卒業論文">Lisans Tezi</strong>
             <span data-lang-text
                   data-lang-text-tr="Araç filtresi üretiminde malzeme parametreleri, geçirgenlik, gözenek yapısı ve filtrasyon performansı üzerine araştırma."
                   data-lang-text-de="Untersuchung zu Materialparametern, Permeabilität, Porenstruktur und Filtrationsleistung in Fahrzeugfiltern."
                   data-lang-text-en="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters."
-                  data-lang-text-nl="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters."
-                  data-lang-text-ja="Research on material parameters, permeability, pore structure, and filtration performance in vehicle filters.">Araç filtresi üretiminde malzeme parametreleri, geçirgenlik, gözenek yapısı ve filtrasyon performansı üzerine araştırma.</span>
+                  data-lang-text-nl="Onderzoek naar materiaalparameters, permeabiliteit, poriënstructuur en filtratieprestaties in voertuigfilters."
+                  data-lang-text-ja="車両フィルターの材料パラメーター、透過性、細孔構造、濾過性能に関する研究。">Araç filtresi üretiminde malzeme parametreleri, geçirgenlik, gözenek yapısı ve filtrasyon performansı üzerine araştırma.</span>
           </span>
           <span class="project-action"
                 data-lang-text
                 data-lang-text-tr="TEZİ İNCELE"
                 data-lang-text-de="THESIS ANSEHEN"
                 data-lang-text-en="VIEW THESIS"
-                data-lang-text-nl="VIEW THESIS"
-                data-lang-text-ja="VIEW THESIS">TEZİ İNCELE</span>
+                data-lang-text-nl="SCRIPTIE BEKIJKEN"
+                data-lang-text-ja="論文を見る">TEZİ İNCELE</span>
         </a>
       </div>
     </section>
@@ -411,21 +447,21 @@ layout: null
            data-lang-text-tr="PROFİL"
            data-lang-text-de="PROFIL"
            data-lang-text-en="PROFILE"
-           data-lang-text-nl="PROFILE"
-           data-lang-text-ja="PROFILE">PROFİL</p>
+           data-lang-text-nl="PROFIEL"
+           data-lang-text-ja="プロフィール">PROFİL</p>
         <h2 id="profile-title"
             data-lang-text
             data-lang-text-tr="Kagan Bağdemir hangi problemleri çözüyor?"
             data-lang-text-de="Welche Probleme löst Kagan Bağdemir?"
             data-lang-text-en="What problems does Kagan Bağdemir solve?"
-            data-lang-text-nl="What problems does Kagan Bağdemir solve?"
-            data-lang-text-ja="What problems does Kagan Bağdemir solve?">Kagan Bağdemir hangi problemleri çözüyor?</h2>
+            data-lang-text-nl="Welke problemen lost Kagan Bağdemir op?"
+            data-lang-text-ja="Kagan Bağdemirはどのような問題を解決しますか？">Kagan Bağdemir hangi problemleri çözüyor?</h2>
         <p data-lang-text
            data-lang-text-tr="Mechanical Engineering (ITPL) eğitimim sayesinde fiziksel üretim ve lojistik süreçlerini yalnızca tablo olarak değil, gerçek sistemler olarak okuyorum. Bir siparişin depoda nerede beklediğini, hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD ve FEM tarafında nasıl ele alınması gerektiğini aynı problem çözme yaklaşımında birleştiriyorum. Hedefim karmaşıklığı süslemek değil; onu ölçülebilir, anlaşılır ve uygulanabilir hale getirmek."
            data-lang-text-de="Durch mein Studium im Maschinenbau (ITPL) betrachte ich Produktions- und Logistikprozesse nicht nur als Tabellen, sondern als reale Systeme. Ich verbinde die Frage, wo ein Auftrag im Lager wartet, welche KPI tatsächlich eine Entscheidung unterstützt und wie ein Bauteil in CAD und FEM gedacht werden sollte, in einem gemeinsamen Problemlösungsansatz. Mein Ziel ist nicht, Komplexität zu dekorieren, sondern sie messbar, verständlich und nutzbar zu machen."
            data-lang-text-en="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable."
-           data-lang-text-nl="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable."
-           data-lang-text-ja="My Mechanical Engineering (ITPL) studies help me read production and logistics processes as physical systems, not only as tables. I connect warehouse flow, decision-relevant KPIs, and CAD/FEM engineering questions through one practical problem-solving approach. My goal is not to decorate complexity, but to make it measurable, understandable, and usable.">Mechanical Engineering (ITPL) eğitimim sayesinde fiziksel üretim ve lojistik süreçlerini yalnızca tablo olarak değil, gerçek sistemler olarak okuyorum. Bir siparişin depoda nerede beklediğini, hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD ve FEM tarafında nasıl ele alınması gerektiğini aynı problem çözme yaklaşımında birleştiriyorum. Hedefim karmaşıklığı süslemek değil; onu ölçülebilir, anlaşılır ve uygulanabilir hale getirmek.</p>
+           data-lang-text-nl="Dankzij mijn studie Werktuigbouwkunde (ITPL) kan ik productie- en logistieke processen lezen als fysieke systemen, en niet alleen als tabellen. Ik verbind magazijnstromen, beslissingsrelevante KPI's en CAD/FEM-technische vragen via één praktische probleemoplossende aanpak. Mijn doel is niet om complexiteit te verfraaien, maar om het meetbaar, begrijpelijk en bruikbaar te maken."
+           data-lang-text-ja="機械工学 (ITPL) の勉強は、生産と物流のプロセスを表だけでなく物理システムとして理解するのに役立ちます。私は、倉庫フロー、意思決定に関連する KPI、CAD/FEM エンジニアリングの質問を、1 つの実践的な問題解決アプローチを通じて結び付けます。私の目標は、複雑さを装飾することではなく、それを測定可能、理解可能、使用可能にすることです。">Mechanical Engineering (ITPL) eğitimim sayesinde fiziksel üretim ve lojistik süreçlerini yalnızca tablo olarak değil, gerçek sistemler olarak okuyorum. Bir siparişin depoda nerede beklediğini, hangi KPI'ın gerçekten karar aldırdığını veya teknik bir parçanın CAD ve FEM tarafında nasıl ele alınması gerektiğini aynı problem çözme yaklaşımında birleştiriyorum. Hedefim karmaşıklığı süslemek değil; onu ölçülebilir, anlaşılır ve uygulanabilir hale getirmek.</p>
       </div>
 
       <div class="portfolio-profile-grid">
@@ -435,14 +471,14 @@ layout: null
               data-lang-text-tr="Hangi teknik araçları kullanıyorum?"
               data-lang-text-de="Welche technischen Werkzeuge nutze ich?"
               data-lang-text-en="Which technical tools do I use?"
-              data-lang-text-nl="Which technical tools do I use?"
-              data-lang-text-ja="Which technical tools do I use?">Hangi teknik araçları kullanıyorum?</h3>
+              data-lang-text-nl="Welke technische hulpmiddelen gebruik ik?"
+              data-lang-text-ja="どの技術ツールを使っていますか？">Hangi teknik araçları kullanıyorum?</h3>
           <p data-lang-text
              data-lang-text-tr="Veri tarafında Python, NumPy ve pandas ile analiz, veri temizleme ve prototipleme yapıyorum. Operasyonel görünürlük için lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri iş sorularına bağlıyorum. Mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel sonlu elemanlar yaklaşımını kullanıyorum. Araç seçimini gösterişe göre değil, problemi en açık şekilde çözmesine göre yapıyorum."
              data-lang-text-de="Auf der Datenseite arbeite ich mit Python, NumPy und pandas für Analyse, Datenbereinigung und Prototyping. Kennzahlen wie Lead Time, Picking Accuracy, On-time Delivery, Cycle Time und OEE verbinde ich mit konkreten operativen Fragen. Im Engineering nutze ich CAD, technische Zeichnung, Toleranzdenken und grundlegende FEM-Methodik. Das Werkzeug wähle ich danach, wie klar es das Problem löst."
              data-lang-text-en="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods."
-             data-lang-text-nl="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods."
-             data-lang-text-ja="I use Python, NumPy, and pandas for analysis, cleaning, and prototyping. I connect lead time, picking accuracy, on-time delivery, cycle time, and OEE to operational questions. On the engineering side I work with CAD, technical drawing, tolerance thinking, and basic finite element methods.">Veri tarafında Python, NumPy ve pandas ile analiz, veri temizleme ve prototipleme yapıyorum. Operasyonel görünürlük için lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri iş sorularına bağlıyorum. Mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel sonlu elemanlar yaklaşımını kullanıyorum. Araç seçimini gösterişe göre değil, problemi en açık şekilde çözmesine göre yapıyorum.</p>
+             data-lang-text-nl="Ik gebruik Python, NumPy en pandas voor analyse, opschoning en prototyping. Ik koppel doorlooptijd, picknauwkeurigheid, tijdige levering, cyclustijd en OEE aan operationele vragen. Aan de technische kant werk ik met CAD, technisch tekenen, tolerantiedenken en elementaire eindige-elementenmethoden."
+             data-lang-text-ja="分析、クリーニング、プロトタイピングには Python、NumPy、pandas を使用します。私はリード タイム、ピッキング精度、納期厳守、サイクル タイム、OEE を運用上の質問に結び付けます。エンジニアリング面では、CAD、製図、公差の考え方、および基本的な有限要素法を扱います。">Veri tarafında Python, NumPy ve pandas ile analiz, veri temizleme ve prototipleme yapıyorum. Operasyonel görünürlük için lead time, picking accuracy, on-time delivery, cycle time ve OEE gibi metrikleri iş sorularına bağlıyorum. Mühendislik tarafında CAD, teknik çizim, tolerans düşüncesi ve temel sonlu elemanlar yaklaşımını kullanıyorum. Araç seçimini gösterişe göre değil, problemi en açık şekilde çözmesine göre yapıyorum.</p>
         </article>
 
         <article>
@@ -451,14 +487,14 @@ layout: null
               data-lang-text-tr="Projelerde nasıl çalışıyorum?"
               data-lang-text-de="Wie arbeite ich in Projekten?"
               data-lang-text-en="How do I work on projects?"
-              data-lang-text-nl="How do I work on projects?"
-              data-lang-text-ja="How do I work on projects?">Projelerde nasıl çalışıyorum?</h3>
+              data-lang-text-nl="Hoe werk ik aan projecten?"
+              data-lang-text-ja="プロジェクトではどのように取り組みますか？">Projelerde nasıl çalışıyorum?</h3>
           <p data-lang-text
              data-lang-text-tr="Önce problemi ve başarı ölçütünü netleştiriyorum. Sonra gerekli veriyi, varsayımları ve sınırları görünür hale getiriyorum. Dashboard projesinde grafik sayısını artırmak yerine hangi metriğin hangi kararı desteklediğini soruyorum; FEM projesinde yalnızca sonuç göstermek yerine matris kurulumunu ve sınır şartlarını anlaşılır kılıyorum. Bu yaklaşım, hem teknik doğruluğu hem de çıktının iş ortamında kullanılabilir olmasını koruyor."
              data-lang-text-de="Zuerst kläre ich Problem und Erfolgskriterium. Danach mache ich Daten, Annahmen und Grenzen sichtbar. Beim Dashboard frage ich nicht nach mehr Charts, sondern danach, welche Kennzahl welche Entscheidung unterstützt. Beim FEM-Projekt zeige ich nicht nur Ergebnisse, sondern mache Matrixaufbau und Randbedingungen nachvollziehbar. So bleiben technische Richtigkeit und praktische Nutzbarkeit zusammen."
              data-lang-text-en="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together."
-             data-lang-text-nl="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together."
-             data-lang-text-ja="I first clarify the problem and success criterion, then make data, assumptions, and limits visible. In dashboard work I ask which metric supports which decision. In FEM work I expose matrix assembly and boundary conditions instead of presenting only outputs. This keeps technical correctness and practical usefulness together.">Önce problemi ve başarı ölçütünü netleştiriyorum. Sonra gerekli veriyi, varsayımları ve sınırları görünür hale getiriyorum. Dashboard projesinde grafik sayısını artırmak yerine hangi metriğin hangi kararı desteklediğini soruyorum; FEM projesinde yalnızca sonuç göstermek yerine matris kurulumunu ve sınır şartlarını anlaşılır kılıyorum. Bu yaklaşım, hem teknik doğruluğu hem de çıktının iş ortamında kullanılabilir olmasını koruyor.</p>
+             data-lang-text-nl="Ik verduidelijk eerst het probleem en het succescriterium, en maak vervolgens data, aannames en grenzen zichtbaar. Bij dashboardwerk vraag ik welke statistiek welke beslissing ondersteunt. In FEM-werk leg ik matrixsamenstellen en randvoorwaarden bloot in plaats van alleen de output te presenteren. Hierdoor blijven technische correctheid en praktische bruikbaarheid bij elkaar."
+             data-lang-text-ja="まず問題と成功基準を明確にし、次にデータ、仮定、限界を可視化します。ダッシュボードの作業では、どの指標がどの決定をサポートするかを尋ねます。 FEM の研究では、出力だけを提示するのではなく、行列のアセンブリと境界条件を公開します。これにより、技術的な正確さと実用的な有用性が同時に保たれます。">Önce problemi ve başarı ölçütünü netleştiriyorum. Sonra gerekli veriyi, varsayımları ve sınırları görünür hale getiriyorum. Dashboard projesinde grafik sayısını artırmak yerine hangi metriğin hangi kararı desteklediğini soruyorum; FEM projesinde yalnızca sonuç göstermek yerine matris kurulumunu ve sınır şartlarını anlaşılır kılıyorum. Bu yaklaşım, hem teknik doğruluğu hem de çıktının iş ortamında kullanılabilir olmasını koruyor.</p>
         </article>
 
         <article>
@@ -467,67 +503,73 @@ layout: null
               data-lang-text-tr="Hangi rolleri hedefliyorum?"
               data-lang-text-de="Welche Rollen suche ich?"
               data-lang-text-en="Which roles am I targeting?"
-              data-lang-text-nl="Which roles am I targeting?"
-              data-lang-text-ja="Which roles am I targeting?">Hangi rolleri hedefliyorum?</h3>
+              data-lang-text-nl="Op welke rollen richt ik mij?"
+              data-lang-text-ja="どのような職種を目指していますか？">Hangi rolleri hedefliyorum?</h3>
           <p data-lang-text
              data-lang-text-tr="Lojistik optimizasyonu, üretim operasyonları, veri analitiği ve teknik proje geliştirme kesişimindeki Werkstudent, staj ve junior rolleriyle ilgileniyorum. Özellikle depo ve üretim verisini operasyonel kararlara çeviren, mühendislik bağlamını koruyan ve farklı ekipler arasında anlaşılır iletişim gerektiren görevler bana uygun. Dortmund ve çevresinde, Ekim 2026'dan itibaren gerçek süreçlerle çalışabileceğim ekiplerle görüşmeye açığım."
              data-lang-text-de="Ich suche Werkstudenten-, Praktikums- und Junior-Rollen an der Schnittstelle von Logistikoptimierung, Produktionsbetrieb, Datenanalyse und technischer Projektentwicklung. Besonders passen Aufgaben, die Lager- und Produktionsdaten in operative Entscheidungen übersetzen, Engineering-Kontext bewahren und klare Kommunikation zwischen Teams verlangen. Ab Oktober 2026 bin ich im Raum Dortmund offen für Gespräche."
              data-lang-text-en="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026."
-             data-lang-text-nl="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026."
-             data-lang-text-ja="I am targeting working-student, internship, and junior roles across logistics optimization, manufacturing operations, data analytics, and technical project development. I am especially interested in teams that turn warehouse and production data into operational decisions while preserving engineering context. I am available around Dortmund from October 2026.">Lojistik optimizasyonu, üretim operasyonları, veri analitiği ve teknik proje geliştirme kesişimindeki Werkstudent, staj ve junior rolleriyle ilgileniyorum. Özellikle depo ve üretim verisini operasyonel kararlara çeviren, mühendislik bağlamını koruyan ve farklı ekipler arasında anlaşılır iletişim gerektiren görevler bana uygun. Dortmund ve çevresinde, Ekim 2026'dan itibaren gerçek süreçlerle çalışabileceğim ekiplerle görüşmeye açığım.</p>
+             data-lang-text-nl="Ik richt me op werkstudenten, stagiaires en juniorrollen op het gebied van logistieke optimalisatie, productieactiviteiten, data-analyse en technische projectontwikkeling. Ik ben vooral geïnteresseerd in teams die magazijn- en productiegegevens omzetten in operationele beslissingen, terwijl de technische context behouden blijft. Ik ben vanaf oktober 2026 beschikbaar in de omgeving van Dortmund."
+             data-lang-text-ja="物流最適化、製造オペレーション、データ分析、技術プロジェクト開発に関わるWerkstudent、インターン、ジュニア職を志望しています。特に、倉庫・生産データを工学的な文脈を保ちながら業務判断につなげるチームに関心があります。2026年10月からドルトムント周辺で勤務可能です。">Lojistik optimizasyonu, üretim operasyonları, veri analitiği ve teknik proje geliştirme kesişimindeki Werkstudent, staj ve junior rolleriyle ilgileniyorum. Özellikle depo ve üretim verisini operasyonel kararlara çeviren, mühendislik bağlamını koruyan ve farklı ekipler arasında anlaşılır iletişim gerektiren görevler bana uygun. Dortmund ve çevresinde, Ekim 2026'dan itibaren gerçek süreçlerle çalışabileceğim ekiplerle görüşmeye açığım.</p>
         </article>
       </div>
     </section>
 
     <section class="thesis-band" aria-labelledby="thesis-title">
       <div>
-        <p class="swiss-kicker">BACHELOR THESIS · TR / DE / EN</p>
+        <p class="swiss-kicker" data-lang-text data-lang-text-tr="LISANS TEZI · TR / DE / EN" data-lang-text-de="BACHELORARBEIT · TR / DE / EN" data-lang-text-en="BACHELOR THESIS · TR / DE / EN" data-lang-text-nl="BACHELORSCRIPTIE · TR / DE / EN" data-lang-text-ja="卒業論文 · TR / DE / EN">LISANS TEZI · TR / DE / EN</p>
         <h2 id="thesis-title"
             data-lang-text
             data-lang-text-tr="Araç filtresi malzemeleri filtrasyon performansını nasıl etkiler?"
             data-lang-text-de="Wie beeinflussen Materialparameter die Filtrationsleistung von Fahrzeugfiltern?"
             data-lang-text-en="How do material parameters affect vehicle-filter performance?"
-            data-lang-text-nl="How do material parameters affect vehicle-filter performance?"
-            data-lang-text-ja="How do material parameters affect vehicle-filter performance?">Araç filtresi malzemeleri filtrasyon performansını nasıl etkiler?</h2>
+            data-lang-text-nl="Hoe beïnvloeden materiaalparameters de prestaties van voertuigfilters?"
+            data-lang-text-ja="材料パラメータは車両フィルターの性能にどのように影響しますか?">Araç filtresi malzemeleri filtrasyon performansını nasıl etkiler?</h2>
         <p data-lang-text
            data-lang-text-tr="Lisans tezim; filtre kağıdı, kapak ve conta malzemelerindeki geçirgenlik, dayanım ve gözenek parametrelerinin filtrasyon davranışına etkisini inceliyor. Çalışmanın özeti ve üç dilde dosyaları tek sayfada bulunuyor."
            data-lang-text-de="Meine Bachelorarbeit untersucht, wie Permeabilität, Festigkeit und Porenparameter von Filterpapier, Deckel- und Dichtungsmaterialien das Filtrationsverhalten beeinflussen. Zusammenfassung und Dateien in drei Sprachen stehen auf einer Seite bereit."
            data-lang-text-en="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page."
-           data-lang-text-nl="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page."
-           data-lang-text-ja="My bachelor thesis examines how permeability, strength, and pore parameters in filter paper, covers, and gaskets influence filtration. The summary and files in three languages are available on one page.">Lisans tezim; filtre kağıdı, kapak ve conta malzemelerindeki geçirgenlik, dayanım ve gözenek parametrelerinin filtrasyon davranışına etkisini inceliyor. Çalışmanın özeti ve üç dilde dosyaları tek sayfada bulunuyor.</p>
+           data-lang-text-nl="Mijn bachelorscriptie onderzoekt hoe permeabiliteit, sterkte en porieparameters in filterpapier, deksels en pakkingen de filtratie beïnvloeden. De samenvatting en bestanden in drie talen zijn op één pagina beschikbaar."
+           data-lang-text-ja="私の卒業論文では、濾紙、カバー、ガスケットの透過性、強度、細孔パラメータが濾過にどのように影響するかを調査しています。 3 か国語の概要とファイルが 1 ページにあります。">Lisans tezim; filtre kağıdı, kapak ve conta malzemelerindeki geçirgenlik, dayanım ve gözenek parametrelerinin filtrasyon davranışına etkisini inceliyor. Çalışmanın özeti ve üç dilde dosyaları tek sayfada bulunuyor.</p>
       </div>
       <a class="swiss-action swiss-action-primary" href="/blog/bachelor-thesis-filter-materials/"
          data-lang-text
          data-lang-text-tr="TEZ SAYFASINI AÇ"
          data-lang-text-de="THESIS ÖFFNEN"
          data-lang-text-en="OPEN THESIS"
-         data-lang-text-nl="OPEN THESIS"
-         data-lang-text-ja="OPEN THESIS">TEZ SAYFASINI AÇ</a>
+         data-lang-text-nl="SCRIPTIE OPENEN"
+         data-lang-text-ja="論文ページを開く">TEZ SAYFASINI AÇ</a>
     </section>
 
     <footer class="portfolio-footer">
       <div class="portfolio-footer-primary">
         <p>
           <strong>Kagan Bağdemir</strong><br>
-          Dortmund · Mechanical Engineering (ITPL)<br>
+          <span data-lang-text data-lang-text-tr="Dortmund · Makine Muhendisligi (ITPL)" data-lang-text-de="Dortmund · Maschinenbau (ITPL)" data-lang-text-en="Dortmund · Mechanical Engineering (ITPL)" data-lang-text-nl="Dortmund · Werktuigbouwkunde (ITPL)" data-lang-text-ja="ドルトムント · 機械工学 (ITPL)">Dortmund · Makine Muhendisligi (ITPL)</span><br>
           <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a>
         </p>
-        <nav aria-label="Footer Navigation">
+        <nav aria-label="Alt bilgi navigasyonu"
+             data-lang-aria-label
+             data-lang-aria-label-tr="Alt bilgi navigasyonu"
+             data-lang-aria-label-de="Footer-Navigation"
+             data-lang-aria-label-en="Footer navigation"
+             data-lang-aria-label-nl="Voettekstnavigatie"
+             data-lang-aria-label-ja="フッターナビゲーション">
           <a href="/blog/">Blog</a>
           <a href="/kronolojik-basarimlar/"
              data-lang-text
              data-lang-text-tr="Başarılar"
              data-lang-text-de="Erfolge"
              data-lang-text-en="Achievements"
-             data-lang-text-nl="Achievements"
-             data-lang-text-ja="Achievements">Başarılar</a>
+             data-lang-text-nl="Prestaties"
+             data-lang-text-ja="実績">Başarılar</a>
           <a href="/projekte-und-ziele/"
              data-lang-text
              data-lang-text-tr="Projeler &amp; Hedefler"
              data-lang-text-de="Projekte &amp; Ziele"
              data-lang-text-en="Projects &amp; Goals"
-             data-lang-text-nl="Projects &amp; Goals"
-             data-lang-text-ja="Projects &amp; Goals">Projeler &amp; Hedefler</a>
+             data-lang-text-nl="Projecten &amp; Doelen"
+             data-lang-text-ja="プロジェクトと目標">Projeler &amp; Hedefler</a>
           <a href="/cv.pdf" target="_blank" rel="noopener">CV</a>
         </nav>
       </div>
@@ -542,8 +584,8 @@ layout: null
                 data-lang-text-tr="Son güncelleme"
                 data-lang-text-de="Zuletzt aktualisiert"
                 data-lang-text-en="Last updated"
-                data-lang-text-nl="Last updated"
-                data-lang-text-ja="Last updated">Son güncelleme</span>:
+                data-lang-text-nl="Laatst bijgewerkt"
+                data-lang-text-ja="最終更新日">Son güncelleme</span>:
           <time datetime="2026-08-12">12.08.2026</time>
         </p>
         <p class="portfolio-playground-link">
@@ -554,9 +596,9 @@ layout: null
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=6"></script>
-<script src="/assets/lang.js?v=6"></script>
-<script src="/assets/theme.js?v=6"></script>
+<script src="/assets/i18n.js?v=12"></script>
+<script src="/assets/lang.js?v=9"></script>
+<script src="/assets/theme.js?v=7"></script>
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
 </script>

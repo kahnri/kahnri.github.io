@@ -8,25 +8,25 @@ category: engineering
 category_tr: "Engineering / FEM"
 category_de: "Engineering / FEM"
 category_en: "Engineering / FEM"
-category_nl: "Engineering / FEM"
-category_ja: "Engineering / FEM"
+category_nl: "Techniek / FEM"
+category_ja: "エンジニアリング / FEM"
 read_time_tr: "4 dk okuma"
 read_time_de: "4 Min. Lesezeit"
 read_time_en: "4 min read"
-read_time_nl: "4 min read"
-read_time_ja: "4 min read"
+read_time_nl: "4 minuten lezen"
+read_time_ja: "4 分で読めます"
 title_tr: "FEM Mini-Solver: Küçük Bir Python Modelinden Mühendislik Sezgisine"
 title_de: "FEM Mini-Solver: Von einem kleinen Python-Modell zur Engineering-Intuition"
 title_en: "FEM Mini-Solver: From a Small Python Model to Engineering Intuition"
-title_nl: "FEM Mini-Solver: From a Small Python Model to Engineering Intuition"
-title_ja: "FEM Mini-Solver: From a Small Python Model to Engineering Intuition"
+title_nl: "FEM Mini-Solver: van een klein Python-model tot technische intuïtie"
+title_ja: "FEM ミニソルバー: 小さな Python モデルからエンジニアリングの直感まで"
 description: "A note on the FEM mini-solver project, finite element thinking, Python, NumPy, stiffness matrices, boundary conditions, and engineering intuition."
 excerpt: "FEM mini-solver projesinin arkasındaki fikir: rijitlik matrisi, sınır şartları ve sonuçları küçük bir Python modeliyle görünür yapmak."
 excerpt_tr: "FEM mini-solver projesinin arkasındaki fikir: rijitlik matrisi, sınır şartları ve sonuçları küçük bir Python modeliyle görünür yapmak."
 excerpt_de: "Die Idee hinter dem FEM Mini-Solver: Steifigkeitsmatrix, Randbedingungen und Ergebnisse in einem kleinen Python-Modell sichtbar machen."
 excerpt_en: "The idea behind the FEM mini-solver: making stiffness matrices, boundary conditions, and results visible in a small Python model."
-excerpt_nl: "The idea behind the FEM mini-solver: making stiffness matrices, boundary conditions, and results visible in a small Python model."
-excerpt_ja: "The idea behind the FEM mini-solver: making stiffness matrices, boundary conditions, and results visible in a small Python model."
+excerpt_nl: "Het idee achter de FEM mini-solver: stijfheidsmatrices, randvoorwaarden en resultaten zichtbaar maken in een klein Python-model."
+excerpt_ja: "FEM ミニソルバーの背後にある考え方: 剛性マトリックス、境界条件、結果を小さな Python モデルで可視化する。"
 tags: [FEM, Python, NumPy, Mechanical Engineering, Simulation, Stiffness Matrix]
 tr: |
   # FEM Mini-Solver neden yaptım?
@@ -110,12 +110,12 @@ en: |
   The goal is not to build the strongest solver. The goal is to open the calculation.
 
 nl: |
-  # Why build a FEM mini-solver?
+  # Waarom een ​​FEM-mini-oplosser bouwen?
 
-  The [FEM Mini-Solver](/dev/fem-mini-solver/) is a small project for making finite element logic visible: nodes, elements, degrees of freedom, stiffness matrices, boundary conditions, displacement, and stress.
+  De [FEM Mini-Solver](/dev/fem-mini-solver/) is een klein project voor het zichtbaar maken van eindige-elementenlogica: knooppunten, elementen, vrijheidsgraden, stijfheidsmatrices, randvoorwaarden, verplaatsing en spanning.
 
 ja: |
-  # Why build a FEM mini-solver?
+  # FEM ミニソルバーを構築する理由
 
-  The [FEM Mini-Solver](/dev/fem-mini-solver/) is a small project for making finite element logic visible: nodes, elements, degrees of freedom, stiffness matrices, boundary conditions, displacement, and stress.
+  [FEM Mini-Solver](/dev/fem-mini-solver/) は、節点、要素、自由度、剛性行列、境界条件、変位、応力などの有限要素ロジックを可視化するための小さなプロジェクトです。
 ---

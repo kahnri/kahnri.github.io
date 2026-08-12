@@ -18,10 +18,11 @@
     } catch (e) {}
   }
 
-  function pickLangValue(el, lang){
+  function pickLangValue(el, lang, attributePrefix){
+    attributePrefix = attributePrefix || 'data-lang-text-';
     var priority = [lang].concat(VALID_LANGS.filter(function(code){ return code !== lang; }));
     for (var i = 0; i < priority.length; i += 1) {
-      var value = el.getAttribute('data-lang-text-' + priority[i]);
+      var value = el.getAttribute(attributePrefix + priority[i]);
       if (value && value.trim()) {
         return value;
       }
@@ -85,6 +86,15 @@
     });
   }
 
+  function applyLangAriaLabels(lang){
+    document.querySelectorAll('[data-lang-aria-label]').forEach(function(el){
+      var label = pickLangValue(el, lang, 'data-lang-aria-label-');
+      if (label) {
+        el.setAttribute('aria-label', label);
+      }
+    });
+  }
+
   function applyPostLangContent(lang){
     var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-lang-content]'));
     if (!blocks.length) {
@@ -134,13 +144,8 @@
     applyLangSelect(lang, strings);
     applyLegacyButtons(lang);
     applyLangTextBlocks(lang);
+    applyLangAriaLabels(lang);
     applyPostLangContent(lang);
-
-    var toggle = document.getElementById('theme-toggle');
-    if (toggle && strings['btn.theme']) {
-      toggle.setAttribute('aria-label', strings['btn.theme']);
-      toggle.setAttribute('title', strings['btn.theme']);
-    }
 
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
     return lang;

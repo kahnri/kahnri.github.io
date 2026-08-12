@@ -2,27 +2,16 @@
 layout: null
 ---
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>KAHNRI — Kader Carki</title>
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-  <script>
-  (function(){
-    try{
-      const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
-      document.documentElement.dataset.theme=theme;
-    }catch(e){
-      document.documentElement.dataset.theme='dark';
-    }
-  })();
-  </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=14">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <style>
     body { font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif; }
 
@@ -61,10 +50,6 @@ layout: null
         <a href="/" class="px-3 py-1 rounded-full border theme-button text-xs sm:text-sm">Ana Sayfa</a>
         <a href="/blog/" class="px-3 py-1 rounded-full border theme-button text-xs sm:text-sm">Blog</a>
       </div>
-      <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-        <span data-theme-icon aria-hidden="true">moon</span>
-        <span class="sr-only">Tema Degistir</span>
-      </button>
     </header>
 
     <section class="wheel-stage mt-6 rounded-3xl p-5 sm:p-6" data-animate style="--stagger:0.5">
@@ -122,7 +107,7 @@ layout: null
     </footer>
   </main>
 
-  <script src="/assets/theme.js?v=5"></script>
+  <script src="/assets/theme.js?v=7"></script>
   <script>
   (function(){
     const defaultOptions=[

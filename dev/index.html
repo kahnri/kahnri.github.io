@@ -1,27 +1,21 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Selected Work — Kagan Bagdemir</title>
+  <title data-lang-text
+         data-lang-text-tr="Secili Calismalar — Kagan Bagdemir"
+         data-lang-text-de="Ausgewaehlte Arbeiten — Kagan Bagdemir"
+         data-lang-text-en="Selected Work — Kagan Bagdemir"
+         data-lang-text-nl="Geselecteerd Werk — Kagan Bagdemir"
+         data-lang-text-ja="主な実績 — Kagan Bagdemir">Secili Calismalar — Kagan Bagdemir</title>
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-  <script>
-  (function(){
-    try{
-      const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
-      document.documentElement.dataset.theme=theme;
-    }catch(e){
-      document.documentElement.dataset.theme='dark';
-    }
-  })();
-  </script>
   <meta name="description" content="Selected engineering, data analytics, FEM, and CAD work by Kagan Bagdemir.">
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=16">
   <link rel="stylesheet" href="/assets/portfolio.css?v=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -37,10 +31,6 @@
           <option value="nl" data-i18n="lang.nl">Nederlands</option>
           <option value="ja" data-i18n="lang.ja">日本語</option>
         </select>
-        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-          <span data-theme-icon aria-hidden="true">HELL</span>
-          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
-        </button>
       </div>
     </header>
 
@@ -50,22 +40,22 @@
          data-lang-text-tr="Portfolio / Projeler"
          data-lang-text-de="Portfolio / Projekte"
          data-lang-text-en="Portfolio / Projects"
-         data-lang-text-nl="Portfolio / Projects"
-         data-lang-text-ja="Portfolio / Projects">Portfolio / Projeler</p>
+         data-lang-text-nl="Portefeuille / Projecten"
+         data-lang-text-ja="ポートフォリオ / プロジェクト">Portfolio / Projeler</p>
       <h1 class="mt-3 text-3xl font-semibold safe-wrap sm:text-5xl"
           data-lang-text
           data-lang-text-tr="Secili isler"
           data-lang-text-de="Ausgewaehlte Arbeiten"
           data-lang-text-en="Selected work"
-          data-lang-text-nl="Selected work"
-          data-lang-text-ja="Selected work">Secili isler</h1>
+          data-lang-text-nl="Geselecteerd werk"
+          data-lang-text-ja="入選作品">Secili isler</h1>
       <p class="mt-4 max-w-3xl theme-text-soft safe-wrap"
          data-lang-text
          data-lang-text-tr="Her proje artik kendi isimli adresinde duruyor. KPI dashboard, FEM solver ve CAD portfoyu birbirinden ayrildi."
          data-lang-text-de="Jedes Projekt hat jetzt eine eigene URL. KPI-Dashboard, FEM-Solver und CAD-Portfolio sind sauber getrennt."
          data-lang-text-en="Each project now has its own named URL. The KPI dashboard, FEM solver, and CAD portfolio are separated cleanly."
-         data-lang-text-nl="Each project now has its own named URL. The KPI dashboard, FEM solver, and CAD portfolio are separated cleanly."
-         data-lang-text-ja="Each project now has its own named URL. The KPI dashboard, FEM solver, and CAD portfolio are separated cleanly.">Her proje artik kendi isimli adresinde duruyor. KPI dashboard, FEM solver ve CAD portfoyu birbirinden ayrildi.</p>
+         data-lang-text-nl="Elk project heeft nu zijn eigen benoemde URL. Het KPI-dashboard, de FEM-oplosser en het CAD-portfolio zijn netjes gescheiden."
+         data-lang-text-ja="各プロジェクトには独自の名前付き URL が割り当てられます。 KPI ダッシュボード、FEM ソルバー、CAD ポートフォリオは明確に分離されています。">Her proje artik kendi isimli adresinde duruyor. KPI dashboard, FEM solver ve CAD portfoyu birbirinden ayrildi.</p>
     </section>
 
     <section class="mt-6 grid gap-4 md:grid-cols-3" data-animate style="--stagger:0.8">
@@ -77,16 +67,16 @@
            data-lang-text-tr="Depo operasyon verisini karar destek KPI'larina ceviren interaktif dashboard."
            data-lang-text-de="Interaktives Dashboard, das Warehouse-Events in entscheidungsnahe KPIs uebersetzt."
            data-lang-text-en="Interactive dashboard turning warehouse events into decision-focused KPIs."
-           data-lang-text-nl="Interactive dashboard turning warehouse events into decision-focused KPIs."
-           data-lang-text-ja="Interactive dashboard turning warehouse events into decision-focused KPIs.">Depo operasyon verisini karar destek KPI'larina ceviren interaktif dashboard.</p>
+           data-lang-text-nl="Interactief dashboard dat magazijngebeurtenissen omzet in beslissingsgerichte KPI's."
+           data-lang-text-ja="インタラクティブなダッシュボードは、倉庫イベントを意思決定に重点を置いた KPI に変換します。">Depo operasyon verisini karar destek KPI'larina ceviren interaktif dashboard.</p>
         <a class="inline-block mt-4 px-3 py-1 rounded-lg border theme-button transition"
            href="/dev/warehouse-kpi-dashboard/"
            data-lang-text
            data-lang-text-tr="Dashboard Ac"
            data-lang-text-de="Dashboard oeffnen"
            data-lang-text-en="Open Dashboard"
-           data-lang-text-nl="Open Dashboard"
-           data-lang-text-ja="Open Dashboard">Dashboard Ac</a>
+           data-lang-text-nl="Dashboard openen"
+           data-lang-text-ja="ダッシュボードを開く">Dashboard Ac</a>
       </article>
       <article class="rounded-2xl border theme-card p-5 transition hover:-translate-y-0.5">
         <p class="text-xs uppercase tracking-widest signal-tag">Engineering / Computation</p>
@@ -96,16 +86,16 @@
            data-lang-text-tr="2D cubuk sistemini global rijitlik, yer degistirme, reaksiyon ve gerilme ile cozen mini demo."
            data-lang-text-de="Mini-Demo fuer ein 2D-Stabwerk mit globaler Steifigkeit, Verschiebung, Reaktion und Spannung."
            data-lang-text-en="Mini demo solving a 2D truss with stiffness, displacement, reaction, and stress outputs."
-           data-lang-text-nl="Mini demo solving a 2D truss with stiffness, displacement, reaction, and stress outputs."
-           data-lang-text-ja="Mini demo solving a 2D truss with stiffness, displacement, reaction, and stress outputs.">2D cubuk sistemini global rijitlik, yer degistirme, reaksiyon ve gerilme ile cozen mini demo.</p>
+           data-lang-text-nl="Minidemo die een 2D-truss oplost met stijfheid, verplaatsing, reactie en spanningsoutputs."
+           data-lang-text-ja="剛性、変位、反力、応力出力を使用して 2D トラスを解決するミニ デモ。">2D cubuk sistemini global rijitlik, yer degistirme, reaksiyon ve gerilme ile cozen mini demo.</p>
         <a class="inline-block mt-4 px-3 py-1 rounded-lg border theme-button transition"
            href="/dev/fem-mini-solver/"
            data-lang-text
            data-lang-text-tr="Demo Ac"
            data-lang-text-de="Demo oeffnen"
            data-lang-text-en="Open Demo"
-           data-lang-text-nl="Open Demo"
-           data-lang-text-ja="Open Demo">Demo Ac</a>
+           data-lang-text-nl="Demo openen"
+           data-lang-text-ja="オープンデモ">Demo Ac</a>
       </article>
       <article class="rounded-2xl border theme-card p-5 transition hover:-translate-y-0.5">
         <p class="text-xs uppercase tracking-widest signal-tag">Design / Manufacturing</p>
@@ -115,23 +105,23 @@
            data-lang-text-tr="Olculendirme, tolerans ve uretilebilirlik dusuncesini gosteren teknik cizim alani."
            data-lang-text-de="Bereich fuer technische Zeichnung, Bemassung, Toleranzen und Fertigbarkeit."
            data-lang-text-en="Technical drawing area focused on dimensioning, tolerances, and manufacturability."
-           data-lang-text-nl="Technical drawing area focused on dimensioning, tolerances, and manufacturability."
-           data-lang-text-ja="Technical drawing area focused on dimensioning, tolerances, and manufacturability.">Olculendirme, tolerans ve uretilebilirlik dusuncesini gosteren teknik cizim alani.</p>
+           data-lang-text-nl="Technisch tekengebied gericht op maatvoering, toleranties en maakbaarheid."
+           data-lang-text-ja="寸法、公差、製造性に重点を置いた技術製図エリア。">Olculendirme, tolerans ve uretilebilirlik dusuncesini gosteren teknik cizim alani.</p>
         <a class="inline-block mt-4 px-3 py-1 rounded-lg border theme-button transition"
            href="/dev/cad-technical-drawing/"
            data-lang-text
            data-lang-text-tr="Portfoy Ac"
            data-lang-text-de="Portfolio oeffnen"
            data-lang-text-en="Open Portfolio"
-           data-lang-text-nl="Open Portfolio"
-           data-lang-text-ja="Open Portfolio">Portfoy Ac</a>
+           data-lang-text-nl="Portefeuille openen"
+           data-lang-text-ja="ポートフォリオを開く">Portfoy Ac</a>
       </article>
     </section>
   </main>
 
-<script src="/assets/i18n.js?v=6"></script>
-<script src="/assets/lang.js?v=6"></script>
-<script src="/assets/theme.js?v=6"></script>
+<script src="/assets/i18n.js?v=12"></script>
+<script src="/assets/lang.js?v=9"></script>
+<script src="/assets/theme.js?v=7"></script>
 <script>
 document.body.classList.add('initial-anim');
 requestAnimationFrame(function(){

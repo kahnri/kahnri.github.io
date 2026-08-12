@@ -2,7 +2,7 @@
 layout: null
 ---
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,21 +10,10 @@ layout: null
   <meta name="description" content="Kagan Bağdemir'in data, lojistik, üretim IT, FEM ve teknik çizim üzerine yazıları.">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-  <script>
-  (function(){
-    try{
-      const stored=localStorage.getItem('theme-preference');
-      const theme=stored||'dark';
-      document.documentElement.dataset.theme=theme;
-    }catch(e){
-      document.documentElement.dataset.theme='dark';
-    }
-  })();
-  </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=16">
   <link rel="stylesheet" href="/assets/portfolio.css?v=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -43,8 +32,8 @@ layout: null
                 data-lang-text-tr="Data · Lojistik · Engineering"
                 data-lang-text-de="Daten · Logistik · Engineering"
                 data-lang-text-en="Data · Logistics · Engineering"
-                data-lang-text-nl="Data · Logistics · Engineering"
-                data-lang-text-ja="Data · Logistics · Engineering">Data · Lojistik · Engineering</span>
+                data-lang-text-nl="Gegevens · Logistiek · Engineering"
+                data-lang-text-ja="データ・ロジスティクス・エンジニアリング">Data · Lojistik · Engineering</span>
         </span>
       </a>
       <div class="flex w-full items-center justify-between gap-3 flex-wrap sm:w-auto sm:justify-end">
@@ -53,8 +42,8 @@ layout: null
            data-lang-text-tr="Projeler"
            data-lang-text-de="Projekte"
            data-lang-text-en="Projects"
-           data-lang-text-nl="Projects"
-           data-lang-text-ja="Projects">Projeler</a>
+           data-lang-text-nl="Projecten"
+           data-lang-text-ja="プロジェクト">Projeler</a>
         <div class="flex items-center gap-2 flex-wrap justify-end">
           <label for="lang-select-blog" class="sr-only" data-i18n="lang.label"></label>
           <select id="lang-select-blog" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
@@ -64,10 +53,6 @@ layout: null
             <option value="nl" data-i18n="lang.nl">Nederlands</option>
             <option value="ja" data-i18n="lang.ja">日本語</option>
           </select>
-          <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-            <span data-theme-icon aria-hidden="true">HELL</span>
-            <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
-          </button>
         </div>
       </div>
     </header>
@@ -80,22 +65,22 @@ layout: null
              data-lang-text-tr="Blog / Saha notları"
              data-lang-text-de="Blog / Praxisnotizen"
              data-lang-text-en="Blog / Field notes"
-             data-lang-text-nl="Blog / Field notes"
-             data-lang-text-ja="Blog / Field notes">Blog / Saha notları</p>
+             data-lang-text-nl="Blog / veldnotities"
+             data-lang-text-ja="ブログ / フィールドノート">Blog / Saha notları</p>
           <h1 class="blog-title safe-wrap"
               data-lang-text
               data-lang-text-tr="Veri, lojistik ve mühendisliği okunur hikayelere çeviren notlar"
               data-lang-text-de="Notizen, die Daten, Logistik und Engineering lesbar machen"
               data-lang-text-en="Notes that turn data, logistics, and engineering into readable stories"
-              data-lang-text-nl="Notes that turn data, logistics, and engineering into readable stories"
-              data-lang-text-ja="Notes that turn data, logistics, and engineering into readable stories">Veri, lojistik ve mühendisliği okunur hikayelere çeviren notlar</h1>
+              data-lang-text-nl="Notities die data, logistiek en techniek omzetten in leesbare verhalen"
+              data-lang-text-ja="データ、ロジスティクス、エンジニアリングを読みやすいストーリーに変えるメモ">Veri, lojistik ve mühendisliği okunur hikayelere çeviren notlar</h1>
           <p class="blog-lead theme-text-soft"
              data-lang-text
              data-lang-text-tr="Burada portföydeki projelerin arka planını, karar mantığını ve öğrendiklerimi kısa ama işe yarar yazılarla topluyorum."
              data-lang-text-de="Hier sammle ich den Kontext hinter meinen Projekten, die Entscheidungslogik und die wichtigsten Learnings in kompakten Beiträgen."
              data-lang-text-en="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts."
-             data-lang-text-nl="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts."
-             data-lang-text-ja="Here I collect the context behind my portfolio projects, the decision logic, and the lessons in compact posts.">Burada portföydeki projelerin arka planını, karar mantığını ve öğrendiklerimi kısa ama işe yarar yazılarla topluyorum.</p>
+             data-lang-text-nl="Hier verzamel ik de context achter mijn portfolioprojecten, de beslissingslogica en de lessen in compacte berichten."
+             data-lang-text-ja="ここでは、私のポートフォリオ プロジェクトの背景、意思決定ロジック、教訓をコンパクトな投稿にまとめています。">Burada portföydeki projelerin arka planını, karar mantığını ve öğrendiklerimi kısa ama işe yarar yazılarla topluyorum.</p>
         </div>
 
         <aside class="blog-hero-panel rounded-2xl border theme-card-soft" aria-label="Blog özeti">
@@ -106,8 +91,8 @@ layout: null
                     data-lang-text-tr="yayın"
                     data-lang-text-de="Beiträge"
                     data-lang-text-en="posts"
-                    data-lang-text-nl="posts"
-                    data-lang-text-ja="posts">yayın</span>
+                    data-lang-text-nl="berichten"
+                    data-lang-text-ja="投稿">yayın</span>
             </div>
             <div class="blog-stat">
               <strong>5</strong>
@@ -115,8 +100,8 @@ layout: null
                     data-lang-text-tr="odak alanı"
                     data-lang-text-de="Fokusfelder"
                     data-lang-text-en="focus areas"
-                    data-lang-text-nl="focus areas"
-                    data-lang-text-ja="focus areas">odak alanı</span>
+                    data-lang-text-nl="focusgebieden"
+                    data-lang-text-ja="重点分野">odak alanı</span>
             </div>
             <div class="blog-stat">
               <strong>TR/DE/EN</strong>
@@ -124,8 +109,8 @@ layout: null
                     data-lang-text-tr="çok dilli akış"
                     data-lang-text-de="mehrsprachiger Flow"
                     data-lang-text-en="multilingual flow"
-                    data-lang-text-nl="multilingual flow"
-                    data-lang-text-ja="multilingual flow">çok dilli akış</span>
+                    data-lang-text-nl="meertalige stroom"
+                    data-lang-text-ja="多言語フロー">çok dilli akış</span>
             </div>
           </div>
           <p class="theme-text-muted mt-4 safe-wrap"
@@ -133,8 +118,8 @@ layout: null
              data-lang-text-tr="Öncelik: okuyanın hızlıca bağlam alması, sonra isterse proje demosuna veya ilgili yazıya akması."
              data-lang-text-de="Priorität: schnell Kontext geben und danach elegant zu Demo, Projekt oder Folgebeitrag führen."
              data-lang-text-en="Priority: give context quickly, then guide readers into a demo, project, or related post."
-             data-lang-text-nl="Priority: give context quickly, then guide readers into a demo, project, or related post."
-             data-lang-text-ja="Priority: give context quickly, then guide readers into a demo, project, or related post.">Öncelik: okuyanın hızlıca bağlam alması, sonra isterse proje demosuna veya ilgili yazıya akması.</p>
+             data-lang-text-nl="Prioriteit: geef snel context en begeleid lezers vervolgens naar een demo, project of gerelateerd bericht."
+             data-lang-text-ja="優先順位: コンテキストをすばやく提供し、読者をデモ、プロジェクト、または関連投稿に誘導します。">Öncelik: okuyanın hızlıca bağlam alması, sonra isterse proje demosuna veya ilgili yazıya akması.</p>
         </aside>
       </div>
     </section>
@@ -153,8 +138,8 @@ layout: null
                 data-lang-text-tr="Tümü"
                 data-lang-text-de="Alle"
                 data-lang-text-en="All"
-                data-lang-text-nl="All"
-                data-lang-text-ja="All">Tümü</button>
+                data-lang-text-nl="Allemaal"
+                data-lang-text-ja="すべて">Tümü</button>
         <button class="blog-topic-button border theme-button" type="button" data-topic-filter="analytics" aria-pressed="false">Analytics</button>
         <button class="blog-topic-button border theme-button" type="button" data-topic-filter="logistics" aria-pressed="false">Logistics IT</button>
         <button class="blog-topic-button border theme-button" type="button" data-topic-filter="engineering" aria-pressed="false">Engineering</button>
@@ -163,15 +148,15 @@ layout: null
                 data-lang-text-tr="Araştırma"
                 data-lang-text-de="Forschung"
                 data-lang-text-en="Research"
-                data-lang-text-nl="Research"
-                data-lang-text-ja="Research">Araştırma</button>
+                data-lang-text-nl="Onderzoek"
+                data-lang-text-ja="研究">Araştırma</button>
         <button class="blog-topic-button border theme-button" type="button" data-topic-filter="career" aria-pressed="false"
                 data-lang-text
                 data-lang-text-tr="Profil"
                 data-lang-text-de="Profil"
                 data-lang-text-en="Profile"
-                data-lang-text-nl="Profile"
-                data-lang-text-ja="Profile">Profil</button>
+                data-lang-text-nl="Profiel"
+                data-lang-text-ja="プロフィール">Profil</button>
       </div>
     </section>
 
@@ -238,7 +223,13 @@ layout: null
             </h2>
             <p class="blog-card-excerpt theme-text-soft" data-blog-excerpt>{{ excerpt_tr | markdownify | strip_html | strip_newlines | strip | truncate: 190 | escape }}</p>
             {% if post.tags.size > 0 %}
-            <div class="blog-card-tags" aria-label="Etiketler">
+            <div class="blog-card-tags" aria-label="Etiketler"
+                 data-lang-aria-label
+                 data-lang-aria-label-tr="Etiketler"
+                 data-lang-aria-label-de="Schlagwoerter"
+                 data-lang-aria-label-en="Tags"
+                 data-lang-aria-label-nl="Tags"
+                 data-lang-aria-label-ja="タグ">
               {% for tag in post.tags limit:4 %}
               <span class="blog-tag">{{ tag }}</span>
               {% endfor %}
@@ -258,15 +249,15 @@ layout: null
             data-lang-text-tr="Bu filtreyle yazı bulunamadı"
             data-lang-text-de="Keine Beiträge für diesen Filter"
             data-lang-text-en="No posts match this filter"
-            data-lang-text-nl="No posts match this filter"
-            data-lang-text-ja="No posts match this filter">Bu filtreyle yazı bulunamadı</h2>
+            data-lang-text-nl="Er zijn geen berichten die overeenkomen met dit filter"
+            data-lang-text-ja="このフィルターに一致する投稿はありません">Bu filtreyle yazı bulunamadı</h2>
         <p class="theme-text-muted mt-2"
            data-lang-text
            data-lang-text-tr="Aramayı biraz genişlet veya tüm yazılara geri dön."
            data-lang-text-de="Erweitere die Suche oder gehe zurück zu allen Beiträgen."
            data-lang-text-en="Try a broader search or return to all posts."
-           data-lang-text-nl="Try a broader search or return to all posts."
-           data-lang-text-ja="Try a broader search or return to all posts.">Aramayı biraz genişlet veya tüm yazılara geri dön.</p>
+           data-lang-text-nl="Probeer een bredere zoekopdracht of ga terug naar alle berichten."
+           data-lang-text-ja="さらに広範囲の検索を試すか、すべての投稿に戻ってください。">Aramayı biraz genişlet veya tüm yazılara geri dön.</p>
       </div>
       {% else %}
       <p class="theme-text-muted" data-i18n="blog.empty">Henuz yazi yok. _posts/ klasorune bir Markdown dosyasi ekle.</p>
@@ -278,23 +269,23 @@ layout: null
          data-lang-text-tr="Blogu; proje sayfalarının arka planı, teknik karar günlüğü ve kısa öğrenme notları olarak büyütüyorum."
          data-lang-text-de="Ich baue den Blog als Kontextschicht für Projekte, technische Entscheidungen und kompakte Learnings aus."
          data-lang-text-en="I am growing the blog as context for projects, technical decisions, and compact learning notes."
-         data-lang-text-nl="I am growing the blog as context for projects, technical decisions, and compact learning notes."
-         data-lang-text-ja="I am growing the blog as context for projects, technical decisions, and compact learning notes.">Blogu; proje sayfalarının arka planı, teknik karar günlüğü ve kısa öğrenme notları olarak büyütüyorum.</p>
+         data-lang-text-nl="Ik laat de blog groeien als context voor projecten, technische beslissingen en compacte leernotities."
+         data-lang-text-ja="私はプロジェクト、技術的な決定、コンパクトな学習ノートのコンテキストとしてブログを成長させています。">Blogu; proje sayfalarının arka planı, teknik karar günlüğü ve kısa öğrenme notları olarak büyütüyorum.</p>
       <p class="mt-2 mini-footer-note">
         <span data-lang-text
               data-lang-text-tr="Kucuk bir not: eglenmek icin ayri bir alan da var"
               data-lang-text-de="Kleine Randnotiz: Es gibt auch einen separaten Spielplatz"
               data-lang-text-en="Small side note: there is also a separate playground"
-              data-lang-text-nl="Small side note: there is also a separate playground"
-              data-lang-text-ja="Small side note: there is also a separate playground">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
+              data-lang-text-nl="Kleine kanttekening: er is ook een aparte speeltuin"
+              data-lang-text-ja="ちょっとした補足: 独立した遊び場もあります">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
         · <a href="/kahnri/" class="footer-side-link">KAHNRI</a>
       </p>
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=7"></script>
-<script src="/assets/lang.js?v=6"></script>
-<script src="/assets/theme.js?v=6"></script>
+<script src="/assets/i18n.js?v=12"></script>
+<script src="/assets/lang.js?v=9"></script>
+<script src="/assets/theme.js?v=7"></script>
 <script>
 const BLOG_LANGS=['tr','de','en','nl','ja'];
 const cards=Array.from(document.querySelectorAll('[data-blog-card]'));

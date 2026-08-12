@@ -8,25 +8,25 @@ category: logistics
 category_tr: "Logistics IT"
 category_de: "Logistics IT"
 category_en: "Logistics IT"
-category_nl: "Logistics IT"
-category_ja: "Logistics IT"
+category_nl: "Logistieke IT"
+category_ja: "物流IT"
 read_time_tr: "5 dk okuma"
 read_time_de: "5 Min. Lesezeit"
 read_time_en: "5 min read"
-read_time_nl: "5 min read"
-read_time_ja: "5 min read"
+read_time_nl: "5 minuten lezen"
+read_time_ja: "5 分で読めます"
 title_tr: "Lojistik IT'de İyi Veri Akışı Nasıl Kurulur?"
 title_de: "Wie ein guter Datenfluss in Logistics IT entsteht"
 title_en: "How to Build a Good Data Flow in Logistics IT"
-title_nl: "How to Build a Good Data Flow in Logistics IT"
-title_ja: "How to Build a Good Data Flow in Logistics IT"
+title_nl: "Hoe u een goede datastroom opbouwt in logistieke IT"
+title_ja: "物流ITで適切なデータフローを構築する方法"
 description: "A practical note on logistics IT data flows, operational events, clean timestamps, process visibility, and useful KPIs."
 excerpt: "Lojistikte iyi veri akışı; doğru event, temiz zaman damgası ve süreç bağlamı olmadan kurulmaz. Kısa bir pratik çerçeve."
 excerpt_tr: "Lojistikte iyi veri akışı; doğru event, temiz zaman damgası ve süreç bağlamı olmadan kurulmaz. Kısa bir pratik çerçeve."
 excerpt_de: "Guter Datenfluss in der Logistik entsteht durch saubere Events, Zeitstempel und Prozesskontext. Ein kompakter Praxisrahmen."
 excerpt_en: "Good logistics data flow depends on clean events, timestamps, and process context. A compact practical framework."
-excerpt_nl: "Good logistics data flow depends on clean events, timestamps, and process context. A compact practical framework."
-excerpt_ja: "Good logistics data flow depends on clean events, timestamps, and process context. A compact practical framework."
+excerpt_nl: "Een goede logistieke gegevensstroom is afhankelijk van schone gebeurtenissen, tijdstempels en procescontext. Een compact praktijkkader."
+excerpt_ja: "良好な物流データ フローは、クリーンなイベント、タイムスタンプ、プロセス コンテキストに依存します。コンパクトで実用的なフレームワーク。"
 tags: [Logistics IT, Data Flow, Process Visibility, KPIs, Warehouse, Operations]
 tr: |
   # İyi veri akışı nereden başlar?
@@ -130,16 +130,16 @@ en: |
   KPI design is tempting to start with, but process events should be clean first. A KPI is not just a label on raw data. It is a measurable version of process logic.
 
 nl: |
-  # Where does good data flow start?
+  # Waar begint een goede datastroom?
 
-  Good logistics data flow comes from operational events: inbound, stock movement, picking, packing, shipping, and returns.
+  Een goede logistieke gegevensstroom is afkomstig van operationele gebeurtenissen: inslag, voorraadbewegingen, picking, verpakking, verzending en retourzendingen.
 
-  Clean timestamps, process context, and clear event definitions are the foundation for useful KPIs and dashboards.
+  Schone tijdstempels, procescontext en duidelijke gebeurtenisdefinities vormen de basis voor nuttige KPI’s en dashboards.
 
 ja: |
-  # Where does good data flow start?
+  # 良好なデータフローはどこから始まるのでしょうか?
 
-  Good logistics data flow comes from operational events: inbound, stock movement, picking, packing, shipping, and returns.
+  優れた物流データ フローは、入荷、在庫移動、ピッキング、梱包、出荷、返品などの運用イベントから生まれます。
 
-  Clean timestamps, process context, and clear event definitions are the foundation for useful KPIs and dashboards.
+  クリーンなタイムスタンプ、プロセス コンテキスト、明確なイベント定義は、有用な KPI とダッシュボードの基盤です。
 ---

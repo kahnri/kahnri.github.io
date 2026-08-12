@@ -1,27 +1,21 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Warehouse KPI Dashboard — Kagan Bağdemir</title>
+  <title data-lang-text
+         data-lang-text-tr="Depo KPI Dashboard — Kagan Bağdemir"
+         data-lang-text-de="Warehouse KPI Dashboard — Kagan Bağdemir"
+         data-lang-text-en="Warehouse KPI Dashboard — Kagan Bağdemir"
+         data-lang-text-nl="Magazijn-KPI-dashboard — Kagan Bağdemir"
+         data-lang-text-ja="倉庫KPIダッシュボード — Kagan Bağdemir">Depo KPI Dashboard — Kagan Bağdemir</title>
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-  <script>
-  (function(){
-    try{
-      const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
-      document.documentElement.dataset.theme=theme;
-    }catch(e){
-      document.documentElement.dataset.theme='dark';
-    }
-  })();
-  </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=16">
   <link rel="stylesheet" href="/assets/portfolio.css?v=1">
   <link rel="stylesheet" href="/assets/projects/warehouse-kpi/dashboard.css?v=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -37,10 +31,6 @@
           <option value="nl" data-i18n="lang.nl">Nederlands</option>
           <option value="ja" data-i18n="lang.ja">日本語</option>
         </select>
-        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-          <span data-theme-icon aria-hidden="true">HELL</span>
-          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
-        </button>
       </div>
     </header>
 
@@ -52,44 +42,44 @@
              data-lang-text-tr="Operations / Analytics Case"
              data-lang-text-de="Operations / Analytics Case"
              data-lang-text-en="Operations / Analytics Case"
-             data-lang-text-nl="Operations / Analytics Case"
-             data-lang-text-ja="Operations / Analytics Case">Operations / Analytics Case</p>
+             data-lang-text-nl="Operationele/analyse-case"
+             data-lang-text-ja="運用/分析のケース">Operations / Analytics Case</p>
           <h1 id="dashboard-main-title" class="mt-3 text-3xl font-semibold safe-wrap sm:text-5xl"
               data-lang-text
               data-lang-text-tr="Warehouse KPI Dashboard"
               data-lang-text-de="Warehouse KPI Dashboard"
               data-lang-text-en="Warehouse KPI Dashboard"
-              data-lang-text-nl="Warehouse KPI Dashboard"
-              data-lang-text-ja="Warehouse KPI Dashboard">Warehouse KPI Dashboard</h1>
+              data-lang-text-nl="Magazijn-KPI-dashboard"
+              data-lang-text-ja="倉庫 KPI ダッシュボード">Warehouse KPI Dashboard</h1>
           <p class="dashboard-lead theme-text-soft mt-4 safe-wrap"
              data-lang-text
              data-lang-text-tr="Bu sayfa depo operasyonlarindaki ham olay verisini, ekiplerin karar vermesini hizlandiran bir KPI gorunurlugune cevirme denemesi. Amac sadece raporlamak degil; gecikmeyi, backlogu ve servis riskini erken gormek."
              data-lang-text-de="Diese Seite ist ein Versuch, rohe Warehouse-Events in eine KPI-Sicht zu übersetzen, die Entscheidungen im Team beschleunigt. Das Ziel ist nicht bloß Reporting, sondern Verzögerungen, Backlog und Service-Risiken früh sichtbar zu machen."
              data-lang-text-en="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early."
-             data-lang-text-nl="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early."
-             data-lang-text-ja="This page is a first pass at turning raw warehouse events into a KPI view that helps teams make decisions faster. The goal is not just reporting, but making delay, backlog, and service risk visible early.">Bu sayfa depo operasyonlarindaki ham olay verisini, ekiplerin karar vermesini hizlandiran bir KPI gorunurlugune cevirme denemesi. Amac sadece raporlamak degil; gecikmeyi, backlogu ve servis riskini erken gormek.</p>
+             data-lang-text-nl="Deze pagina is een eerste poging om ruwe magazijngebeurtenissen om te zetten in een KPI-weergave waarmee teams sneller beslissingen kunnen nemen. Het doel is niet alleen rapportage, maar het vroegtijdig zichtbaar maken van vertragingen, achterstanden en servicerisico's."
+             data-lang-text-ja="このページは、未加工のウェアハウス イベントを KPI ビューに変換するための最初のパスであり、チームがより迅速に意思決定を行えるようにします。目標は、レポートを作成するだけではなく、遅延、バックログ、サービス リスクを早期に可視化することです。">Bu sayfa depo operasyonlarindaki ham olay verisini, ekiplerin karar vermesini hizlandiran bir KPI gorunurlugune cevirme denemesi. Amac sadece raporlamak degil; gecikmeyi, backlogu ve servis riskini erken gormek.</p>
           <div class="dashboard-pill-row mt-6">
             <span class="dashboard-pill"
                   data-lang-text
                   data-lang-text-tr="Lead time yerine karar kalitesi"
                   data-lang-text-de="Nicht nur Lead Time, sondern Entscheidungsqualität"
                   data-lang-text-en="Not just lead time, but decision quality"
-                  data-lang-text-nl="Not just lead time, but decision quality"
-                  data-lang-text-ja="Not just lead time, but decision quality">Lead time yerine karar kalitesi</span>
+                  data-lang-text-nl="Niet alleen doorlooptijd, maar ook beslissingskwaliteit"
+                  data-lang-text-ja="リードタイムだけでなく意思決定の質も重視">Lead time yerine karar kalitesi</span>
             <span class="dashboard-pill"
                   data-lang-text
                   data-lang-text-tr="Mock data + acik metric tanimlari"
                   data-lang-text-de="Mock-Daten + klare Metric-Definitionen"
                   data-lang-text-en="Mock data + explicit metric definitions"
-                  data-lang-text-nl="Mock data + explicit metric definitions"
-                  data-lang-text-ja="Mock data + explicit metric definitions">Mock data + acik metric tanimlari</span>
+                  data-lang-text-nl="Mock-gegevens + expliciete metrische definities"
+                  data-lang-text-ja="モックデータ + 明示的なメトリクス定義">Mock data + acik metric tanimlari</span>
             <span class="dashboard-pill"
                   data-lang-text
                   data-lang-text-tr="Portfolio case study + canli demo"
                   data-lang-text-de="Portfolio-Case-Study + Live-Demo"
                   data-lang-text-en="Portfolio case study + live demo"
-                  data-lang-text-nl="Portfolio case study + live demo"
-                  data-lang-text-ja="Portfolio case study + live demo">Portfolio case study + canli demo</span>
+                  data-lang-text-nl="Portfolio casestudy + live demo"
+                  data-lang-text-ja="ポートフォリオのケーススタディ + ライブデモ">Portfolio case study + canli demo</span>
           </div>
         </div>
 
@@ -102,14 +92,14 @@
                     data-lang-text-tr="Scope"
                     data-lang-text-de="Scope"
                     data-lang-text-en="Scope"
-                    data-lang-text-nl="Scope"
-                    data-lang-text-ja="Scope">Scope</span>
+                    data-lang-text-nl="Reikwijdte"
+                    data-lang-text-ja="範囲">Scope</span>
               <strong data-lang-text
                       data-lang-text-tr="Outbound + inventory"
                       data-lang-text-de="Outbound + Inventory"
                       data-lang-text-en="Outbound + inventory"
-                      data-lang-text-nl="Outbound + inventory"
-                      data-lang-text-ja="Outbound + inventory">Outbound + inventory</strong>
+                      data-lang-text-nl="Uitgaand + inventaris"
+                      data-lang-text-ja="アウトバウンド + 在庫">Outbound + inventory</strong>
             </div>
             <div class="dashboard-stat">
               <span class="theme-text-muted"
@@ -117,8 +107,8 @@
                     data-lang-text-tr="Gorunumdeki kayitlar"
                     data-lang-text-de="Datensätze in der Ansicht"
                     data-lang-text-en="Records in current view"
-                    data-lang-text-nl="Records in current view"
-                    data-lang-text-ja="Records in current view">Gorunumdeki kayitlar</span>
+                    data-lang-text-nl="Records in de huidige weergave"
+                    data-lang-text-ja="現在のビューのレコード">Gorunumdeki kayitlar</span>
               <strong id="record-count">—</strong>
             </div>
             <div class="dashboard-stat">
@@ -127,8 +117,8 @@
                     data-lang-text-tr="Veri penceresi"
                     data-lang-text-de="Datenfenster"
                     data-lang-text-en="Data window"
-                    data-lang-text-nl="Data window"
-                    data-lang-text-ja="Data window">Veri penceresi</span>
+                    data-lang-text-nl="Gegevensvenster"
+                    data-lang-text-ja="データウィンドウ">Veri penceresi</span>
               <strong id="source-window-value">—</strong>
             </div>
             <div class="dashboard-stat">
@@ -137,8 +127,8 @@
                     data-lang-text-tr="Kaynak karmasi"
                     data-lang-text-de="Quellenmix"
                     data-lang-text-en="Source mix"
-                    data-lang-text-nl="Source mix"
-                    data-lang-text-ja="Source mix">Kaynak karmasi</span>
+                    data-lang-text-nl="Bronmix"
+                    data-lang-text-ja="ソースミックス">Kaynak karmasi</span>
               <strong id="dataset-summary">—</strong>
             </div>
           </div>
@@ -153,8 +143,8 @@
            data-lang-text-tr="Bu dashboard hangi sorulara cevap vermeli?"
            data-lang-text-de="Welche Fragen sollte das Dashboard beantworten?"
            data-lang-text-en="What questions should this dashboard answer?"
-           data-lang-text-nl="What questions should this dashboard answer?"
-           data-lang-text-ja="What questions should this dashboard answer?">Bu dashboard hangi sorulara cevap vermeli?</p>
+           data-lang-text-nl="Welke vragen moet dit dashboard beantwoorden?"
+           data-lang-text-ja="このダッシュボードでどのような質問に答えるべきでしょうか?">Bu dashboard hangi sorulara cevap vermeli?</p>
 
         <div data-lang-content="tr" class="dashboard-bullet-list mt-4" style="display:none;">
           <ul class="dashboard-bullet-list list-disc pl-5">
@@ -199,8 +189,8 @@
            data-lang-text-tr="Canli filtreler"
            data-lang-text-de="Live-Filter"
            data-lang-text-en="Live filters"
-           data-lang-text-nl="Live filters"
-           data-lang-text-ja="Live filters">Canli filtreler</p>
+           data-lang-text-nl="Live-filters"
+           data-lang-text-ja="ライブフィルター">Canli filtreler</p>
         <div class="dashboard-filter-grid mt-4">
           <div class="dashboard-filter">
             <label id="filter-window-label" for="filter-window">Zaman penceresi</label>
@@ -220,8 +210,8 @@
            data-lang-text-tr="Tum KPI'lar ayni secili veri penceresinden yeniden hesaplanir. Bu nokta mulakatta onemlidir: filtre sadece charti degil, metric mantigini da etkiler."
            data-lang-text-de="Alle KPIs werden aus demselben gefilterten Datenfenster neu berechnet. Genau das ist im Interview wichtig: Der Filter ändert nicht nur das Chart, sondern die Kennzahlenlogik selbst."
            data-lang-text-en="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself."
-           data-lang-text-nl="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself."
-           data-lang-text-ja="All KPIs are recalculated from the same filtered data window. This matters in interviews: the filter should not only change the chart, but the metric logic itself.">Tum KPI'lar ayni secili veri penceresinden yeniden hesaplanir. Bu nokta mulakatta onemlidir: filtre sadece charti degil, metric mantigini da etkiler.</p>
+           data-lang-text-nl="Alle KPI's worden opnieuw berekend vanuit hetzelfde gefilterde gegevensvenster. Dit is van belang in interviews: het filter moet niet alleen het diagram veranderen, maar ook de metrische logica zelf."
+           data-lang-text-ja="すべての KPI は、同じフィルター処理されたデータ ウィンドウから再計算されます。これはインタビューでは重要です。フィルターはグラフを変更するだけでなく、指標ロジック自体も変更する必要があります。">Tum KPI'lar ayni secili veri penceresinden yeniden hesaplanir. Bu nokta mulakatta onemlidir: filtre sadece charti degil, metric mantigini da etkiler.</p>
       </article>
     </section>
 
@@ -241,15 +231,15 @@
                data-lang-text-tr="Gunluk servis seviyesi trendi"
                data-lang-text-de="Täglicher Service-Level-Trend"
                data-lang-text-en="Daily service-level trend"
-               data-lang-text-nl="Daily service-level trend"
-               data-lang-text-ja="Daily service-level trend">Gunluk servis seviyesi trendi</p>
+               data-lang-text-nl="Dagelijkse trend op het gebied van serviceniveau"
+               data-lang-text-ja="日次サービスレベルの傾向">Gunluk servis seviyesi trendi</p>
             <h2 class="mt-2 text-2xl font-semibold safe-wrap"
                 data-lang-text
                 data-lang-text-tr="On-time shipment dalgalanmasi"
                 data-lang-text-de="Schwankung der On-time-Shipment-Rate"
                 data-lang-text-en="On-time shipment movement"
-                data-lang-text-nl="On-time shipment movement"
-                data-lang-text-ja="On-time shipment movement">On-time shipment dalgalanmasi</h2>
+                data-lang-text-nl="Tijdige verzendingsbeweging"
+                data-lang-text-ja="オンタイム出荷の動き">On-time shipment dalgalanmasi</h2>
             <p id="trend-subtitle" class="mt-2 theme-text-muted safe-wrap">Barlar sevk edilen siparis sayisini, cizgi ise gunluk on-time shipment oranini gosterir.</p>
           </div>
           <div id="trend-chart"></div>
@@ -263,15 +253,15 @@
                data-lang-text-tr="Bottleneck görünümü"
                data-lang-text-de="Bottleneck-Ansicht"
                data-lang-text-en="Bottleneck view"
-               data-lang-text-nl="Bottleneck view"
-               data-lang-text-ja="Bottleneck view">Bottleneck görünümü</p>
+               data-lang-text-nl="Knelpuntweergave"
+               data-lang-text-ja="ボトルネックビュー">Bottleneck görünümü</p>
             <h2 class="mt-2 text-2xl font-semibold safe-wrap"
                 data-lang-text
                 data-lang-text-tr="Zone bazli backlog"
                 data-lang-text-de="Backlog nach Zone"
                 data-lang-text-en="Backlog by zone"
-                data-lang-text-nl="Backlog by zone"
-                data-lang-text-ja="Backlog by zone">Zone bazli backlog</h2>
+                data-lang-text-nl="Achterstand per zone"
+                data-lang-text-ja="ゾーン別のバックログ">Zone bazli backlog</h2>
             <p id="breakdown-subtitle" class="mt-2 theme-text-muted safe-wrap">Zone bazli backlog ve service seviyesi kirilimi.</p>
           </div>
           <div id="breakdown-chart"></div>
@@ -285,15 +275,15 @@
              data-lang-text-tr="Decision signals"
              data-lang-text-de="Decision Signals"
              data-lang-text-en="Decision signals"
-             data-lang-text-nl="Decision signals"
-             data-lang-text-ja="Decision signals">Decision signals</p>
+             data-lang-text-nl="Beslissingssignalen"
+             data-lang-text-ja="決定信号">Decision signals</p>
           <h2 class="mt-2 text-2xl font-semibold safe-wrap"
               data-lang-text
               data-lang-text-tr="Bu ekrandan cikarilabilecek ilk yorumlar"
               data-lang-text-de="Erste Interpretationen aus dem Dashboard"
               data-lang-text-en="First takeaways from the dashboard"
-              data-lang-text-nl="First takeaways from the dashboard"
-              data-lang-text-ja="First takeaways from the dashboard">Bu ekrandan cikarilabilecek ilk yorumlar</h2>
+              data-lang-text-nl="Eerste inzichten uit het dashboard"
+              data-lang-text-ja="ダッシュボードからの最初のポイント">Bu ekrandan cikarilabilecek ilk yorumlar</h2>
           <p id="insight-subtitle" class="mt-2 theme-text-muted safe-wrap">Bu bolum sadece sayi gostermek yerine karar sinyali uretir.</p>
           <div id="insight-list" class="mt-4"></div>
         </article>
@@ -304,15 +294,15 @@
              data-lang-text-tr="Data model"
              data-lang-text-de="Datenmodell"
              data-lang-text-en="Data model"
-             data-lang-text-nl="Data model"
-             data-lang-text-ja="Data model">Data model</p>
+             data-lang-text-nl="Gegevensmodel"
+             data-lang-text-ja="データモデル">Data model</p>
           <h2 class="mt-2 text-2xl font-semibold safe-wrap"
               data-lang-text
               data-lang-text-tr="KPI'lar hangi olaylardan türetiliyor?"
               data-lang-text-de="Aus welchen Events werden die KPIs abgeleitet?"
               data-lang-text-en="Which events produce these KPIs?"
-              data-lang-text-nl="Which events produce these KPIs?"
-              data-lang-text-ja="Which events produce these KPIs?">KPI'lar hangi olaylardan türetiliyor?</h2>
+              data-lang-text-nl="Welke evenementen leveren deze KPI’s op?"
+              data-lang-text-ja="これらの KPI を生み出すイベントはどれですか?">KPI'lar hangi olaylardan türetiliyor?</h2>
           <div class="dashboard-data-model mt-4">
             <div class="dashboard-data-box">
               <strong>orders</strong>
@@ -336,15 +326,15 @@
            data-lang-text-tr="Metric definitions"
            data-lang-text-de="Metric Definitions"
            data-lang-text-en="Metric definitions"
-           data-lang-text-nl="Metric definitions"
-           data-lang-text-ja="Metric definitions">Metric definitions</p>
+           data-lang-text-nl="Metrische definities"
+           data-lang-text-ja="メトリクスの定義">Metric definitions</p>
         <h2 class="mt-2 text-2xl font-semibold safe-wrap"
             data-lang-text
             data-lang-text-tr="Metriklerin formulu ve yorumu"
             data-lang-text-de="Formeln und Interpretation der Kennzahlen"
             data-lang-text-en="Metric formulas and interpretation"
-            data-lang-text-nl="Metric formulas and interpretation"
-            data-lang-text-ja="Metric formulas and interpretation">Metriklerin formulu ve yorumu</h2>
+            data-lang-text-nl="Metrische formules en interpretatie"
+            data-lang-text-ja="指標の式と解釈">Metriklerin formulu ve yorumu</h2>
         <div class="dashboard-definition-list mt-5">
           <div class="dashboard-definition-item">
             <strong>On-time shipment %</strong>
@@ -353,8 +343,8 @@
                data-lang-text-tr="Formul: zamaninda cikmis sevkiyat / toplam sevk edilen siparis. Servis seviyesinin ilk gostergesidir."
                data-lang-text-de="Formel: termingerecht versandte Sendungen / alle versandten Aufträge. Ein erster Indikator für das Service-Level."
                data-lang-text-en="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level."
-               data-lang-text-nl="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level."
-               data-lang-text-ja="Formula: shipments sent on or before promise time / all shipped orders. A first indicator of service level.">Formul: zamaninda cikmis sevkiyat / toplam sevk edilen siparis. Servis seviyesinin ilk gostergesidir.</p>
+               data-lang-text-nl="Formule: zendingen verzonden op of vóór de beloofde tijd / alle verzonden bestellingen. Een eerste indicator van het serviceniveau."
+               data-lang-text-ja="計算式: 約束時刻またはそれ以前に送信された出荷数 / 出荷されたすべての注文。サービスレベルの最初の指標。">Formul: zamaninda cikmis sevkiyat / toplam sevk edilen siparis. Servis seviyesinin ilk gostergesidir.</p>
           </div>
           <div class="dashboard-definition-item">
             <strong>Order cycle time</strong>
@@ -363,8 +353,8 @@
                data-lang-text-tr="Formul: ortalama shipped_at - created_at. Surecin hizini ve darboğaz etkisini gostermek icin kullanilir."
                data-lang-text-de="Formel: Durchschnitt aus shipped_at - created_at. Zeigt Geschwindigkeit und Bottleneck-Effekt des Prozesses."
                data-lang-text-en="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect."
-               data-lang-text-nl="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect."
-               data-lang-text-ja="Formula: average shipped_at - created_at. Used to show process speed and bottleneck effect.">Formul: ortalama shipped_at - created_at. Surecin hizini ve darboğaz etkisini gostermek icin kullanilir.</p>
+               data-lang-text-nl="Formule: gemiddelde verzonden_om - gemaakte_om. Wordt gebruikt om de processnelheid en het knelpunteffect weer te geven."
+               data-lang-text-ja="計算式: 平均出荷時刻 - 作成時刻。プロセス速度とボトルネック効果を示すために使用されます。">Formul: ortalama shipped_at - created_at. Surecin hizini ve darboğaz etkisini gostermek icin kullanilir.</p>
           </div>
           <div class="dashboard-definition-item">
             <strong>Picking accuracy %</strong>
@@ -373,8 +363,8 @@
                data-lang-text-tr="Formul: (pick line - hata) / pick line. Hizli ama hatali islem yapan bir operasyonu yakalamak icin kritik."
                data-lang-text-de="Formel: (Pick-Linien - Fehler) / Pick-Linien. Wichtig, um schnelle, aber fehleranfällige Abläufe sichtbar zu machen."
                data-lang-text-en="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations."
-               data-lang-text-nl="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations."
-               data-lang-text-ja="Formula: (picked lines - errors) / picked lines. Critical for exposing fast but error-prone operations.">Formul: (pick line - hata) / pick line. Hizli ama hatali islem yapan bir operasyonu yakalamak icin kritik.</p>
+               data-lang-text-nl="Formule: (gekozen regels - fouten) / gekozen regels. Cruciaal voor het blootleggen van snelle maar foutgevoelige bewerkingen."
+               data-lang-text-ja="計算式: (選択された行 - エラー) / 選択された行。高速だがエラーが発生しやすい操作を公開する場合に重要です。">Formul: (pick line - hata) / pick line. Hizli ama hatali islem yapan bir operasyonu yakalamak icin kritik.</p>
           </div>
           <div class="dashboard-definition-item">
             <strong>Open backlog</strong>
@@ -383,8 +373,8 @@
                data-lang-text-tr="Formul: secili pencerede hala kapanmamis siparis sayisi. Geciken operasyon yukunu anlamak icin kullanilir."
                data-lang-text-de="Formel: Anzahl der im gewählten Zeitraum noch offenen Aufträge. Hilft, operative Last und Rückstau zu erkennen."
                data-lang-text-en="Formula: number of orders still open inside the selected window. Helps show delayed operational load."
-               data-lang-text-nl="Formula: number of orders still open inside the selected window. Helps show delayed operational load."
-               data-lang-text-ja="Formula: number of orders still open inside the selected window. Helps show delayed operational load.">Formul: secili pencerede hala kapanmamis siparis sayisi. Geciken operasyon yukunu anlamak icin kullanilir.</p>
+               data-lang-text-nl="Formule: aantal bestellingen dat nog open staat binnen het geselecteerde venster. Helpt vertraagde operationele belasting te tonen."
+               data-lang-text-ja="計算式: 選択したウィンドウ内でまだオープンしている注文の数。遅延した運用負荷を表示するのに役立ちます。">Formul: secili pencerede hala kapanmamis siparis sayisi. Geciken operasyon yukunu anlamak icin kullanilir.</p>
           </div>
           <div class="dashboard-definition-item">
             <strong>Inventory accuracy %</strong>
@@ -393,8 +383,8 @@
                data-lang-text-tr="Formul: tam eslesen sayimlar / toplam cycle count. Sayim sapmasi varsa servis riski sadece outbound tarafinda degildir demektir."
                data-lang-text-de="Formel: exakte Counts / alle Cycle Counts. Wenn hier Abweichungen auftreten, liegt das Risiko nicht nur im Outbound."
                data-lang-text-en="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue."
-               data-lang-text-nl="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue."
-               data-lang-text-ja="Formula: exact counts / total cycle counts. If this drifts, service risk is not only an outbound issue.">Formul: tam eslesen sayimlar / toplam cycle count. Sayim sapmasi varsa servis riski sadece outbound tarafinda degildir demektir.</p>
+               data-lang-text-nl="Formule: exacte tellingen / totale cyclustellingen. Als dit niet het geval is, is het servicerisico niet alleen een uitgaand probleem."
+               data-lang-text-ja="計算式: 正確なカウント / 合計サイクル数。これがずれると、サービスのリスクはアウトバウンドの問題だけではなくなります。">Formul: tam eslesen sayimlar / toplam cycle count. Sayim sapmasi varsa servis riski sadece outbound tarafinda degildir demektir.</p>
           </div>
           <div class="dashboard-definition-item">
             <strong>Dock-to-stock</strong>
@@ -403,17 +393,17 @@
                data-lang-text-tr="Formul: ortalama available_at - received_at. Inbound tarafindaki yavaslik downstream performansi da bozar."
                data-lang-text-de="Formel: Durchschnitt aus available_at - received_at. Langsame Inbound-Prozesse wirken direkt auf nachgelagerte Performance."
                data-lang-text-en="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too."
-               data-lang-text-nl="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too."
-               data-lang-text-ja="Formula: average available_at - received_at. Slow inbound flow damages downstream performance too.">Formul: ortalama available_at - received_at. Inbound tarafindaki yavaslik downstream performansi da bozar.</p>
+               data-lang-text-nl="Formule: gemiddelde beschikbare_at - ontvangen_at. Een langzame inkomende stroom schaadt ook de prestaties stroomafwaarts."
+               data-lang-text-ja="計算式: 平均利用可能時間 - 受信可能時間。インバウンドフローが遅いと、ダウンストリームのパフォーマンスも損なわれます。">Formul: ortalama available_at - received_at. Inbound tarafindaki yavaslik downstream performansi da bozar.</p>
           </div>
         </div>
       </section>
     </div>
   </main>
 
-<script src="/assets/i18n.js?v=6"></script>
-<script src="/assets/lang.js?v=6"></script>
-<script src="/assets/theme.js?v=6"></script>
+<script src="/assets/i18n.js?v=12"></script>
+<script src="/assets/lang.js?v=9"></script>
+<script src="/assets/theme.js?v=7"></script>
 <script src="/assets/projects/warehouse-kpi/js/dashboard.js?v=1"></script>
 <script>
 addEventListener('DOMContentLoaded',function(){

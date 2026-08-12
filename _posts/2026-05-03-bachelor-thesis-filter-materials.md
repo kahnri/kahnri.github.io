@@ -9,25 +9,25 @@ category: research
 category_tr: "Araştırma / Tez"
 category_de: "Forschung / Thesis"
 category_en: "Research / Thesis"
-category_nl: "Research / Thesis"
-category_ja: "Research / Thesis"
+category_nl: "Onderzoek / Scriptie"
+category_ja: "研究・論文"
 read_time_tr: "5 dk okuma"
 read_time_de: "5 Min. Lesezeit"
 read_time_en: "5 min read"
-read_time_nl: "5 min read"
-read_time_ja: "5 min read"
+read_time_nl: "5 minuten lezen"
+read_time_ja: "5 分で読めます"
 title_tr: "Araç Filtre İmalatında Malzeme Parametreleri Filtrasyonu Nasıl Etkiler?"
 title_de: "Wie Materialparameter in Fahrzeugfiltern die Filtration beeinflussen"
 title_en: "How Material Parameters in Vehicle Filters Influence Filtration"
-title_nl: "How Material Parameters in Vehicle Filters Influence Filtration"
-title_ja: "How Material Parameters in Vehicle Filters Influence Filtration"
+title_nl: "Hoe materiaalparameters in voertuigfilters de filtratie beïnvloeden"
+title_ja: "車両フィルターの材料パラメータが濾過に与える影響"
 description: "Bachelor thesis by Kagan Bagdemir on filter materials, permeability, burst pressure, pore size, and filtration performance in vehicle filter manufacturing."
 excerpt: "Lisans tezimin pratik özeti: filtre kağıdı, kapak ve conta gibi parçaların malzeme parametreleri filtrasyon performansını nasıl değiştirir?"
 excerpt_tr: "Lisans tezimin pratik özeti: filtre kağıdı, kapak ve conta gibi parçaların malzeme parametreleri filtrasyon performansını nasıl değiştirir?"
 excerpt_de: "Eine praxisnahe Zusammenfassung meiner Bachelorarbeit: Wie Materialparameter von Filterpapier, Deckel und Dichtung die Filtrationsleistung beeinflussen."
 excerpt_en: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
-excerpt_nl: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
-excerpt_ja: "A practical summary of my bachelor thesis: how material parameters in filter paper, covers, and gaskets affect filtration performance."
+excerpt_nl: "Een praktische samenvatting van mijn bachelorscriptie: hoe materiaalparameters in filterpapier, deksels en pakkingen de filtratieprestaties beïnvloeden."
+excerpt_ja: "私の卒業論文の実践的な要約: 濾紙、カバー、ガスケットの材料パラメータが濾過性能にどのように影響するか。"
 tags: [Bachelor Thesis, Automotive Engineering, Filtration, Filter Materials, Permeability, CAD]
 tr: |
   # Araç filtrelerinde malzeme neden kritik?
@@ -159,32 +159,32 @@ en: |
   - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 
 nl: |
-  # Why material parameters matter in vehicle filters
+  # Waarom materiaalparameters belangrijk zijn in voertuigfilters
 
-  My bachelor thesis studied how material parameters used in vehicle filter manufacturing affect filtration performance.
+  Mijn bachelorscriptie bestudeerde hoe materiaalparameters die worden gebruikt bij de productie van voertuigfilters de filtratieprestaties beïnvloeden.
 
-  A good filter must do more than catch particles. It should not restrict the flow too much, it must handle pressure, and it has to keep its shape during use.
+  Een goed filter moet meer doen dan deeltjes opvangen. Het mag de doorstroming niet te veel beperken, het moet druk kunnen verdragen en zijn vorm behouden tijdens gebruik.
 
-  The thesis focuses on air permeability, burst pressure, pore size, covers, gasket materials, and the relationship between material choice and filtration efficiency.
+  Het proefschrift richt zich op luchtdoorlaatbaarheid, barstdruk, poriegrootte, afdekkingen, pakkingmaterialen en de relatie tussen materiaalkeuze en filtratie-efficiëntie.
 
-  ## Files
+  ## Bestanden
 
-  - [Original Turkish thesis (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
-  - [English translation (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
-  - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
+  - [Origineel Turks proefschrift (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
+  - [Engelse vertaling (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
+  - [Duitse vertaling (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 
 ja: |
-  # Why material parameters matter in vehicle filters
+  # 車両フィルターにおいて材料パラメータが重要な理由
 
-  My bachelor thesis studied how material parameters used in vehicle filter manufacturing affect filtration performance.
+  私の卒業論文では、車両のフィルター製造に使用される材料パラメータが濾過性能にどのような影響を与えるかを研究しました。
 
-  A good filter must do more than catch particles. It should not restrict the flow too much, it must handle pressure, and it has to keep its shape during use.
+  優れたフィルターは粒子を捕捉するだけではありません。流れを制限しすぎてはならず、圧力に対処し、使用中にその形状を維持する必要があります。
 
-  The thesis focuses on air permeability, burst pressure, pore size, covers, gasket materials, and the relationship between material choice and filtration efficiency.
+  この論文は、空気透過性、破裂圧力、細孔サイズ、カバー、ガスケット材料、および材料の選択と濾過効率の関係に焦点を当てています。
 
-  ## Files
+  ## ファイル
 
-  - [Original Turkish thesis (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
-  - [English translation (DOCX)](/assets/thesis/bachelor-thesis-en.docx)
-  - [German translation (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
+  - [オリジナルのトルコ語論文 (PDF)](/assets/thesis/bachelor-thesis-tr.pdf)
+  - [英語翻訳(DOCX)](/assets/thesis/bachelor-thesis-en.docx)
+  - [ドイツ語翻訳 (DOCX)](/assets/thesis/bachelor-thesis-de.docx)
 ---

@@ -8,25 +8,25 @@ category: analytics
 category_tr: "Analytics / Operasyon"
 category_de: "Analytics / Betrieb"
 category_en: "Analytics / Operations"
-category_nl: "Analytics / Operations"
-category_ja: "Analytics / Operations"
+category_nl: "Analyse / Operaties"
+category_ja: "分析 / 運用"
 read_time_tr: "4 dk okuma"
 read_time_de: "4 Min. Lesezeit"
 read_time_en: "4 min read"
-read_time_nl: "4 min read"
-read_time_ja: "4 min read"
+read_time_nl: "4 minuten lezen"
+read_time_ja: "4 分で読めます"
 title_tr: "Depo KPI Dashboard: Veriyi Aksiyona Çeviren Akış"
 title_de: "Warehouse KPI Dashboard: Vom Messwert zur Aktion"
 title_en: "Warehouse KPI Dashboard: Turning Data into Action"
-title_nl: "Warehouse KPI Dashboard: Turning Data into Action"
-title_ja: "Warehouse KPI Dashboard: Turning Data into Action"
+title_nl: "Magazijn-KPI-dashboard: gegevens omzetten in actie"
+title_ja: "ウェアハウス KPI ダッシュボード: データをアクションに変える"
 description: "A practical note on building a warehouse KPI dashboard around lead time, picking accuracy, OEE, and operational decisions."
 excerpt: "Lead time, picking accuracy ve OEE gibi metrikleri sadece güzel grafik değil, karar üreten bir operasyon akışına dönüştürme notu."
 excerpt_tr: "Lead time, picking accuracy ve OEE gibi metrikleri sadece güzel grafik değil, karar üreten bir operasyon akışına dönüştürme notu."
 excerpt_de: "Wie Lead Time, Picking Accuracy und OEE nicht nur als schöne Charts, sondern als Entscheidungsfluss funktionieren."
 excerpt_en: "How lead time, picking accuracy, and OEE become more than charts: a workflow for operational decisions."
-excerpt_nl: "How lead time, picking accuracy, and OEE become more than charts: a workflow for operational decisions."
-excerpt_ja: "How lead time, picking accuracy, and OEE become more than charts: a workflow for operational decisions."
+excerpt_nl: "Hoe doorlooptijd, orderverzamelnauwkeurigheid en OEE meer worden dan alleen grafieken: een workflow voor operationele beslissingen."
+excerpt_ja: "リード タイム、ピッキング精度、OEE がどのようにチャート以上のものになるか: 運用上の意思決定のためのワークフロー。"
 tags: [Warehouse KPI Dashboard, Data Analytics, Logistics IT, OEE, Python, pandas]
 tr: |
   # Depo KPI Dashboard neden önemli?
@@ -131,16 +131,16 @@ en: |
   KPI cards, trend lines, and simple breakdowns are often more useful than complex visuals because they help the reader answer: where is the issue today?
 
 nl: |
-  # Why a warehouse KPI dashboard matters
+  # Waarom een magazijn-KPI-dashboard belangrijk is
 
-  A useful dashboard shows where the operation should look, which deviation matters, and what action might make sense.
+  Een handig dashboard laat zien waar de operatie eruit moet zien, welke afwijking ertoe doet en welke actie zinvol kan zijn.
 
-  My [Warehouse KPI Dashboard](/dev/warehouse-kpi-dashboard/) focuses on lead time, picking accuracy, OEE, and the path from metric to decision.
+  Mijn [Warehouse KPI Dashboard](/dev/warehouse-kpi-dashboard/) richt zich op de doorlooptijd, de nauwkeurigheid van de selectie, OEE en het pad van statistiek naar beslissing.
 
 ja: |
-  # Why a warehouse KPI dashboard matters
+  # 倉庫 KPI ダッシュボードが重要な理由
 
-  A useful dashboard shows where the operation should look, which deviation matters, and what action might make sense.
+  便利なダッシュボードには、操作の対象となる場所、どの逸脱が重要か、どのアクションが意味があるのかが示されます。
 
-  My [Warehouse KPI Dashboard](/dev/warehouse-kpi-dashboard/) focuses on lead time, picking accuracy, OEE, and the path from metric to decision.
+  私の [倉庫 KPI ダッシュボード](/dev/warehouse-kpi-dashboard/) は、リード タイム、ピッキング精度、OEE、指標から意思決定までのパスに焦点を当てています。
 ---

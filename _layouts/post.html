@@ -1,27 +1,21 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page.title | escape }} — Kagan Bağdemir</title>
+  <title data-lang-text
+         data-lang-text-tr="{{ page.title_tr | default: page.title | escape }} — Kagan Bağdemir"
+         data-lang-text-de="{{ page.title_de | default: page.title | escape }} — Kagan Bağdemir"
+         data-lang-text-en="{{ page.title_en | default: page.title | escape }} — Kagan Bağdemir"
+         data-lang-text-nl="{{ page.title_nl | default: page.title_en | default: page.title | escape }} — Kagan Bağdemir"
+         data-lang-text-ja="{{ page.title_ja | default: page.title_en | default: page.title | escape }} — Kagan Bağdemir">{{ page.title | escape }} — Kagan Bağdemir</title>
   <meta name="description" content="{{ page.description | default: page.excerpt_tr | default: page.excerpt | strip_html | strip_newlines | escape }}">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
-  <script>
-  (function(){
-    try{
-      const stored=localStorage.getItem('theme-preference');
-      const theme=stored||'dark';
-      document.documentElement.dataset.theme=theme;
-    }catch(e){
-      document.documentElement.dataset.theme='dark';
-    }
-  })();
-  </script>
   <link rel="stylesheet" href="/assets/utilities.css?v=1">
   <link rel="stylesheet" href="/assets/theme.css?v=16">
   <link rel="stylesheet" href="/assets/portfolio.css?v=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark">
   <!-- Plausible -->
   <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -37,8 +31,8 @@
            data-lang-text-tr="Projeler"
            data-lang-text-de="Projekte"
            data-lang-text-en="Projects"
-           data-lang-text-nl="Projects"
-           data-lang-text-ja="Projects">Projeler</a>
+           data-lang-text-nl="Projecten"
+           data-lang-text-ja="プロジェクト">Projeler</a>
         <label for="lang-select-post" class="sr-only" data-i18n="lang.label"></label>
         <select id="lang-select-post" data-lang-select class="px-3 py-1 rounded-full border theme-input text-sm min-w-[116px]">
           <option value="tr" data-i18n="lang.tr">Turkce</option>
@@ -47,10 +41,6 @@
           <option value="nl" data-i18n="lang.nl">Nederlands</option>
           <option value="ja" data-i18n="lang.ja">日本語</option>
         </select>
-        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-          <span data-theme-icon aria-hidden="true">HELL</span>
-          <span class="sr-only" data-i18n="btn.theme">Tema degistir</span>
-        </button>
       </div>
     </header>
 
@@ -111,7 +101,13 @@
         </div>
 
         {% if page.tags.size > 0 %}
-        <div class="post-tag-row" aria-label="Etiketler">
+        <div class="post-tag-row" aria-label="Etiketler"
+             data-lang-aria-label
+             data-lang-aria-label-tr="Etiketler"
+             data-lang-aria-label-de="Schlagwoerter"
+             data-lang-aria-label-en="Tags"
+             data-lang-aria-label-nl="Tags"
+             data-lang-aria-label-ja="タグ">
           {% for tag in page.tags limit:6 %}
           <span class="blog-tag">{{ tag }}</span>
           {% endfor %}
@@ -142,31 +138,47 @@
       </div>
     </article>
 
-    <nav class="post-nav-grid mt-6" aria-label="Yakın yazılar">
+    <nav class="post-nav-grid mt-6" aria-label="Yakin yazilar"
+         data-lang-aria-label
+         data-lang-aria-label-tr="Yakin yazilar"
+         data-lang-aria-label-de="Benachbarte Beitraege"
+         data-lang-aria-label-en="Nearby posts"
+         data-lang-aria-label-nl="Nabije berichten"
+         data-lang-aria-label-ja="前後の記事">
       {% if page.previous %}
-      {% assign previous_title = page.previous.title_tr | default: page.previous.title %}
       <a class="post-nav-card rounded-2xl border theme-card transition" href="{{ page.previous.url | relative_url }}">
         <span class="theme-text-muted text-sm"
               data-lang-text
               data-lang-text-tr="Önceki yazı"
               data-lang-text-de="Vorheriger Beitrag"
               data-lang-text-en="Previous post"
-              data-lang-text-nl="Previous post"
-              data-lang-text-ja="Previous post">Önceki yazı</span>
-        <strong class="safe-wrap">{{ previous_title | strip_html | strip_newlines | escape }}</strong>
+              data-lang-text-nl="Vorig bericht"
+              data-lang-text-ja="前の投稿">Önceki yazı</span>
+        <strong class="safe-wrap"
+                data-lang-text
+                data-lang-text-tr="{{ page.previous.title_tr | default: page.previous.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-de="{{ page.previous.title_de | default: page.previous.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-en="{{ page.previous.title_en | default: page.previous.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-nl="{{ page.previous.title_nl | default: page.previous.title_en | default: page.previous.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-ja="{{ page.previous.title_ja | default: page.previous.title_en | default: page.previous.title | strip_html | strip_newlines | escape }}">{{ page.previous.title_tr | default: page.previous.title | strip_html | strip_newlines | escape }}</strong>
       </a>
       {% endif %}
       {% if page.next %}
-      {% assign next_title = page.next.title_tr | default: page.next.title %}
       <a class="post-nav-card rounded-2xl border theme-card transition" href="{{ page.next.url | relative_url }}">
         <span class="theme-text-muted text-sm"
               data-lang-text
               data-lang-text-tr="Sonraki yazı"
               data-lang-text-de="Nächster Beitrag"
               data-lang-text-en="Next post"
-              data-lang-text-nl="Next post"
-              data-lang-text-ja="Next post">Sonraki yazı</span>
-        <strong class="safe-wrap">{{ next_title | strip_html | strip_newlines | escape }}</strong>
+              data-lang-text-nl="Volgende bericht"
+              data-lang-text-ja="次の投稿">Sonraki yazı</span>
+        <strong class="safe-wrap"
+                data-lang-text
+                data-lang-text-tr="{{ page.next.title_tr | default: page.next.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-de="{{ page.next.title_de | default: page.next.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-en="{{ page.next.title_en | default: page.next.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-nl="{{ page.next.title_nl | default: page.next.title_en | default: page.next.title | strip_html | strip_newlines | escape }}"
+                data-lang-text-ja="{{ page.next.title_ja | default: page.next.title_en | default: page.next.title | strip_html | strip_newlines | escape }}">{{ page.next.title_tr | default: page.next.title | strip_html | strip_newlines | escape }}</strong>
       </a>
       {% endif %}
     </nav>
@@ -177,15 +189,15 @@
           data-lang-text-tr="Bir sonraki durak"
           data-lang-text-de="Nächster Halt"
           data-lang-text-en="Next stop"
-          data-lang-text-nl="Next stop"
-          data-lang-text-ja="Next stop">Bir sonraki durak</h2>
+          data-lang-text-nl="Volgende halte"
+          data-lang-text-ja="次の停留所">Bir sonraki durak</h2>
       <p class="mt-2 theme-text-muted"
          data-lang-text
          data-lang-text-tr="Yazının bağlamını projelerde görmek istersen seçili işlere dönebilir ya da tüm blog akışını tarayabilirsin."
          data-lang-text-de="Wenn du den Kontext im Projekt sehen möchtest, geh zurück zu den ausgewählten Arbeiten oder stöbere weiter im Blog."
          data-lang-text-en="If you want to see the context in projects, jump back to selected work or keep browsing the blog."
-         data-lang-text-nl="If you want to see the context in projects, jump back to selected work or keep browsing the blog."
-         data-lang-text-ja="If you want to see the context in projects, jump back to selected work or keep browsing the blog.">Yazının bağlamını projelerde görmek istersen seçili işlere dönebilir ya da tüm blog akışını tarayabilirsin.</p>
+         data-lang-text-nl="Als je de context in projecten wilt zien, ga dan terug naar geselecteerd werk of blader door de blog."
+         data-lang-text-ja="プロジェクトのコンテキストを確認したい場合は、選択した作業に戻るか、ブログの閲覧を続けてください。">Yazının bağlamını projelerde görmek istersen seçili işlere dönebilir ya da tüm blog akışını tarayabilirsin.</p>
       <div class="post-cta-actions mt-4">
         <a class="px-4 py-2 rounded-xl border theme-button-accent" href="/blog/" data-i18n="recent.all">Tum yazilar</a>
         <a class="px-4 py-2 rounded-xl border theme-button" href="/#selected-work"
@@ -193,8 +205,8 @@
            data-lang-text-tr="Projeler"
            data-lang-text-de="Projekte"
            data-lang-text-en="Projects"
-           data-lang-text-nl="Projects"
-           data-lang-text-ja="Projects">Projeler</a>
+           data-lang-text-nl="Projecten"
+           data-lang-text-ja="プロジェクト">Projeler</a>
       </div>
     </section>
 
@@ -205,16 +217,16 @@
               data-lang-text-tr="Kucuk bir not: eglenmek icin ayri bir alan da var"
               data-lang-text-de="Kleine Randnotiz: Es gibt auch einen separaten Spielplatz"
               data-lang-text-en="Small side note: there is also a separate playground"
-              data-lang-text-nl="Small side note: there is also a separate playground"
-              data-lang-text-ja="Small side note: there is also a separate playground">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
+              data-lang-text-nl="Kleine kanttekening: er is ook een aparte speeltuin"
+              data-lang-text-ja="ちょっとした補足: 独立した遊び場もあります">Kucuk bir not: eglenmek icin ayri bir alan da var</span>
         · <a href="/kahnri/" class="footer-side-link">KAHNRI</a>
       </p>
     </footer>
   </main>
 
-<script src="/assets/i18n.js?v=7"></script>
-<script src="/assets/lang.js?v=6"></script>
-<script src="/assets/theme.js?v=6"></script>
+<script src="/assets/i18n.js?v=12"></script>
+<script src="/assets/lang.js?v=9"></script>
+<script src="/assets/theme.js?v=7"></script>
 <script>
 function syncPostPageTitle(){
   var titleEl=document.getElementById('post-main-title');

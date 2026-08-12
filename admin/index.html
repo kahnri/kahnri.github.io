@@ -2,7 +2,7 @@
 layout: null
 ---
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -121,17 +121,6 @@ html.admin-lock body{visibility:hidden;}
 }
 </style>
 <script>
-(function(){
-  try{
-    const stored=localStorage.getItem('theme-preference');
-    const theme=stored||'dark';
-    document.documentElement.dataset.theme=theme;
-  }catch(e){
-    document.documentElement.dataset.theme='dark';
-  }
-})();
-</script>
-<script>
 (async function(){
   document.documentElement.classList.add('admin-lock');
   var expected = '091fbc2691e7aeefe8d01a11ae7999be48d18804d773782588ca565b6d6cedb6';
@@ -173,7 +162,7 @@ html.admin-lock body{visibility:hidden;}
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
 <link rel="stylesheet" href="assets/theme.css?v=16">
 <link rel="stylesheet" href="assets/portfolio.css?v=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 </head>
 <body>
   <main class="relative isolate max-w-5xl mx-auto px-6 py-8">
@@ -192,31 +181,36 @@ html.admin-lock body{visibility:hidden;}
           <option value="nl" data-i18n="lang.nl">Nederlands</option>
           <option value="ja" data-i18n="lang.ja">日本語</option>
         </select>
-        <button id="theme-toggle" class="w-10 h-10 rounded-full border theme-button-icon" type="button">
-          <span data-theme-icon aria-hidden="true">moon</span>
-          <span class="sr-only" data-i18n="btn.theme"></span>
-        </button>
       </div>
     </header>
 
     <section class="mt-5 rounded-3xl p-5 border theme-card fx-hero" data-animate style="--stagger:0.4">
       <p class="text-xs tracking-[0.2em] uppercase theme-text-muted">Blog studio</p>
-      <h2 class="mt-2 text-2xl font-semibold theme-text-strong">Sadece yazi yonetimi icin sade bir alan</h2>
-      <p class="mt-2 theme-text-muted admin-hero-copy">
-        Burada sadece blog postu yaziyor, mevcut yazilari aciyor, duzenliyor ve siliyorsun.
-        Teknik ayarlar arka planda sabit; panel yuzunde sadece icerik ve akisin kendisi var.
-      </p>
+      <h2 class="mt-2 text-2xl font-semibold theme-text-strong"
+          data-lang-text
+          data-lang-text-tr="Sadece yazi yonetimi icin sade bir alan"
+          data-lang-text-de="Ein klarer Bereich nur fuer die Beitragsverwaltung"
+          data-lang-text-en="A focused space for post management"
+          data-lang-text-nl="Een eenvoudige omgeving voor berichtbeheer"
+          data-lang-text-ja="投稿管理に集中できるシンプルな画面">Sadece yazi yonetimi icin sade bir alan</h2>
+      <p class="mt-2 theme-text-muted admin-hero-copy"
+         data-lang-text
+         data-lang-text-tr="Burada blog postu yazabilir, mevcut yazilari acabilir, duzenleyebilir ve silebilirsin. Teknik ayarlar arka planda sabit; panelde sadece icerik ve akis var."
+         data-lang-text-de="Hier kannst du Blogbeitraege schreiben, oeffnen, bearbeiten und loeschen. Die technischen Einstellungen bleiben im Hintergrund; im Panel geht es nur um Inhalt und Ablauf."
+         data-lang-text-en="Write, open, edit, and delete blog posts here. Technical settings stay in the background so the panel remains focused on content and workflow."
+         data-lang-text-nl="Hier kun je blogberichten schrijven, openen, bewerken en verwijderen. Technische instellingen blijven op de achtergrond, zodat het paneel op inhoud en workflow is gericht."
+         data-lang-text-ja="ここではブログ記事の作成、閲覧、編集、削除ができます。技術設定は背後に置き、画面はコンテンツと作業フローに集中します。">Burada blog postu yazabilir, mevcut yazilari acabilir, duzenleyebilir ve silebilirsin. Teknik ayarlar arka planda sabit; panelde sadece icerik ve akis var.</p>
       <div class="admin-hero-grid">
         <div class="admin-stat">
-          <span>Calisma modu</span>
+          <span data-lang-text data-lang-text-tr="Calisma modu" data-lang-text-de="Arbeitsmodus" data-lang-text-en="Working mode" data-lang-text-nl="Werkmodus" data-lang-text-ja="作業モード">Calisma modu</span>
           <strong id="admin-mode-label">Panel ici yayin</strong>
         </div>
         <div class="admin-stat">
-          <span>Toplam post</span>
+          <span data-lang-text data-lang-text-tr="Toplam post" data-lang-text-de="Beitraege gesamt" data-lang-text-en="Total posts" data-lang-text-nl="Totaal aantal berichten" data-lang-text-ja="投稿数">Toplam post</span>
           <strong id="admin-post-count">0</strong>
         </div>
         <div class="admin-stat">
-          <span>Aktif dosya</span>
+          <span data-lang-text data-lang-text-tr="Aktif dosya" data-lang-text-de="Aktive Datei" data-lang-text-en="Active file" data-lang-text-nl="Actief bestand" data-lang-text-ja="作業中のファイル">Aktif dosya</span>
           <strong id="admin-current-file-label">_posts/</strong>
         </div>
       </div>
@@ -227,14 +221,18 @@ html.admin-lock body{visibility:hidden;}
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 class="text-xl font-semibold" data-i18n="admin.editor"></h2>
-            <p class="theme-text-muted mt-1 admin-section-note">
-              Yeni bir post olusturabilir, secili yaziyi duzenleyebilir veya yayindan kaldirabilirsin.
-              Cok dilli alanlar korunuyor; bos birakilan diller kayda eklenmiyor.
-            </p>
+            <p class="theme-text-muted mt-1 admin-section-note"
+               data-lang-text
+               data-lang-text-tr="Yeni bir post olusturabilir, secili yaziyi duzenleyebilir veya yayindan kaldirabilirsin. Cok dilli alanlar korunur; bos birakilan diller kayda eklenmez."
+               data-lang-text-de="Du kannst einen neuen Beitrag erstellen, den ausgewaehlten Beitrag bearbeiten oder entfernen. Mehrsprachige Felder bleiben erhalten; leere Sprachen werden nicht gespeichert."
+               data-lang-text-en="Create a new post, edit the selected post, or remove it from publication. Multilingual fields are preserved and empty languages are not saved."
+               data-lang-text-nl="Maak een nieuw bericht, bewerk het geselecteerde bericht of verwijder het uit de publicatie. Meertalige velden blijven behouden en lege talen worden niet opgeslagen."
+               data-lang-text-ja="新しい投稿の作成、選択した投稿の編集、公開停止ができます。多言語フィールドは保持され、空の言語は保存されません。">Yeni bir post olusturabilir, secili yaziyi duzenleyebilir veya yayindan kaldirabilirsin. Cok dilli alanlar korunur; bos birakilan diller kayda eklenmez.</p>
           </div>
           <div class="admin-toolbar">
-            <button id="admin-new" class="px-4 py-2 rounded-xl border theme-button" type="button">Yeni post</button>
-            <a href="/blog/" class="px-4 py-2 rounded-xl border theme-button admin-link-button" target="_blank" rel="noopener">Blogu ac</a>
+            <button id="admin-new" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.newpost"></button>
+            <a href="/blog/" class="px-4 py-2 rounded-xl border theme-button admin-link-button" target="_blank" rel="noopener"
+               data-lang-text data-lang-text-tr="Blogu ac" data-lang-text-de="Blog oeffnen" data-lang-text-en="Open blog" data-lang-text-nl="Blog openen" data-lang-text-ja="ブログを開く">Blogu ac</a>
           </div>
         </div>
 
@@ -274,7 +272,7 @@ html.admin-lock body{visibility:hidden;}
             <strong id="admin-file">_posts/</strong>
           </span>
           <span class="admin-pill">
-            <span>Durum</span>
+            <span data-lang-text data-lang-text-tr="Durum" data-lang-text-de="Status" data-lang-text-en="Status" data-lang-text-nl="Status" data-lang-text-ja="ステータス">Durum</span>
             <strong id="admin-editing" data-i18n="admin.newpost"></strong>
           </span>
         </div>
@@ -293,31 +291,43 @@ html.admin-lock body{visibility:hidden;}
         <section class="rounded-2xl p-5 border theme-card" data-animate style="--stagger:1">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h3 class="text-lg font-semibold">Yayin erisimi</h3>
-              <p class="theme-text-muted text-sm mt-1">
-                Panel icinden kaydetmek veya silmek icin bir kez yayin anahtarini girmen yeterli.
-              </p>
+              <h3 class="text-lg font-semibold"
+                  data-lang-text data-lang-text-tr="Yayin erisimi" data-lang-text-de="Veroeffentlichungszugriff" data-lang-text-en="Publishing access" data-lang-text-nl="Publicatietoegang" data-lang-text-ja="公開アクセス">Yayin erisimi</h3>
+              <p class="theme-text-muted text-sm mt-1"
+                 data-lang-text
+                 data-lang-text-tr="Panel icinden kaydetmek veya silmek icin yayin anahtarini bir kez girmen yeterli."
+                 data-lang-text-de="Zum Speichern oder Loeschen im Panel musst du den Veroeffentlichungsschluessel nur einmal eingeben."
+                 data-lang-text-en="Enter the publishing key once to save or delete directly from the panel."
+                 data-lang-text-nl="Voer de publicatiesleutel eenmalig in om rechtstreeks vanuit het paneel op te slaan of te verwijderen."
+                 data-lang-text-ja="パネルから直接保存または削除するには、公開キーを一度入力します。">Panel icinden kaydetmek veya silmek icin yayin anahtarini bir kez girmen yeterli.</p>
             </div>
             <span id="admin-session-badge" class="admin-badge">Web kaydetme modu</span>
           </div>
 
           <label class="block mt-4">
             <span class="text-sm theme-text-muted" data-i18n="admin.token"></span>
-            <input id="github-token" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="password" placeholder="Yayin anahtarini buraya yapistir" autocomplete="off">
+            <input id="github-token" class="mt-1 w-full rounded-lg border theme-input px-3 py-2" type="password" data-i18n-ph="admin.token" autocomplete="off">
           </label>
-          <p class="theme-text-muted mt-2 admin-session-note">
-            Anahtar sadece bu tarayici oturumunda tutulur. Bos birakirsan yazilari acabilir ve duzenleyebilirsin;
-            kaydetme ve silme sirasinda web kaydetme ekranina yonlendirilirsin.
-          </p>
+          <p class="theme-text-muted mt-2 admin-session-note"
+             data-lang-text
+             data-lang-text-tr="Anahtar sadece bu tarayici oturumunda tutulur. Bos birakirsan yazilari acabilir ve duzenleyebilirsin; kaydetme ve silme sirasinda web ekranina yonlendirilirsin."
+             data-lang-text-de="Der Schluessel bleibt nur in dieser Browser-Sitzung. Ohne Schluessel kannst du Beitraege oeffnen und bearbeiten; beim Speichern oder Loeschen wirst du zum Web-Ablauf weitergeleitet."
+             data-lang-text-en="The key is kept only for this browser session. Without it, you can still open and edit posts; saving or deleting redirects to the web workflow."
+             data-lang-text-nl="De sleutel wordt alleen tijdens deze browsersessie bewaard. Zonder sleutel kun je berichten openen en bewerken; opslaan of verwijderen gaat via de webworkflow."
+             data-lang-text-ja="キーはこのブラウザーセッション内だけで保持されます。キーがなくても投稿の閲覧と編集はでき、保存や削除はWebの手順へ移動します。">Anahtar sadece bu tarayici oturumunda tutulur. Bos birakirsan yazilari acabilir ve duzenleyebilirsin; kaydetme ve silme sirasinda web ekranina yonlendirilirsin.</p>
         </section>
 
         <section class="rounded-2xl p-5 border theme-card" data-animate style="--stagger:1.2">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h3 class="text-lg font-semibold" data-i18n="admin.repo_posts"></h3>
-              <p class="theme-text-muted text-sm mt-1">
-                Mevcut postlari tara, ac ve secili yazi uzerinde islem yap.
-              </p>
+              <p class="theme-text-muted text-sm mt-1"
+                 data-lang-text
+                 data-lang-text-tr="Mevcut postlari tara, ac ve secili yazi uzerinde islem yap."
+                 data-lang-text-de="Vorhandene Beitraege durchsuchen, oeffnen und bearbeiten."
+                 data-lang-text-en="Search existing posts, open them, and work on the selected entry."
+                 data-lang-text-nl="Doorzoek bestaande berichten, open ze en werk aan het geselecteerde bericht."
+                 data-lang-text-ja="既存の投稿を検索して開き、選択した記事を編集できます。">Mevcut postlari tara, ac ve secili yazi uzerinde islem yap.</p>
             </div>
             <button id="admin-refresh" class="px-4 py-2 rounded-xl border theme-button" type="button" data-i18n="admin.refresh"></button>
           </div>
@@ -334,9 +344,9 @@ html.admin-lock body{visibility:hidden;}
     </footer>
   </main>
 
-<script src="assets/i18n.js?v=10"></script>
-<script src="assets/lang.js?v=7"></script>
-<script src="assets/theme.js?v=6"></script>
+<script src="assets/i18n.js?v=12"></script>
+<script src="assets/lang.js?v=9"></script>
+<script src="assets/theme.js?v=7"></script>
 <script src="assets/admin.js?v=23"></script>
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();

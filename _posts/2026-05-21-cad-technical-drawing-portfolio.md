@@ -8,25 +8,25 @@ category: engineering
 category_tr: "Engineering / CAD"
 category_de: "Engineering / CAD"
 category_en: "Engineering / CAD"
-category_nl: "Engineering / CAD"
-category_ja: "Engineering / CAD"
+category_nl: "Techniek / CAD"
+category_ja: "エンジニアリング / CAD"
 read_time_tr: "3 dk okuma"
 read_time_de: "3 Min. Lesezeit"
 read_time_en: "3 min read"
-read_time_nl: "3 min read"
-read_time_ja: "3 min read"
+read_time_nl: "3 minuten lezen"
+read_time_ja: "3 分で読めます"
 title_tr: "CAD ve Teknik Çizim Portföyü: Sadece Şekil Değil, Üretim Dili"
 title_de: "CAD und technische Zeichnung: Mehr als Geometrie"
 title_en: "CAD and Technical Drawing: More Than Geometry"
-title_nl: "CAD and Technical Drawing: More Than Geometry"
-title_ja: "CAD and Technical Drawing: More Than Geometry"
+title_nl: "CAD en technisch tekenen: meer dan geometrie"
+title_ja: "CAD と製図: 単なる幾何学以上のもの"
 description: "A short note on CAD, technical drawing, tolerances, manufacturability, and how engineering drawings communicate production intent."
 excerpt: "CAD ve teknik çizim, parçanın sadece nasıl göründüğünü değil, nasıl üretileceğini ve kontrol edileceğini anlatan bir mühendislik dilidir."
 excerpt_tr: "CAD ve teknik çizim, parçanın sadece nasıl göründüğünü değil, nasıl üretileceğini ve kontrol edileceğini anlatan bir mühendislik dilidir."
 excerpt_de: "CAD und technische Zeichnung zeigen nicht nur Geometrie, sondern auch Herstellbarkeit, Toleranzen und Prüfidee."
 excerpt_en: "CAD and technical drawing communicate not only geometry, but manufacturability, tolerances, and inspection intent."
-excerpt_nl: "CAD and technical drawing communicate not only geometry, but manufacturability, tolerances, and inspection intent."
-excerpt_ja: "CAD and technical drawing communicate not only geometry, but manufacturability, tolerances, and inspection intent."
+excerpt_nl: "CAD en technische tekeningen communiceren niet alleen de geometrie, maar ook de maakbaarheid, toleranties en inspectie-intentie."
+excerpt_ja: "CAD と技術図面は、形状だけでなく、製造可能性、公差、検査の意図も伝えます。"
 tags: [CAD, Technical Drawing, Manufacturing, Tolerances, Automotive Engineering]
 tr: |
   # Teknik çizim neden sadece çizim değildir?
@@ -104,12 +104,12 @@ en: |
   CAD also carries structured information: dimensions, tolerances, revisions, and part relationships. In that sense, CAD and data analytics share a goal. Both try to make a complex system readable.
 
 nl: |
-  # Why technical drawing is more than drawing
+  # Waarom technisch tekenen meer is dan tekenen
 
-  A CAD model shows shape. A technical drawing communicates manufacturing intent, tolerances, inspection needs, and important relationships between parts.
+  Een CAD-model toont vorm. Een technische tekening communiceert de fabricage-intentie, toleranties, inspectiebehoeften en belangrijke relaties tussen onderdelen.
 
 ja: |
-  # Why technical drawing is more than drawing
+  # 製図が製図以上のものである理由
 
-  A CAD model shows shape. A technical drawing communicates manufacturing intent, tolerances, inspection needs, and important relationships between parts.
+  CADモデルは形状を示します。技術図面は、製造意図、公差、検査の必要性、部品間の重要な関係を伝えます。
 ---
