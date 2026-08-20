@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /assets/documents/profile-payload.txt
+
+Sitemap: https://kaganbagdemir.de/sitemap.xml

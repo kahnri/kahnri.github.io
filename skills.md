@@ -24,7 +24,6 @@ GET /blog/bachelor-thesis-filter-materials/  Bachelor thesis in Turkish, English
 GET /kronolojik-basarimlar/             Chronological achievements
 GET /projekte-und-ziele/                Projects and goals
 GET /blog/                              Blog and notes
-GET /cv.pdf                             CV PDF
 GET /llms.txt                           AI-readable site map
 ```
 
