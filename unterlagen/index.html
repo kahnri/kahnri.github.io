@@ -1,0 +1,293 @@
+---
+layout: null
+sitemap: false
+---
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-lang-text
+         data-lang-text-tr="Başvuru belgesi - Kagan Bagdemir"
+         data-lang-text-de="Bewerbungsunterlage - Kagan Bagdemir"
+         data-lang-text-en="Application document - Kagan Bagdemir"
+         data-lang-text-nl="Sollicitatiedocument - Kagan Bagdemir"
+         data-lang-text-ja="応募書類 - Kagan Bagdemir">Başvuru belgesi - Kagan Bagdemir</title>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <link rel="canonical" href="https://kaganbagdemir.de/unterlagen/">
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1">
+  <link rel="stylesheet" href="/assets/utilities.css?v=1">
+  <link rel="stylesheet" href="/assets/theme.css?v=16">
+  <meta name="color-scheme" content="dark">
+  <style>
+    .document-page {
+      width: min(100% - 2rem, 72rem);
+      margin: 0 auto;
+      padding: 1.25rem 0 2rem;
+    }
+
+    .document-header,
+    .document-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .document-header a,
+    .document-status {
+      color: var(--text-muted);
+    }
+
+    .document-card {
+      margin-top: 1.25rem;
+      padding: clamp(1rem, 3vw, 2rem);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      background: var(--surface);
+      box-shadow: 0 24px 70px var(--shadow-soft);
+    }
+
+    .document-card h1 {
+      margin-top: 0.55rem;
+      color: var(--text-strong);
+      font-size: clamp(1.9rem, 5vw, 3.5rem);
+      line-height: 1.05;
+    }
+
+    .document-kicker {
+      color: var(--accent-text);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .document-toolbar {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .document-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .document-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--accent-border);
+      border-radius: 0.8rem;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    .document-button:hover,
+    .document-button:focus-visible {
+      border-color: var(--border-strong);
+      color: var(--text-strong);
+    }
+
+    .document-viewer {
+      width: 100%;
+      height: min(76vh, 62rem);
+      min-height: 34rem;
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: #fff;
+    }
+
+    .document-note {
+      margin-top: 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .document-page {
+        width: min(100% - 1rem, 72rem);
+        padding-top: 0.75rem;
+      }
+
+      .document-viewer {
+        min-height: 28rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="document-page">
+    <header class="document-header">
+      <a href="/">&larr; <span data-i18n="back.home">Anasayfa</span></a>
+      <label for="lang-select-document" class="sr-only" data-i18n="lang.label"></label>
+      <select id="lang-select-document" data-lang-select class="theme-input portfolio-language">
+        <option value="tr" data-i18n="lang.tr">Türkçe</option>
+        <option value="de" data-i18n="lang.de">Deutsch</option>
+        <option value="en" data-i18n="lang.en">English</option>
+        <option value="nl" data-i18n="lang.nl">Nederlands</option>
+        <option value="ja" data-i18n="lang.ja">日本語</option>
+      </select>
+    </header>
+
+    <section class="document-card" aria-labelledby="document-title">
+      <p class="document-kicker"
+         data-lang-text
+         data-lang-text-tr="Başvuru belgesi"
+         data-lang-text-de="Bewerbungsunterlage"
+         data-lang-text-en="Application document"
+         data-lang-text-nl="Sollicitatiedocument"
+         data-lang-text-ja="応募書類">Başvuru belgesi</p>
+      <h1 id="document-title"
+          data-lang-text
+          data-lang-text-tr="CV / Özgeçmiş"
+          data-lang-text-de="Lebenslauf"
+          data-lang-text-en="CV / Resume"
+          data-lang-text-nl="CV"
+          data-lang-text-ja="履歴書">CV / Özgeçmiş</h1>
+
+      <div class="document-toolbar">
+        <p id="document-loading" class="document-status"
+           data-lang-text
+           data-lang-text-tr="Belge hazırlanıyor…"
+           data-lang-text-de="Dokument wird vorbereitet…"
+           data-lang-text-en="Preparing document…"
+           data-lang-text-nl="Document wordt voorbereid…"
+           data-lang-text-ja="書類を準備しています…">Belge hazırlanıyor…</p>
+        <p id="document-ready" class="document-status" hidden
+           data-lang-text
+           data-lang-text-tr="Belge görüntülenmeye hazır."
+           data-lang-text-de="Das Dokument ist bereit."
+           data-lang-text-en="The document is ready."
+           data-lang-text-nl="Het document is klaar."
+           data-lang-text-ja="書類の準備ができました。">Belge görüntülenmeye hazır.</p>
+        <p id="document-error" class="document-status" hidden
+           data-lang-text
+           data-lang-text-tr="Belge yüklenemedi. Lütfen tekrar deneyin."
+           data-lang-text-de="Das Dokument konnte nicht geladen werden. Bitte versuchen Sie es erneut."
+           data-lang-text-en="The document could not be loaded. Please try again."
+           data-lang-text-nl="Het document kon niet worden geladen. Probeer het opnieuw."
+           data-lang-text-ja="書類を読み込めませんでした。もう一度お試しください。">Belge yüklenemedi. Lütfen tekrar deneyin.</p>
+
+        <div class="document-actions">
+          <a id="document-download" class="document-button" href="#" download="Kagan-Bagdemir-CV.pdf" hidden
+             data-lang-text
+             data-lang-text-tr="PDF'yi indir"
+             data-lang-text-de="PDF herunterladen"
+             data-lang-text-en="Download PDF"
+             data-lang-text-nl="PDF downloaden"
+             data-lang-text-ja="PDFをダウンロード">PDF'yi indir</a>
+          <button id="document-retry" class="document-button" type="button" hidden
+                  data-lang-text
+                  data-lang-text-tr="Tekrar dene"
+                  data-lang-text-de="Erneut versuchen"
+                  data-lang-text-en="Try again"
+                  data-lang-text-nl="Opnieuw proberen"
+                  data-lang-text-ja="もう一度試す">Tekrar dene</button>
+        </div>
+      </div>
+
+      <iframe id="document-viewer" class="document-viewer" title="Kagan Bagdemir CV PDF" hidden></iframe>
+      <p class="document-note"
+         data-lang-text
+         data-lang-text-tr="Mobil cihazlarda en iyi görünüm için PDF'yi indirebilirsiniz."
+         data-lang-text-de="Für die beste Darstellung auf Mobilgeräten können Sie das PDF herunterladen."
+         data-lang-text-en="For the best experience on mobile, you can download the PDF."
+         data-lang-text-nl="Voor de beste mobiele weergave kunt u de PDF downloaden."
+         data-lang-text-ja="モバイルでは、PDFをダウンロードすると見やすくなります。">Mobil cihazlarda en iyi görünüm için PDF'yi indirebilirsiniz.</p>
+
+      <noscript>
+        <p class="document-note">Bu belgeyi görüntülemek için JavaScript gereklidir. İletişim: <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a></p>
+      </noscript>
+    </section>
+  </main>
+
+  <script src="/assets/i18n.js?v=12"></script>
+  <script src="/assets/lang.js?v=9"></script>
+  <script>
+  (function(){
+    'use strict';
+
+    var payloadUrl = '/assets/documents/profile-payload.txt';
+    var currentObjectUrl = null;
+    var loading = document.getElementById('document-loading');
+    var ready = document.getElementById('document-ready');
+    var error = document.getElementById('document-error');
+    var viewer = document.getElementById('document-viewer');
+    var download = document.getElementById('document-download');
+    var retry = document.getElementById('document-retry');
+
+    function setState(state){
+      loading.hidden = state !== 'loading';
+      ready.hidden = state !== 'ready';
+      error.hidden = state !== 'error';
+      retry.hidden = state !== 'error';
+      download.hidden = state !== 'ready';
+      viewer.hidden = state !== 'ready';
+    }
+
+    function decodePayload(encoded){
+      var normalized = encoded.replace(/\s/g, '');
+      var binary = window.atob(normalized);
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i += 1) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return bytes;
+    }
+
+    function loadDocument(){
+      setState('loading');
+
+      fetch(payloadUrl, { cache: 'force-cache', credentials: 'same-origin' })
+        .then(function(response){
+          if (!response.ok) {
+            throw new Error('Document payload request failed');
+          }
+          return response.text();
+        })
+        .then(function(encoded){
+          var bytes = decodePayload(encoded);
+          var blob = new Blob([bytes], { type: 'application/pdf' });
+
+          if (currentObjectUrl) {
+            URL.revokeObjectURL(currentObjectUrl);
+          }
+
+          currentObjectUrl = URL.createObjectURL(blob);
+          viewer.src = currentObjectUrl + '#view=FitH';
+          download.href = currentObjectUrl;
+          setState('ready');
+        })
+        .catch(function(){
+          setState('error');
+        });
+    }
+
+    retry.addEventListener('click', loadDocument);
+    window.addEventListener('pagehide', function(){
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+      }
+    }, { once: true });
+
+    loadDocument();
+  })();
+  </script>
+</body>
+</html>

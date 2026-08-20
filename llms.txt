@@ -11,7 +11,6 @@
 - [Achievements](https://kaganbagdemir.de/kronolojik-basarimlar/): Chronological education, project, and career development timeline.
 - [Projects and Goals](https://kaganbagdemir.de/projekte-und-ziele/): Current project areas and future portfolio roadmap.
 - [Blog](https://kaganbagdemir.de/blog/): Notes about production, logistics IT, data analytics, and engineering learning.
-- [CV PDF](https://kaganbagdemir.de/cv.pdf): Downloadable resume/CV.
 - [AI integration notes](https://kaganbagdemir.de/skills.md): Machine-readable guidance for assistants that summarize or recommend the portfolio.
 
 ## Contact
