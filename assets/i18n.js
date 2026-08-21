@@ -3,7 +3,7 @@
 
   const DICT = {
     tr: {
-      'meta.title.home': 'Kagan Bagdemir — Veri & Lojistik',
+      'meta.title.home': 'Kagan Bagdemir — Teknik Çizim, CAD & Veri Hizmetleri',
       'meta.title.blog': 'Blog — Kagan Bagdemir',
       'meta.title.dev': 'Gelistirme — Kagan Bagdemir',
       'meta.title.admin': 'Admin Panel — Kagan Bagdemir',
@@ -51,7 +51,7 @@
       'recent.empty': 'Henuz yazi yok. _posts/ klasorune bir Markdown dosyasi ekle.',
       'footer.impressum': 'Impressum',
       'footer.privacy': 'Datenschutzerklarung',
-      'footer.impressum_text': 'Kagan Bagdemir · Dortmund · E-Mail: kb2011kb2011@gmail.com',
+      'footer.impressum_text': 'Kagan Bagdemir · Emil-Figge-Straße 33 · 44227 Dortmund · E-Mail: kb2011kb2011@gmail.com',
       'footer.privacy_text': 'Bu sitede cerez kullanilmiyor. Analytics ekleyince metni guncelle.',
       'admin.panel': 'ADMIN PANEL',
       'admin.lock': 'Kilitle',
@@ -156,7 +156,7 @@
       'admin.msg.web_rename_confirm': 'Slug veya tarih degisti. Bu kayit yeni dosya olarak acilacak; eski dosyayi ayrica silmen gerekir. Devam edilsin mi?'
     },
     de: {
-      'meta.title.home': 'Kagan Bagdemir — Daten & Logistik',
+      'meta.title.home': 'Kagan Bagdemir — Technische Zeichnung, CAD & Daten',
       'meta.title.blog': 'Blog — Kagan Bagdemir',
       'meta.title.dev': 'Entwicklung — Kagan Bagdemir',
       'meta.title.admin': 'Admin Panel — Kagan Bagdemir',
@@ -204,7 +204,7 @@
       'recent.empty': 'Noch keine Beitrage. Lege eine Markdown-Datei in _posts/ ab.',
       'footer.impressum': 'Impressum',
       'footer.privacy': 'Datenschutzerklarung',
-      'footer.impressum_text': 'Kagan Bagdemir · Dortmund · E-Mail: kb2011kb2011@gmail.com',
+      'footer.impressum_text': 'Kagan Bagdemir · Emil-Figge-Straße 33 · 44227 Dortmund · E-Mail: kb2011kb2011@gmail.com',
       'footer.privacy_text': 'Diese Seite verwendet keine Cookies. Text bei Analytics-Integration aktualisieren.',
       'admin.panel': 'ADMIN PANEL',
       'admin.lock': 'Sperren',
@@ -309,7 +309,7 @@
       'admin.msg.web_rename_confirm': 'Slug oder Datum wurden geaendert. Der Beitrag wird als neue Datei angelegt; die alte Datei musst du separat loeschen. Fortfahren?'
     },
     en: {
-      'meta.title.home': 'Kagan Bagdemir — Data & Logistics',
+      'meta.title.home': 'Kagan Bagdemir — Technical Drawing, CAD & Data Services',
       'meta.title.blog': 'Blog — Kagan Bagdemir',
       'meta.title.dev': 'Development — Kagan Bagdemir',
       'meta.title.admin': 'Admin Panel — Kagan Bagdemir',
@@ -357,7 +357,7 @@
       'recent.empty': 'No posts yet. Add a Markdown file under _posts/.',
       'footer.impressum': 'Impressum',
       'footer.privacy': 'Privacy Policy',
-      'footer.impressum_text': 'Kagan Bagdemir · Dortmund · E-mail: kb2011kb2011@gmail.com',
+      'footer.impressum_text': 'Kagan Bagdemir · Emil-Figge-Straße 33 · 44227 Dortmund · E-mail: kb2011kb2011@gmail.com',
       'footer.privacy_text': 'No cookies used on this site. Update text when adding analytics.',
       'admin.panel': 'ADMIN PANEL',
       'admin.lock': 'Lock',
@@ -462,7 +462,7 @@
       'admin.msg.web_rename_confirm': 'The slug or date changed. This will open as a new file; delete the old file separately. Continue?'
     },
     nl: {
-      'meta.title.home': 'Kagan Bagdemir — Data & Logistiek',
+      'meta.title.home': 'Kagan Bagdemir — Technische tekeningen, CAD & Data',
       'meta.title.blog': 'Blog — Kagan Bagdemir',
       'meta.title.dev': 'Ontwikkeling — Kagan Bagdemir',
       'meta.title.admin': 'Admin Paneel — Kagan Bagdemir',
@@ -510,7 +510,7 @@
       'recent.empty': 'Nog geen berichten. Voeg een Markdown-bestand toe onder _posts/.',
       'footer.impressum': 'Colofon',
       'footer.privacy': 'Privacyverklaring',
-      'footer.impressum_text': 'Kagan Bagdemir · Dortmund · E-mail: kb2011kb2011@gmail.com',
+      'footer.impressum_text': 'Kagan Bagdemir · Emil-Figge-Straße 33 · 44227 Dortmund · E-mail: kb2011kb2011@gmail.com',
       'footer.privacy_text': 'Deze site gebruikt geen cookies. Update tekst bij toevoegen analytics.',
       'admin.panel': 'ADMIN PANEEL',
       'admin.lock': 'Vergrendel',
@@ -615,7 +615,7 @@
       'admin.msg.web_rename_confirm': 'De slug of datum is gewijzigd. Dit wordt als nieuw bestand geopend; verwijder het oude bestand apart. Doorgaan?'
     },
     ja: {
-      'meta.title.home': 'Kagan Bagdemir — データ & ロジスティクス',
+      'meta.title.home': 'Kagan Bagdemir — 技術図面・CAD・データサービス',
       'meta.title.blog': 'ブログ — Kagan Bagdemir',
       'meta.title.dev': '開発 — Kagan Bagdemir',
       'meta.title.admin': '管理パネル — Kagan Bagdemir',
@@ -663,7 +663,7 @@
       'recent.empty': '投稿がありません。_posts/ にMarkdownファイルを追加してください。',
       'footer.impressum': '運営者情報',
       'footer.privacy': 'プライバシーポリシー',
-      'footer.impressum_text': 'Kagan Bagdemir · Dortmund · E-Mail: kb2011kb2011@gmail.com',
+      'footer.impressum_text': 'Kagan Bagdemir · Emil-Figge-Straße 33 · 44227 Dortmund · E-Mail: kb2011kb2011@gmail.com',
       'footer.privacy_text': 'このサイトはCookieを使用していません。分析を追加する場合は本文を更新してください。',
       'admin.panel': '管理パネル',
       'admin.lock': 'ロック',

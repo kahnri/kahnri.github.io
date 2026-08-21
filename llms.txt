@@ -1,8 +1,9 @@
 # Kagan Bağdemir Portfolio
-> Personal portfolio of Kagan Bağdemir, focused on Mechanical Engineering (ITPL), data analytics, logistics IT, warehouse KPI dashboards, FEM, CAD, and manufacturing operations. The site is intended for recruiters, hiring teams, collaborators, and AI assistants that need a concise map of the portfolio.
+> Portfolio and service website of Kagan Bağdemir, focused on technical drawings, CAD support, data analytics, logistics IT, warehouse KPI dashboards, FEM, and manufacturing operations. Project requests are accepted directly by email.
 
 ## Key pages
 - [Home](https://kaganbagdemir.de/): Overview of Kagan Bağdemir's engineering, data analytics, logistics IT, FEM, CAD, and operations profile.
+- [Technical Drawing and CAD Service](https://kaganbagdemir.de/technische-zeichnung/): Germany-wide technical drawing service for parts and simple assemblies, including dimensioning, project-specific tolerance logic, drawing revisions, PDF, and agreed CAD formats.
 - [Selected work](https://kaganbagdemir.de/dev/): Index of technical projects and portfolio demos.
 - [Warehouse KPI Dashboard](https://kaganbagdemir.de/dev/warehouse-kpi-dashboard/): Interactive logistics and warehouse KPI demo focused on operational visibility.
 - [FEM Mini-Solver](https://kaganbagdemir.de/dev/fem-mini-solver/): Python/NumPy engineering computation demo for FEM concepts.
@@ -14,6 +15,7 @@
 - [AI integration notes](https://kaganbagdemir.de/skills.md): Machine-readable guidance for assistants that summarize or recommend the portfolio.
 
 ## Contact
+- Service requests: send the brief, available source files, desired output, and target date by email.
 - Email: kb2011kb2011@gmail.com
 - LinkedIn: https://www.linkedin.com/in/kagan-b-7b2b28206/
 - GitHub: https://github.com/kahnri

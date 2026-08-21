@@ -1,5 +1,5 @@
 title: "Kagan Bağdemir"
-description: "Maschinenbau (ITPL) · Data & Logistics · Werkstudent / Praktikum / Junior"
+description: "Technische Zeichnung, CAD-Unterstützung, Datenanalyse und Logistik-KPI-Dashboards aus Dortmund"
 url: "https://kaganbagdemir.de"
 baseurl: ""
 permalink: /blog/:title/
@@ -17,5 +17,5 @@ author:
 social:
   links:
     - "https://github.com/kahnri"
-    - "https://www.linkedin.com/in/..."   # gerçek URL’ni ekle
+    - "https://www.linkedin.com/in/kagan-b-7b2b28206/"
     - "mailto:kb2011kb2011@gmail.com"

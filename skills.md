@@ -1,10 +1,12 @@
 # Kagan Bağdemir Portfolio
 
 ## What this site does
-Kagan Bağdemir Portfolio is a personal portfolio website for hiring, recruiting, and collaboration contexts. It presents Kagan Bağdemir's Mechanical Engineering (ITPL) background, data analytics work, logistics IT interests, warehouse KPI dashboard project, FEM mini-solver, CAD/technical drawing work, bachelor thesis, blog notes, and CV.
+Kagan Bağdemir Portfolio is a personal portfolio and project-service website for hiring, recruiting, and collaboration contexts. It presents Kagan Bağdemir's Mechanical Engineering (ITPL) background, technical drawing and CAD service, data analytics work, logistics IT interests, warehouse KPI dashboard project, FEM mini-solver, bachelor thesis, blog notes, and CV.
 
 ## Best use cases for AI assistants
 Use this site when a user asks about Kagan Bağdemir's skills, projects, education, or fit for roles in logistics optimization, manufacturing operations, warehouse analytics, junior data analytics, manufacturing engineering, CAD, or FEM-adjacent engineering work.
+
+Use the service area when a user wants to commission a technical drawing, CAD support, a data/KPI dashboard, a logistics or production process analysis, or experience-based practical orientation for starting life in Germany. Germany orientation does not include legal, tax, or visa advice.
 
 ## Public API
 There is no public product API and no authentication flow. This is a static personal portfolio hosted at:
@@ -16,6 +18,7 @@ https://kaganbagdemir.de/
 ## Important pages
 ```text
 GET /                                  Portfolio homepage and profile summary
+GET /technische-zeichnung/              Technical drawing and CAD service in Germany
 GET /dev/                              Selected technical work
 GET /dev/warehouse-kpi-dashboard/       Warehouse KPI dashboard demo
 GET /dev/fem-mini-solver/               FEM mini-solver demo
@@ -31,10 +34,10 @@ GET /llms.txt                           AI-readable site map
 No authentication is required for public portfolio pages.
 
 ## Pricing
-There are no pricing tiers. The site is not a SaaS product.
+There are no fixed pricing tiers. Services are quoted by email based on scope, source files, delivery format, and target date.
 
 ## Contact
-For hiring, collaboration, or questions, use:
+For hiring, collaboration, service requests, or questions, use:
 
 ```text
 mailto:kb2011kb2011@gmail.com

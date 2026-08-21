@@ -1,28 +1,29 @@
 ---
 layout: null
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n-title="meta.title.home">Kagan Bağdemir — Data &amp; Logistics</title>
-<meta name="description" content="Portfolio of Kagan Bağdemir — Mechanical Engineering (ITPL), data analytics, logistics IT, FEM, and CAD for manufacturing and operations roles.">
+<title data-i18n-title="meta.title.home">Kagan Bağdemir — Teknik Çizim, CAD &amp; Veri Hizmetleri</title>
+<meta name="description" content="Dortmund'dan teknik çizim, CAD desteği, veri analizi ve lojistik KPI dashboard hizmetleri. Proje talepleri doğrudan Kagan Bağdemir'e e-posta ile ulaşır.">
 <meta name="author" content="Kagan Bağdemir">
 <link rel="canonical" href="https://kaganbagdemir.de/">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="de_DE">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="de_DE">
 <meta property="og:url" content="https://kaganbagdemir.de/">
 <meta property="og:site_name" content="Kagan Bağdemir Portfolio">
-<meta property="og:title" content="Kagan Bağdemir — Data · Logistics · Engineering">
-<meta property="og:description" content="Portfolio of Kagan Bağdemir — Mechanical Engineering (ITPL), data analytics, logistics IT, FEM, and CAD for manufacturing and operations roles.">
+<meta property="og:title" content="Kagan Bağdemir — Teknik Çizim · CAD · Veri Hizmetleri">
+<meta property="og:description" content="Dortmund'dan teknik çizim, CAD desteği, veri analizi ve lojistik KPI dashboard hizmetleri.">
 <meta property="og:image" content="https://kaganbagdemir.de/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Kagan Bağdemir portfolio preview with KB logo and Data, Logistics, Engineering title.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kagan Bağdemir — Data · Logistics · Engineering">
-<meta name="twitter:description" content="Mechanical Engineering (ITPL), data analytics, logistics IT, FEM, and CAD portfolio for manufacturing and operations roles.">
+<meta name="twitter:title" content="Kagan Bağdemir — Teknik Çizim · CAD · Veri Hizmetleri">
+<meta name="twitter:description" content="Dortmund'dan teknik çizim, CAD desteği, veri analizi ve lojistik KPI dashboard hizmetleri.">
 <meta name="twitter:image" content="https://kaganbagdemir.de/og-image.jpg">
 <meta name="twitter:image:alt" content="Kagan Bağdemir portfolio preview with KB logo and Data, Logistics, Engineering title.">
 <link rel="icon" type="image/png" href="/assets/favicon.png?v=1">
@@ -36,11 +37,17 @@ layout: null
   "givenName": "Kagan",
   "familyName": "Bağdemir",
   "jobTitle": "Data & Logistics Engineer",
-  "description": "Portfolio of Kagan Bağdemir focused on Mechanical Engineering (ITPL), data analytics, logistics IT, FEM, and CAD.",
+  "description": "Mechanical Engineering profile in Dortmund offering technical drawing, CAD support, data analytics and logistics KPI dashboard services.",
   "email": "mailto:kb2011kb2011@gmail.com",
   "url": "https://kaganbagdemir.de/",
   "image": "https://kaganbagdemir.de/og-image.jpg",
-  "address": { "@type": "PostalAddress", "addressLocality": "Dortmund", "addressCountry": "DE" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Emil-Figge-Straße 33",
+    "postalCode": "44227",
+    "addressLocality": "Dortmund",
+    "addressCountry": "DE"
+  },
   "alumniOf": {
     "@type": "CollegeOrUniversity",
     "name": "TU Dortmund University"
@@ -57,7 +64,28 @@ layout: null
     "Warehouse KPI dashboards",
     "Finite Element Method",
     "CAD",
+    "Technical drawing",
+    "Technische Zeichnung",
     "Manufacturing operations"
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Technische Zeichnung und CAD-Service",
+        "areaServed": { "@type": "Country", "name": "Germany" },
+        "url": "https://kaganbagdemir.de/technische-zeichnung/"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Datenanalyse und KPI-Dashboards",
+        "areaServed": { "@type": "Country", "name": "Germany" }
+      }
+    }
   ],
   "sameAs": [
     "https://github.com/kahnri",
@@ -69,7 +97,7 @@ layout: null
 </script>
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
 <link rel="stylesheet" href="/assets/theme.css?v=16">
-<link rel="stylesheet" href="/assets/portfolio.css?v=1">
+<link rel="stylesheet" href="/assets/portfolio.css?v=2">
 <meta name="color-scheme" content="dark">
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -109,8 +137,15 @@ layout: null
            data-lang-aria-label-tr="Ana navigasyon"
            data-lang-aria-label-de="Hauptnavigation"
            data-lang-aria-label-en="Main navigation"
-           data-lang-aria-label-nl="Hoofdnavigatie"
-           data-lang-aria-label-ja="メインナビゲーション">
+             data-lang-aria-label-nl="Hoofdnavigatie"
+             data-lang-aria-label-ja="メインナビゲーション">
+        <a href="#services"
+           data-lang-text
+           data-lang-text-tr="Hizmetler"
+           data-lang-text-de="Leistungen"
+           data-lang-text-en="Services"
+           data-lang-text-nl="Diensten"
+           data-lang-text-ja="サービス">Hizmetler</a>
         <a href="/kronolojik-basarimlar/"
            data-lang-text
            data-lang-text-tr="Başarılar"
@@ -148,6 +183,13 @@ layout: null
              data-lang-aria-label-en="Mobile navigation"
              data-lang-aria-label-nl="Mobiele navigatie"
              data-lang-aria-label-ja="モバイルナビゲーション">
+          <a href="#services"
+             data-lang-text
+             data-lang-text-tr="Hizmetler"
+             data-lang-text-de="Leistungen"
+             data-lang-text-en="Services"
+             data-lang-text-nl="Diensten"
+             data-lang-text-ja="サービス">Hizmetler</a>
           <a href="/kronolojik-basarimlar/"
              data-lang-text
              data-lang-text-tr="Başarılar"
@@ -313,6 +355,155 @@ layout: null
       </div>
       <span class="sr-only" data-lang-text data-lang-text-tr="Ekime kadar sinav donemi." data-lang-text-de="Klausurphase bis Oktober." data-lang-text-en="Exam phase until October." data-lang-text-nl="Examenfase tot oktober." data-lang-text-ja="10月まで試験期間です。">Ekime kadar sinav donemi.</span>
     </div>
+
+    <section id="services" class="services-section" aria-labelledby="services-title">
+      <header class="services-header">
+        <div>
+          <p class="swiss-kicker"
+             data-lang-text
+             data-lang-text-tr="BAĞIMSIZ PROJE DESTEĞİ"
+             data-lang-text-de="FREELANCE-PROJEKTUNTERSTÜTZUNG"
+             data-lang-text-en="FREELANCE PROJECT SUPPORT"
+             data-lang-text-nl="FREELANCE PROJECTONDERSTEUNING"
+             data-lang-text-ja="フリーランス・プロジェクト支援">BAĞIMSIZ PROJE DESTEĞİ</p>
+          <h2 id="services-title"
+              data-lang-text
+              data-lang-text-tr="Bir dosyayla başlayın. Kullanılabilir bir çıktıyla bitirelim."
+              data-lang-text-de="Mit einer Datei starten. Mit einem nutzbaren Ergebnis abschließen."
+              data-lang-text-en="Start with a file. Finish with a usable result."
+              data-lang-text-nl="Begin met een bestand. Eindig met een bruikbaar resultaat."
+              data-lang-text-ja="ファイルから始め、使える成果物に仕上げます。">Bir dosyayla başlayın. Kullanılabilir bir çıktıyla bitirelim.</h2>
+        </div>
+        <div class="services-intro">
+          <p data-lang-text
+             data-lang-text-tr="Teknik çizimden operasyon verisine kadar kapsamı net, uzaktan yürütülebilen işler için destek sunuyorum. İhtiyacınızı ve elinizdeki dosyaları e-postayla gönderin; teslim kapsamını birlikte netleştirelim."
+             data-lang-text-de="Ich unterstütze klar abgegrenzte, remote umsetzbare Projekte – von technischen Zeichnungen bis zu operativen Daten. Senden Sie Bedarf und vorhandene Dateien per E-Mail; anschließend klären wir Umfang und Ergebnis."
+             data-lang-text-en="I support clearly scoped, remote-ready projects—from technical drawings to operational data. Email your brief and available files so we can define the deliverable together."
+             data-lang-text-nl="Ik ondersteun duidelijk afgebakende projecten op afstand, van technische tekeningen tot operationele data. Mail uw vraag en beschikbare bestanden, dan bepalen we samen het resultaat."
+             data-lang-text-ja="技術図面から業務データまで、範囲が明確でリモート対応可能なプロジェクトを支援します。ご要望と資料をメールでお送りください。成果物の範囲を一緒に確認します。">Teknik çizimden operasyon verisine kadar kapsamı net, uzaktan yürütülebilen işler için destek sunuyorum. İhtiyacınızı ve elinizdeki dosyaları e-postayla gönderin; teslim kapsamını birlikte netleştirelim.</p>
+          <a class="swiss-action" href="mailto:kb2011kb2011@gmail.com?subject=Neue%20Projektanfrage%20%2F%20Yeni%20proje%20talebi&amp;body=Guten%20Tag%20Herr%20Bagdemir%2C%0A%0ALeistung%20%2F%20Hizmet%3A%0AProjektbeschreibung%20%2F%20Proje%20ozeti%3A%0AVorhandene%20Dateien%20%2F%20Dosyalar%3A%0AGew%C3%BCnschtes%20Ergebnis%20%2F%20Istenen%20teslim%3A%0ATermin%20%2F%20Hedef%20tarih%3A%0A"
+             data-lang-text
+             data-lang-text-tr="PROJEYİ ANLAT"
+             data-lang-text-de="PROJEKT ANFRAGEN"
+             data-lang-text-en="SEND A BRIEF"
+             data-lang-text-nl="PROJECT AANVRAGEN"
+             data-lang-text-ja="相談メールを送る">PROJEYİ ANLAT</a>
+        </div>
+      </header>
+
+      <div class="services-grid">
+        <article class="service-card service-card-featured">
+          <div class="service-card-meta">
+            <span class="service-number">01</span>
+            <span class="service-badge"
+                  data-lang-text
+                  data-lang-text-tr="ÖNE ÇIKAN · ALMANYA GENELİ"
+                  data-lang-text-de="FOKUS · DEUTSCHLANDWEIT"
+                  data-lang-text-en="FEATURED · GERMANY-WIDE"
+                  data-lang-text-nl="UITGELICHT · HEEL DUITSLAND"
+                  data-lang-text-ja="注力サービス · ドイツ全域">ÖNE ÇIKAN · ALMANYA GENELİ</span>
+          </div>
+          <div class="service-card-body">
+            <p class="service-eyebrow">CAD · ZEICHNUNG · FERTIGUNG</p>
+            <h3 data-lang-text
+                data-lang-text-tr="Teknik çizim &amp; CAD hizmeti"
+                data-lang-text-de="Technische Zeichnung &amp; CAD-Service"
+                data-lang-text-en="Technical drawing &amp; CAD service"
+                data-lang-text-nl="Technische tekeningen &amp; CAD-service"
+                data-lang-text-ja="技術図面・CADサービス">Teknik çizim &amp; CAD hizmeti</h3>
+            <p data-lang-text
+               data-lang-text-tr="Eskiz, ölçü, PDF veya mevcut modelden; üretim ve teknik iletişim için temiz, okunabilir parça çizimleri. Ölçülendirme, tolerans mantığı ve revizyonlar proje kapsamında netleştirilir."
+               data-lang-text-de="Saubere, lesbare Bauteilzeichnungen aus Skizzen, Maßen, PDF-Dateien oder vorhandenen Modellen – für Fertigung und technische Abstimmung. Bemaßung, Toleranzlogik und Revisionen werden projektbezogen festgelegt."
+               data-lang-text-en="Clear, readable part drawings from sketches, dimensions, PDFs, or existing models—for manufacturing and technical coordination. Dimensioning, tolerance logic, and revisions are agreed per project."
+               data-lang-text-nl="Duidelijke werktekeningen op basis van schetsen, maten, pdf's of bestaande modellen, voor productie en technische afstemming. Maatvoering, toleranties en revisies worden per project afgesproken."
+               data-lang-text-ja="スケッチ、寸法、PDF、既存モデルから、製造や技術調整に使える明確な部品図を作成します。寸法、公差、修正範囲はプロジェクトごとに合意します。">Eskiz, ölçü, PDF veya mevcut modelden; üretim ve teknik iletişim için temiz, okunabilir parça çizimleri. Ölçülendirme, tolerans mantığı ve revizyonlar proje kapsamında netleştirilir.</p>
+            <ul class="service-deliverables">
+              <li data-lang-text data-lang-text-tr="Parça ve basit montaj çizimleri" data-lang-text-de="Bauteil- und einfache Baugruppenzeichnungen" data-lang-text-en="Part and simple assembly drawings" data-lang-text-nl="Onderdeel- en eenvoudige montagetekeningen" data-lang-text-ja="部品図・簡単な組立図">Parça ve basit montaj çizimleri</li>
+              <li data-lang-text data-lang-text-tr="Ölçülendirme, tolerans ve çizim düzeni" data-lang-text-de="Bemaßung, Toleranzen und Zeichnungsaufbau" data-lang-text-en="Dimensions, tolerances, and drawing layout" data-lang-text-nl="Maatvoering, toleranties en tekenopmaak" data-lang-text-ja="寸法、公差、図面レイアウト">Ölçülendirme, tolerans ve çizim düzeni</li>
+              <li data-lang-text data-lang-text-tr="PDF ve proje başında kararlaştırılan CAD formatları" data-lang-text-de="PDF und vorab vereinbarte CAD-Formate" data-lang-text-en="PDF and CAD formats agreed at project start" data-lang-text-nl="Pdf en vooraf afgesproken CAD-formaten" data-lang-text-ja="PDFおよび事前合意したCAD形式">PDF ve proje başında kararlaştırılan CAD formatları</li>
+            </ul>
+          </div>
+          <div class="service-card-actions">
+            <a class="swiss-action swiss-action-primary" href="/technische-zeichnung/"
+               data-lang-text
+               data-lang-text-tr="HİZMETİ İNCELE"
+               data-lang-text-de="LEISTUNG ANSEHEN"
+               data-lang-text-en="VIEW SERVICE"
+               data-lang-text-nl="BEKIJK DIENST"
+               data-lang-text-ja="詳細を見る">HİZMETİ İNCELE</a>
+            <a class="service-mail-link" href="mailto:kb2011kb2011@gmail.com?subject=Anfrage%3A%20Technische%20Zeichnung%20%2F%20CAD&amp;body=Guten%20Tag%20Herr%20Bagdemir%2C%0A%0AProjekt%20%2F%20Bauteil%3A%0AVorhandene%20Unterlagen%3A%0AGew%C3%BCnschtes%20Ergebnis%3A%0ATermin%3A%0A"
+               data-lang-text
+               data-lang-text-tr="E-POSTA İLE SİPARİŞ VER →"
+               data-lang-text-de="PER E-MAIL ANFRAGEN →"
+               data-lang-text-en="REQUEST BY EMAIL →"
+               data-lang-text-nl="AANVRAGEN PER E-MAIL →"
+               data-lang-text-ja="メールで依頼 →">E-POSTA İLE SİPARİŞ VER →</a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-meta"><span class="service-number">02</span><span>DATA · KPI</span></div>
+          <div class="service-card-body">
+            <h3 data-lang-text data-lang-text-tr="Veri analizi &amp; KPI dashboard" data-lang-text-de="Datenanalyse &amp; KPI-Dashboard" data-lang-text-en="Data analysis &amp; KPI dashboard" data-lang-text-nl="Data-analyse &amp; KPI-dashboard" data-lang-text-ja="データ分析・KPIダッシュボード">Veri analizi &amp; KPI dashboard</h3>
+            <p data-lang-text
+               data-lang-text-tr="Excel veya CSV verisini temizleyip karar vermeyi kolaylaştıran metriklere, grafiklere ve anlaşılır bir rapora dönüştürüyorum."
+               data-lang-text-de="Ich bereinige Excel- oder CSV-Daten und überführe sie in entscheidungsrelevante Kennzahlen, Visualisierungen und einen verständlichen Bericht."
+               data-lang-text-en="I clean Excel or CSV data and turn it into decision-ready metrics, visualizations, and a clear report."
+               data-lang-text-nl="Ik schoon Excel- of CSV-data op en zet die om in bruikbare KPI's, visualisaties en een duidelijk rapport."
+               data-lang-text-ja="ExcelやCSVデータを整理し、意思決定に役立つ指標、可視化、分かりやすいレポートにまとめます。">Excel veya CSV verisini temizleyip karar vermeyi kolaylaştıran metriklere, grafiklere ve anlaşılır bir rapora dönüştürüyorum.</p>
+          </div>
+          <a class="service-mail-link" href="mailto:kb2011kb2011@gmail.com?subject=Anfrage%3A%20Datenanalyse%20%2F%20KPI-Dashboard"
+             data-lang-text data-lang-text-tr="PROJEYİ GÖNDER →" data-lang-text-de="PROJEKT ANFRAGEN →" data-lang-text-en="SEND PROJECT →" data-lang-text-nl="PROJECT AANVRAGEN →" data-lang-text-ja="相談する →">PROJEYİ GÖNDER →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-meta"><span class="service-number">03</span><span>LOGISTIK · PROZESS</span></div>
+          <div class="service-card-body">
+            <h3 data-lang-text data-lang-text-tr="Lojistik &amp; üretim süreç analizi" data-lang-text-de="Logistik- &amp; Produktionsanalyse" data-lang-text-en="Logistics &amp; production analysis" data-lang-text-nl="Logistieke &amp; productieanalyse" data-lang-text-ja="物流・生産プロセス分析">Lojistik &amp; üretim süreç analizi</h3>
+            <p data-lang-text
+               data-lang-text-tr="Akışları, bekleme noktalarını ve KPI tanımlarını sade bir süreç haritası ve iyileştirme önerileriyle görünür hale getiriyorum."
+               data-lang-text-de="Ich mache Abläufe, Wartepunkte und KPI-Definitionen mit einer klaren Prozessdarstellung und konkreten Verbesserungshinweisen sichtbar."
+               data-lang-text-en="I make flows, wait points, and KPI definitions visible through a clear process map and practical improvement notes."
+               data-lang-text-nl="Ik maak stromen, wachttijden en KPI-definities zichtbaar met een helder procesoverzicht en praktische verbeterpunten."
+               data-lang-text-ja="工程、待ち時間、KPI定義を、明確なプロセスマップと実践的な改善案で可視化します。">Akışları, bekleme noktalarını ve KPI tanımlarını sade bir süreç haritası ve iyileştirme önerileriyle görünür hale getiriyorum.</p>
+          </div>
+          <a class="service-mail-link" href="mailto:kb2011kb2011@gmail.com?subject=Anfrage%3A%20Logistik-%20%2F%20Prozessanalyse"
+             data-lang-text data-lang-text-tr="SÜRECİ ANLAT →" data-lang-text-de="PROZESS BESCHREIBEN →" data-lang-text-en="DESCRIBE PROCESS →" data-lang-text-nl="BESCHRIJF PROCES →" data-lang-text-ja="相談する →">SÜRECİ ANLAT →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-meta"><span class="service-number">04</span><span>DEUTSCHLAND · START</span></div>
+          <div class="service-card-body">
+            <h3 data-lang-text data-lang-text-tr="Almanya'ya başlangıç desteği" data-lang-text-de="Praktische Starthilfe in Deutschland" data-lang-text-en="Practical Germany starter support" data-lang-text-nl="Praktische starthulp in Duitsland" data-lang-text-ja="ドイツ生活スタート支援">Almanya'ya başlangıç desteği</h3>
+            <p data-lang-text
+               data-lang-text-tr="Almanya'ya gelecek Türkçe konuşanlar için kişisel deneyime dayalı hazırlık görüşmesi: günlük yaşam, ev arama düzeni, randevu ve belge kontrol listeleri, üniversite ve iş hayatına uyum."
+               data-lang-text-de="Orientierungsgespräch für türkischsprachige Neuankömmlinge auf Basis persönlicher Erfahrung: Alltag, Wohnungssuche, Termin- und Dokumentenchecklisten sowie Einstieg in Studium und Arbeitsleben."
+               data-lang-text-en="Experience-based orientation for Turkish-speaking newcomers: daily life, housing search, appointment and document checklists, and adapting to study or work."
+               data-lang-text-nl="Oriëntatie op basis van persoonlijke ervaring voor Turkstalige nieuwkomers: dagelijks leven, woningzoeken, afspraken, documenten, studie en werk."
+               data-lang-text-ja="トルコ語話者向けに、生活、住居探し、予約・書類チェックリスト、留学・就職への適応を実体験ベースで支援します。">Almanya'ya gelecek Türkçe konuşanlar için kişisel deneyime dayalı hazırlık görüşmesi: günlük yaşam, ev arama düzeni, randevu ve belge kontrol listeleri, üniversite ve iş hayatına uyum.</p>
+            <p class="service-note"
+               data-lang-text
+               data-lang-text-tr="Bu hizmet hukuki, vergi veya vize danışmanlığı içermez."
+               data-lang-text-de="Keine Rechts-, Steuer- oder Visaberatung."
+               data-lang-text-en="This service does not include legal, tax, or visa advice."
+               data-lang-text-nl="Deze dienst omvat geen juridisch, fiscaal of visumadvies."
+               data-lang-text-ja="法律・税務・ビザに関する助言は含みません。">Bu hizmet hukuki, vergi veya vize danışmanlığı içermez.</p>
+          </div>
+          <a class="service-mail-link" href="mailto:kb2011kb2011@gmail.com?subject=Talep%3A%20Almanya%27ya%20baslangic%20destegi"
+             data-lang-text data-lang-text-tr="GÖRÜŞME TALEP ET →" data-lang-text-de="GESPRÄCH ANFRAGEN →" data-lang-text-en="REQUEST A CALL →" data-lang-text-nl="GESPREK AANVRAGEN →" data-lang-text-ja="相談を申し込む →">GÖRÜŞME TALEP ET →</a>
+        </article>
+      </div>
+
+      <div class="services-closing">
+        <p data-lang-text
+           data-lang-text-tr="Fiyat; kapsam, dosya durumu, teslim formatı ve hedef tarihe göre proje bazında belirlenir. İlk e-postanıza örnek dosya veya ekran görüntüsü ekleyebilirsiniz."
+           data-lang-text-de="Der Preis richtet sich nach Umfang, Ausgangsdateien, Lieferformat und Termin. Ihrer ersten E-Mail können Sie Beispieldateien oder Screenshots beifügen."
+           data-lang-text-en="Pricing depends on scope, source files, delivery format, and deadline. You can attach sample files or screenshots to your first email."
+           data-lang-text-nl="De prijs hangt af van omvang, bronbestanden, opleverformaat en deadline. U kunt voorbeeldbestanden of screenshots aan uw eerste e-mail toevoegen."
+           data-lang-text-ja="料金は範囲、元データ、納品形式、納期により決まります。最初のメールにサンプルやスクリーンショットを添付できます。">Fiyat; kapsam, dosya durumu, teslim formatı ve hedef tarihe göre proje bazında belirlenir. İlk e-postanıza örnek dosya veya ekran görüntüsü ekleyebilirsiniz.</p>
+        <a href="mailto:kb2011kb2011@gmail.com">kb2011kb2011@gmail.com</a>
+      </div>
+    </section>
 
     <section id="selected-work" class="project-index" aria-labelledby="project-index-title">
       <header class="project-index-header">
@@ -555,6 +746,13 @@ layout: null
              data-lang-aria-label-en="Footer navigation"
              data-lang-aria-label-nl="Voettekstnavigatie"
              data-lang-aria-label-ja="フッターナビゲーション">
+          <a href="#services"
+             data-lang-text
+             data-lang-text-tr="Hizmetler"
+             data-lang-text-de="Leistungen"
+             data-lang-text-en="Services"
+             data-lang-text-nl="Diensten"
+             data-lang-text-ja="サービス">Hizmetler</a>
           <a href="/blog/">Blog</a>
           <a href="/kronolojik-basarimlar/"
              data-lang-text
@@ -576,7 +774,7 @@ layout: null
 
       <div class="portfolio-footer-legal">
         <p>
-          <span data-i18n="footer.impressum">Impressum</span> ·
+          <a href="/impressum/" data-i18n="footer.impressum">Impressum</a> ·
           <span data-i18n="footer.privacy">Datenschutzerklärung</span>
         </p>
         <p>
@@ -586,7 +784,7 @@ layout: null
                 data-lang-text-en="Last updated"
                 data-lang-text-nl="Laatst bijgewerkt"
                 data-lang-text-ja="最終更新日">Son güncelleme</span>:
-          <time datetime="2026-08-12">12.08.2026</time>
+          <time datetime="2026-08-22">22.08.2026</time>
         </p>
         <p class="portfolio-playground-link">
           <a href="/kahnri/">KAHNRI / PLAYGROUND</a>
