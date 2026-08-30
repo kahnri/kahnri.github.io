@@ -540,6 +540,12 @@ main h3 {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
+select[data-lang-select] {
+  min-width: 9rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
 input,
 select,
 textarea,
@@ -1727,7 +1733,7 @@ body.initial-anim-run main::before {
   }
 
   body > main > header select[data-lang-select] {
-    min-width: 104px;
+    min-width: 132px;
     padding-inline: 0.65rem;
   }
 

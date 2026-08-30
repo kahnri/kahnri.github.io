@@ -407,12 +407,12 @@ html[data-theme="light"] .portfolio-theme-toggle {
 }
 
 .portfolio-language {
-  min-width: 6.75rem;
+  min-width: 9rem;
   appearance: auto;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 
 .portfolio-theme-toggle {
@@ -1657,7 +1657,7 @@ body.home-page [data-animate] {
   }
 
   .portfolio-language {
-    min-width: 4.6rem;
+    min-width: 8.25rem;
     padding: 0 0.5rem;
     font-size: 0.66rem;
   }
