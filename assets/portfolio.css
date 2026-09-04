@@ -560,9 +560,27 @@ html[data-theme="light"] .portfolio-theme-toggle {
   line-height: 1.65;
 }
 
+.project-carousel-link {
+  display: inline-flex;
+  margin-top: 1.2rem;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.18rem;
+  color: var(--hero-text);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.project-carousel-link:hover,
+.project-carousel-link:focus-visible {
+  color: var(--hero-muted);
+}
+
 .project-carousel-controls {
   display: grid;
-  grid-template-columns: repeat(4, 2.75rem) minmax(3rem, 1fr);
+  grid-template-columns: repeat(5, 2.75rem) minmax(3rem, 1fr);
   align-items: center;
   gap: 0.45rem;
   margin-top: 1rem;
@@ -2045,11 +2063,11 @@ body.home-page [data-animate] {
   }
 
   .project-carousel-controls {
-    grid-template-columns: repeat(4, 2.45rem) minmax(2rem, 1fr);
+    grid-template-columns: repeat(5, 2.2rem) minmax(1.5rem, 1fr);
   }
 
   .project-carousel-controls button {
-    width: 2.45rem;
+    width: 2.2rem;
   }
 
   .project-index-header {
