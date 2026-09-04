@@ -97,7 +97,7 @@ layout: null
 </script>
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
 <link rel="stylesheet" href="/assets/theme.css?v=17">
-<link rel="stylesheet" href="/assets/portfolio.css?v=4">
+<link rel="stylesheet" href="/assets/portfolio.css?v=5">
 <meta name="color-scheme" content="dark">
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -160,13 +160,6 @@ layout: null
            data-lang-text-en="Projects &amp; Goals"
            data-lang-text-nl="Projecten &amp; Doelen"
            data-lang-text-ja="プロジェクトと目標">Projeler &amp; Hedefler</a>
-        <a class="portfolio-nav-active" href="/projekte-und-ziele/#active-projects"
-           data-lang-text
-           data-lang-text-tr="Aktif Geliştirilen Projeler"
-           data-lang-text-de="Aktive Projekte"
-           data-lang-text-en="Projects in Development"
-           data-lang-text-nl="Projecten in ontwikkeling"
-           data-lang-text-ja="開発中のプロジェクト">Aktif Geliştirilen Projeler</a>
         <a href="/blog/" data-i18n="nav.blog">Blog</a>
       </nav>
 
@@ -211,41 +204,155 @@ layout: null
              data-lang-text-en="Projects &amp; Goals"
              data-lang-text-nl="Projecten &amp; Doelen"
              data-lang-text-ja="プロジェクトと目標">Projeler &amp; Hedefler</a>
-          <a class="portfolio-nav-active" href="/projekte-und-ziele/#active-projects"
-             data-lang-text
-             data-lang-text-tr="Aktif Geliştirilen Projeler"
-             data-lang-text-de="Aktive Projekte"
-             data-lang-text-en="Projects in Development"
-             data-lang-text-nl="Projecten in ontwikkeling"
-             data-lang-text-ja="開発中のプロジェクト">Aktif Geliştirilen Projeler</a>
           <a href="/blog/" data-i18n="nav.blog">Blog</a>
         </nav>
       </details>
     </header>
 
     <section class="swiss-hero" aria-labelledby="portfolio-title">
-      <div class="swiss-hero-copy">
-        <p class="swiss-kicker">PORTFOLIO</p>
-        <h1 id="portfolio-title" class="swiss-title">
-          <span data-lang-text
-                data-lang-text-tr="Tekniği anla."
-                data-lang-text-de="Technik verstehen."
-                data-lang-text-en="Understand engineering."
-                data-lang-text-nl="Begrijp techniek."
-                data-lang-text-ja="エンジニアリングを理解する。">Tekniği anla.</span>
-          <span data-lang-text
-                data-lang-text-tr="Veriyi kullan."
-                data-lang-text-de="Daten nutzen."
-                data-lang-text-en="Use data."
-                data-lang-text-nl="Gebruik gegevens."
-                data-lang-text-ja="データを使用します。">Veriyi kullan.</span>
-          <span data-lang-text
-                data-lang-text-tr="Süreçleri iyileştir."
-                data-lang-text-de="Abläufe verbessern."
-                data-lang-text-en="Improve operations."
-                data-lang-text-nl="Verbeter de bedrijfsvoering."
-                data-lang-text-ja="運用を改善します。">Süreçleri iyileştir.</span>
-        </h1>
+      <div class="swiss-hero-copy project-carousel" data-project-carousel style="--project-index: 0"
+           role="region" aria-label="Aktif geliştirilen projeler"
+           data-lang-aria-label
+           data-lang-aria-label-tr="Aktif geliştirilen projeler"
+           data-lang-aria-label-de="Aktiv entwickelte Projekte"
+           data-lang-aria-label-en="Projects in active development"
+           data-lang-aria-label-nl="Actief ontwikkelde projecten"
+           data-lang-aria-label-ja="現在開発中のプロジェクト">
+        <header class="project-carousel-header">
+          <div>
+            <p class="swiss-kicker"
+               data-lang-text
+               data-lang-text-tr="AKTİF GELİŞTİRİLEN PROJELER"
+               data-lang-text-de="AKTIV ENTWICKELTE PROJEKTE"
+               data-lang-text-en="PROJECTS IN ACTIVE DEVELOPMENT"
+               data-lang-text-nl="ACTIEF ONTWIKKELDE PROJECTEN"
+               data-lang-text-ja="現在開発中のプロジェクト">AKTİF GELİŞTİRİLEN PROJELER</p>
+            <h1 id="portfolio-title" class="project-carousel-heading"
+                data-lang-text
+                data-lang-text-tr="Şu anda ne geliştiriyorum?"
+                data-lang-text-de="Woran arbeite ich gerade?"
+                data-lang-text-en="What am I building right now?"
+                data-lang-text-nl="Waar werk ik momenteel aan?"
+                data-lang-text-ja="現在何を開発していますか？">Şu anda ne geliştiriyorum?</h1>
+          </div>
+          <button class="project-carousel-toggle" type="button" data-project-carousel-toggle aria-pressed="false">
+            <span data-project-carousel-toggle-icon aria-hidden="true">Ⅱ</span>
+          </button>
+        </header>
+
+        <div class="project-carousel-viewport">
+          <div class="project-carousel-track" data-project-carousel-track>
+            <article class="project-carousel-slide is-active" data-project-carousel-slide aria-hidden="false"
+                     aria-label="Proje 1 / 4"
+                     data-lang-aria-label
+                     data-lang-aria-label-tr="Proje 1 / 4"
+                     data-lang-aria-label-de="Projekt 1 / 4"
+                     data-lang-aria-label-en="Project 1 of 4"
+                     data-lang-aria-label-nl="Project 1 van 4"
+                     data-lang-aria-label-ja="プロジェクト 1 / 4">
+              <div class="project-carousel-meta">
+                <span class="project-carousel-number">01 / 04</span>
+                <span class="project-carousel-status" data-lang-text data-lang-text-tr="Geliştiriliyor" data-lang-text-de="In Entwicklung" data-lang-text-en="In development" data-lang-text-nl="In ontwikkeling" data-lang-text-ja="開発中">Geliştiriliyor</span>
+              </div>
+              <div class="project-carousel-content">
+                <h2>Karrierebuch</h2>
+                <p data-lang-text
+                   data-lang-text-tr="Modül el kitabını yükleyerek dersleri, yetkinlikleri ve akademik kariyer seçeneklerini yapılandıran bir planlama aracı."
+                   data-lang-text-de="Ein Planungstool, das Modulhandbücher auswertet und daraus Studienverlauf, Kompetenzen und akademische Karrierewege strukturiert."
+                   data-lang-text-en="A planning tool that analyzes module handbooks to structure courses, competencies, and academic career paths."
+                   data-lang-text-nl="Een planningstool die modulehandboeken analyseert en vakken, competenties en academische loopbaanpaden structureert."
+                   data-lang-text-ja="モジュールハンドブックを分析し、履修科目、能力、研究キャリアの道筋を整理する計画ツール。">Modül el kitabını yükleyerek dersleri, yetkinlikleri ve akademik kariyer seçeneklerini yapılandıran bir planlama aracı.</p>
+              </div>
+            </article>
+
+            <article class="project-carousel-slide" data-project-carousel-slide aria-hidden="true"
+                     aria-label="Proje 2 / 4"
+                     data-lang-aria-label
+                     data-lang-aria-label-tr="Proje 2 / 4"
+                     data-lang-aria-label-de="Projekt 2 / 4"
+                     data-lang-aria-label-en="Project 2 of 4"
+                     data-lang-aria-label-nl="Project 2 van 4"
+                     data-lang-aria-label-ja="プロジェクト 2 / 4">
+              <div class="project-carousel-meta">
+                <span class="project-carousel-number">02 / 04</span>
+                <span class="project-carousel-status" data-lang-text data-lang-text-tr="Geliştiriliyor" data-lang-text-de="In Entwicklung" data-lang-text-en="In development" data-lang-text-nl="In ontwikkeling" data-lang-text-ja="開発中">Geliştiriliyor</span>
+              </div>
+              <div class="project-carousel-content">
+                <h2>Werkcheck</h2>
+                <p data-lang-text
+                   data-lang-text-tr="İş ilanlarını analiz eden, gereksinimleri özetleyen ve başvuru sürecini düzenleyen bir Chrome eklentisi."
+                   data-lang-text-de="Eine Chrome-Erweiterung, die Stellenanzeigen analysiert, Anforderungen zusammenfasst und den Bewerbungsprozess strukturiert."
+                   data-lang-text-en="A Chrome extension that analyzes job listings, summarizes requirements, and organizes the application process."
+                   data-lang-text-nl="Een Chrome-extensie die vacatures analyseert, vereisten samenvat en het sollicitatieproces organiseert."
+                   data-lang-text-ja="求人情報を分析し、応募要件を要約して、応募プロセスを整理するChrome拡張機能。">İş ilanlarını analiz eden, gereksinimleri özetleyen ve başvuru sürecini düzenleyen bir Chrome eklentisi.</p>
+              </div>
+            </article>
+
+            <article class="project-carousel-slide" data-project-carousel-slide aria-hidden="true"
+                     aria-label="Proje 3 / 4"
+                     data-lang-aria-label
+                     data-lang-aria-label-tr="Proje 3 / 4"
+                     data-lang-aria-label-de="Projekt 3 / 4"
+                     data-lang-aria-label-en="Project 3 of 4"
+                     data-lang-aria-label-nl="Project 3 van 4"
+                     data-lang-aria-label-ja="プロジェクト 3 / 4">
+              <div class="project-carousel-meta">
+                <span class="project-carousel-number">03 / 04</span>
+                <span class="project-carousel-status" data-lang-text data-lang-text-tr="Geliştiriliyor" data-lang-text-de="In Entwicklung" data-lang-text-en="In development" data-lang-text-nl="In ontwikkeling" data-lang-text-ja="開発中">Geliştiriliyor</span>
+              </div>
+              <div class="project-carousel-content">
+                <h2 data-lang-text data-lang-text-tr="Giyim Markası" data-lang-text-de="Bekleidungsmarke" data-lang-text-en="Clothing Brand" data-lang-text-nl="Kledingmerk" data-lang-text-ja="アパレルブランド">Giyim Markası</h2>
+                <p data-lang-text
+                   data-lang-text-tr="Marka kimliği, ilk ürün koleksiyonu ve dijital satış deneyimi birlikte geliştirilen bağımsız bir moda girişimi."
+                   data-lang-text-de="Eine unabhängige Modemarke, bei der Markenidentität, erste Kollektion und digitales Verkaufserlebnis gemeinsam entwickelt werden."
+                   data-lang-text-en="An independent fashion venture developing its brand identity, first collection, and digital shopping experience together."
+                   data-lang-text-nl="Een onafhankelijk modemerk dat tegelijk de merkidentiteit, eerste collectie en digitale winkelervaring ontwikkelt."
+                   data-lang-text-ja="ブランドアイデンティティ、最初のコレクション、デジタル販売体験を同時に構築する独立系ファッション事業。">Marka kimliği, ilk ürün koleksiyonu ve dijital satış deneyimi birlikte geliştirilen bağımsız bir moda girişimi.</p>
+              </div>
+            </article>
+
+            <article class="project-carousel-slide" data-project-carousel-slide aria-hidden="true"
+                     aria-label="Proje 4 / 4"
+                     data-lang-aria-label
+                     data-lang-aria-label-tr="Proje 4 / 4"
+                     data-lang-aria-label-de="Projekt 4 / 4"
+                     data-lang-aria-label-en="Project 4 of 4"
+                     data-lang-aria-label-nl="Project 4 van 4"
+                     data-lang-aria-label-ja="プロジェクト 4 / 4">
+              <div class="project-carousel-meta">
+                <span class="project-carousel-number">04 / 04</span>
+                <span class="project-carousel-status" data-lang-text data-lang-text-tr="Geliştiriliyor" data-lang-text-de="In Entwicklung" data-lang-text-en="In development" data-lang-text-nl="In ontwikkeling" data-lang-text-ja="開発中">Geliştiriliyor</span>
+              </div>
+              <div class="project-carousel-content">
+                <h2 data-lang-text data-lang-text-tr="Çardak OSB Tedarik Projesi" data-lang-text-de="Çardak OSB Beschaffungsprojekt" data-lang-text-en="Çardak OSB Supply Project" data-lang-text-nl="Çardak OSB Inkoopproject" data-lang-text-ja="Çardak OSB 調達プロジェクト">Çardak OSB Tedarik Projesi</h2>
+                <p data-lang-text
+                   data-lang-text-tr="Çardak Organize Sanayi Bölgesi için tedarikçi keşfi, ihtiyaç eşleştirme ve teklif akışını yapılandıran bir B2B tedarik projesi."
+                   data-lang-text-de="Ein B2B-Beschaffungsprojekt für Lieferantensuche, Bedarfsabgleich und strukturierte Angebotsprozesse im Çardak OSB."
+                   data-lang-text-en="A B2B supply project for supplier discovery, demand matching, and structured quotation workflows in Çardak OSB."
+                   data-lang-text-nl="Een B2B-inkoopproject voor leveranciersselectie, behoeftematching en gestructureerde offertestromen binnen Çardak OSB."
+                   data-lang-text-ja="Çardak OSBにおけるサプライヤー探索、需要マッチング、見積フローを構築するB2B調達プロジェクト。">Çardak Organize Sanayi Bölgesi için tedarikçi keşfi, ihtiyaç eşleştirme ve teklif akışını yapılandıran bir B2B tedarik projesi.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="project-carousel-controls" aria-label="Proje seçimi"
+             data-lang-aria-label
+             data-lang-aria-label-tr="Proje seçimi"
+             data-lang-aria-label-de="Projektauswahl"
+             data-lang-aria-label-en="Project selection"
+             data-lang-aria-label-nl="Projectselectie"
+             data-lang-aria-label-ja="プロジェクト選択">
+          <button type="button" data-project-carousel-go="0" aria-current="true" aria-label="Proje 1: Karrierebuch"
+                  data-lang-aria-label data-lang-aria-label-tr="Proje 1: Karrierebuch" data-lang-aria-label-de="Projekt 1: Karrierebuch" data-lang-aria-label-en="Project 1: Karrierebuch" data-lang-aria-label-nl="Project 1: Karrierebuch" data-lang-aria-label-ja="プロジェクト1: Karrierebuch">1</button>
+          <button type="button" data-project-carousel-go="1" aria-current="false" aria-label="Proje 2: Werkcheck"
+                  data-lang-aria-label data-lang-aria-label-tr="Proje 2: Werkcheck" data-lang-aria-label-de="Projekt 2: Werkcheck" data-lang-aria-label-en="Project 2: Werkcheck" data-lang-aria-label-nl="Project 2: Werkcheck" data-lang-aria-label-ja="プロジェクト2: Werkcheck">2</button>
+          <button type="button" data-project-carousel-go="2" aria-current="false" aria-label="Proje 3: Giyim Markası"
+                  data-lang-aria-label data-lang-aria-label-tr="Proje 3: Giyim Markası" data-lang-aria-label-de="Projekt 3: Bekleidungsmarke" data-lang-aria-label-en="Project 3: Clothing Brand" data-lang-aria-label-nl="Project 3: Kledingmerk" data-lang-aria-label-ja="プロジェクト3: アパレルブランド">3</button>
+          <button type="button" data-project-carousel-go="3" aria-current="false" aria-label="Proje 4: Çardak OSB Tedarik Projesi"
+                  data-lang-aria-label data-lang-aria-label-tr="Proje 4: Çardak OSB Tedarik Projesi" data-lang-aria-label-de="Projekt 4: Çardak OSB Beschaffungsprojekt" data-lang-aria-label-en="Project 4: Çardak OSB Supply Project" data-lang-aria-label-nl="Project 4: Çardak OSB Inkoopproject" data-lang-aria-label-ja="プロジェクト4: Çardak OSB 調達プロジェクト">4</button>
+          <span class="project-carousel-timing" aria-hidden="true"><span data-project-carousel-progress></span></span>
+        </div>
       </div>
 
       <aside class="swiss-profile-card" aria-label="Profil ozeti"
@@ -765,6 +872,111 @@ layout: null
 <script src="/assets/theme.js?v=7"></script>
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
+
+(function(){
+  var carousel = document.querySelector('[data-project-carousel]');
+  if (!carousel) return;
+
+  var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-project-carousel-slide]'));
+  var controls = Array.prototype.slice.call(carousel.querySelectorAll('[data-project-carousel-go]'));
+  var toggle = carousel.querySelector('[data-project-carousel-toggle]');
+  var toggleIcon = carousel.querySelector('[data-project-carousel-toggle-icon]');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var activeIndex = 0;
+  var timer = null;
+  var userPaused = false;
+  var pointerPaused = false;
+  var interval = 10000;
+  var toggleLabels = {
+    tr: { pause: 'Otomatik geçişi durdur', play: 'Otomatik geçişi başlat' },
+    de: { pause: 'Automatischen Wechsel pausieren', play: 'Automatischen Wechsel starten' },
+    en: { pause: 'Pause automatic rotation', play: 'Start automatic rotation' },
+    nl: { pause: 'Automatisch wisselen pauzeren', play: 'Automatisch wisselen starten' },
+    ja: { pause: '自動切り替えを一時停止', play: '自動切り替えを開始' }
+  };
+
+  function canRotate(){
+    return !userPaused && !pointerPaused && !document.hidden && !reducedMotion.matches;
+  }
+
+  function updateToggle(){
+    var lang = document.documentElement.lang || 'tr';
+    var labels = toggleLabels[lang] || toggleLabels.tr;
+    var label = userPaused ? labels.play : labels.pause;
+    toggle.setAttribute('aria-label', label);
+    toggle.setAttribute('title', label);
+    toggle.setAttribute('aria-pressed', String(userPaused));
+    toggleIcon.textContent = userPaused ? '▶' : 'Ⅱ';
+  }
+
+  function stopTimer(){
+    window.clearTimeout(timer);
+    timer = null;
+    carousel.classList.remove('is-timing');
+  }
+
+  function scheduleNext(){
+    stopTimer();
+    if (!canRotate()) return;
+    void carousel.offsetWidth;
+    carousel.classList.add('is-timing');
+    timer = window.setTimeout(function(){
+      showSlide(activeIndex + 1);
+    }, interval);
+  }
+
+  function showSlide(index){
+    activeIndex = (index + slides.length) % slides.length;
+    carousel.style.setProperty('--project-index', String(activeIndex));
+
+    slides.forEach(function(slide, slideIndex){
+      var isActive = slideIndex === activeIndex;
+      slide.classList.toggle('is-active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+      if ('inert' in slide) slide.inert = !isActive;
+    });
+
+    controls.forEach(function(control, controlIndex){
+      control.setAttribute('aria-current', String(controlIndex === activeIndex));
+    });
+
+    scheduleNext();
+  }
+
+  controls.forEach(function(control){
+    control.addEventListener('click', function(){
+      showSlide(Number(control.dataset.projectCarouselGo));
+    });
+  });
+
+  toggle.addEventListener('click', function(){
+    userPaused = !userPaused;
+    carousel.classList.toggle('is-paused', userPaused);
+    updateToggle();
+    scheduleNext();
+  });
+
+  carousel.addEventListener('pointerenter', function(event){
+    if (event.pointerType && event.pointerType !== 'mouse') return;
+    pointerPaused = true;
+    scheduleNext();
+  });
+
+  carousel.addEventListener('pointerleave', function(event){
+    if (event.pointerType && event.pointerType !== 'mouse') return;
+    pointerPaused = false;
+    scheduleNext();
+  });
+
+  document.addEventListener('visibilitychange', scheduleNext);
+  document.addEventListener('langchange', updateToggle);
+  if (typeof reducedMotion.addEventListener === 'function') {
+    reducedMotion.addEventListener('change', scheduleNext);
+  }
+
+  updateToggle();
+  showSlide(0);
+})();
 </script>
 </body>
 </html>
