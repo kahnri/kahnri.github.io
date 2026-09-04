@@ -369,6 +369,21 @@ html[data-theme="light"] .portfolio-header .site-brand-line {
   color: #050505;
 }
 
+.portfolio-nav a.portfolio-nav-active {
+  gap: 0.55rem;
+  padding-inline: 1.3rem;
+}
+
+.portfolio-nav a.portfolio-nav-active::before,
+.portfolio-mobile-menu a.portfolio-nav-active::before {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
 html[data-theme="light"] .portfolio-nav a {
   border-color: #b8b8b1;
   color: #050505;
@@ -530,33 +545,6 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .swiss-action-primary:hover {
   background: transparent;
   color: var(--hero-text);
-}
-
-.klausur-strip {
-  overflow: hidden;
-  border-bottom: 1px solid #050505;
-  background: #f2f2ed;
-  color: #050505;
-}
-
-.klausur-strip-track {
-  display: flex;
-  width: max-content;
-  min-width: 200%;
-  align-items: center;
-  animation: swissTicker 22s linear infinite;
-}
-
-.klausur-strip-track span {
-  display: block;
-  flex: 0 0 auto;
-  min-width: 19rem;
-  border-right: 1px solid #a8a8a2;
-  padding: 0.8rem 1.8rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-align: center;
 }
 
 .services-section {
@@ -1525,11 +1513,6 @@ body.home-page [data-animate] {
   }
 }
 
-@keyframes swissTicker {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
 @media (max-width: 1120px) {
   .portfolio-header {
     grid-template-columns: minmax(16rem, 1fr) auto;
@@ -1571,6 +1554,8 @@ body.home-page [data-animate] {
   }
 
   .portfolio-mobile-menu nav a {
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #3a3a3a;
     padding: 0.9rem 1.25rem;
     color: inherit;
@@ -1689,10 +1674,6 @@ body.home-page [data-animate] {
   .swiss-profile-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
-
-  .klausur-strip-track span {
-    min-width: 16rem;
   }
 
   .services-header,
@@ -1917,8 +1898,118 @@ body.home-page [data-animate] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.home-page [data-animate],
-  .klausur-strip-track {
+  body.home-page [data-animate] {
     animation: none !important;
+  }
+}
+
+.active-projects-section {
+  scroll-margin-top: 6rem;
+}
+
+.active-project-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.active-project-card {
+  position: relative;
+  display: flex;
+  min-height: 20rem;
+  flex-direction: column;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.active-project-card::after {
+  position: absolute;
+  right: -3rem;
+  bottom: -4rem;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  content: "";
+  opacity: 0.45;
+  transition: transform 240ms ease;
+}
+
+.active-project-card:hover {
+  border-color: var(--border-strong);
+  color: inherit;
+  transform: translateY(-4px);
+}
+
+.active-project-card:hover::after {
+  transform: scale(1.15);
+}
+
+.active-project-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.active-project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.active-project-status::before {
+  width: 0.48rem;
+  height: 0.48rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--accent-text);
+  box-shadow: 0 0 0 0.24rem var(--accent-bg);
+  content: "";
+}
+
+.active-project-card h3 {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.active-project-card p {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.active-project-link {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 2rem;
+  color: var(--text-strong);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .active-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .active-project-grid {
+    grid-template-columns: 1fr;
   }
 }
