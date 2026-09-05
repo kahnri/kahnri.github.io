@@ -97,7 +97,7 @@ layout: null
 </script>
 <link rel="stylesheet" href="/assets/utilities.css?v=1">
 <link rel="stylesheet" href="/assets/theme.css?v=17">
-<link rel="stylesheet" href="/assets/portfolio.css?v=6">
+<link rel="stylesheet" href="/assets/portfolio.css?v=7">
 <meta name="color-scheme" content="dark">
 <script defer data-domain="kaganbagdemir.de" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -925,6 +925,7 @@ document.getElementById('y').textContent = new Date().getFullYear();
   var timer = null;
   var userPaused = false;
   var pointerPaused = false;
+  var focusPaused = false;
   var interval = 10000;
   var toggleLabels = {
     tr: { pause: 'Otomatik geçişi durdur', play: 'Otomatik geçişi başlat' },
@@ -935,7 +936,7 @@ document.getElementById('y').textContent = new Date().getFullYear();
   };
 
   function canRotate(){
-    return !userPaused && !pointerPaused && !document.hidden && !reducedMotion.matches;
+    return !userPaused && !pointerPaused && !focusPaused && !document.hidden && !reducedMotion.matches;
   }
 
   function updateToggle(){
@@ -1004,6 +1005,17 @@ document.getElementById('y').textContent = new Date().getFullYear();
   carousel.addEventListener('pointerleave', function(event){
     if (event.pointerType && event.pointerType !== 'mouse') return;
     pointerPaused = false;
+    scheduleNext();
+  });
+
+  carousel.addEventListener('focusin', function(){
+    focusPaused = true;
+    scheduleNext();
+  });
+
+  carousel.addEventListener('focusout', function(event){
+    if (carousel.contains(event.relatedTarget)) return;
+    focusPaused = false;
     scheduleNext();
   });
 

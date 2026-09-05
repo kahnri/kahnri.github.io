@@ -1,16 +1,52 @@
-/* Monochrome Swiss portfolio system */
+/* Shared monochrome portfolio system. Fonts are served locally. */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(fonts/manrope-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(fonts/manrope-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/space-grotesk-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/space-grotesk-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: dark;
   --bg: #050505;
   --text-primary: #f2f2ed;
   --text-strong: #ffffff;
-  --text-muted: #8a8a86;
+  --text-muted: #a3a3a3;
   --text-soft: #c9c9c3;
-  --border: #343434;
+  --border: #2b2b2b;
   --border-strong: #f2f2ed;
-  --surface: #080808;
-  --surface-muted: #101010;
-  --surface-rail: #050505;
+  --surface: #111111;
+  --surface-muted: #181818;
+  --surface-rail: #0b0b0b;
   --chip-bg: #101010;
   --accent-bg: #f2f2ed;
   --accent-border: #f2f2ed;
@@ -21,9 +57,9 @@
   --shadow-hard: transparent;
   --focus-ring: #ffffff;
   --focus-ring-bg: rgba(255, 255, 255, 0.14);
-  --hero-bg: #f2f2ed;
+  --hero-bg: #f5f5f3;
   --hero-text: #050505;
-  --hero-muted: #4e4e4a;
+  --hero-muted: #595959;
   --index-bg: #050505;
   --index-text: #f2f2ed;
   --index-muted: #a0a09a;
@@ -66,7 +102,7 @@ html[data-theme="light"] {
 body {
   background: var(--bg) !important;
   color: var(--text-primary);
-  font-family: "Avenir Next", "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-family: "Manrope", "Avenir Next", sans-serif;
   letter-spacing: -0.01em;
 }
 
@@ -85,7 +121,7 @@ h4,
 .site-brand-name,
 .project-number,
 .project-main strong {
-  font-family: "Avenir Next Condensed", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif;
+  font-family: "Space Grotesk", "Manrope", sans-serif;
 }
 
 a {
@@ -145,7 +181,7 @@ html[data-theme="light"] .site-brand-mark {
   background: none;
   color: var(--text-strong);
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.09em;
   line-height: 1;
   -webkit-text-fill-color: currentColor;
@@ -170,7 +206,7 @@ html[data-theme="light"] .site-brand-mark {
 .chronology-hero,
 .signal-card {
   border-color: var(--border) !important;
-  border-radius: 0.1rem !important;
+  border-radius: 1rem !important;
   background: var(--surface) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
@@ -191,7 +227,7 @@ html[data-theme="light"] .site-brand-mark {
 .theme-button-accent {
   min-height: 2.7rem;
   border: 1px solid var(--border-strong);
-  border-radius: 0.1rem !important;
+  border-radius: 1rem !important;
   background: transparent !important;
   color: var(--text-strong);
   box-shadow: none !important;
@@ -234,14 +270,14 @@ html[data-theme="light"] .site-brand-mark {
 
 .theme-button-icon [data-theme-icon] {
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .theme-input {
   min-height: 2.7rem;
   border-color: var(--border);
-  border-radius: 0.1rem !important;
+  border-radius: 1rem !important;
   background: var(--surface-rail);
   color: var(--text-strong);
   box-shadow: none;
@@ -249,7 +285,7 @@ html[data-theme="light"] .site-brand-mark {
 
 .theme-chip {
   border-color: var(--border);
-  border-radius: 0.1rem !important;
+  border-radius: 1rem !important;
   background: transparent;
   box-shadow: none;
 }
@@ -437,7 +473,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .swiss-kicker {
   margin: 0;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -475,7 +511,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   color: var(--hero-text);
   cursor: pointer;
   font-size: 0.78rem;
-  font-weight: 850;
+  font-weight: 700;
   transition: background-color 160ms ease, color 160ms ease;
 }
 
@@ -517,7 +553,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   gap: 1rem;
   color: var(--hero-muted);
   font-size: 0.66rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -546,9 +582,9 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0;
   color: var(--hero-text);
   font-size: clamp(3.4rem, 7vw, 6.75rem);
-  font-weight: 900;
-  letter-spacing: -0.07em;
-  line-height: 0.86;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.04;
   overflow-wrap: anywhere;
 }
 
@@ -567,7 +603,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   padding-bottom: 0.18rem;
   color: var(--hero-text);
   font-size: 0.72rem;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.07em;
   text-decoration: none;
   text-transform: uppercase;
@@ -597,7 +633,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   color: var(--hero-muted);
   cursor: pointer;
   font-size: 0.7rem;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .project-carousel-controls button:hover,
@@ -647,7 +683,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .swiss-meta-list dt {
   color: var(--hero-muted);
   font-size: 0.66rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
@@ -680,7 +716,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   padding: 0.72rem 1rem;
   color: inherit;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-decoration: none;
   text-transform: uppercase;
@@ -724,8 +760,8 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0.8rem 0 0;
   color: inherit;
   font-size: clamp(2.6rem, 5vw, 5.4rem);
-  letter-spacing: -0.065em;
-  line-height: 0.94;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
 }
 
 .services-intro {
@@ -775,7 +811,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   gap: 1rem;
   color: var(--hero-muted);
   font-size: 0.64rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
@@ -789,10 +825,10 @@ html[data-theme="light"] .portfolio-theme-toggle {
 
 .service-number {
   color: inherit;
-  font-family: "Avenir Next Condensed", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif;
+  font-family: "Space Grotesk", "Manrope", sans-serif;
   font-size: clamp(2.9rem, 4.5vw, 5.2rem);
-  font-weight: 800;
-  letter-spacing: -0.07em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
   line-height: 0.9;
 }
 
@@ -814,7 +850,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0 0 1.1rem;
   color: var(--index-muted);
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -822,8 +858,8 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0;
   color: inherit;
   font-size: clamp(1.85rem, 3vw, 3.4rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 .service-card:not(.service-card-featured) h3 {
@@ -883,7 +919,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   padding-top: 1rem;
   color: inherit;
   font-size: 0.66rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.45;
   text-decoration: none;
@@ -979,8 +1015,8 @@ html[data-theme="light"] .portfolio-theme-toggle {
 
 .project-number {
   font-size: clamp(2.8rem, 4vw, 4.6rem);
-  font-weight: 800;
-  letter-spacing: -0.07em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
   line-height: 1;
 }
 
@@ -1004,8 +1040,8 @@ html[data-theme="light"] .portfolio-theme-toggle {
 
 .project-main strong {
   font-size: clamp(1.65rem, 2.75vw, 3rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 .project-main > span {
@@ -1023,7 +1059,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   border-left: 1px solid currentColor;
   padding-left: 1rem;
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.07em;
   text-align: right;
 }
@@ -1042,8 +1078,8 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0.8rem 0 1.5rem;
   color: inherit;
   font-size: clamp(2.5rem, 4.4vw, 4.9rem);
-  letter-spacing: -0.065em;
-  line-height: 0.94;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
 }
 
 .portfolio-profile-intro > p:last-child {
@@ -1072,7 +1108,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .profile-number {
   color: var(--hero-muted);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .portfolio-profile-grid h3 {
@@ -1107,7 +1143,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   color: inherit;
   font-size: clamp(2rem, 4vw, 4.5rem);
   letter-spacing: -0.06em;
-  line-height: 0.96;
+  line-height: 1.08;
 }
 
 .thesis-band p:not(.swiss-kicker) {
@@ -1227,7 +1263,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   padding: 0 1.5rem;
   color: #f2f2ed;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
@@ -1265,9 +1301,9 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 1rem 0 1.5rem;
   color: inherit;
   font-size: clamp(3.5rem, 7.4vw, 7.8rem);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.075em;
-  line-height: 0.86;
+  line-height: 1.04;
 }
 
 .service-page-lead {
@@ -1295,7 +1331,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0;
   color: var(--hero-muted);
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.07em;
 }
 
@@ -1325,7 +1361,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 
 .service-brief-card li span {
   color: var(--hero-text);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .service-brief-card > a {
@@ -1377,7 +1413,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
   margin: 0.75rem 0 0;
   color: inherit;
   font-size: clamp(2.7rem, 5.2vw, 5.7rem);
-  letter-spacing: -0.065em;
+  letter-spacing: -0.045em;
   line-height: 0.93;
 }
 
@@ -1417,7 +1453,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .service-scope-grid article > span {
   color: var(--hero-muted);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .service-scope-grid h3 {
@@ -1473,7 +1509,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .service-delivery dt {
   color: var(--index-text);
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1523,7 +1559,7 @@ html[data-theme="light"] .portfolio-theme-toggle {
 .service-process-grid span {
   color: var(--hero-muted);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .service-process-grid strong {
@@ -1699,7 +1735,7 @@ body.home-page [data-animate] {
     padding: 0.78rem 1.25rem;
     color: #f2f2ed;
     font-size: 0.68rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.1em;
     cursor: pointer;
     list-style-position: inside;
@@ -2075,7 +2111,242 @@ body.home-page [data-animate] {
   }
 }
 
+/* Layout refinement shared by the portfolio and its project pages. */
+:root {
+  --page-gutter: clamp(1.25rem, 4.5vw, 5rem);
+  --rule-light: #d5d5d2;
+}
+
+button, input, select, textarea { font-family: inherit; }
+h1, h2, h3, h4 { text-wrap: balance; }
+::selection { background: #bdbdbd; color: #080808; }
+
+body > main > header { border-radius: 1rem; }
+.theme-button, .theme-button-accent, .theme-button-icon {
+  min-height: 2.75rem;
+  border-radius: 0.65rem !important;
+  letter-spacing: 0.025em;
+  text-transform: none;
+}
+.theme-input { border-radius: 0.65rem !important; }
+.theme-chip { border-radius: 999px !important; }
+
+.portfolio-header {
+  min-height: 5.5rem;
+  grid-template-columns: minmax(15rem, 1fr) auto auto;
+  border-radius: 0;
+  background: rgba(11, 11, 11, 0.96) !important;
+  backdrop-filter: blur(16px);
+}
+.portfolio-header .site-brand { padding: 1.1rem var(--page-gutter); gap: 0.8rem; }
+.site-brand-picture { background: transparent; }
+.portfolio-header .site-brand-picture { width: 2.75rem; height: 2.75rem; flex: 0 0 auto; }
+.portfolio-header .site-brand-mark { width: 100%; height: 100%; }
+.site-brand-name { font-weight: 600; letter-spacing: -0.025em; }
+.site-brand-line { font-weight: 500; letter-spacing: 0.065em; opacity: 0.65; }
+.portfolio-nav { align-items: center; gap: 0.2rem; }
+.portfolio-nav a {
+  min-height: 2.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.portfolio-nav a:hover, .portfolio-nav a:focus-visible { background: #252525; color: #fff; }
+.portfolio-controls { position: relative; border: 0; padding: 0 1rem; align-items: center; }
+.portfolio-controls .sr-only { left: 0; top: 0; }
+.portfolio-language { min-width: 8rem; min-height: 2.75rem; border: 1px solid #333; border-radius: 0.5rem; }
+
+.swiss-hero {
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(2.5rem, 5vw, 5rem) var(--page-gutter) 3rem;
+  border-color: var(--rule-light);
+  background: radial-gradient(ellipse at 10% 0%, #fff, transparent 65%), var(--hero-bg);
+}
+.swiss-kicker { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; }
+.project-carousel-heading { margin-top: 0.65rem; font-size: clamp(1.2rem, 2vw, 1.65rem); font-weight: 500; }
+.project-carousel-toggle { border-color: var(--rule-light); }
+.project-carousel-viewport { margin-top: 1.8rem; border-color: var(--rule-light); }
+.project-carousel-slide { min-height: 23rem; padding: 1.25rem 0 1.75rem; gap: 3rem; }
+.project-carousel-meta { font-size: 0.62rem; font-weight: 600; }
+.project-carousel-status { border: 1px solid var(--rule-light); border-radius: 999px; padding: 0.45rem 0.75rem; }
+.project-carousel-status::before { width: 0.35rem; height: 0.35rem; }
+.project-carousel-content h2 {
+  max-width: none;
+  font-size: clamp(2.6rem, 5.3vw, 5.25rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+  text-wrap: initial;
+}
+.project-carousel-content p { max-width: 57ch; font-size: 0.95rem; line-height: 1.8; }
+.project-carousel-link {
+  align-items: center;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--hero-text);
+  border-radius: 0.65rem;
+  background: var(--hero-text);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.project-carousel-link:hover, .project-carousel-link:focus-visible { background: #333; color: #fff; transform: translateY(-2px); }
+.project-carousel-controls { grid-template-columns: repeat(5, 2.75rem) minmax(1rem, 1fr); gap: 0.5rem; }
+.project-carousel-controls button { width: 2.75rem; height: 2.75rem; border-color: transparent; border-radius: 0.65rem; font-weight: 500; font-size: 0.8rem; }
+.project-carousel-timing { background: var(--rule-light); }
+.swiss-profile-card { border: 1px solid var(--rule-light); border-radius: 1.25rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.55); }
+.swiss-meta-list > div { border-color: var(--rule-light); padding-bottom: 1.15rem; margin-bottom: 1.15rem; }
+.swiss-meta-list dt { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.09em; }
+.swiss-meta-list dd { font-size: 0.85rem; line-height: 1.65; overflow-wrap: anywhere; }
+.swiss-profile-actions { display: grid; grid-template-columns: 1fr; }
+.swiss-action { border-radius: 0.65rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.015em; text-transform: none; }
+.swiss-hero :focus-visible { outline: 2px solid #111; outline-offset: 4px; }
+
+.services-section, .portfolio-profile { padding: clamp(3.5rem, 7vw, 7rem) var(--page-gutter); }
+.services-header { border-color: var(--rule-light); gap: 3rem; }
+.services-header h2, .portfolio-profile-intro h2 { font-size: clamp(2rem, 3.8vw, 4rem); font-weight: 500; }
+.services-grid { gap: 1rem; border: 0; margin-top: 2rem; }
+.service-card { min-height: 25rem; border: 1px solid var(--rule-light); border-radius: 1.25rem; padding: 1.75rem; background: #fff; }
+.service-card-featured {
+  grid-template-columns: minmax(4rem, 0.18fr) minmax(0, 1fr) minmax(10rem, 0.4fr);
+  min-height: 24rem;
+  border-color: #282828;
+  padding: clamp(1.75rem, 3vw, 3rem);
+  background: radial-gradient(ellipse at 100% 0%, #2b2b2b, transparent 65%), #111;
+}
+.service-number { font-size: 2.5rem; font-weight: 400; letter-spacing: -0.04em; }
+.service-badge { border: 0; font-size: 0.6rem; }
+.service-card h3, .service-card:not(.service-card-featured) h3 { font-size: clamp(1.5rem, 2.4vw, 2.75rem); font-weight: 500; }
+.service-card:not(.service-card-featured) h3 { font-size: clamp(1.4rem, 2vw, 2rem); }
+.service-deliverables li { border-color: #444; border-radius: 0.5rem; }
+.service-mail-link { border-color: #ccc; font-size: 0.65rem; letter-spacing: 0.02em; }
+.services-closing { border: 0; }
+
+.project-index { padding: 4rem var(--page-gutter); }
+.project-index-header { border-color: var(--border); padding-bottom: 1.5rem; margin-bottom: 1rem; }
+.project-index-header h2 { font-weight: 500; }
+.project-index-row {
+  grid-template-columns: 3rem 8rem minmax(0, 1fr) 6rem;
+  gap: 1.25rem;
+  min-height: 9rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 0.75rem;
+  background: #111;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.project-index-row:hover, .project-index-row:focus-visible { background: #1c1c1c; border-color: #666; color: #fff; }
+.project-number { font-size: 1.5rem; font-weight: 400; color: #a3a3a3; }
+.project-discipline { border: 0; padding: 0; line-height: 1.6; color: #a3a3a3; }
+.project-main { border: 0; padding: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; }
+.project-main strong { font-size: clamp(1.2rem, 2vw, 2rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.15; }
+.project-main > span { font-size: 0.82rem; line-height: 1.7; }
+.project-action { border: 0; padding: 0; letter-spacing: 0.02em; }
+.portfolio-profile { gap: 4rem; }
+.portfolio-profile-grid article, .portfolio-profile-grid article:last-child { border-color: var(--rule-light); }
+.thesis-band { padding: 4rem var(--page-gutter); background: linear-gradient(120deg, #191919, #080808); }
+.thesis-band h2 { font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.04em; }
+.portfolio-footer { padding: 2.5rem var(--page-gutter); }
+
+body.initial-anim-run [data-animate] {
+  animation-name: portfolioEnter;
+  animation-duration: 400ms;
+  animation-delay: calc(var(--stagger, 0) * 45ms);
+}
+body main > header[data-animate] { animation: none; opacity: 1; transform: none; }
+body.initial-anim main::before { display: none; }
+@keyframes portfolioEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Large sections must remain readable even before their reveal threshold. */
+body.home-page main > section.scroll-reveal,
+body.home-page footer.scroll-reveal {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+body.home-page article.scroll-reveal {
+  filter: none;
+  transform: translateY(12px);
+  transition: opacity 400ms ease, transform 400ms ease;
+  transition-delay: calc(var(--reveal-index, 0) * 35ms);
+}
+body.home-page article.scroll-reveal.is-visible { transform: none; }
+
+@media (min-width: 1600px) {
+  :root { --page-gutter: max(5rem, calc((100vw - 1440px) / 2)); }
+}
+
+@media (max-width: 1120px) {
+  .portfolio-header { grid-template-columns: minmax(0, 1fr) auto; }
+  .portfolio-mobile-menu { border-color: #2b2b2b; }
+  .portfolio-mobile-menu summary { min-height: 2.75rem; padding-inline: var(--page-gutter); }
+  .portfolio-mobile-menu nav { padding: 0.5rem var(--page-gutter) 1rem; gap: 0.25rem; }
+  .portfolio-mobile-menu nav a { border: 0; border-radius: 0.5rem; background: #171717; text-transform: none; }
+  .swiss-hero { grid-template-columns: minmax(0, 1fr) 18rem; gap: 2rem; }
+  .project-carousel-content h2 { font-size: clamp(2.4rem, 5.2vw, 4rem); }
+  .service-card-featured { grid-template-columns: 4rem minmax(0, 1fr); gap: 2rem; }
+  .service-card-featured .service-card-actions { grid-column: 2; justify-items: start; }
+  .project-main { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
+  .portfolio-profile { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+
+@media (max-width: 760px) {
+  .portfolio-header { min-height: 4.75rem; }
+  .portfolio-header .site-brand { padding: 0.9rem 1rem; gap: 0.6rem; }
+  .portfolio-header .site-brand-picture { width: 2.25rem; height: 2.25rem; }
+  .portfolio-header .site-brand-name { font-size: 0.8rem; }
+  .portfolio-controls { padding: 0 0.75rem 0 0; }
+  .portfolio-language { min-width: 7.5rem; font-size: 0.7rem; }
+  .swiss-hero { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-top: 2.25rem; }
+  .project-carousel-slide { min-height: 24rem; gap: 2rem; }
+  .project-carousel-content h2 { font-size: clamp(2.25rem, 8.5vw, 4rem); }
+  .project-carousel-content p { font-size: 0.9rem; }
+  .project-carousel-heading { font-size: 1.2rem; }
+  .project-carousel-meta { flex-wrap: wrap; gap: 0.5rem; }
+  .project-carousel-controls { grid-template-columns: repeat(5, 2.75rem) minmax(0, 1fr); gap: 0.35rem; }
+  .swiss-profile-card { padding: 1.5rem; }
+  .swiss-profile-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services-header { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .services-grid { grid-template-columns: minmax(0, 1fr); }
+  .service-card { min-height: 20rem; }
+  .service-card-featured { grid-template-columns: minmax(0, 1fr); }
+  .service-card-featured .service-card-actions { grid-column: auto; }
+  .service-card-featured .service-card-meta { display: flex; }
+  .project-index-row { grid-template-columns: 2rem minmax(0, 1fr) auto; gap: 0.75rem; padding: 1.25rem; }
+  .project-discipline { grid-column: 2 / -1; grid-row: 1; }
+  .project-number { grid-row: 1; }
+  .project-main { grid-column: 1 / -1; grid-row: 2; padding-top: 0.5rem; }
+  .project-main strong { font-size: 1.55rem; }
+  .project-action { grid-column: 1 / -1; grid-row: 3; text-align: left; padding-top: 0.5rem; }
+  .portfolio-profile-grid article { grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; }
+  .portfolio-profile-grid article p { grid-column: 2; }
+  .thesis-band { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 380px) {
+  .portfolio-header .site-brand { min-width: 0; padding-inline: 0.75rem; gap: 0.45rem; }
+  .portfolio-header .site-brand-name { max-width: 9ch; white-space: normal; font-size: 0.68rem; line-height: 1.3; }
+  .portfolio-language { min-width: 6.75rem; }
+  .swiss-profile-actions { grid-template-columns: minmax(0, 1fr); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .project-carousel-link { transition: none; transform: none !important; }
   body.home-page [data-animate],
   .project-carousel-timing span {
     animation: none !important;
