@@ -1,7 +1,7 @@
 (function(window){
   'use strict';
 
-  var DEFAULT_LANG = 'tr';
+  var DEFAULT_LANG = 'de';
   var VALID_LANGS = ['tr', 'de', 'en', 'nl', 'ja'];
 
   function readStoredLang(){
@@ -169,8 +169,7 @@
   function init(){
     bindLanguageSelects();
     var saved = readStoredLang();
-    var browser = ((navigator.language || '').slice(0, 2) || '').toLowerCase();
-    var initial = VALID_LANGS.includes(saved) ? saved : (VALID_LANGS.includes(browser) ? browser : DEFAULT_LANG);
+    var initial = VALID_LANGS.includes(saved) ? saved : DEFAULT_LANG;
     apply(initial);
   }
 

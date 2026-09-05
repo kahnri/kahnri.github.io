@@ -2,7 +2,7 @@
 layout: null
 ---
 <!doctype html>
-<html lang="tr" data-theme="dark">
+<html lang="de" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -124,9 +124,9 @@ html.admin-lock body{visibility:hidden;}
 (async function(){
   document.documentElement.classList.add('admin-lock');
   var expected = '091fbc2691e7aeefe8d01a11ae7999be48d18804d773782588ca565b6d6cedb6';
-  var lang='tr';
+  var lang='de';
   try{
-    lang=(localStorage.getItem('lang')||'tr').slice(0,2).toLowerCase();
+    lang=(localStorage.getItem('lang')||'de').slice(0,2).toLowerCase();
   }catch(e){}
   var labels={
     tr:{prompt:'Admin sifresi:',wrong:'Yanlis sifre.'},
@@ -135,7 +135,7 @@ html.admin-lock body{visibility:hidden;}
     nl:{prompt:'Admin-wachtwoord:',wrong:'Onjuist wachtwoord.'},
     ja:{prompt:'管理者パスワード:',wrong:'パスワードが違います。'}
   };
-  var ui=labels[lang]||labels.tr;
+  var ui=labels[lang]||labels.de;
   var entered = window.prompt(ui.prompt);
   if (!entered) {
     window.alert(ui.wrong);
@@ -345,7 +345,7 @@ html.admin-lock body{visibility:hidden;}
   </main>
 
 <script src="assets/i18n.js?v=13"></script>
-<script src="assets/lang.js?v=9"></script>
+<script src="assets/lang.js?v=10"></script>
 <script src="assets/theme.js?v=7"></script>
 <script src="assets/admin.js?v=23"></script>
 <script>
