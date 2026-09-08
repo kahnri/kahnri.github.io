@@ -2767,14 +2767,18 @@ html[data-theme="light"] .more-page .portfolio-nav a[aria-current="page"] {
 }
 
 .more-page .more-link-card:nth-child(2) {
-  background: linear-gradient(115deg, #334155, #4f46e5 60%, #7c3aed);
+  background: linear-gradient(115deg, #008f7a, #12bfa7 58%, #38d39f);
 }
 
 .more-page .more-link-card:nth-child(3) {
-  background: linear-gradient(115deg, #0757a6, #0a78d1 62%, #27a9e8);
+  background: linear-gradient(115deg, #334155, #4f46e5 60%, #7c3aed);
 }
 
 .more-page .more-link-card:nth-child(4) {
+  background: linear-gradient(115deg, #0757a6, #0a78d1 62%, #27a9e8);
+}
+
+.more-page .more-link-card:nth-child(5) {
   background: linear-gradient(115deg, #e11d48, #ff3d55 58%, #ff7849);
 }
 
@@ -2793,9 +2797,10 @@ html[data-theme="light"] .more-page .portfolio-nav a[aria-current="page"] {
 }
 
 .more-page .more-link-card:nth-child(1)::before { content: "K"; }
-.more-page .more-link-card:nth-child(2)::before { content: "GH"; }
-.more-page .more-link-card:nth-child(3)::before { content: "in"; font-size: 1.05rem; }
-.more-page .more-link-card:nth-child(4)::before { content: "▶"; padding-left: 0.12rem; }
+.more-page .more-link-card:nth-child(2)::before { content: "W"; }
+.more-page .more-link-card:nth-child(3)::before { content: "GH"; }
+.more-page .more-link-card:nth-child(4)::before { content: "in"; font-size: 1.05rem; }
+.more-page .more-link-card:nth-child(5)::before { content: "▶"; padding-left: 0.12rem; }
 
 .more-page .more-link-card:hover,
 .more-page .more-link-card:focus-visible {
